@@ -11,13 +11,13 @@ const userController = (
         
     const DbRepositoryUser = userDbRepository(userDbRepositoryImp())
 
-    const getUser = async (req : Request, res : Response) =>{
+    // const getUser = async (req : Request, res : Response) =>{
 
-        const userId = req.params.id
-        findById(userId, DbRepositoryUser)
-        .then((user)=>res.json(user))
+    //     const userId = req.params.id
+    //     findById(userId, DbRepositoryUser)
+    //     .then((user)=>res.json(user))
     
-    }
+    // }
 
     const addUser = async (req : Request , res : Response) => {
         
@@ -35,7 +35,7 @@ const userController = (
 
     return {
         sample,
-        getUser,
+        // getUser,
         addUser
     };
 };

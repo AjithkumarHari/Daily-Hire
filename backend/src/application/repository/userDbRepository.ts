@@ -2,21 +2,18 @@ import { UserRepositoryMongoDB } from "../../framework/database/repository/userD
 
 export const userDbRepository = (repository : ReturnType<UserRepositoryMongoDB>) => {
 
-    const getUser = async (id:string) => {
-        
-        return await repository.getUser(id);
-    }
-
+    const getUserById = async (id:string) => await repository.getUserById(id);
+    
     const addUser = async (user:{name:string, email:string, password:string}) => {
-
         return await repository.addUser(user);
- 
     }
     
+    const getUserByEmail = async (email: string) => await repository.getUserByEmail(email);
     
     return {
-        getUser,
-        addUser
+        getUserByEmail,
+        addUser,
+        getUserById
     }
 }
 

@@ -9,7 +9,7 @@ const userRouter = () => {
     const controller = userController(userDbRepository,userRepositoryMongoDB)
 
     router.get('/',controller.sample)
-    router.get('/getuser/:id', controller.getUser)
+    // router.get('/getuser/:id', controller.getUser)
     router.post('/adduser',controller.addUser)
     return router
 }

@@ -2,18 +2,27 @@ import USER from "../models/userModel";
 import { User } from "../../../types/User";
 
 export const userRepositoryMongoDB = () => {
-    const getUser = async (id : string) => {
+
+    const getUserById = async (id : string) => {
         return await USER.findById(id).select('-password');
         
     }
+
     const addUser = async (user : User) => {
-        await USER.create(user);
-        return {status : "success"};
+        return await USER.create(user);
     }
+
+    const getUserByEmail = async (email : string): Promise<User | null> => {
+        return await USER.findOne( {email} );
+    }
+
+    
+
     return {
-        getUser,
-        addUser
-    }
+        getUserByEmail,
+        addUser,
+        getUserById
+    };
     
 }
 
