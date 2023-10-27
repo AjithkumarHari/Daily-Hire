@@ -9,7 +9,7 @@ export const authService  = () => {
     }
 
     const comparePassword = async (password: string, hashedPassword: string) => {
-        return bcryptjs.compare(password, hashedPassword);
+        return await bcryptjs.compare(password, hashedPassword);
     }
 
     const generateToken = (payload: string) => {

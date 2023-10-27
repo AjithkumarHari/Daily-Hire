@@ -11,21 +11,9 @@ const userController = (
         
     const DbRepositoryUser = userDbRepository(userDbRepositoryImp())
 
-    // const getUser = async (req : Request, res : Response) =>{
 
-    //     const userId = req.params.id
-    //     findById(userId, DbRepositoryUser)
-    //     .then((user)=>res.json(user))
-    
-    // }
 
-    const addUser = async (req : Request , res : Response) => {
-        
-        const user:{name:string,email:string,password:string} = req.body
-        await addNewUser(user, DbRepositoryUser)
-        .then((result : object) => res.json(result))
 
-    }
 
     const sample = (req: Request,res: Response) => {
         res.send("Success")
@@ -35,8 +23,6 @@ const userController = (
 
     return {
         sample,
-        // getUser,
-        addUser
     };
 };
 

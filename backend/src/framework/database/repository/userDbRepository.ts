@@ -5,23 +5,21 @@ export const userRepositoryMongoDB = () => {
 
     const getUserById = async (id : string) => {
         return await USER.findById(id).select('-password');
-        
     }
-
-    const addUser = async (user : User) => {
-        return await USER.create(user);
-    }
-
+    
     const getUserByEmail = async (email : string): Promise<User | null> => {
         return await USER.findOne( {email} );
     }
-
+    
+    const addUser = async (user : User) => {
+        return await USER.create(user);
+    }
     
 
     return {
         getUserByEmail,
+        getUserById,
         addUser,
-        getUserById
     };
     
 }

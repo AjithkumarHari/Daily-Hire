@@ -1,4 +1,4 @@
-import mongoose ,{ model, Schema, trusted} from "mongoose";
+import { model, Schema} from "mongoose";
 
 const userShcema = new Schema(
     {
