@@ -1,5 +1,4 @@
 import { AdminDbRepositoryMongoDb } from "../../framework/database/repository/adminDbRepository";
-import { Admin } from "../../types/Admin";
 
 export const adminDbRepository = (repository: ReturnType<AdminDbRepositoryMongoDb>) =>{
 
