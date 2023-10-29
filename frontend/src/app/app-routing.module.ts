@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './views/user/user.component';
-import { LoginSignupComponent } from './views/user/login-signup/login-signup.component';
-import { LoginBoxComponent } from './views/user/login-signup/login-box/login-box.component';
-import { SignupBoxComponent } from './views/user/login-signup/signup-box/signup-box.component';
+import { UserRoutingModule } from './views/user/user-routing.module';
+import { WorkerComponent } from './views/worker/worker.component';
+import { AdminComponent } from './views/admin/admin.component';
 
 const routes: Routes = [
-  {path: 'user',component: UserComponent,children:[
-    {path:'auth',component:LoginSignupComponent,children:[
-      {path:'login',component:LoginBoxComponent},
-      {path:'signup',component:SignupBoxComponent}
-    ]}
-  ]}
+  {path: '',component: UserComponent, loadChildren: ()=> UserRoutingModule},
+  {path: 'worker', component: WorkerComponent},
+  {path: 'admin', component: AdminComponent}
 ];
 
 @NgModule({
