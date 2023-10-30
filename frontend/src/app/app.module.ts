@@ -16,6 +16,8 @@ import { NavBarComponent } from './views/user/home/nav-bar/nav-bar.component';
 import { MainSectionComponent } from './views/user/home/main-section/main-section.component';
 import { CategoryComponent } from './views/user/home/main-section/category/category.component';
 import { SearchComponent } from './views/user/home/search/search.component';
+import { UserModule } from './views/user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { SearchComponent } from './views/user/home/search/search.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

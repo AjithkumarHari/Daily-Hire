@@ -15,7 +15,7 @@ expressConfig(app);
 serverConfig(server).startServer();
 
 // connect to datbase
-connectDB()
+connectDB() 
 
 routes(app)
 
