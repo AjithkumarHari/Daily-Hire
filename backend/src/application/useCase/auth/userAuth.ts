@@ -38,7 +38,7 @@ export const userLogin = async (
         }
         const isPasswordCorrect = await authService.comparePassword(password, user.password);
         if(!isPasswordCorrect){
-            throw new AppError("password does not match",HttpStatus.UNAUTHORIZED);
+            throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
         }
         if(user._id)
             return authService.generateToken(user._id.toString())

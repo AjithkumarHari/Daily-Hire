@@ -34,7 +34,7 @@ const authController = (
         const result = await userSignup(user, dbUserRepository, authService);
         
         if(result instanceof AppError){
-             res.json({
+            res.status(result.errorCode).json({
                 ...result,
                 status: "failed",
                 })
@@ -52,7 +52,7 @@ const authController = (
         const result = await userLogin(email, password, dbUserRepository, authService);
 
         if(result instanceof AppError){
-            res.json({
+            res.status(result.errorCode).json({
                ...result,
                status: "failed",
                })
@@ -69,7 +69,7 @@ const authController = (
         const {email, password} = req.body;
         const result = await adminLogin(email, password, dbAdminRepository, authService);
         if(result instanceof AppError){
-            res.json({
+            res.status(result.errorCode).json({
                 ...result,
                 status: "failed",
             })
@@ -86,7 +86,7 @@ const authController = (
         const worker = req.body;
         const result = await workerSignup(worker, dbWorkerRepository, authService);
         if(result instanceof AppError){
-             res.json({
+            res.status(result.errorCode).json({
                 ...result,
                 status: "failed",
                 })
@@ -104,7 +104,7 @@ const authController = (
         const result = await workerLogin(email, password, dbWorkerRepository, authService);
 
         if(result instanceof AppError){
-            res.json({
+            res.status(result.errorCode).json({
                ...result,
                status: "failed",
                })

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../User';
+import { User } from '../../types/User';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 
@@ -31,15 +31,12 @@ export class SignupBoxComponent {
   }
 
   onFormSubmit(){
-    console.log(this.form);
-    
     const user : User ={
       name : this.form.value.name,
       email : this.form.value.email,
       phone : this.form.value.phone,
       password : this.form.value.password
     }
-    console.log(user);
     
     this.userService.signup(user).subscribe({
       next: (response) => {

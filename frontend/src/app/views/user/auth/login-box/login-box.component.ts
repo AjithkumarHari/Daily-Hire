@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Credentials } from '../../types/Credentials';
+import { UserService } from '../../user.service';
+import { Router } from '@angular/router';
+import { SuccessRes } from '../../types/SuccessRes';
 
 @Component({
   selector: 'app-login-box',
@@ -8,8 +12,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginBoxComponent implements OnInit{
   form!: FormGroup;
+  errorMessage: string = " "
 
-  constructor(private formBuilder : FormBuilder ){
+  constructor(private formBuilder : FormBuilder,
+    private userService: UserService,
+    private router: Router
+    ){
 
   }
   ngOnInit(): void {
@@ -19,6 +27,25 @@ export class LoginBoxComponent implements OnInit{
     })
   }
   onFormSubmit(){
-    console.log(this.form);
+    const credentials: Credentials ={
+      email : this.form.value.email,
+      password : this.form.value.password
+    }
+
+    this.userService.login(credentials).subscribe({
+      next: (Response) => {
+
+        console.log(Response);
+ 
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        console.log(err.error.message);
+        this.errorMessage = err.error.message;
+        setTimeout(() => this.errorMessage = '',3000);
+      },
+ 
+    }
+    )
   }
 }
