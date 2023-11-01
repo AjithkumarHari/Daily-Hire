@@ -21,12 +21,13 @@ export class AuthEffects{
                 this.userService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
-                        if(responce){
-                            sessionStorage.setItem('token',responce[2])
-                            console.log('in side effect',responce[0]);
-                            return loginSuccess({token : responce[2]})
+                        if(responce.token){
+                            sessionStorage.setItem('user-token',responce.token)
+                            console.log('in side effect LS',responce.message);
+                            return loginSuccess({token : responce.token})
                         }else{
-                            return loginFailure({ error : responce  })
+                            console.log('in side effect LE',responce);
+                            return loginFailure({ error : responce.error.error  })
                         }
                     }),
                     catchError(error => of (loginFailure({ error })))

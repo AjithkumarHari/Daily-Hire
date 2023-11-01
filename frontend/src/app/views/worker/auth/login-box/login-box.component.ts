@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from '../../types/Credentials';
-import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { loginRequest } from '../../state/login/login.action';
-import { selectErrorMessage } from '../../state/login/login.selector';
-import { UserState } from '../../state/user.state';
- 
-
 
 @Component({
   selector: 'app-login-box',
@@ -20,9 +12,9 @@ export class LoginBoxComponent implements OnInit{
   errorMessage: any = " "
 
   constructor(private formBuilder : FormBuilder,
-    private userService: UserService,
+    // private userService: UserService,
     private router: Router,
-    private store: Store<UserState>
+    // private store: Store<UserState>
     ){}
 
   ngOnInit(): void {
@@ -34,17 +26,17 @@ export class LoginBoxComponent implements OnInit{
 
 
   onFormSubmit(){
-    const credentials: Credentials ={
-      email : this.form.value.email,
-      password : this.form.value.password
-    }
+    // const credentials: Credentials ={
+    //   email : this.form.value.email,
+    //   password : this.form.value.password
+    // }
 
-    this.store.dispatch(loginRequest({credentials}))
+    // this.store.dispatch(loginRequest({credentials}))
  
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-      this.errorMessage = error
-      console.log("login",this.errorMessage);  
-    }
-    );
+    //   this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+    //   this.errorMessage = error
+    //   console.log("login",this.errorMessage);  
+    // }
+    // );
   }
 }

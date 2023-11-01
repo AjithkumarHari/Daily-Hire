@@ -18,6 +18,7 @@ import { CategoryComponent } from './views/user/home/main-section/category/categ
 import { SearchComponent } from './views/user/home/search/search.component';
 import { UserModule } from './views/user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { WorkerModule } from './views/worker/worker.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     UserModule,
-    HttpClientModule
+    HttpClientModule,
+    WorkerModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

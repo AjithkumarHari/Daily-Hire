@@ -1,16 +1,9 @@
-  <div class="flex w-7/12 m-auto mt-32 overflow-hidden bg-white shadow-lg h-2/5 rounded-xl"> 
-    <div class="hidden  w-1/2  sm:hidden md:block">
-        <div class="flex flex-col items-center justify-center p-12 h-full bg-no-repeat bg-cover" style="background-image: url('../../../assets/images/gentleman-tuxedo.jpg');">
-            <h1 class="mb-4 text-3xl font-bold text-white">Welcome</h1>
-            <div>
-                <p class="text-sm text-[#ffffff]">This web app connects daily workers with those in need. Workers create profiles detailing their skills, while users book them as needed.</p>
-            </div>
-        </div> 
-    </div>
-    <div class="relative sm:w-full lg:w-1/2 px-5 lg:px-10 py-10 lg:h-96 h-fit ">
-        <h1 class="mb-1 text-3xl ">Login</h1>
-        <p class="  text-sm  ">Are you new to Daily Hire? <a routerLink="/auth/signup"  class="font-semibold text-yellow-950">Click Here</a></p>
-        <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="">
+<div class="flex w-4/12 m-auto mt-32 overflow-hidden bg-[#ffffffa9] shadow-lg h-2/5 rounded-xl"> 
+     
+    <div class="relative w-full px-5 lg:px-10 py-10 lg:h-96 h-fit ">
+        <h1 class="mb-1 text-3xl text-center">Worker Login</h1>
+        <p class="  text-sm  ">If you want to Register on  Daily Hire? <a routerLink="/auth/signup"  class="font-semibold text-yellow-950">Click Here</a></p>
+        <form  (ngSubmit)="onFormSubmit()" class="">
             <div  class='grid gap-6 mt-7'>
                 <div>
                     <div class="relative">
