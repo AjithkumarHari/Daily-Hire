@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from '../admin.service';
 import { Router } from '@angular/router';
-import { Credentials } from '../../types/Credentials';
-import { WorkerService } from '../../worker.service';
+import { adminLoginRequest } from '../state/login/admin.login.action';
+import { selectErrorMessage } from '../state/login/admin.login.selector';
 import { Store, select } from '@ngrx/store';
-import { WorkerState } from '../../state/worker.state';
-import { workerLoginRequest } from '../../state/login/worker.login.action';
-import { selectErrorMessage } from '../../state/login/worker.login.selector';
+import { AdminState } from '../state/admin.state';
 
 @Component({
-  selector: 'app-login-box',
-  templateUrl: './login-box.component.html',
-  styleUrls: ['./login-box.component.css']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css']
 })
-export class LoginBoxComponent implements OnInit{
+export class AuthComponent {
   form!: FormGroup;
   errorMessage: any = " "
 
   constructor(private formBuilder : FormBuilder,
-    private workerService: WorkerService,
+    private adminService: AdminService,
     private router: Router,
-    private store: Store<WorkerState>
+    private store: Store<AdminState>
     ){}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       email : new FormControl(null, [Validators.required, Validators.email, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$")]),
-      password : new FormControl(null, [Validators.required, Validators.maxLength(8), Validators.minLength(8)])
+      password : new FormControl(null, [Validators.required, Validators.maxLength(6), Validators.minLength(6)])
     })
   }
 
@@ -34,14 +33,14 @@ export class LoginBoxComponent implements OnInit{
   onFormSubmit(){
     console.log(this.form);
     
-    const credentials: Credentials ={
+    const credentials: {email: string, password: string} ={
       email : this.form.value.email,
       password : this.form.value.password
     }
 
     console.log(credentials);
 
-    this.store.dispatch(workerLoginRequest({credentials}))
+    this.store.dispatch(adminLoginRequest({credentials}))
  
       this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
       this.errorMessage = error
@@ -49,12 +48,13 @@ export class LoginBoxComponent implements OnInit{
     }
     );
     
-    // this.workerService.login(credentials).subscribe({
+    // this.adminService.login(credentials).subscribe({
     //   next: (response) => {
-    //     this.router.navigateByUrl('/worker');
+    //     this.router.navigateByUrl('/admin');
     //   },
     //   error: (err) => {
-    //     console.log(err);
+    //     console.log(err.error.message);
+    //     this.errorMessage = err.error.message
     //   }
     // });
     

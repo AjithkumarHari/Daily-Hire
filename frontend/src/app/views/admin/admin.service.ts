@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Credentials } from './types/Credentials';
 import { environment } from 'src/environments/environment';  
-import { Worker } from './types/Worker';
+import { Credentials } from './types/Credentials';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkerService {
+export class AdminService {
+
   server = environment.serverUrl
   constructor( private http: HttpClient) { }
 
-  signup(worker: Worker){
-    return this.http.post(`${this.server}/auth/worker-signup`, worker)
-  }
-
   login(credentials: Credentials){
-    return this.http.post(`${this.server}/auth/worker-login`,credentials)
+    return this.http.post(`${this.server}/auth/admin-login`,credentials)
   }
 
   setToken(token: string){
@@ -26,5 +22,4 @@ export class WorkerService {
   getToken(){
     return window.sessionStorage.getItem('worker-token')
   }
-
 }

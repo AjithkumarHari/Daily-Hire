@@ -34,15 +34,19 @@ const workerShcema = new Schema(
             type: String,
             require: true
         },
-        wage_for_day: {
+        wageForDay: {
             type: Number,
             require: true
         },
-        wage_for_hour: {
+        wageForHour: {
             type: Number,
             require: true
         },
-        profile_img: {
+        location: {
+            type: String,
+            require: true
+        },
+        profileImg: {
             type: String,
         }
     }

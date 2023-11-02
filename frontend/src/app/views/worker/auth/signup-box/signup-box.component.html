@@ -1,14 +1,15 @@
 <div class="w-7/12 m-auto mt-20  overflow-hidden bg-[#ffffffc1] shadow-lg  rounded-xl">
     <div class="text-center mt-3">
         <h1 class="mb-1 text-3xl ">Worker Signup</h1>
-        <p class="text-sm">Already Registered on Daily Hire? <a routerLink="/auth/login"  class="font-semibold text-yellow-950">Click Here</a></p>
+        <p class="text-sm">Already Registered on Daily Hire? <a routerLink="/worker/auth/login"  class="font-semibold text-yellow-950">Click Here</a></p>
     </div>
 
-    <form  (ngSubmit)="onFormSubmit()" >
+    <form  [formGroup]="form"  (ngSubmit)="onFormSubmit()" >
 
         <div class="grid grid-cols-2 mt-3 divide-x divide-slate-400/50">
             <div class="relative w-full px-10 py-10 h-fit">
-                <div class='grid gap-5 mt-2'>
+                <div class='grid gap-5'>
+                    <h1 class="text-xl ">Personal Details</h1>
                     <div>
                         <div class="relative">
                             <input type="text" id="floating_outlined" 
@@ -27,7 +28,7 @@
                             }"
                             >Name</label>
                         </div>
-                        <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Name must be valid(a-z,A-Z)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -47,7 +48,7 @@
                             }"
                             >Phone number</label>
                         </div>
-                        <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Number must be valid(0-9)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -67,21 +68,20 @@
                             }"
                             >Age</label>
                         </div>
-                        <!-- <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be a valid number</p> -->
+                        <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Age must be a valid (0-9)</p>
                     </div>
                     <div>
-                         
-                        <label for="underline_select" class="sr-only ">Gender select</label>
-                        <select id="underline_select" 
-                        class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                        >
-                            <option selected>Select gender</option>
-                            <option value="male"> Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-
-                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <div class="relative">
+                            <select id="underline_select" formControlName="gender"
+                                class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-400 appearance-none focus:outline-none focus:ring-0 peer"
+                                >
+                                <option value="select">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <p *ngIf="!form.get('gender')?.valid && !form.get('gender')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -121,7 +121,7 @@
                             }"
                             >Password</label>
                         </div>
-                        <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>emust be 8 characters(eg: e5$h23Dq)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -141,92 +141,110 @@
                             }"
                             >Confirm Password</label>
                         </div>
-                        <p *ngIf="!form.get('confpassword')?.valid && !form.get('confpassword')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('confpassword')?.valid && !form.get('confpassword')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>must be 8 characters(eg: e5$h23Dq)</p>
                     </div>
                 </div>
             </div>
 
             <div class="relative w-full px-10 py-10 h-fit">
-            
-                <div class='grid gap-5 mt-2'>
+                <div class='grid gap-5'>
+                    <h1 class="text-xl ">Work Details</h1>
                     <div>
-                         
                         <label for="underline_select" class="sr-only ">Works</label>
                         <select id="underline_select" 
+                        formControlName="work"
                         class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                         >
-                            <option selected>Profession</option>
-                            <option value="male"> Elecrician</option>
-                            <option value="female">Plumber</option>
-                            <option value="other">Driver</option>
-                            <option value="other">House keeping</option>
-                            <option value="other">Painter</option>
-
+                            <option value="work">Profession</option>
+                            <option value="Elecrician"> Elecrician</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Driver">Driver</option>
+                            <option value="House-keeping">House-keeping</option>
+                            <option value="Painter">Painter</option>
                         </select>
-
-                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Work name must be valid (a-z,A-Z)</p>
                     </div>
                     <div>
                         <div class="relative">
                             <input type="text" id="floating_outlined" 
-                            formControlName="phone"
+                            formControlName="experience"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
-                                ' border-red-500': form.get('phone')?.invalid && form.get('phone')?.touched,
-                                'border-green-600': !form.get('phone')?.invalid && !form.get('phone')?.touched
+                                ' border-red-500': form.get('experience')?.invalid && form.get('experience')?.touched,
+                                'border-green-600': !form.get('experience')?.invalid && !form.get('experience')?.touched
                             }"
                             />
                             <label for="floating_outlined" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
-                                'text-red-600': form.get('phone')?.invalid && form.get('phone')?.touched,
-                                'text-green-600 ': !form.get('phone')?.invalid && !form.get('phone')?.touched,
+                                'text-red-600': form.get('experience')?.invalid && form.get('experience')?.touched,
+                                'text-green-600 ': !form.get('experience')?.invalid && !form.get('experience')?.touched,
                             }"
                             >Years of Experince</label>
                         </div>
-                        <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('experience')?.valid && !form.get('experience')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Years must be valid(0-9)</p>
                     </div>
                     <div>
                         <div class="relative">
                             <input type="text" id="floating_outlined" 
-                            formControlName="email"
+                            formControlName="wageForHour"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
-                                ' border-red-500': form.get('email')?.invalid && form.get('email')?.touched,
-                                'border-green-600': !form.get('email')?.invalid && !form.get('email')?.touched
+                                ' border-red-500': form.get('wageForHour')?.invalid && form.get('wageForHour')?.touched,
+                                'border-green-600': !form.get('wageForHour')?.invalid && !form.get('wageForHour')?.touched
                             }"
                             />
                             <label for="floating_outlined" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
-                                'text-red-600': form.get('email')?.invalid && form.get('email')?.touched,
-                                'text-green-600 ': !form.get('email')?.invalid && !form.get('email')?.touched,
+                                'text-red-600': form.get('wageForHour')?.invalid && form.get('wageForHour')?.touched,
+                                'text-green-600 ': !form.get('wageForHour')?.invalid && !form.get('wageForHour')?.touched,
                             }"
                             >Expected wage for an hour</label>
                         </div>
-                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('wageForHour')?.valid && !form.get('wageForHour')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>wage must be valid(0-9)</p>
                     </div>
                     <div>
                         <div class="relative">
                             <input type="text" id="floating_outlined" 
-                            formControlName="password"
+                            formControlName="wageForDay"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
-                                ' border-red-500': form.get('password')?.invalid && form.get('password')?.touched,
-                                'border-green-600': !form.get('password')?.invalid && !form.get('password')?.touched
+                                ' border-red-500': form.get('wageForDay')?.invalid && form.get('wageForDay')?.touched,
+                                'border-green-600': !form.get('wageForDay')?.invalid && !form.get('wageForDay')?.touched
                             }"
                             />
                             <label for="floating_outlined" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
-                                'text-red-600': form.get('password')?.invalid && form.get('password')?.touched,
-                                'text-green-600 ': !form.get('password')?.invalid && !form.get('password')?.touched,
+                                'text-red-600': form.get('wageForDay')?.invalid && form.get('wageForDay')?.touched,
+                                'text-green-600 ': !form.get('wageForDay')?.invalid && !form.get('wageForDay')?.touched,
                             }"
-                            >Password</label>
+                            >Expected wage for a Day</label>
                         </div>
-                        <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                        <p *ngIf="!form.get('wageForDay')?.valid && !form.get('wageForDay')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>wage must be valid(0-9)</p>
                     </div>
                     <div>
+                        <div class="relative">
+                            <input type="text" id="floating_outlined" 
+                            formControlName="location"
+                            class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
+                            [ngClass]="{
+                                ' border-red-500': form.get('location')?.invalid && form.get('location')?.touched,
+                                'border-green-600': !form.get('location')?.invalid && !form.get('location')?.touched
+                            }"
+                            />
+                            <label for="floating_outlined" 
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            [ngClass]="{
+                                'text-red-600': form.get('location')?.invalid && form.get('location')?.touched,
+                                'text-green-600 ': !form.get('location')?.invalid && !form.get('location')?.touched,
+                            }"
+                            >Perfered Location</label>
+                        </div>
+                        <p *ngIf="!form.get('location')?.valid && !form.get('location')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Location must be valid (a-z,A-Z)</p>
+                    </div>
+                    <!-- <div>
                         <div class="relative">
                             <input type="text" id="floating_outlined" 
                             formControlName="confpassword"
@@ -242,10 +260,10 @@
                                 'text-red-600': form.get('confpassword')?.invalid && form.get('confpassword')?.touched,
                                 'text-green-600 ': !form.get('confpassword')?.invalid && !form.get('confpassword')?.touched,
                             }"
-                            >Confirm Password</label>
+                            >Perfered Location</label>
                         </div>
                         <p *ngIf="!form.get('confpassword')?.valid && !form.get('confpassword')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
-                    </div>
+                    </div> -->
                 </div>
                     
                 <div class="mt-4">
@@ -256,6 +274,9 @@
                 </div> 
                 
             </div> 
+        </div>
+        <div class="flex">
+            <p class="text-red-600 m-auto text-sm">{{errorMessage}}</p>
         </div>
         
         <div class="w-full my-5 text-center">
