@@ -3,7 +3,7 @@ export interface Worker {
     name: string,
     phone: number,
     email: string,
-    password: string,
+    password: string | any,
     age: number,
     work: string,
     experience: string,

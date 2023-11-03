@@ -28,7 +28,6 @@ const authController = (
     const authService = authServiceInterface(authServiceImpl());
 
     const registerUser = async ( req: Request, res: Response) => {
-        console.log('registerUser');
         
         const user:{name: string, phone: number, email: string, password: string}= req.body;
         const result = await userSignup(user, dbUserRepository, authService);
