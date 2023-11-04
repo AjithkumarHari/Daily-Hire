@@ -21,14 +21,13 @@ const userController = (
     const allWorkersGet = async ( req: Request, res: Response ) => {
 
         try{
-            const result =   allWorkers(dbWorkerRepository);
-            
+            const result: Worker[] | null | unknown= await allWorkers(dbWorkerRepository);
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'
                 })
             }
-            res.send(result)
+            res.json(result)
         } catch{
             res.status(500)
         }

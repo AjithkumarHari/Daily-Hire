@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 
 import { UserRoutingModule } from './user-routing.module';
 import { WorkerListComponent } from './worker-list/worker-list.component';
+import { WorkerDetailsComponent } from './worker-details/worker-details.component';
 
 
 
@@ -31,6 +32,7 @@ import { WorkerListComponent } from './worker-list/worker-list.component';
     CategoryComponent,
     SearchComponent,
     WorkerListComponent,
+    WorkerDetailsComponent,
 
   ],
   imports: [

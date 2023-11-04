@@ -16,8 +16,8 @@ export const workerSignup = async (
             throw new AppError("worker already exists", HttpStatus.UNAUTHORIZED);
         } 
         worker.password = await authService.encryptPassword(worker.password);
-        const {_id: workerId} = await workerRepository.addWorker(worker);
-        return authService.generateToken(workerId.toString());
+        await workerRepository.addWorker(worker);
+        return {status: "success"};
     } catch (AppError) {
         return AppError;
     }

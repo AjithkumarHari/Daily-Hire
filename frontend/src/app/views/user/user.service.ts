@@ -3,12 +3,16 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { User } from './types/User';
 import { Credentials } from './types/Credentials';
+import { Observable } from 'rxjs';
+import { Worker } from '../worker/types/Worker';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
   server = environment.serverUrl
+  
   constructor( private http: HttpClient) { }
 
   signup(user: User){
@@ -25,5 +29,9 @@ export class UserService {
 
   getToken(){
     return window.sessionStorage.getItem('user-token')
+  }
+
+  allWorkers():Observable<Worker[]> {
+    return this.http.get<Worker[]>(`${this.server}/user/worker-list`) 
   }
 }

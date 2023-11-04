@@ -17,8 +17,8 @@ export const userSignup = async (
             throw new AppError("email already exits",HttpStatus.UNAUTHORIZED);
         }
         user.password = await authService.encryptPassword(user.password);
-        const {_id: userId} = await userRepository.addUser(user);
-        return authService.generateToken(userId.toString())
+        await userRepository.addUser(user);
+        return {status: "success"};
     }catch(AppError){
         return AppError;
     }

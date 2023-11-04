@@ -34,14 +34,12 @@ const authController = (
         
         if(result instanceof AppError){
             res.status(result.errorCode).json({
-                ...result,
-                status: "failed",
+                ...result
                 })
         }else{
             res.json({
-                status: "success",
+                result,
                 message: "successfully added new user",
-                token: result
             });
         }
     }
@@ -91,9 +89,9 @@ const authController = (
                 })
         }else{
             res.json({
-                status: "success",
+                result,
                 message: "successfully added new worker",
-                token: result
+
             });
         }
     }

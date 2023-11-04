@@ -5,6 +5,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginBoxComponent } from './auth/login-box/login-box.component';
 import { SignupBoxComponent } from './auth/signup-box/signup-box.component';
 import { WorkerListComponent } from './worker-list/worker-list.component';
+import { WorkerDetailsComponent } from './worker-details/worker-details.component';
  
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     {path:'signup',component:SignupBoxComponent}
   ]},
   {path:'workerList',component: WorkerListComponent},
+  { path: 'workerDetails', component: WorkerDetailsComponent}
  
 ];
 
