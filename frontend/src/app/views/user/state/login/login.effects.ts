@@ -24,7 +24,7 @@ export class AuthEffects{
                         if(responce.token){
                             sessionStorage.setItem('user-token',responce.token)
                             console.log('in side effect LS',responce.message);
-                            return loginSuccess({token : responce.token})
+                            return loginSuccess({UserToken : responce.token})
                         }else{
                             console.log('in side effect LE',responce);
                             return loginFailure({ error : responce.error.error  })

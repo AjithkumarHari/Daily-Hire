@@ -3,16 +3,16 @@ import { Credentials } from "../../types/Credentials";
 import { ErrorRes } from "../../types/ErrorRes";
 
 export const adminLoginRequest = createAction(
-    `Auth Worker Login Request`,
+    `Auth Admin Login Request`,
     props<{credentials: Credentials}>()
 )
 
 export const adminLoginSuccess = createAction(
-    `Auth Worker Login Success`,
+    `Auth Admin Login Success`,
     props<{token: string}>()
 )
 
 export const adminLoginFailure = createAction(
-    `Auth Worker Login Failure`,
+    `Auth Admin Login Failure`,
     props<{error: ErrorRes}>()
 )

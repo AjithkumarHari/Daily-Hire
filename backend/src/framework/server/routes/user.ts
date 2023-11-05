@@ -10,7 +10,9 @@ const userRouter = () => {
     
     const controller = userController(workerDbRepository,workerRepositoryMongoDB)
 
-    router.get('/worker-list',controller.allWorkersGet)
+    router.get('/worker-list',controller.getAllWorkers)
+
+    router.get('/worker-details/:id',controller.getWorkerById)
 
     return router
 }

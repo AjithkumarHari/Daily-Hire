@@ -1,4 +1,4 @@
-export interface UserState {
-    token: string;
+export interface UserState { 
+    UserToken: string;
     errorMessage: string | undefined;
 }

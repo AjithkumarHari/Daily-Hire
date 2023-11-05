@@ -7,12 +7,15 @@ export const workerDbRepository = (repository: ReturnType<WorkerRepositoryMongoD
 
     const getWorkerByEmail = async (email: string) => await repository.getWorkerByEmail(email);
 
-    const addWorker = async (worker: Worker) => await repository.addWorker(worker); 
+    const addWorker = async (worker: Worker) => await repository.addWorker(worker);
+
+    const getWorkerById = async (workerId: string) => await repository.getWorkerById(workerId);
 
     return {
         getAllWorkers,
         getWorkerByEmail,
-        addWorker
+        addWorker,
+        getWorkerById
     }
 }
 

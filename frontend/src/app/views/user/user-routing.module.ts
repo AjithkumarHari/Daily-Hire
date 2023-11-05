@@ -6,6 +6,7 @@ import { LoginBoxComponent } from './auth/login-box/login-box.component';
 import { SignupBoxComponent } from './auth/signup-box/signup-box.component';
 import { WorkerListComponent } from './worker-list/worker-list.component';
 import { WorkerDetailsComponent } from './worker-details/worker-details.component';
+import { userGuard } from './user.guard';
  
 
 const routes: Routes = [
@@ -14,8 +15,8 @@ const routes: Routes = [
     {path:'login',component:LoginBoxComponent},
     {path:'signup',component:SignupBoxComponent}
   ]},
-  {path:'workerList',component: WorkerListComponent},
-  { path: 'workerDetails', component: WorkerDetailsComponent}
+  {path:'workerList',component: WorkerListComponent, canActivate: [userGuard]},
+  { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]}
  
 ];
 

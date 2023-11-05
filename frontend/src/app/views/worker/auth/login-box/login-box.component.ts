@@ -6,7 +6,7 @@ import { WorkerService } from '../../worker.service';
 import { Store, select } from '@ngrx/store';
 import { WorkerState } from '../../state/worker.state';
 import { workerLoginRequest } from '../../state/login/worker.login.action';
-import { selectErrorMessage } from '../../state/login/worker.login.selector';
+import { selectWorkerErrorMessage } from '../../state/login/worker.login.selector';
 
 @Component({
   selector: 'app-login-box',
@@ -32,7 +32,6 @@ export class LoginBoxComponent implements OnInit{
 
 
   onFormSubmit(){
-    console.log(this.form);
     
     const credentials: Credentials ={
       email : this.form.value.email,
@@ -43,7 +42,7 @@ export class LoginBoxComponent implements OnInit{
 
     this.store.dispatch(workerLoginRequest({credentials}))
  
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+      this.store.pipe(select(selectWorkerErrorMessage)).subscribe((error) => {
       this.errorMessage = error
       console.log("login",this.errorMessage);  
     }
@@ -54,7 +53,7 @@ export class LoginBoxComponent implements OnInit{
     //     this.router.navigateByUrl('/worker');
     //   },
     //   error: (err) => {
-    //     console.log(err);
+    //     console.log(err.error.message);
     //   }
     // });
     

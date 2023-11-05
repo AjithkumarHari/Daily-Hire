@@ -26,5 +26,8 @@ export class WorkerService {
   getToken(){
     return window.sessionStorage.getItem('worker-token')
   }
+  deleteToken(){
+    return window.sessionStorage.removeItem('worker-token')
+  }
 
 }

@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from './views/user/user.module';
 import { WorkerModule } from './views/worker/worker.module';
 import { AdminModule } from './views/admin/admin.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,12 @@ import { AdminModule } from './views/admin/admin.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     UserModule,
     HttpClientModule,
     WorkerModule,
     AdminModule,
+    StoreModule.forRoot(),
+    EffectsModule.forRoot()
  
   ],
   providers: [],

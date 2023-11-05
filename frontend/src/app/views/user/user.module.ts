@@ -39,8 +39,8 @@ import { WorkerDetailsComponent } from './worker-details/worker-details.componen
     CommonModule,
     ReactiveFormsModule,
     UserRoutingModule,
-    StoreModule.forRoot({ user: authReducer}),
-    EffectsModule.forRoot(AuthEffects)
+    StoreModule.forFeature('user', authReducer),
+    EffectsModule.forFeature(AuthEffects)
   ]
 })
 export class UserModule { }

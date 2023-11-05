@@ -9,5 +9,12 @@
         <li><a class="pr-2.5 pl-2.5" routerLink="/workerList">Workers</a></li>
         <li><a class="pr-2.5 pl-2.5" href="#">Profile</a></li>
     </ul>
-    <button class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/login">Login</button>
+    <div>
+
+        <button *ngIf="isLoggedIn(); else loginSignup" class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/login">Logout</button>
+        <ng-template #loginSignup>
+            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/login">Login</button>
+            <button class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/signup">Signup</button>
+        </ng-template>
+    </div>
 </nav>

@@ -11,27 +11,34 @@ import { Worker } from '../worker/types/Worker';
 })
 export class UserService {
 
-  server = environment.serverUrl
+  server = environment.serverUrl;
   
   constructor( private http: HttpClient) { }
 
   signup(user: User){
-    return this.http.post(`${this.server}/auth/user-signup`, user)
+    return this.http.post(`${this.server}/auth/user-signup`, user);
   }
 
   login(credentials: Credentials){
-    return this.http.post(`${this.server}/auth/user-login`,credentials)
+    return this.http.post(`${this.server}/auth/user-login`,credentials);
   }
 
   setToken(token: string){
-    return window.sessionStorage.setItem('user-token',token)
+    return window.sessionStorage.setItem('user-token',token);
   }
 
   getToken(){
-    return window.sessionStorage.getItem('user-token')
+    return window.sessionStorage.getItem('user-token');
   }
 
   allWorkers():Observable<Worker[]> {
-    return this.http.get<Worker[]>(`${this.server}/user/worker-list`) 
+    return this.http.get<Worker[]>(`${this.server}/user/worker-list`);
+  }
+
+  getWorkerById (id: string):Observable<Worker> {
+    return this.http.get<Worker>(`${this.server}/user/worker-details/${id}`);
+  }
+  deleteToken(){
+    return window.sessionStorage.removeItem('admin-token')
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AdminService } from '../../admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
 
+  constructor(private adminService: AdminService, private router: Router){}
+
+  logout(){
+    this.adminService.deleteToken();
+    this.router.navigateByUrl('admin/auth')
+  }
 }

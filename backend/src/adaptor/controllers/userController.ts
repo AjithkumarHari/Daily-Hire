@@ -5,6 +5,8 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { allWorkers } from "../../application/useCase/user/allWorkers";
 import { HttpStatus } from "../../types/HttpStatus";
+import { findById } from "../../application/useCase/worker/findById";
+import { Worker } from "../../types/Worker";
 
 
 const userController = ( 
@@ -18,7 +20,7 @@ const userController = (
 
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
 
-    const allWorkersGet = async ( req: Request, res: Response ) => {
+    const getAllWorkers = async ( req: Request, res: Response ) => {
 
         try{
             const result: Worker[] | null | unknown= await allWorkers(dbWorkerRepository);
@@ -34,8 +36,28 @@ const userController = (
         
     }
 
+    const getWorkerById = async (req: Request, res: Response) => {
+        try{
+            const workerId: string = req.params.id;
+            
+            const result: Worker | null | unknown= await findById(workerId, dbWorkerRepository);
+
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
+    
+
     return {
-        allWorkersGet,
+        getAllWorkers,
+        getWorkerById
     };
 };
 

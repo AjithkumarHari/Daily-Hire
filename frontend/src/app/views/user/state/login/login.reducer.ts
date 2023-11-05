@@ -3,23 +3,23 @@ import { loginSuccess, loginFailure } from "./login.action";
 import { UserState } from "../user.state";
 
 export const InitialState: UserState =  {
-    token: '',
+    UserToken: '',
     errorMessage: undefined
 }
 
 const _authReducer = createReducer(
     InitialState,
-    on(loginSuccess,(state, {token})=>{
+    on(loginSuccess,(state, {UserToken})=>{
         return {
             ...state,
-            token,
+            UserToken,
             errorMessage: undefined
         }
     }),
     on(loginFailure,(state,{error})=>{
         return {
             ...state,
-            token: " ",
+            UserToken: " ",
             errorMessage: error.error.message
         }
     })

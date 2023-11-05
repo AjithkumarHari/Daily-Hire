@@ -25,8 +25,8 @@ import { NavbarComponent } from './home/navbar/navbar.component';
     WorkerRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ worker: authReducer}),
-    EffectsModule.forRoot(AuthEffects)
+    StoreModule.forFeature('worker', authReducer),
+    EffectsModule.forFeature(AuthEffects)
   ]
 })
 export class WorkerModule { }

@@ -50,7 +50,7 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(adminLoginFailure),
             tap(()=>{
-                this.router.navigate(['/admin/auth/login'])
+                this.router.navigate(['/admin/auth'])
             })
         ), {
             dispatch: false

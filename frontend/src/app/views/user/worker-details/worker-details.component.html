@@ -7,13 +7,13 @@
     </div>
     <div class="absolute flex w-full mt-28 z-0 h-fit">
         
-        <div class="h-fit mx-20 w-full bg-white">
+        <div class="h-fit mx-20 w-full rounded-md bg-gradient-to-r from-[#fff9d6] via-[#e5ece9] to-[#adb6c4]">
            
             <div class=" flex justify-center mt-20 w-full">
-                <h1 class="text-4xl left-1/2 font-semibold">Name</h1>
+                <h1 class="text-4xl left-1/2 font-semibold">{{details$.name}}</h1>
             </div>
             <div class=" flex justify-center w-full">
-                <h2 class="text-3xl">Work</h2>
+                <h2 class="text-3xl">{{details$.work}}</h2>
             </div>
             <div class="flex justify-center items-center space-x-2 m-3">
                 <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -34,25 +34,24 @@
             </div>
             <div class="flex">
 
-                <div class="grid grid-cols-2 h-fit w-3/4 ">
+                <div class="grid grid-cols-2 py-1 h-fit w-3/4 ">
                     <div class="mx-10 ">
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Phone:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">E-mail:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Age:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Gender:</span> xxx</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Phone:</span> {{details$.phone}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">E-mail:</span> {{details$.email}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Age:</span> {{details$.age}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Gender:</span> {{details$.gender}}</p>
                     </div>
                     <div class="mx-10 ">
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Place:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Experience:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for a Day:</span> xxx</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for an Hour:</span> xxx</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Location:</span> {{details$.location}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Experience:</span> {{details$.experience}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for a Day:</span> {{details$.wageForDay}}</p>
+                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for an Hour:</span> {{details$.wageForHour}}</p>
                     </div>
                 </div>
-                <div>
-                    <button class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]">Book Now</button>
+                <div class="flex justify-center items-center">
+                    <button class="px-6 py-3 text-lg text-white rounded bg-[#9e2a2b] hover:bg-[#540b0e]">Book Now</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

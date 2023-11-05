@@ -10,21 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class WorkerListComponent implements OnInit{
 
-  workers$: any
+  workers$!: Worker[];
 
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
     
-    this.userService.allWorkers().subscribe((data:any)=>{
-      
-      this.workers$ = data
-      console.log( 'componet', this.workers$  );
-       
+    this.userService.allWorkers().subscribe((data: Worker[])=>{
+      this.workers$ = data;
     })
-
- 
-    
   }
   
 }

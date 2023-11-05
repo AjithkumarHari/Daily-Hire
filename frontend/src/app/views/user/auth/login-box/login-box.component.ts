@@ -43,6 +43,7 @@ export class LoginBoxComponent implements OnInit{
  
       this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
       this.errorMessage = error
+      
       console.log("login",this.errorMessage);  
     }
     );

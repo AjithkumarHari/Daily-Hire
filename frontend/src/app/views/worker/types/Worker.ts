@@ -1,4 +1,5 @@
 export interface Worker{
+    _id?:string
     name: string,
     phone: number,
     email: string,

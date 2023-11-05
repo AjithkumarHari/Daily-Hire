@@ -16,10 +16,14 @@ export class AdminService {
   }
 
   setToken(token: string){
-    return window.sessionStorage.setItem('worker-token',token)
+    return window.sessionStorage.setItem('admin-token',token)
   }
 
   getToken(){
-    return window.sessionStorage.getItem('worker-token')
+    return window.sessionStorage.getItem('admin-token')
   }
+  deleteToken(){
+    return window.sessionStorage.removeItem('admin-token')
+  }
+
 }

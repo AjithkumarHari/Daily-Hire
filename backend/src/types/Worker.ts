@@ -1,5 +1,5 @@
 export interface Worker {
-    _id?: string,
+    _id: string,
     name: string,
     phone: number,
     email: string,
@@ -8,7 +8,8 @@ export interface Worker {
     work: string,
     experience: string,
     gender: string,
-    wage_for_day: number,
-    wage_for_hour: number,
-    profile_img?: string
+    wageForDay: number,
+    wageForHour: number,
+    profileImg?: string,
+    location: string
 }

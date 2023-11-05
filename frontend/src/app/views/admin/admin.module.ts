@@ -26,8 +26,8 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ worker: authReducer}),
-    EffectsModule.forRoot(AuthEffects)
+    StoreModule.forFeature('admin', authReducer),
+    EffectsModule.forFeature(AuthEffects)
   ]
 })
 export class AdminModule { }

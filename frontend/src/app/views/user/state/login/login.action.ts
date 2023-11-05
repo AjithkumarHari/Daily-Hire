@@ -9,7 +9,7 @@ export const loginRequest = createAction(
 
 export const loginSuccess = createAction(
     `Auth Login Success`,
-    props<{token: string}>()
+    props<{UserToken: string}>()
 )
 
 export const loginFailure = createAction(
