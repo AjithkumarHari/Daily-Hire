@@ -1,0 +1,24 @@
+{
+    "restoreTerminals.terminals": [
+    
+        {
+            "splitTerminals": [
+              {
+                "name": "server",
+                "commands": ["cd backend", "npm run dev"],
+                "icon": "server",
+               
+              },
+            ]
+          },
+          {
+            "splitTerminals": [
+              {
+                "name": "client",
+                "commands": ["cd frontend", "ng serve"],
+                "icon": "vm"
+              },
+            ]
+          }
+    ]
+}
