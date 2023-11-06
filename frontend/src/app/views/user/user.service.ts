@@ -39,6 +39,6 @@ export class UserService {
     return this.http.get<Worker>(`${this.server}/user/worker-details/${id}`);
   }
   deleteToken(){
-    return window.sessionStorage.removeItem('admin-token')
+    return window.sessionStorage.removeItem('user-token')
   }
 }
