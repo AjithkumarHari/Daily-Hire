@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "../../user.service";
-import { loginFailure, loginRequest, loginSuccess } from "./login.action";
+import { loginFailure, loginRequest, loginSuccess, googleLoginRequest } from "./login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -19,6 +19,28 @@ export class AuthEffects{
             ofType(loginRequest),
             switchMap(({ credentials }) =>
                 this.userService.login(credentials).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        if(responce.token){
+                            sessionStorage.setItem('user-token',responce.token)
+                            console.log('in side effect LS',responce.message);
+                            return loginSuccess({UserToken : responce.token})
+                        }else{
+                            console.log('in side effect LE',responce);
+                            return loginFailure({ error : responce.error.error  })
+                        }
+                    }),
+                    catchError(error => of (loginFailure({ error })))
+                )
+            )
+        )
+    );
+
+    googleLogin$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(googleLoginRequest),
+            switchMap(({ user }) =>
+                this.userService.signInWithGoogle(user).pipe(
                     map(res=>{
                         let responce : any = res;
                         if(responce.token){

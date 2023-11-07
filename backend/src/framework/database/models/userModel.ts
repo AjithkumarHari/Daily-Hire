@@ -17,7 +17,11 @@ const userShcema = new Schema(
         password : {
             type : String,
             require : true
-        }
+        },
+        isGoogleUser:{
+            type:Boolean,
+            default:false
+        },
     }
 )
 

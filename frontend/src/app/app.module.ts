@@ -13,6 +13,7 @@ import { AdminModule } from './views/admin/admin.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +30,9 @@ import { EffectsModule } from '@ngrx/effects';
     WorkerModule,
     AdminModule,
     StoreModule.forRoot(),
-    EffectsModule.forRoot()
- 
+    EffectsModule.forRoot(),
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

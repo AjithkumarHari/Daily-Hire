@@ -7,7 +7,9 @@ import { AdminRepository } from "../../application/repository/adminDbRepository"
 import { AdminDbRepositoryMongoDb } from "../../framework/database/repository/adminDbRepository";
 import { AuthService } from "../../framework/service/authService";
 import { AuthServiceInterface } from "../../application/service/authServiceInterface";
-import { userLogin, userSignup } from "../../application/useCase/auth/userAuth";
+import { GoogleAuthServiceInterface } from "../../application/service/googleAuthServiceInterface";
+import { GoogleAuthService } from "../../framework/service/googleAuthService";
+import { signInWithGoogle, userLogin, userSignup } from "../../application/useCase/auth/userAuth";
 import { workerSignup, workerLogin } from "../../application/useCase/auth/workerAuth";
 import { adminLogin } from "../../application/useCase/auth/adminAuth";
 import AppError from "../../util/appError";
@@ -20,12 +22,15 @@ const authController = (
     adminDbRepository: AdminRepository,
     adminDbRepositoryImp: AdminDbRepositoryMongoDb,
     authServiceInterface: AuthServiceInterface,
-    authServiceImpl: AuthService
+    authServiceImpl: AuthService,
+    googleAuthServiceInterface:GoogleAuthServiceInterface,
+    googleAuthServiceImpl:GoogleAuthService
 ) => {
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbAdminRepository = adminDbRepository(adminDbRepositoryImp());
     const authService = authServiceInterface(authServiceImpl());
+    const googleAuthService = googleAuthServiceInterface(googleAuthServiceImpl())
 
     const registerUser = async ( req: Request, res: Response) => {
         
@@ -45,6 +50,8 @@ const authController = (
     }
 
     const loginUser = async (req: Request, res: Response) => {
+        console.log('login',req.body);
+        
         const {email, password} = req.body;
         const result = await userLogin(email, password, dbUserRepository, authService);
 
@@ -112,6 +119,18 @@ const authController = (
                 token: result
             });
         }
+    } 
+
+    const loginWithGoogle =async (req: Request, res: Response) => {
+        
+        const credentials: string = req.body.idToken;
+         
+        const token = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
+        res.json({
+            status:"success",
+            message:"user Google auth success",
+            token
+          })
     }
 
     
@@ -122,6 +141,7 @@ const authController = (
         registerWorker,
         loginWorker,
         loginAdmin,
+        loginWithGoogle
     }
 
 }

@@ -1,10 +1,11 @@
 import { UserRepositoryMongoDB } from "../../framework/database/repository/userDbRepository";
+import { User } from "../../types/User";
 
 export const userDbRepository = (repository : ReturnType<UserRepositoryMongoDB>) => {
 
     const getUserById = async (id:string) => await repository.getUserById(id);
     
-    const addUser = async (user:{name:string, email:string, password:string}) => {
+    const addUser = async (user: User) => {
         return await repository.addUser(user);
     }
     

@@ -18,8 +18,10 @@ import { UserRoutingModule } from './user-routing.module';
 import { WorkerListComponent } from './worker-list/worker-list.component';
 import { WorkerDetailsComponent } from './worker-details/worker-details.component';
 
-
-
+ 
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,23 @@ import { WorkerDetailsComponent } from './worker-details/worker-details.componen
     ReactiveFormsModule,
     UserRoutingModule,
     StoreModule.forFeature('user', authReducer),
-    EffectsModule.forFeature(AuthEffects)
-  ]
+    EffectsModule.forFeature(AuthEffects),
+    SocialLoginModule,
+    GoogleSigninButtonModule
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.googleClientId),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+  ],
 })
 export class UserModule { }

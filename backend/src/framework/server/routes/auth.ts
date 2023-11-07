@@ -8,6 +8,8 @@ import { adminDbRepository } from "../../../application/repository/adminDbReposi
 import { adminDbRepositoryMongoDB } from "../../database/repository/adminDbRepository";
 import { authService } from "../../service/authService";
 import { authServiceInterface } from "../../../application/service/authServiceInterface";
+import { googleAuthService } from "../../service/googleAuthService";
+import { googleAuthServiceInterface } from "../../../application/service/googleAuthServiceInterface";
 
 const authRouter = () => {
     const route = express.Router();
@@ -21,17 +23,21 @@ const authRouter = () => {
         adminDbRepositoryMongoDB,
         authServiceInterface,
         authService,
+        googleAuthServiceInterface,
+        googleAuthService,
     );
 
     route.post('/user-login',controller.loginUser);
 
     route.post('/user-signup',controller.registerUser);
 
-    route.post('/worker-login',controller.loginWorker);
+    route.post('/worker-login',controller.loginWorker); 
 
     route.post('/worker-signup',controller.registerWorker);
 
     route.post('/admin-login',controller.loginAdmin);
+
+    route.post('/user-google-signin',controller.loginWithGoogle)
 
     return route;
 }

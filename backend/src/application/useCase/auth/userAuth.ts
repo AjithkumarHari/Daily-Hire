@@ -3,6 +3,7 @@ import { UserDbInterface } from "../../repository/userDbRepository";
 import { AuthServiceInterface } from "../../service/authServiceInterface";
 import AppError from "../../../util/appError"; 
 import { HttpStatus } from "../../../types/HttpStatus";
+import { GoogleAuthServiceInterface } from "../../service/googleAuthServiceInterface";
 
 export const userSignup = async (
     user: {name: string, phone: number, email: string, password: string},
@@ -36,13 +37,34 @@ export const userLogin = async (
         if(!user){
             throw new AppError("User not exists",HttpStatus.UNAUTHORIZED);
         }
-        const isPasswordCorrect = await authService.comparePassword(password, user.password);
-        if(!isPasswordCorrect){
-            throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
+        if(user.password){
+            const isPasswordCorrect = await authService.comparePassword(password, user.password);
+            if(!isPasswordCorrect){
+                throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
+            }
         }
         if(user._id)
             return authService.generateToken(user._id.toString())
     }catch(AppError){
         return AppError;
+    }
+}
+
+export const signInWithGoogle = async(
+    credentials: string,
+    googleAuthService: ReturnType<GoogleAuthServiceInterface>,
+    userRepository: ReturnType<UserDbInterface>,
+    authService: ReturnType<AuthServiceInterface>
+) => {
+    
+    const user: User = await googleAuthService.verify(credentials);
+    const isUserExist = await userRepository.getUserByEmail(user.email);
+    if(isUserExist && isUserExist._id){
+        const token = authService.generateToken(isUserExist._id.toString());
+        return token
+    }else{
+        const { _id: userId } = await userRepository.addUser(user);
+        const token = authService.generateToken(userId.toString());
+        return token
     }
 }
