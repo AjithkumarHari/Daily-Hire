@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { loginSuccess, loginFailure } from "./login.action";
+import { loginSuccess, loginFailure ,signupSuccess, signupFailure} from "./login.action";
 import { UserState } from "../user.state";
 
 export const InitialState: UserState =  {
@@ -22,8 +22,22 @@ const _authReducer = createReducer(
             UserToken: " ",
             errorMessage: error.error.message
         }
+    }),
+    on(signupSuccess,(state, {userData})=>{
+        return {
+            ...state,
+            userData,
+            errorMessage: undefined
+        }
+    }),
+    on(signupFailure,(state,{error})=>{
+        return {
+            ...state,
+            UserToken: " ",
+            errorMessage: error.error.message
+        }
     })
-)
+) 
 
 
 export function authReducer(state: UserState = InitialState, action: Action){

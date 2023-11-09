@@ -19,7 +19,8 @@
     "google-auth-library": "^9.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.3",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "twilio": "^4.19.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.5",

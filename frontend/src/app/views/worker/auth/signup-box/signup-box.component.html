@@ -21,7 +21,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('name')?.invalid && form.get('name')?.touched,
                                 'text-green-600 ': !form.get('name')?.invalid && !form.get('name')?.touched,
@@ -41,7 +41,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('phone')?.invalid && form.get('phone')?.touched,
                                 'text-green-600 ': !form.get('phone')?.invalid && !form.get('phone')?.touched,
@@ -61,14 +61,14 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('age')?.invalid && form.get('age')?.touched,
                                 'text-green-600 ': !form.get('age')?.invalid && !form.get('age')?.touched,
                             }"
                             >Age</label>
                         </div>
-                        <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Age must be a valid (0-9)</p>
+                        <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Age must be a valid (above 17 & below 65)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -94,7 +94,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('email')?.invalid && form.get('email')?.touched,
                                 'text-green-600 ': !form.get('email')?.invalid && !form.get('email')?.touched,
@@ -114,7 +114,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('password')?.invalid && form.get('password')?.touched,
                                 'text-green-600 ': !form.get('password')?.invalid && !form.get('password')?.touched,
@@ -134,7 +134,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('confpassword')?.invalid && form.get('confpassword')?.touched,
                                 'text-green-600 ': !form.get('confpassword')?.invalid && !form.get('confpassword')?.touched,
@@ -175,7 +175,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('experience')?.invalid && form.get('experience')?.touched,
                                 'text-green-600 ': !form.get('experience')?.invalid && !form.get('experience')?.touched,
@@ -195,7 +195,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('wageForHour')?.invalid && form.get('wageForHour')?.touched,
                                 'text-green-600 ': !form.get('wageForHour')?.invalid && !form.get('wageForHour')?.touched,
@@ -215,7 +215,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('wageForDay')?.invalid && form.get('wageForDay')?.touched,
                                 'text-green-600 ': !form.get('wageForDay')?.invalid && !form.get('wageForDay')?.touched,
@@ -235,7 +235,7 @@
                             }"
                             />
                             <label for="floating_outlined" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('location')?.invalid && form.get('location')?.touched,
                                 'text-green-600 ': !form.get('location')?.invalid && !form.get('location')?.touched,

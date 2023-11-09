@@ -10,6 +10,8 @@ import { authService } from "../../service/authService";
 import { authServiceInterface } from "../../../application/service/authServiceInterface";
 import { googleAuthService } from "../../service/googleAuthService";
 import { googleAuthServiceInterface } from "../../../application/service/googleAuthServiceInterface";
+import { otpService } from "../../service/otpService";
+import { otpServiceInterface } from "../../../application/service/otpServiceInterface";
 
 const authRouter = () => {
     const route = express.Router();
@@ -25,6 +27,8 @@ const authRouter = () => {
         authService,
         googleAuthServiceInterface,
         googleAuthService,
+        otpServiceInterface,
+        otpService,
     );
 
     route.post('/user-login',controller.loginUser);
@@ -38,6 +42,8 @@ const authRouter = () => {
     route.post('/admin-login',controller.loginAdmin);
 
     route.post('/user-google-signin',controller.loginWithGoogle)
+
+    route.post('/user-otp',controller.userOtpVerify)
 
     return route;
 }

@@ -8,7 +8,10 @@ const configKeys = {
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY as string,
     GOOGLE_AUTH_CLIENT_ID: process.env.GOOGLE_AUTH_CLIENT_ID as string,
     GOOGLE_AUTH_CLIENT_SECRET: process.env.GOOGLE_AUTH_CLIENT_SECRET as string,
-    GOOGLE_AUTH_REDIRECT_URI: process.env.GOOGLE_AUTH_REDIRECT_URI
+    GOOGLE_AUTH_REDIRECT_URI: process.env.GOOGLE_AUTH_REDIRECT_URI,
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID as string,
+    TWILIO_SERVICE_SID: process.env.TWILIO_SERVICE_SID as string,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN as string,
 }
 
 export default configKeys; 

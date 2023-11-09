@@ -22,18 +22,18 @@ export class SignupBoxComponent {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-      phone: new FormControl(null, [Validators.required, Validators.min(10)]),
-      age: new FormControl(null, [Validators.required, Validators.min(10)]),
+      name: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_-]{3,15}$")]),
+      phone: new FormControl(null, [Validators.required, Validators.pattern("[6-9]\\d{9}")]),
+      age: new FormControl(null, [Validators.required, Validators.pattern("^(?:1[8-9]|[2-5][0-9]|65)$")]),
       gender: new FormControl('select', [Validators.required]),
-      email : new FormControl(null, [Validators.required, Validators.email, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$")]),
-      password : new FormControl(null, [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-      confpassword: new FormControl(null, [Validators.required,Validators.maxLength(8), Validators.minLength(8)]),
+      email : new FormControl(null, [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,4}$")]),
+      password : new FormControl(null, [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")]),
+      confpassword: new FormControl(null, [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")]),
       work: new FormControl('work', [Validators.required, Validators.maxLength(30)]),
-      experience: new FormControl(null, [Validators.required, Validators.min(2)]),
-      wageForHour: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-      wageForDay: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-      location: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
+      experience: new FormControl(null, [Validators.required, Validators.pattern("^([0-9]|45)$")]),
+      wageForHour: new FormControl(null, [Validators.required, Validators.pattern("^([0-9]|10000)$")]),
+      wageForDay: new FormControl(null, [Validators.required, Validators.pattern("^([0-9]|100000)$")]),
+      location: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_-]{3,20}$")]),
     })
     
   }
@@ -53,17 +53,22 @@ export class SignupBoxComponent {
       wageForDay : this.form.value.wageForDay,
       location : this.form.value.location,
     }
+
+    const confpassword = this.form.value.confpassword;
     
-    this.workerService.signup(worker).subscribe({
-      next: (response) => {
-        this.router.navigateByUrl('/worker/auth/login');
-      },
-      error: (err) => {
-        this.errorMessage = err.error.message
-        console.log(err);
-      }
-    });
-    
+    if(confpassword==worker.password){
+
+      this.workerService.signup(worker).subscribe({
+        next: (response) => {
+          this.router.navigateByUrl('/worker/auth/login');
+        },
+        error: (err) => {
+          this.errorMessage = err.error.message
+          console.log(err);
+        }
+      });
+
+    }
      
   }
 }

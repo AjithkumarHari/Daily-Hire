@@ -14,12 +14,22 @@ export const userRepositoryMongoDB = () => {
     const addUser = async (user : User) => {
         return await USER.create(user);
     }
+
+    const getUserByNumber = async (phone : number): Promise<User | null> => {
+        return await USER.findOne( {phone} );
+    }
+
+    const userActivate =async (email: string) => {
+        return await USER.updateOne({email}, {$set:{isActive: true}});
+    }
     
 
     return {
         getUserByEmail,
         getUserById,
         addUser,
+        getUserByNumber,
+        userActivate
     };
     
 }

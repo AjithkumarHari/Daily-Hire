@@ -1,14 +1,16 @@
 import { User } from "../../../types/User";
 import { UserDbInterface } from "../../repository/userDbRepository";
 import { AuthServiceInterface } from "../../service/authServiceInterface";
+import { GoogleAuthServiceInterface } from "../../service/googleAuthServiceInterface";
+import { OtpServiceInterface } from "../../service/otpServiceInterface";
 import AppError from "../../../util/appError"; 
 import { HttpStatus } from "../../../types/HttpStatus";
-import { GoogleAuthServiceInterface } from "../../service/googleAuthServiceInterface";
 
 export const userSignup = async (
     user: {name: string, phone: number, email: string, password: string},
     userRepository: ReturnType<UserDbInterface>,
-    authService: ReturnType<AuthServiceInterface>
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>
 ) => { 
     try{
         user.email = user.email.toLowerCase(); 
@@ -19,7 +21,9 @@ export const userSignup = async (
         }
         user.password = await authService.encryptPassword(user.password);
         await userRepository.addUser(user);
-        return {status: "success"};
+        await otpService.sendOtp(user.phone);
+        
+        return {status: "success",user};
     }catch(AppError){
         return AppError;
     }
@@ -66,5 +70,23 @@ export const signInWithGoogle = async(
         const { _id: userId } = await userRepository.addUser(user);
         const token = authService.generateToken(userId.toString());
         return token
+    }
+}
+export const otpVerification = async (
+    data:{
+        email: string,
+        phoneNumber: number,
+        code: string
+    },
+    userRepository: ReturnType<UserDbInterface>,
+    otpService: ReturnType<OtpServiceInterface>
+) => {
+    const isOtpVaild = await otpService.verifyOtp(data.phoneNumber, data.code);
+    
+    if(isOtpVaild){
+        await userRepository.userActivate(data.email);
+        return {"status":"success"};
+    }else{
+        return {"status":"failed"};
     }
 }

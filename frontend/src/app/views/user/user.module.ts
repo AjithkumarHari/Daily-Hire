@@ -13,6 +13,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MainSectionComponent } from './home/main-section/main-section.component';
 import { CategoryComponent } from './home/main-section/category/category.component';
 import { SearchComponent } from './search/search.component';
+import { OtpBoxComponent } from './auth/otp-box/otp-box.component';
 
 import { UserRoutingModule } from './user-routing.module';
 import { WorkerListComponent } from './worker-list/worker-list.component';
@@ -22,6 +23,8 @@ import { WorkerDetailsComponent } from './worker-details/worker-details.componen
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { environment } from 'src/environments/environment';
     SearchComponent,
     WorkerListComponent,
     WorkerDetailsComponent,
+    OtpBoxComponent,
+    PhoneNumberPipe,
 
   ],
   imports: [
@@ -44,7 +49,8 @@ import { environment } from 'src/environments/environment';
     StoreModule.forFeature('user', authReducer),
     EffectsModule.forFeature(AuthEffects),
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    NgOtpInputModule
   ],
   providers: [
     {

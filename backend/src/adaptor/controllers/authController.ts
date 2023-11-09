@@ -5,11 +5,13 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { AdminRepository } from "../../application/repository/adminDbRepository";
 import { AdminDbRepositoryMongoDb } from "../../framework/database/repository/adminDbRepository";
-import { AuthService } from "../../framework/service/authService";
 import { AuthServiceInterface } from "../../application/service/authServiceInterface";
+import { AuthService } from "../../framework/service/authService";
 import { GoogleAuthServiceInterface } from "../../application/service/googleAuthServiceInterface";
 import { GoogleAuthService } from "../../framework/service/googleAuthService";
-import { signInWithGoogle, userLogin, userSignup } from "../../application/useCase/auth/userAuth";
+import { OtpServiceInterface } from "../../application/service/otpServiceInterface";
+import { OtpService } from "../../framework/service/otpService";
+import { signInWithGoogle, userLogin, userSignup, otpVerification } from "../../application/useCase/auth/userAuth";
 import { workerSignup, workerLogin } from "../../application/useCase/auth/workerAuth";
 import { adminLogin } from "../../application/useCase/auth/adminAuth";
 import AppError from "../../util/appError";
@@ -24,18 +26,22 @@ const authController = (
     authServiceInterface: AuthServiceInterface,
     authServiceImpl: AuthService,
     googleAuthServiceInterface:GoogleAuthServiceInterface,
-    googleAuthServiceImpl:GoogleAuthService
+    googleAuthServiceImpl:GoogleAuthService,
+    otpServiceInterface:OtpServiceInterface,
+    otpServiceImpl:OtpService,
 ) => {
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbAdminRepository = adminDbRepository(adminDbRepositoryImp());
     const authService = authServiceInterface(authServiceImpl());
-    const googleAuthService = googleAuthServiceInterface(googleAuthServiceImpl())
+    const googleAuthService = googleAuthServiceInterface(googleAuthServiceImpl());
+    const otpService = otpServiceInterface(otpServiceImpl());
 
     const registerUser = async ( req: Request, res: Response) => {
         
         const user:{name: string, phone: number, email: string, password: string}= req.body;
-        const result = await userSignup(user, dbUserRepository, authService);
+        
+        const result = await userSignup(user, dbUserRepository, authService, otpService);
         
         if(result instanceof AppError){
             res.status(result.errorCode).json({
@@ -49,8 +55,16 @@ const authController = (
         }
     }
 
+    const userOtpVerify = async (req: Request, res: Response) => {
+        
+        const data = req.body;
+        const result = await otpVerification(data, dbUserRepository, otpService);
+
+        res.send(result);
+
+    }
+
     const loginUser = async (req: Request, res: Response) => {
-        console.log('login',req.body);
         
         const {email, password} = req.body;
         const result = await userLogin(email, password, dbUserRepository, authService);
@@ -141,7 +155,8 @@ const authController = (
         registerWorker,
         loginWorker,
         loginAdmin,
-        loginWithGoogle
+        loginWithGoogle,
+        userOtpVerify
     }
 
 }

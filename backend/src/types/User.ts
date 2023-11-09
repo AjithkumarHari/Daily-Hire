@@ -4,5 +4,6 @@ export interface User {
     email : string,
     phone ? : number,
     password ?: string,
-    isGoogleUser?: boolean
+    isGoogleUser?: boolean,
+    isActive?: boolean
 }

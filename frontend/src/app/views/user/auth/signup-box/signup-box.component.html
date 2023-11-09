@@ -1,11 +1,11 @@
-<div class="flex w-7/12 m-auto mt-32  overflow-hidden bg-white shadow-lg  rounded-xl">
-     <div class="flex flex-col items-center justify-center w-1/2 p-12 bg-no-repeat bg-top" style="background-image: url('../../../assets/images/gentleman-tuxedo.jpg');">
+<div class="flex w-7/12 m-auto overflow-hidden bg-white shadow-lg  rounded-xl">
+     <div class="flex flex-col items-center justify-center w-1/2 p-12 bg-no-repeat bg-cover bg-center" style="background-image: url('../../../assets/images/gentleman-tuxedo.jpg');">
         <h1 class="mb-4 text-3xl font-bold text-white">Welcome</h1>
         <div>
             <p class="text-sm text-[#ffffff]">This web app connects daily workers with those in need. Workers create profiles detailing their skills, while users book them as needed.</p>
         </div>
     </div>
-    <div class="relative w-1/2 px-10 py-10 h-fit">
+    <div class="relative w-1/2 px-10 py-4 h-fit">
         <h1 class="mb-1 text-3xl ">Register</h1>
         <p class="text-sm">Already Registered on Daily Hire? <a routerLink="/auth/login"  class="font-semibold text-yellow-950">Click Here</a></p>
         <form [formGroup]="form" (ngSubmit)="onFormSubmit()" >
@@ -28,7 +28,7 @@
                         }"
                         >Name</label>
                     </div>
-                    <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                    <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>name must be valid(eg: A-Z or a-z)</p>
                 </div>
                 <div>
                     <div class="relative">
@@ -48,7 +48,7 @@
                         }"
                         >Phone number</label>
                     </div>
-                    <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                    <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Phone number must be valid.(0-9)</p>
                 </div>
                 <div>
                     <div class="relative">
@@ -88,7 +88,7 @@
                         }"
                         >Password</label>
                     </div>
-                    <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
+                    <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>must be 8 characters(eg: e5$h23Dq)</p>
                 </div>
                 <div>
                     <div class="relative">
@@ -109,6 +109,9 @@
                         >Confirm Password</label>
                     </div>
                     <p *ngIf="!form.get('confpassword')?.valid && !form.get('confpassword')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>must be 8 characters(eg: e5$h23Dq)</p>
+                    <div class="flex">
+                        <p class="text-red-600 m-auto text-sm">{{errorMessage}}</p>
+                    </div>
                 </div>
             </div>
              
@@ -122,6 +125,9 @@
                 <button class="w-full py-3 text-center text-white bg-[#232121] rounded-md" [disabled]="!form.valid">Register Now</button>
             </div>
         </form>
+        <div class="mt-4 flex justify-center">
+            <asl-google-signin-button *ngIf="!user" type="standard" size="medium"></asl-google-signin-button>
+        </div>
     </div> 
 </div>
  
