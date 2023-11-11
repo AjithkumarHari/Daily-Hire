@@ -17,7 +17,6 @@ export class LoginBoxComponent implements OnInit{
   form!: FormGroup;
   errorMessage: any = " "
   user! : SocialUser ;
-  loggedIn!: boolean;
  
 
   constructor(private formBuilder : FormBuilder,
@@ -29,7 +28,6 @@ export class LoginBoxComponent implements OnInit{
 
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
        
       this.store.dispatch(googleLoginRequest({user}))
  
@@ -47,8 +45,6 @@ export class LoginBoxComponent implements OnInit{
 
 
   onFormSubmit(){
-    console.log('form sumbit');
-    
     const credentials: Credentials ={
       email : this.form.value.email, 
       password : this.form.value.password
@@ -57,8 +53,7 @@ export class LoginBoxComponent implements OnInit{
     this.store.dispatch(loginRequest({credentials}))
  
     this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-      this.errorMessage = error
-      console.log("login",this.errorMessage);  
+      this.errorMessage = error  
     });
 
   }

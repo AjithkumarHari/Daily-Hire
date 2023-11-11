@@ -11,10 +11,11 @@ import { GoogleAuthServiceInterface } from "../../application/service/googleAuth
 import { GoogleAuthService } from "../../framework/service/googleAuthService";
 import { OtpServiceInterface } from "../../application/service/otpServiceInterface";
 import { OtpService } from "../../framework/service/otpService";
-import { signInWithGoogle, userLogin, userSignup, otpVerification } from "../../application/useCase/auth/userAuth";
+import { signInWithGoogle, userLogin, userSignup, otpVerification, resendOtp } from "../../application/useCase/auth/userAuth";
 import { workerSignup, workerLogin } from "../../application/useCase/auth/workerAuth";
 import { adminLogin } from "../../application/useCase/auth/adminAuth";
 import AppError from "../../util/appError";
+import { Res } from "../../types/Res";
 
 const authController = (
     userDbRepository: UserDbInterface,
@@ -41,7 +42,7 @@ const authController = (
         
         const user:{name: string, phone: number, email: string, password: string}= req.body;
         
-        const result = await userSignup(user, dbUserRepository, authService, otpService);
+        const result: any = await userSignup(user, dbUserRepository, authService, otpService);
         
         if(result instanceof AppError){
             res.status(result.errorCode).json({
@@ -49,7 +50,7 @@ const authController = (
                 })
         }else{
             res.json({
-                result,
+                ...result,
                 message: "successfully added new user",
             });
         }
@@ -58,27 +59,54 @@ const authController = (
     const userOtpVerify = async (req: Request, res: Response) => {
         
         const data = req.body;
-        const result = await otpVerification(data, dbUserRepository, otpService);
+        const result: any = await otpVerification(data, dbUserRepository, authService, otpService);
+        if(result.status=='success'){
+            res.json({
+                ...result,
+                message: "user verified"
+            });
+        }else{
+            res.status(result.errorCode).json({
+                ...result,
+            });
+        }
 
-        res.send(result);
+    }
 
+    const resendUserOtp = async (req: Request, res: Response) => {
+        const {phoneNumber} = req.body;
+        const result:any = await resendOtp(phoneNumber, otpService);
+        if(result.status=='success'){
+            res.json({
+                ...result,
+                message: "user otp resend success"
+            });
+        }else{
+            res.json({
+                ...result,
+                message: "user otp resend failed"
+            });
+        }
     }
 
     const loginUser = async (req: Request, res: Response) => {
         
         const {email, password} = req.body;
-        const result = await userLogin(email, password, dbUserRepository, authService);
-
-        if(result instanceof AppError){
+        const result: any= await userLogin(email, password, dbUserRepository, authService, otpService);
+ 
+        if(result instanceof AppError) {
             res.status(result.errorCode).json({
                ...result,
-               status: "failed",
                })
-       }else{
+       }else if( result.status == "pending") {
             res.json({
-                status: "success",
-                message: "user logged in successfully",
-                token: result
+                message: "otp verification required",
+                ...result
+            });
+       } else {
+            res.json({
+                message: "user login success",
+                ...result
             });
         }
     }
@@ -89,7 +117,6 @@ const authController = (
         if(result instanceof AppError){
             res.status(result.errorCode).json({
                 ...result,
-                status: "failed",
             })
         }else{
             res.json({
@@ -107,7 +134,7 @@ const authController = (
             res.status(result.errorCode).json({
                 ...result,
                 status: "failed",
-                })
+            })
         }else{
             res.json({
                 result,
@@ -156,7 +183,8 @@ const authController = (
         loginWorker,
         loginAdmin,
         loginWithGoogle,
-        userOtpVerify
+        userOtpVerify,
+        resendUserOtp
     }
 
 }

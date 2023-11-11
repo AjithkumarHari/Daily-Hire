@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { selectToken } from '../state/login/login.selector';
-import { UserState } from '../state/user.state';
+import { selectToken } from '../../state/login/login.selector';
+import { UserState } from '../../state/user.state';
 
 @Component({
   selector: 'app-home',

@@ -16,7 +16,12 @@ export const googleLoginRequest = createAction(
 
 export const loginSuccess = createAction(
     `Auth Login Success`,
-    props<{UserToken: string}>()
+    props<{userToken: string}>()
+)
+
+export const loginPending = createAction(
+    `Auth Login Pending`,
+    props<{userData: any}>()
 )
 
 export const loginFailure = createAction(
@@ -36,5 +41,20 @@ export const signupSuccess = createAction(
 
 export const signupFailure = createAction(
     `Auth Signup Failure`,
+    props<{error: ErrorRes}>()
+)
+
+export const verifyRequest = createAction(
+    `Auth Verify Request`,
+    props<{user:{email: string, phoneNumber: number, code: string}}>()
+)
+
+export const verifySuccess = createAction(
+    `Auth Verify Success`,
+    props<{userToken: string}>()
+)
+
+export const verifyFailure = createAction(
+    `Auth Verify Failure`,
     props<{error: ErrorRes}>()
 )

@@ -45,7 +45,7 @@ export class SignupBoxComponent {
 
 
     this.form = this.formBuilder.group({
-      name: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_A-Z]{3,15}$")]),
+      name: new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
       phone: new FormControl(null, [Validators.required, Validators.pattern("[6-9]\\d{9}")]),
       email : new FormControl(null, [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,4}$")]),
       password : new FormControl(null, [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")]),

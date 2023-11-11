@@ -7,16 +7,12 @@ export const userRepositoryMongoDB = () => {
         return await USER.findById(id).select('-password');
     }
     
-    const getUserByEmail = async (email : string): Promise<User | null> => {
+    const getUserByEmail = async (email : string): Promise<User|null> => {
         return await USER.findOne( {email} );
     }
     
     const addUser = async (user : User) => {
         return await USER.create(user);
-    }
-
-    const getUserByNumber = async (phone : number): Promise<User | null> => {
-        return await USER.findOne( {phone} );
     }
 
     const userActivate =async (email: string) => {
@@ -28,7 +24,6 @@ export const userRepositoryMongoDB = () => {
         getUserByEmail,
         getUserById,
         addUser,
-        getUserByNumber,
         userActivate
     };
     

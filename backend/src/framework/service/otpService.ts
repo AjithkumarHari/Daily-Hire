@@ -11,6 +11,8 @@ export const otpService = () => {
 
     const sendOtp = async (phoneNumber: number) => {
         try {
+            console.log('send otp to',phoneNumber);
+            
             await client.verify.v2.services(serviceSid).verifications.create({
                 to: `+91${phoneNumber}`,
                 channel: `sms`,

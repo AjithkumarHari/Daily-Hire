@@ -10,7 +10,9 @@ import { loginFailure,
     googleLoginRequest,
     signupRequest,
     signupFailure,
-    signupSuccess
+    signupSuccess,
+    loginPending,
+    verifyRequest
     } from "./login.action";
 
 @Injectable()
@@ -28,12 +30,69 @@ export class AuthEffects{
                 this.userService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
+                        if(responce.status=='success'){
+                            sessionStorage.setItem('user-token',responce.token)
+                            return loginSuccess({userToken : responce.token})
+                        }
+                        else if(responce.status=='pending'){
+                            return loginPending({userData : responce})
+                        }
+                        else{
+                            console.log('in side effect LE',responce);
+                            return loginFailure({ error : responce.error.error  })
+                        }
+                    }),
+                    catchError(error => of (loginFailure({ error })))
+                )
+            )
+        )
+    );
+
+    loginSuccess$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(loginSuccess),
+            tap(( )=>{
+                this.router.navigate(['/']);  
+            })
+        ), {
+            dispatch : false
+        }
+    );
+
+    loginPending$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(loginPending),
+            tap(( )=>{
+                this.router.navigate(['/auth/otp']);
+            })
+        ), {
+            dispatch : false
+        }
+    );
+
+    loginFailure$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(loginFailure),
+            tap(()=>{
+                this.router.navigate(['/auth/login'])
+            })
+        ), {
+            dispatch: false
+        }
+    );
+
+    
+    googleLogin$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(googleLoginRequest),
+            switchMap(({ user }) =>
+                this.userService.signInWithGoogle(user).pipe(
+                    map(res=>{
+                        let responce : any = res;``
                         if(responce.token){
                             sessionStorage.setItem('user-token',responce.token)
-                            console.log('in side effect LS',responce.message);
-                            return loginSuccess({UserToken : responce.token})
+                            return loginSuccess({userToken : responce.token})
                         }else{
-                            console.log('in side effect LE',responce);
                             return loginFailure({ error : responce.error.error  })
                         }
                     }),
@@ -49,13 +108,10 @@ export class AuthEffects{
             switchMap(({ user }) =>
                 this.userService.signup(user).pipe(
                     map(res=>{
-                        
                         let responce : any = res;
-                        console.log(responce.result.user);
-                        if(responce.result.user){
-                            return signupSuccess({userData : responce.result.user})
+                        if(responce.status=='success'){
+                            return signupSuccess({userData : responce})
                         }else{
-                            console.log('in side effect LE',responce);
                             return signupFailure({ error : responce.error.error  })
                         }
                     }),
@@ -87,22 +143,20 @@ export class AuthEffects{
         }
     );
 
-
-
-    googleLogin$ = createEffect(()=>
+    verify$ = createEffect(()=>
         this.actions$.pipe(
-            ofType(googleLoginRequest),
+            ofType(verifyRequest),
             switchMap(({ user }) =>
-                this.userService.signInWithGoogle(user).pipe(
+                this.userService.verifySignupOtp(user).pipe(
                     map(res=>{
                         let responce : any = res;
-                        if(responce.token){
+                        if(responce.status=='success'){
                             sessionStorage.setItem('user-token',responce.token)
-                            console.log('in side effect LS',responce.message);
-                            return loginSuccess({UserToken : responce.token})
-                        }else{
+                            return loginSuccess({userToken : responce.token})
+                        }
+                        else{
                             console.log('in side effect LE',responce);
-                            return loginFailure({ error : responce.error.error  })
+                            return loginFailure({ error : responce.error  })
                         }
                     }),
                     catchError(error => of (loginFailure({ error })))
@@ -111,25 +165,39 @@ export class AuthEffects{
         )
     );
 
-    loginSuccess$ = createEffect(()=>
-        this.actions$.pipe(
-            ofType(loginSuccess),
-            tap(()=>{
-                this.router.navigate(['/']);
-            })
-        ), {
-            dispatch : false
-        }
-    );
+    // loginSuccess$ = createEffect(()=>
+    //     this.actions$.pipe(
+    //         ofType(loginSuccess),
+    //         tap(( )=>{
+    //             this.router.navigate(['/']);  
+    //         })
+    //     ), {
+    //         dispatch : false
+    //     }
+    // );
 
-    loginFailure$ = createEffect(()=>
+    // loginPending$ = createEffect(()=>
+    //     this.actions$.pipe(
+    //         ofType(loginPending),
+    //         tap(( )=>{
+    //             this.router.navigate(['/auth/otp']);
+    //         })
+    //     ), {
+    //         dispatch : false
+    //     }
+    // );
+
+    verifyFailure$ = createEffect(()=>
         this.actions$.pipe(
             ofType(loginFailure),
             tap(()=>{
-                this.router.navigate(['/auth/login'])
+                this.router.navigate(['/auth/otp'])
             })
         ), {
             dispatch: false
         }
     );
+
+
+
 }

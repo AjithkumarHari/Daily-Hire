@@ -22,11 +22,27 @@ export const userSignup = async (
         user.password = await authService.encryptPassword(user.password);
         await userRepository.addUser(user);
         await otpService.sendOtp(user.phone);
-        
-        return {status: "success",user};
+        const { name, email, phone } = user;
+        return {status: "success", userData:{name, email, phone}};
     }catch(AppError){
         return AppError;
     }
+    
+}
+
+export const resendOtp = async (
+    phoneNumber: number,
+    otpService: ReturnType<OtpServiceInterface>
+) => { 
+    try {
+        await otpService.sendOtp(phoneNumber);
+        return {status: "success"};
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+ 
     
 }
 
@@ -34,7 +50,8 @@ export const userLogin = async (
     email: string,
     password: string,
     userRepository: ReturnType<UserDbInterface>,
-    authService: ReturnType<AuthServiceInterface>
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>
 ) => {
     try{
         const user: User | null = await userRepository.getUserByEmail(email);
@@ -47,8 +64,15 @@ export const userLogin = async (
                 throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
             }
         }
-        if(user._id)
-            return authService.generateToken(user._id.toString())
+        if(!user.isActive && user.phone){
+            await otpService.sendOtp(user.phone);
+            const { name, email, phone } = user;
+            return {"status": "pending", userData:{name, email, phone}};
+        }
+        if(user._id){
+            const token = authService.generateToken(user._id.toString());
+            return {"status": "success",token};
+        }
     }catch(AppError){
         return AppError;
     }
@@ -72,6 +96,7 @@ export const signInWithGoogle = async(
         return token
     }
 }
+
 export const otpVerification = async (
     data:{
         email: string,
@@ -79,14 +104,25 @@ export const otpVerification = async (
         code: string
     },
     userRepository: ReturnType<UserDbInterface>,
-    otpService: ReturnType<OtpServiceInterface>
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>,
 ) => {
-    const isOtpVaild = await otpService.verifyOtp(data.phoneNumber, data.code);
+    try{
+        const isOtpVaild = await otpService.verifyOtp(data.phoneNumber, data.code);
     
-    if(isOtpVaild){
-        await userRepository.userActivate(data.email);
-        return {"status":"success"};
-    }else{
-        return {"status":"failed"};
+        if(isOtpVaild){
+            await userRepository.userActivate(data.email);
+            const user = await userRepository.getUserByEmail(data.email);
+            if(user?._id){
+                const token = authService.generateToken(user._id)
+                return {"status":"success",token};
+            }
+        }else{
+            throw new AppError("OTP does not match",HttpStatus.UNAUTHORIZED);
+        }
+
+    } catch(AppError) {
+        return AppError;
     }
+    
 }

@@ -45,7 +45,9 @@ const authRouter = () => {
 
     route.post('/user-otp',controller.userOtpVerify)
 
+    route.post('/user-resend-otp',controller.resendUserOtp)
+
     return route;
 }
 
-export default authRouter;
+export default authRouter; 

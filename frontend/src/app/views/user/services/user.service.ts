@@ -52,4 +52,7 @@ export class UserService {
     return this.http.post(`${this.server}/auth/user-otp`,data);
   }
   
+  resendOtp(phoneNumber:number){
+    return this.http.post(`${this.server}/auth/user-resend-otp`,phoneNumber);
+  }
 }
