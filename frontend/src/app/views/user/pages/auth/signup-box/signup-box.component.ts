@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../types/User';
-import { UserService } from '../../services/user.service';
+import { User } from '../../../types/User';
+import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { googleLoginRequest, signupRequest } from '../../state/login/login.action';
-import { selectErrorMessage, selectToken } from '../../state/login/login.selector';
+import { googleLoginRequest, signupRequest } from '../../../state/login/login.action';
+import { selectErrorMessage, selectToken } from '../../../state/login/login.selector';
 import { Store, select } from '@ngrx/store';
-import { UserState } from '../../state/user.state';
+import { UserState } from '../../../state/user.state';
 
 @Component({
   selector: 'app-signup-box',

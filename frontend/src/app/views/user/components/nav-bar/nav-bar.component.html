@@ -7,13 +7,13 @@
         <li><a class="pr-2.5 pl-2.5" routerLink="/">Home</a> </li>
         <li><a class="pr-2.5 pl-2.5" routerLink="/services">Services</a></li>
         <li><a class="pr-2.5 pl-2.5" routerLink="/workerList">Workers</a></li>
-        <li><a class="pr-2.5 pl-2.5" href="#">Profile</a></li>
+        <li><a class="pr-2.5 pl-2.5" routerLink="/profile">Profile</a></li>
     </ul>
     <div>
-        <button *ngIf="isLoggedIn(); else loginSignup" class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]" (click)="logout()">Logout</button>
+        <button *ngIf="isLoggedIn(); else loginSignup" class="px-4 py-1 text-lg text-white rounded   bg-[#a53521] hover:bg-[#6f1d1b]" (click)="logout()">Logout</button>
         <ng-template #loginSignup>
-            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/login">Login</button>
-            <button class="px-4 py-1 text-lg text-white rounded bg-[#a5352198] hover:bg-[#a53521]" routerLink="/auth/signup">Signup</button>
+            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]" routerLink="/auth/login">Login</button>
+            <button class="px-4 py-1 text-lg text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]" routerLink="/auth/signup">Signup</button>
         </ng-template>
     </div>
 </nav>

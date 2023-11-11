@@ -1,0 +1,31 @@
+<div class="text-white flex justify-center text-lg items-center pb-6 ">
+    
+    <div class="px-5">
+        <span class="font-semibold">Gender : </span>
+        <select name="gender" value="Gender" class=" bg-transparent border rounded-lg outline-none" [(ngModel)]="selectedGenderValue" (change)="onGenderSelectionChanged()" >
+            <option class="text-white bg-gray-500 text-center" value="all">All ({{allWorkers}})</option>
+            <option class="text-white bg-gray-500 text-center" value="male">Male ({{maleWorkers}})</option>
+            <option class="text-white bg-gray-500 text-center" value="female">Female ({{femaleWorkers}})</option>
+        </select>
+    </div>
+
+    <div class="px-5">
+        <span class="font-semibold">Wage : </span>
+        <select name="filter" value="Gender" class=" bg-transparent border rounded-lg outline-none "  [(ngModel)]="wageSort" (change)="onWageSelectionChanged()">
+            <option class="text-white text-center bg-gray-500" value=" ">Default</option>
+            <option class="text-white bg-gray-500 text-center " value="desc">High to Low</option>
+            <option class="text-white bg-gray-500 text-center" value="asc">Low to High</option>
+        </select>
+    </div>
+
+    <div class="px-5">
+        <span class="font-semibold">Age : </span>
+        <select name="filter" value="Gender" class=" bg-transparent border rounded-lg outline-none" [(ngModel)]="ageSort" (change)="onAgeSelectionChanged()">
+            <option class="text-white bg-gray-500 text-center" value=" ">Default</option>
+            <option class="text-white bg-gray-500 text-center" value="desc">High to Low</option>
+            <option class="text-white bg-gray-500 text-center" value="asc">Low to High</option>
+        </select>
+    </div>
+    
+    
+</div>
