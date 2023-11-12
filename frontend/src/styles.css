@@ -6,6 +6,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
 body {
   font-family: "Cairo", sans-serif;
 }

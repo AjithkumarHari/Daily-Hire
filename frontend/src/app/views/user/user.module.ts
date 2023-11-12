@@ -28,7 +28,6 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { ServiceListComponent } from './pages/service-list/service-list.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { FilterComponent } from './components/filter/filter.component';
-import { SortFilterPipe } from './pipes/sort-filter.pipe';
 import { WageSortPipe } from './pipes/wage-sort.pipe';
 import { AgeSortPipe } from './pipes/age-sort.pipe';
  
@@ -49,7 +48,6 @@ import { AgeSortPipe } from './pipes/age-sort.pipe';
     ServiceListComponent,
     UserProfileComponent,
     FilterComponent,
-    SortFilterPipe,
     WageSortPipe,
     AgeSortPipe,
 

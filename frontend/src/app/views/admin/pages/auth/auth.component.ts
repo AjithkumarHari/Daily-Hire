@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../services/admin.service';
 import { Router } from '@angular/router';
-import { adminLoginRequest } from '../state/login/admin.login.action';
-import { selectErrorMessage } from '../state/login/admin.login.selector';
+import { adminLoginRequest } from '../../state/login/admin.login.action';
+import { selectErrorMessage } from '../../state/login/admin.login.selector';
 import { Store, select } from '@ngrx/store';
-import { AdminState } from '../state/admin.state';
+import { AdminState } from '../../state/admin.state';
 
 @Component({
   selector: 'app-auth',

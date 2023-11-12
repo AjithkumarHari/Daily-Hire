@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { AdminService } from "../../admin.service";
+import { AdminService } from "../../services/admin.service";
 import { adminLoginFailure, adminLoginRequest, adminLoginSuccess } from "./admin.login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";

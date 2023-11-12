@@ -7,11 +7,15 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/login/admin.login.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/login/admin.login.effects';
-import { AuthComponent } from './auth/auth.component';
-import { HomeComponent } from './home/home.component';
-import { NavBarComponent } from './home/nav-bar/nav-bar.component';
-import { SideBarComponent } from './home/side-bar/side-bar.component';
-import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { AuthComponent } from './pages/auth/auth.component';
+ 
+import { HomeComponent } from './pages/home/home.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
+import { WorkerManagementComponent } from './components/worker-management/worker-management.component';
+import { ServiceManagementComponent } from './components/service-management/service-management.component';
 
 
 @NgModule({
@@ -20,7 +24,10 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
     HomeComponent,
     NavBarComponent,
     SideBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserManagementComponent,
+    WorkerManagementComponent,
+    ServiceManagementComponent
   ],
   imports: [
     CommonModule,
