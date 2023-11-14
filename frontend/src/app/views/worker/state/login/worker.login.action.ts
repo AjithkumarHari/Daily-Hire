@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { Credentials } from "../../types/Credentials";
-import { ErrorRes } from "../../types/ErrorRes";
+import { Credentials } from "../../../../types/Credentials";
+import { ErrorRes } from "../../../../types/ErrorRes";
 
 export const workerLoginRequest = createAction(
     `Auth Worker Login Request`,

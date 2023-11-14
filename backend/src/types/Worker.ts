@@ -11,5 +11,6 @@ export interface Worker {
     wageForDay: number,
     wageForHour: number,
     profileImg?: string,
-    location: string
+    location: string,
+    isListed?: boolean
 }

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Worker } from '../../worker/types/Worker';
+import { Worker } from '../../../types/Worker';
 
 @Pipe({
   name: 'wageSort'

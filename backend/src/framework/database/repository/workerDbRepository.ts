@@ -21,11 +21,16 @@ export const workerRepositoryMongoDB = () => {
         return result;
     }
 
+    const workerListUnlist = async (_id: string, newStatus: boolean) => {
+        return await WORKER.updateOne({_id}, {$set:{isListed: newStatus}});
+    }
+
     return {
         getAllWorkers,
         getWorkerByEmail,
         addWorker,
-        getWorkerById
+        getWorkerById,
+        workerListUnlist
     }
 }
 

@@ -25,6 +25,10 @@ const userShcema = new Schema(
         isActive: {
             type: Boolean,
             default: false
+        },
+        isListed: {
+            type: Boolean,
+            default: true
         }
     }
 )

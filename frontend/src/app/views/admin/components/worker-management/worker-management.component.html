@@ -5,66 +5,61 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200  ">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         E-mail
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Phone
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Proffesion
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Age
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Gender
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Wage(hour)
-                    </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Wage(day)
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-3">
                         Status
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b ">
+                <tr *ngFor="let worker of workers$" class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
-                         Ajith
+                         {{worker.name}}
                     </th>
-                    <td class="px-6 py-4">
-                        ajith@gmail.com
+                    <td class="px-3 py-4">
+                        {{worker.email}}
                     </td>
-                    <td class="px-6 py-4">
-                        +91 7306446815
+                    <td class="px-3 py-4">
+                        +91{{worker.phone}}
                     </td>
-                    <td class="px-6 py-4">
-                        Electrician
+                    <td class="px-3 py-4">
+                        {{worker.work}}
                     </td>
-                    <td class="px-6 py-4">
-                        22
+                    <td class="px-3 py-4">
+                        {{worker.age}}
                     </td>
-                    <td class="px-6 py-4">
-                        Male
+                    <td class="px-3 py-4">
+                        {{worker.gender}}
                     </td>
-                    <td class="px-6 py-4">
-                        500
+                    <td class="px-3 py-4">
+                        {{worker.wageForDay}}
                     </td>
-                    <td class="px-6 py-4">
-                        1000
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600   hover:underline">Unlist</a>
-                    </td>
-                </tr>
-                
+                    <td class="px-3 py-4">
+                        <a *ngIf="worker.isListed; else list" (click)="onStatusChange(worker._id)" class="font-medium text-blue-600 hover:underline">Unlist</a>
+                        <ng-template #list>
+                            <a (click)="onStatusChange(worker._id)"  class="font-medium text-blue-600 hover:underline">List</a>
+                        </ng-template>
+                </tr> 
             </tbody>
         </table>
     </div>

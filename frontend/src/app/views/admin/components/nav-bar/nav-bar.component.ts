@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminService } from '../../services/admin.service';
+import { AdminAuthService } from '../../services/admin-auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
 
-  constructor(private adminService: AdminService, private router: Router){}
+  constructor(private adminService: AdminAuthService, private router: Router){}
 
   logout(){
     this.adminService.deleteToken();

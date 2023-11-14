@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from '../../../types/Credentials';
+import { Credentials } from '../../../../../types/Credentials';
 import { Store, select } from '@ngrx/store';
 import { googleLoginRequest, loginRequest } from '../../../state/login/login.action';
 import { selectErrorMessage } from '../../../state/login/login.selector';

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { AdminService } from "../../services/admin.service";
+import { AdminAuthService } from "../../services/admin-auth.service";
 import { adminLoginFailure, adminLoginRequest, adminLoginSuccess } from "./admin.login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class AuthEffects{
 
     constructor( private actions$ : Actions, 
-        private adminService : AdminService,
+        private adminService : AdminAuthService,
         private router : Router){}
 
     login$ = createEffect(()=>
@@ -39,7 +39,7 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(adminLoginSuccess),
             tap(()=>{
-                this.router.navigate(['/admin']);
+                this.router.navigate(['/admin/dashboard']);
             })
         ), {
             dispatch : false

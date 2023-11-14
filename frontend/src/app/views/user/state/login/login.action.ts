@@ -1,8 +1,8 @@
 import { createAction, props } from "@ngrx/store";
-import { Credentials } from "../../types/Credentials";
-import { ErrorRes } from "../../types/ErrorRes";
+import { Credentials } from "../../../../types/Credentials";
+import { ErrorRes } from "../../../../types/ErrorRes";
 import { SocialUser } from "@abacritt/angularx-social-login";
-import { User } from "../../types/User";
+import { User } from "../../../../types/User";
 
 export const loginRequest = createAction(
     `Auth login Request`,

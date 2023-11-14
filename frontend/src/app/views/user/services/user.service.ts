@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { User } from '../types/User';
-import { Credentials } from '../types/Credentials';
+import { User } from '../../../types/User';
+import { Credentials } from '../../../types/Credentials';
 import { Observable } from 'rxjs';
-import { Worker } from '../../worker/types/Worker';
+import { Worker } from '../../../types/Worker';
 import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({

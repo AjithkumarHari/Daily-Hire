@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Worker } from '../../types/Worker';
+import { Worker } from '../../../../types/Worker';
 import { Router } from '@angular/router';
 import { WorkerService } from '../../worker.service';
 

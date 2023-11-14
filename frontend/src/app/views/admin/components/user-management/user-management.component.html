@@ -20,18 +20,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b ">
+                <tr *ngFor="let user of users$"  class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
-                         Ajith
+                        {{user.name}}
                     </th>
                     <td class="px-6 py-4">
-                        ajith@gmail.com
+                        {{user.email}}
                     </td>
                     <td class="px-6 py-4">
-                        +91 7306446815
+                        {{user.phone | phoneNumber}}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600   hover:underline">Unlist</a>
+                        <a *ngIf="user.isListed; else list" (click)="onStatusChange(user._id)" class="font-medium text-blue-600 hover:underline">Unlist</a>
+                        <ng-template #list>
+                            <a (click)="onStatusChange(user._id)"  class="font-medium text-blue-600 hover:underline">List</a>
+                        </ng-template>
                     </td>
                 </tr>
                 

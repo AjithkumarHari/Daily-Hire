@@ -48,6 +48,10 @@ const workerShcema = new Schema(
         },
         profileImg: {
             type: String,
+        },
+        isListed: {
+            type: Boolean,
+            default: true
         }
     }
 )

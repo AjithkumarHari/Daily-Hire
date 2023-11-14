@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AdminService } from '../../services/admin.service';
-import { Router } from '@angular/router';
 import { adminLoginRequest } from '../../state/login/admin.login.action';
 import { selectErrorMessage } from '../../state/login/admin.login.selector';
 import { Store, select } from '@ngrx/store';
@@ -17,8 +15,6 @@ export class AuthComponent {
   errorMessage: any = " "
 
   constructor(private formBuilder : FormBuilder,
-    private adminService: AdminService,
-    private router: Router,
     private store: Store<AdminState>
     ){}
 

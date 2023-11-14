@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';  
-import { Credentials } from '../types/Credentials';
+import { Observable } from 'rxjs';
+import { User } from '../../../types/User';
+import { Worker } from '../../../types/Worker';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +13,20 @@ export class AdminService {
   server = environment.serverUrl
   constructor( private http: HttpClient) { }
 
-  login(credentials: Credentials){
-    return this.http.post(`${this.server}/auth/admin-login`,credentials)
+  getAllUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${this.server}/admin/user-list`)
   }
 
-  setToken(token: string){
-    return window.sessionStorage.setItem('admin-token',token)
+  getAllWorkers():Observable<Worker[]>{
+    return this.http.get<Worker[]>(`${this.server}/admin/worker-list`)
   }
 
-  getToken(){
-    return window.sessionStorage.getItem('admin-token')
+  changeUserStatus(userId: string){
+    return this.http.put(`${this.server}/admin/user-status`,{userId})
   }
-  deleteToken(){
-    return window.sessionStorage.removeItem('admin-token')
+
+  changeWorkerStatus(workerId: string){
+    return this.http.put(`${this.server}/admin/worker-status`,{workerId})
   }
 
 }

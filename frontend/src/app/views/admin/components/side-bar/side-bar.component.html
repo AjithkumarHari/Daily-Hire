@@ -1,21 +1,21 @@
 <aside class="w-52 text-center h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
     <h1 class="text-white text-3xl py-3">Daily Hire</h1>
     <div class="pt-10 text-start">
-        <div class="lg:px-10 lg:py-1 text-[#03045e]">
+        <div class="lg:mx-7 my-1 lg:py-1 text-[#03045e] border-white rounded-lg hover:bg-[#ffffff56]" routerLink="dashboard"  [routerLinkActive]="'bg-[#ffffff80] border'" [routerLinkActiveOptions]="{exact: true}" >
             <i class="fa-solid fa-gauge-high p-2"></i>
-            <a class="text-xl" routerLink="dashboard" >Dashboard</a>
+            <a  class="text-xl">Dashboard</a>
         </div>
-        <div class="lg:px-10 lg:py-1 text-[#03045e]">
+        <div class="lg:mx-7 my-1 lg:py-1 text-[#03045e] border-white rounded-lg hover:bg-[#ffffff56]"  routerLink="user" [routerLinkActive]="'bg-[#ffffff80] border'" >
             <i class="fa-solid fa-users p-2"></i>
-            <a class="text-xl" routerLink="user">Users</a>
+            <a class="text-xl">Users</a>
         </div>
-        <div class="lg:px-10 lg:py-1 text-[#03045e]">
+        <div class="lg:mx-7 my-1 lg:py-1 text-[#03045e] border-white rounded-lg hover:bg-[#ffffff56]"  routerLink="worker" [routerLinkActive]="'bg-[#ffffff80] border'" >
             <i class="fas fa-users-cog p-2"></i>
-            <a class="text-xl" routerLink="worker">Workers</a>
+            <a class="text-xl">Workers</a>
         </div>
-        <div class="lg:px-10 lg:py-1 text-[#03045e]">
+        <div class="lg:mx-7 my-1 lg:py-1 text-[#03045e] border-white rounded-lg hover:bg-[#ffffff56]" routerLink="service" [routerLinkActive]="'bg-[#ffffff80] border'" >
             <i class="fa fa-wrench p-2" ></i>
-            <a class="text-xl" routerLink="service">Services</a>
+            <a class="text-xl" >Services</a>
         </div>
     </div>
 </aside>

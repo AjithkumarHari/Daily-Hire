@@ -18,13 +18,23 @@ export const userRepositoryMongoDB = () => {
     const userActivate =async (email: string) => {
         return await USER.updateOne({email}, {$set:{isActive: true}});
     }
+
+    const getAllUser = async () => {
+        return await USER.find().select('-password');
+    }
+
+    const userlistUnlist = async (_id: string, newStatus: boolean) => {
+        return await USER.updateOne({_id}, {$set:{isListed: newStatus}});
+    }
     
 
     return {
         getUserByEmail,
         getUserById,
         addUser,
-        userActivate
+        userActivate,
+        getAllUser,
+        userlistUnlist
     };
     
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Credentials } from '../../types/Credentials';
+import { Credentials } from '../../../../types/Credentials';
 import { WorkerService } from '../../worker.service';
 import { Store, select } from '@ngrx/store';
 import { WorkerState } from '../../state/worker.state';

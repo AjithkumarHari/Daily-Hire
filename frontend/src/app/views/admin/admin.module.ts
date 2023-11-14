@@ -16,6 +16,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { WorkerManagementComponent } from './components/worker-management/worker-management.component';
 import { ServiceManagementComponent } from './components/service-management/service-management.component';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ServiceManagementComponent } from './components/service-management/serv
     DashboardComponent,
     UserManagementComponent,
     WorkerManagementComponent,
-    ServiceManagementComponent
+    ServiceManagementComponent,
+    PhoneNumberPipe
   ],
   imports: [
     CommonModule,
