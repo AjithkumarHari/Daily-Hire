@@ -1,66 +1,95 @@
 <h1 class="p-3 font-semibold text-4xl">Worker Management</h1>
 
 <div class=" flex justify-center">
-    <div class="relative w-11/12 overflow-x-auto shadow-lg sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200  ">
-                <tr>
-                    <th scope="col" class="px-3 py-3">
-                        Name
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        E-mail
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Phone
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Proffesion
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Age
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Gender
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Wage(day)
-                    </th>
-                    <th scope="col" class="px-3 py-3">
-                        Status
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let worker of workers$" class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
-                         {{worker.name}}
-                    </th>
-                    <td class="px-3 py-4">
-                        {{worker.email}}
-                    </td>
-                    <td class="px-3 py-4">
-                        +91{{worker.phone}}
-                    </td>
-                    <td class="px-3 py-4">
-                        {{worker.work}}
-                    </td>
-                    <td class="px-3 py-4">
-                        {{worker.age}}
-                    </td>
-                    <td class="px-3 py-4">
-                        {{worker.gender}}
-                    </td>
-                    <td class="px-3 py-4">
-                        {{worker.wageForDay}}
-                    </td>
-                    <td class="px-3 py-4">
-                        <a *ngIf="worker.isListed; else list" (click)="onStatusChange(worker._id)" class="font-medium text-blue-600 hover:underline">Unlist</a>
-                        <ng-template #list>
-                            <a (click)="onStatusChange(worker._id)"  class="font-medium text-blue-600 hover:underline">List</a>
-                        </ng-template>
-                </tr> 
-            </tbody>
-        </table>
+    <div class="relative w-11/12 ">
+        <div class="overflow-x-auto shadow-lg sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200  ">
+                    <tr>
+                        <th scope="col" class="px-3 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            E-mail
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Phone
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Proffesion
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Age
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Gender
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Wage(day)
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let worker of workers$ | slice: currentPage * 6 - 6 : currentPage * 6" class="bg-white border-b ">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+                             {{worker.name}}
+                        </th>
+                        <td class="px-3 py-4">
+                            {{worker.email}}
+                        </td>
+                        <td class="px-3 py-4">
+                            +91{{worker.phone}}
+                        </td>
+                        <td class="px-3 py-4">
+                            {{worker.work}}
+                        </td>
+                        <td class="px-3 py-4">
+                            {{worker.age}}
+                        </td>
+                        <td class="px-3 py-4">
+                            {{worker.gender}}
+                        </td>
+                        <td class="px-3 py-4">
+                            {{worker.wageForDay}}
+                        </td>
+                        <td class="px-3 py-4">
+                            <a *ngIf="worker.isListed; else list" (click)="onStatusChange(worker._id)" class="font-medium text-blue-600 hover:underline">Unlist</a>
+                            <ng-template #list>
+                                <a (click)="onStatusChange(worker._id)"  class="font-medium text-blue-600 hover:underline">List</a>
+                            </ng-template>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <nav class="flex justify-center my-3" aria-label="Page navigation example">
+                <ul class="inline-flex -space-x-px text-base h-10">
+                    <li>
+                        <a (click)="onPrevious($event)"
+                            class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-50 hover:text-blue-500">
+                            Previous
+                        </a>
+                    </li>
+
+                    <ng-container *ngFor="let page of pages">
+                        <li>
+                            <a (click)="onPageClick(page)" [class.active]="page === currentPage"
+                                class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-blue-50 hover:text-blue-500">
+                                {{ page }}
+                            </a>
+                        </li>
+                    </ng-container>
+
+                    <li>
+                        <a (click)="onNext($event)" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-blue-50 hover:text-blue-500">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>

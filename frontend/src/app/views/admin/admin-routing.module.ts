@@ -11,11 +11,11 @@ import { ServiceManagementComponent } from './components/service-management/serv
 const routes: Routes = [
   { path:'auth', component: AuthComponent },
   { path:'', component: HomeComponent, canActivate: [adminGuard], children:[
-    { path:'dashboard', component: DashboardComponent },
+    { path:'dashboard', component: DashboardComponent, },
     { path: 'user', component: UserManagementComponent },
     { path: 'worker', component: WorkerManagementComponent },
     { path: 'service', component: ServiceManagementComponent }
-  ]},
+  ],},
 ];
 
 @NgModule({

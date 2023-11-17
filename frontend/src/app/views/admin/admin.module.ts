@@ -17,6 +17,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { WorkerManagementComponent } from './components/worker-management/worker-management.component';
 import { ServiceManagementComponent } from './components/service-management/service-management.component';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { AddServiceBoxComponent } from './components/add-service-box/add-service-box.component';
+import { EditServiceBoxComponent } from './components/edit-service-box/edit-service-box.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
     UserManagementComponent,
     WorkerManagementComponent,
     ServiceManagementComponent,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    AddServiceBoxComponent,
+    EditServiceBoxComponent
   ],
   imports: [
     CommonModule,
