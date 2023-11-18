@@ -24,17 +24,16 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let service of services$ | slice: currentPage * 6 - 6 : currentPage * 6"
-                        class="bg-white border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  text-center">
+                        class="bg-white border-b text-center">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{service.name}}
                         </th>
-                        <td class="px-6 py-4 text-center ">
+                        <td class="px-6 py-4 ">
                             <div class="w-[30rem] truncate  ">
                                 {{service.description}}
-                               
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4">
                             <a *ngIf="service.isListed; else list" (click)="onStatusChange(service._id)"
                                 class="font-medium text-blue-600 hover:underline">Unlist</a>
                             <ng-template #list>
@@ -42,9 +41,9 @@
                                     class="font-medium text-blue-600 hover:underline">List</a>
                             </ng-template>
                         </td>
-                        <td class="px-6 py-4">
-                            <app-edit-service-box [name]="service.name" [description]="service.description"></app-edit-service-box>
-                        </td>
+                        <td class="px-6 py-4"> 
+                            <a class="font-medium text-blue-600 hover:underline" [routerLink]="['edit', {_id: service._id, name: service.name, description: service.description} ]" >Edit</a>
+                        </td> 
                     </tr>
                 </tbody>
             </table>
@@ -67,13 +66,14 @@
                             </a>
                         </li>
                     </ng-container>
-
+                    
                     <li>
                         <a (click)="onNext($event)"
-                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-blue-50 hover:text-blue-500">Next</a>
+                        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-blue-50 hover:text-blue-500">Next</a>
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

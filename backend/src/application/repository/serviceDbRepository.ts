@@ -11,6 +11,8 @@ export const serviceDbRepository = (repository: ReturnType<ServiceDbRepositoryMo
 
     const addService = async (service: Service) => await repository.addService(service);
 
+    const editService = async (service: Service) => await repository.editService(service);
+
     const serviceListUnlist = async (serviceId: string, newStatus: boolean) => await repository.listUnlistService(serviceId, newStatus);
 
     return {
@@ -18,6 +20,7 @@ export const serviceDbRepository = (repository: ReturnType<ServiceDbRepositoryMo
         getServiceById,
         getServiceByName,
         addService,
+        editService,
         serviceListUnlist,
     }
 }

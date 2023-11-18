@@ -20,7 +20,9 @@ const adminRouter = () => {
 
     router.put('/worker-status',controller.workerStatusChange)
 
-    router.post('/add-service',controller.createService)
+    router.post('/add-service',controller.createService);
+
+    router.put('/edit-service',controller.updateService)
 
     router.put('/service-status',controller.serviceStatusChange)
 

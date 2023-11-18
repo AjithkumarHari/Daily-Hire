@@ -8,12 +8,7 @@ export const serviceDbRepositoryMongoDB = () => {
     }
 
     const getServiceById = async (id: string) => {
-        console.log('id 2');
-        
-        const ret = await SERVICE.findById(id);
-        console.log(ret);
-        return ret;
-        
+        return await SERVICE.findById(id);
     }
 
     const getServiceByName =async (name: string) => {
@@ -22,6 +17,10 @@ export const serviceDbRepositoryMongoDB = () => {
 
     const addService = async (service: Service) => {
         return await SERVICE.create(service);
+    }
+
+    const editService = async (service: Service) => {
+        return await SERVICE.updateOne(service);
     }
 
     const listUnlistService = async (_id: string, newStatus: boolean) => {
@@ -33,6 +32,7 @@ export const serviceDbRepositoryMongoDB = () => {
         getServiceById,
         getServiceByName,
         addService,
+        editService,
         listUnlistService,
     }
 }

@@ -15,6 +15,7 @@ import { addNewService } from "../../application/useCase/service/addService";
 import { listUnlistService } from "../../application/useCase/admin/listUnlistService";
 import { allServices } from "../../application/useCase/service/allService";
 import { findById } from "../../application/useCase/service/findServiceById";
+import { editService } from "../../application/useCase/service/editService";
 
 
 const adminController = (
@@ -90,12 +91,8 @@ const adminController = (
 
     const getServicesById = async ( req: Request, res: Response ) => {
         try {
-            console.log('getServicesById',req.params.id);
-            
             const serviceId: string = req.params.id
             const result = await findById(serviceId, dbServiceRepository)
-            console.log('result',result);
-            
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'
@@ -123,10 +120,25 @@ const adminController = (
 
     const createService = async ( req: Request, res: Response) => {
         try {
-            const service = req.body
-            console.log("createService",service);
+            console.log('createService');
             
+            const service = req.body;
             const result = await addNewService(service, dbServiceRepository )
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch (error) {
+            res.status(500)
+        }
+    }
+
+    const updateService = async ( req: Request, res: Response) => {
+        try {
+            const service = req.body 
+            const result = await editService(service, dbServiceRepository )
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'
@@ -162,6 +174,7 @@ const adminController = (
         workerStatusChange,
         serviceStatusChange,
         createService,
+        updateService,
         getServicesById,
     }
 }

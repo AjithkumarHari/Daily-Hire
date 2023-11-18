@@ -42,6 +42,11 @@ export class AdminService {
     return this.http.post(`${this.server}/admin/add-service`,data)
   }
 
+  editService(data: {_id: string, name: string, description: string}){
+    return this.http.put(`${this.server}/admin/edit-service`,data)
+  }
+
+
   getServiceById(serviceId: string):Observable<Service>{
     return this.http.get<Service>(`${this.server}/admin/service-details/:${serviceId}`,)
   }
