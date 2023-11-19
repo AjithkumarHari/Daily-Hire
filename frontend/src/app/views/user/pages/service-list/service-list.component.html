@@ -3,47 +3,19 @@
     <h1 class="text-center text-white font-bold text-5xl py-10 ">Our Services</h1>
 </div>
 <div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-10  ">  
-
-        <div  class="flex flex-col h-fit  bg-gradient-to-r from-cyan-500 to-blue-500   shadow-sm p-5 rounded-xl  mx-16 my-5 hover:scale-110 transition duration-300 ease-in-out delay-100 ">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-20">  
+        <div *ngFor="let service of services$" class="flex flex-col  h-fit bg-gradient-to-r from-[#c24d04] to-[#d29908]  shadow-sm p-5 rounded-xl  mx-10 my-5 hover:scale-110 transition duration-300 ease-in-out delay-100" [routerLink]="['/workerList', {serviceName: service.name}]">
             <div class="">
-                <div class=" ">
-                    <h3 class="text-lg font-bold text-gray-800">Service</h3>
-                    <p class="text-sm">Service Listing. Inspirational designs, illustrations, and graphic elements from the world's best designers</p>
+                <div class=" h-24">
+                    <h3 class="text-lg font-bold text-gray-800">{{service.name}}</h3>
+                    <p class="text-sm">{{service.description}}</p>
                 </div>
                 <div class="flex justify-end items-end">
-                    <a class="py-3 inline-flex   gap-2 rounded-full border border-transparent  bg-white text-black  focus:outline-none focus:ring-2 focus:ring-[#bb3e03] focus:ring-offset-2 transition-all text-sm">
+                    <a class="py-3 inline-flex   gap-0 rounded-full border border-transparent  bg-white text-black  focus:outline-none focus:ring-2 focus:ring-[#bb3e03] focus:ring-offset-2 transition-all text-sm">
                         <i class="w-10 px-3 fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div  class="flex flex-col h-fit  bg-gradient-to-r from-[#e85d04] to-[#ffba08]  shadow-sm p-5 rounded-xl  mx-16 my-5 hover:scale-110 transition duration-300 ease-in-out delay-100 ">
-            <div class="">
-                <div class=" ">
-                    <h3 class="text-lg font-bold text-gray-800">Service</h3>
-                    <p class="text-sm">Service Listing. Inspirational designs, illustrations, and graphic elements from the world's best designers</p>
-                </div>
-                <div class="flex justify-end items-end">
-                    <a class="py-3 inline-flex   gap-2 rounded-full border border-transparent  bg-white text-black  focus:outline-none focus:ring-2 focus:ring-[#bb3e03] focus:ring-offset-2 transition-all text-sm">
-                        <i class="w-10 px-3 fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div  class="flex flex-col h-fit  bg-gradient-to-r from-[#aacc00] to-[#ffff3f]  shadow-sm p-5 rounded-xl  mx-16 my-5 hover:scale-110 transition duration-300 ease-in-out delay-100 ">
-            <div class="">
-                <div class=" ">
-                    <h3 class="text-lg font-bold text-gray-800">Service</h3>
-                    <p class="text-sm">Service Listing. Inspirational designs, illustrations, and graphic elements from the world's best designers</p>
-                </div>
-                <div class="flex justify-end items-end">
-                    <a class="py-3 inline-flex   gap-2 rounded-full border border-transparent  bg-white text-black  focus:outline-none focus:ring-2 focus:ring-[#bb3e03] focus:ring-offset-2 transition-all text-sm">
-                        <i class="w-10 px-3 fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>

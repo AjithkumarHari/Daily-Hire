@@ -10,3 +10,8 @@ export const selectWorkerToken = createSelector(
     (state: WorkerState) => state,
     (state) => state
 ) 
+
+export const selectWorkerDetails = createSelector(
+    (state: any) => state.worker.workerData,
+    (workerDetails) => workerDetails
+) 

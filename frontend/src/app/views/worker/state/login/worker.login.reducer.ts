@@ -9,11 +9,12 @@ export const initialState: WorkerState = {
 
 const _authReducer = createReducer(
     initialState,
-    on(workerLoginSuccess,(state, {token})=>{
+    on(workerLoginSuccess,(state, {token, workerData})=>{
         return {
             ...state,
-            token,
-            errorMessage: undefined
+            token: token,
+            errorMessage: undefined,
+            workerData: workerData
         }
     }),
     on(workerLoginFailure,(state,{error})=>{

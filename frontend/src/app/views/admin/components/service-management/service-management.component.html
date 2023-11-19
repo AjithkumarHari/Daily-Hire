@@ -24,8 +24,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let service of services$ | slice: currentPage * 6 - 6 : currentPage * 6"
-                        class="bg-white border-b text-center">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        class="bg-white border-b">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 text-left ">
                             {{service.name}}
                         </th>
                         <td class="px-6 py-4 ">
@@ -33,7 +33,7 @@
                                 {{service.description}}
                             </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4  text-center">
                             <a *ngIf="service.isListed; else list" (click)="onStatusChange(service._id)"
                                 class="font-medium text-blue-600 hover:underline">Unlist</a>
                             <ng-template #list>
@@ -41,7 +41,7 @@
                                     class="font-medium text-blue-600 hover:underline">List</a>
                             </ng-template>
                         </td>
-                        <td class="px-6 py-4"> 
+                        <td class="px-6 py-4  text-center"> 
                             <a class="font-medium text-blue-600 hover:underline" [routerLink]="['edit', {_id: service._id, name: service.name, description: service.description} ]" >Edit</a>
                         </td> 
                     </tr>

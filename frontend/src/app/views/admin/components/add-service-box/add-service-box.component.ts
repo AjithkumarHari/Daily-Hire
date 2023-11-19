@@ -18,7 +18,7 @@ export class AddServiceBoxComponent {
   ngOnInit(){
     this.form = this.formBuilder.group({
       name : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
-      description : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,30}$")]),
+      description : new FormControl(null, [Validators.required, Validators.maxLength(100)]),
     })
   }
 

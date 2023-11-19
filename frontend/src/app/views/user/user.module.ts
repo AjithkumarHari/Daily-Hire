@@ -30,6 +30,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { FilterComponent } from './components/filter/filter.component';
 import { WageSortPipe } from './pipes/wage-sort.pipe';
 import { AgeSortPipe } from './pipes/age-sort.pipe';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.interceptor';
  
 @NgModule({
   declarations: [
@@ -76,6 +78,11 @@ import { AgeSortPipe } from './pipes/age-sort.pipe';
         ],
       } as SocialAuthServiceConfig,
     },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : UserAuthHeaderInterceptor,
+      multi : true
+    }
   ],
 })
 export class UserModule { }

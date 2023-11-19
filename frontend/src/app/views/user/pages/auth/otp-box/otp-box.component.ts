@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserAuthService } from '../../../services/user.auth.service';
 import { Store, select } from '@ngrx/store';
 import { selectErrorMessage, selectUserData } from '../../../state/login/login.selector';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class OtpBoxComponent {
  
   @ViewChild("ngOtpInput", { static: false }) ngOtpInput: any; config = { allowNumbersOnly: true, length: 5, isPasswordInput: false, disableAutoFocus: false, placeholder: "*", inputStyles: { width: "50px", height: "50px", }, }; 
 
-  constructor(private userService: UserService, private store: Store, private router: Router){}
+  constructor(private userService: UserAuthService, private store: Store, private router: Router){}
  
   ngOnInit(): void {
     this.startTimer();

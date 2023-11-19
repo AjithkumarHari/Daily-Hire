@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WorkerService } from '../../worker.service';
+import { WorkerAuthService } from '../../services/worker-auth-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private workerService: WorkerService, private router: Router
+  constructor(private workerAuthService: WorkerAuthService, private router: Router
   ){}
   logout(){
-    this.workerService.deleteToken();
+    this.workerAuthService.deleteToken();
     this.router.navigateByUrl('worker/auth/login')
   }
 }

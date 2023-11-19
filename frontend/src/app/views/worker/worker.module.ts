@@ -7,11 +7,14 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/login/worker.login.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/login/worker.login.effects';
-import { AuthComponent } from './auth/auth.component';
-import { LoginBoxComponent } from './auth/login-box/login-box.component';
-import { SignupBoxComponent } from './auth/signup-box/signup-box.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './home/navbar/navbar.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { LoginBoxComponent } from './pages/auth/login-box/login-box.component';
+import { SignupBoxComponent } from './pages/auth/signup-box/signup-box.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { WorkerProfileComponent } from './components/worker-profile/worker-profile.component';
+import { WorkerCalenderComponent } from './components/worker-calender/worker-calender.component';
+import { WorkerAppoinmentsComponent } from './components/worker-appoinments/worker-appoinments.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NavbarComponent } from './home/navbar/navbar.component';
     LoginBoxComponent,
     SignupBoxComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    WorkerProfileComponent,
+    WorkerCalenderComponent,
+    WorkerAppoinmentsComponent
   ],
   imports: [
     WorkerRoutingModule,

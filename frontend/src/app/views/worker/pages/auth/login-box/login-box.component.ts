@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Credentials } from '../../../../types/Credentials';
-import { WorkerService } from '../../worker.service';
+import { Credentials } from '../../../../../types/Credentials';
+import { WorkerService } from '../../../services/worker.service';
 import { Store, select } from '@ngrx/store';
-import { WorkerState } from '../../state/worker.state';
-import { workerLoginRequest } from '../../state/login/worker.login.action';
-import { selectWorkerErrorMessage } from '../../state/login/worker.login.selector';
+import { WorkerState } from '../../../state/worker.state';
+import { workerLoginRequest } from '../../../state/login/worker.login.action';
+import { selectWorkerErrorMessage } from '../../../state/login/worker.login.selector';
 
 @Component({
   selector: 'app-login-box',

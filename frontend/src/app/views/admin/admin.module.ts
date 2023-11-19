@@ -19,6 +19,8 @@ import { ServiceManagementComponent } from './components/service-management/serv
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { AddServiceBoxComponent } from './components/add-service-box/add-service-box.component';
 import { EditServiceBoxComponent } from './components/edit-service-box/edit-service-box.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.interceptor';
 
 
 @NgModule({
@@ -41,6 +43,13 @@ import { EditServiceBoxComponent } from './components/edit-service-box/edit-serv
     ReactiveFormsModule,
     StoreModule.forFeature('admin', authReducer),
     EffectsModule.forFeature(AuthEffects)
+  ],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AdminAuthHeaderInterceptor,
+      multi : true
+    }
   ]
 })
 export class AdminModule { }

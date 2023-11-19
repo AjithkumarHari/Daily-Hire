@@ -40,9 +40,10 @@ export const workerLogin = async (
         if(!isPasswordCorrect)
             throw new AppError("Password does not match", HttpStatus.UNAUTHORIZED);
 
-        if(worker._id)
-            return authService.generateToken(worker._id.toString());
-        
+        if(worker._id){
+            const token = authService.generateToken(worker._id.toString());
+            return {token, workerDate: worker}
+        }
     } catch (AppError) {
         return AppError;
     }

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Credentials } from '../../types/Credentials';
+import { Credentials } from '../../../types/Credentials';
 import { environment } from 'src/environments/environment';  
-import { Worker } from '../../types/Worker';
+import { Worker } from '../../../types/Worker';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkerService {
+export class WorkerAuthService {
   server = environment.serverUrl
   constructor( private http: HttpClient) { }
 

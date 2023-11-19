@@ -146,8 +146,8 @@ const authController = (
 
     const loginWorker = async (req: Request, res: Response) => {
         const {email, password} = req.body;
-        const result = await workerLogin(email, password, dbWorkerRepository, authService);
-
+        const result: any = await workerLogin(email, password, dbWorkerRepository, authService);
+ 
         if(result instanceof AppError){
             res.status(result.errorCode).json({
                ...result,
@@ -157,7 +157,8 @@ const authController = (
             res.json({
                 status: "success",
                 message: "worker logged in successfully",
-                token: result
+                token: result.token,
+                workerData: result.workerDate
             });
         }
     } 

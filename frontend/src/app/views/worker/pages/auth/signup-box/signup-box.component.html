@@ -5,7 +5,6 @@
     </div>
 
     <form  [formGroup]="form"  (ngSubmit)="onFormSubmit()" >
-
         <div class="grid grid-cols-2 mt-3 divide-x divide-slate-400/50">
             <div class="relative w-full px-10 py-10 h-fit">
                 <div class='grid gap-5'>
@@ -155,12 +154,8 @@
                         formControlName="work"
                         class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                         >
-                            <option value="work">Profession</option>
-                            <option value="Elecrician"> Elecrician</option>
-                            <option value="Plumber">Plumber</option>
-                            <option value="Driver">Driver</option>
-                            <option value="House-keeping">House-keeping</option>
-                            <option value="Painter">Painter</option>
+                            <option  value="work">PROFESSION (Select)</option>
+                            <option *ngFor="let work of works" value="{{work.name}}">{{work.name}}</option>
                         </select>
                         <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Work name must be valid (a-z,A-Z)</p>
                     </div>

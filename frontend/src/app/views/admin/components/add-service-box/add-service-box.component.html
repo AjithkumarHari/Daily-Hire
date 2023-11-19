@@ -14,13 +14,13 @@
                 <div class="col-span-2">
                     <label for="name" class="block m-1  font-medium text-gray-900 ">Name</label>
                     <input type="text" name="name" formControlName="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Type service name" required="">
-                    <span *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="text-sm text-red-700">service name must be valid.</span>
+                    <span *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="text-sm text-red-700">name must be valid.</span>
                     <span   class="text-sm text-red-700 ">{{errorMessage}}</span>
                 </div>
                 <div class="col-span-2">
                     <label for="description" class="block m-1 text-sm font-medium text-gray-900 ">Service Description</label>
                     <textarea id="description" rows="4" formControlName="description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  " placeholder="Write service description here"></textarea>                    
-                    <span *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="text-sm text-red-700">service description must be valid.</span>
+                    <span *ngIf="!form.get('description')?.valid && !form.get('description')?.untouched"  class="text-sm text-red-700">description must be less than 100 letters.</span>
                 </div>
             </div>
             <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" (click)="onSubmit()" [disabled]="!form.valid">
