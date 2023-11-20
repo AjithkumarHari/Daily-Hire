@@ -35,7 +35,7 @@ export class UserService {
   }
 
   allServices():Observable<Service[]>{
-    return this.http.get<Service[]>(`${this.server}/admin/service-list`)
+    return this.http.get<Service[]>(`${this.server}/user/service-list`)
   }
    
 }

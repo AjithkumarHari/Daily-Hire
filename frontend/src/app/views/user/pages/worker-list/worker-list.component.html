@@ -13,7 +13,7 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-10  ">  
 
-  <ng-container *ngFor="let worker of workers$ | ageSort: orderAge  | wageSort : orderWage">
+  <ng-container *ngFor="let worker of workers$ | ageSort: orderAge  | wageSort : orderWage | slice: currentPage * 9 - 9 : currentPage * 9">
     <ng-container  *ngIf="searchText==='' || worker.name.toLowerCase().includes(searchText)">
       <ng-container *ngIf="selectedGender== 'all' || selectedGender== worker.gender">
         <div class="flex flex-col bg-white border shadow-sm p-5 rounded-2xl  mx-16 my-5 hover:scale-110 transition duration-300 ease-in-out delay-100 ">
@@ -59,4 +59,34 @@
       </ng-container>
     </ng-container>
   </ng-container>
+</div>
+<div class="flex justify-center">
+  <nav class=" my-5" aria-label="Page navigation example">
+      <ul class="inline-flex -space-x-px text-base font-semibold h-11">
+          <li>
+              <a (click)="onPrevious($event)"
+                  class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
+                  Previous
+              </a>
+          </li>
+
+          <ng-container *ngFor="let page of pages">
+              <li>
+                  <a (click)="onPageClick(page)"
+                      class="flex items-center justify-center mx-2 px-4 h-11 leading-tight text-white rounded-full  border-2  hover:border-gray-300 border-transparent    "
+                      [ngClass]="{
+                        'bg-[#eb5e28]': page === currentPage,
+                    }">
+                      {{ page }}
+                  </a>
+              </li>
+          </ng-container>
+          
+          <li>
+              <a (click)="onNext($event)"
+              class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
+              Next</a>
+          </li>
+      </ul>
+  </nav>
 </div>

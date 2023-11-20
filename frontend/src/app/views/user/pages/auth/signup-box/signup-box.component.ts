@@ -70,22 +70,22 @@ export class SignupBoxComponent {
       //     this.router.navigateByUrl('/auth/otp');
       //   },
       //   error: (err) => {
-      //     console.log(err);
+      //     console.log(err); 
           
       //   }
       // });
 
       
-    this.store.dispatch(signupRequest({user}))
- 
-    this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-      this.errorMessage = error
-      console.log("signup",this.errorMessage);  
-    });
-    }
-    else{
-      this.errorMessage = "password not match"
-    }
+      this.store.dispatch(signupRequest({user}))
+  
+      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+        this.errorMessage = error
+        console.log("signup",this.errorMessage);  
+      });
+      }
+      else{
+        this.errorMessage = "password not match"
+      }
     
   }
 }

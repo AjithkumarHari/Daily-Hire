@@ -13,12 +13,15 @@ export const workerDbRepository = (repository: ReturnType<WorkerRepositoryMongoD
 
     const workerListUnlist = async (workerId: string, newStatus: boolean) => await repository.workerListUnlist(workerId, newStatus);
 
+    const workerActivate = async (email: string) => await repository.workerActivate(email);
+
     return {
         getAllWorkers,
         getWorkerByEmail,
         addWorker,
         getWorkerById,
-        workerListUnlist
+        workerListUnlist,
+        workerActivate
     }
 }
 

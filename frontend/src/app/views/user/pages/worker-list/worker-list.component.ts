@@ -17,6 +17,9 @@ export class WorkerListComponent implements OnInit{
   orderWage: string = '';
   serviceFilter: string | null = null;
 
+  currentPage: number = 1;
+  pages: number[] = [];
+
   constructor(private activatedRoute: ActivatedRoute,private userService: UserService){}
 
   ngOnInit(): void {
@@ -26,6 +29,7 @@ export class WorkerListComponent implements OnInit{
       if(this.serviceFilter){
         this.workers$ = this.workers$.filter(worker => worker.work == this.serviceFilter);
       }
+      this.countPages(this.workers$.length);
     })
   }
 
@@ -51,6 +55,30 @@ export class WorkerListComponent implements OnInit{
   
   onSearchTextEntered(enteredText: string){
     this.searchText = enteredText;
+  }
+
+  countPages(total: number){    
+    for(let i=1;i<=Math.ceil(total/9);i++){
+      this.pages.push(i)
+    }
+  }
+
+  onPrevious($event: Event) {
+    $event.preventDefault();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  onNext($event: Event) {
+    $event.preventDefault();
+    if (this.currentPage < this.pages.length) {
+      this.currentPage++;
+    }
+  }
+
+  onPageClick(pageNumber: number) {
+    this.currentPage = pageNumber;
   }
 
  

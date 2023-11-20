@@ -25,12 +25,17 @@ export const workerRepositoryMongoDB = () => {
         return await WORKER.updateOne({_id}, {$set:{isListed: newStatus}});
     }
 
+    const workerActivate =async (email: string) => {
+        return await WORKER.updateOne({email}, {$set:{isActive: true}});
+    }
+
     return {
         getAllWorkers,
         getWorkerByEmail,
         addWorker,
         getWorkerById,
-        workerListUnlist
+        workerListUnlist,
+        workerActivate
     }
 }
 

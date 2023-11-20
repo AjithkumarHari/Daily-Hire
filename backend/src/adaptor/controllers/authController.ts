@@ -12,10 +12,9 @@ import { GoogleAuthService } from "../../framework/service/googleAuthService";
 import { OtpServiceInterface } from "../../application/service/otpServiceInterface";
 import { OtpService } from "../../framework/service/otpService";
 import { signInWithGoogle, userLogin, userSignup, otpVerification, resendOtp } from "../../application/useCase/auth/userAuth";
-import { workerSignup, workerLogin } from "../../application/useCase/auth/workerAuth";
+import { workerSignup, workerLogin, workerOtpVerification } from "../../application/useCase/auth/workerAuth";
 import { adminLogin } from "../../application/useCase/auth/adminAuth";
 import AppError from "../../util/appError";
-import { Res } from "../../types/Res";
 
 const authController = (
     userDbRepository: UserDbInterface,
@@ -64,6 +63,23 @@ const authController = (
             res.json({
                 ...result,
                 message: "user verified"
+            });
+        }else{
+            res.status(result.errorCode).json({
+                ...result,
+            });
+        }
+
+    } 
+
+    const workerOtpVerify = async (req: Request, res: Response) => {
+        
+        const data = req.body;
+        const result: any = await workerOtpVerification(data, dbWorkerRepository, authService, otpService);
+        if(result.status=='success'){
+            res.json({
+                ...result,
+                message: "worker verified"
             });
         }else{
             res.status(result.errorCode).json({
@@ -129,17 +145,15 @@ const authController = (
 
     const registerWorker = async ( req: Request, res: Response) => {
         const worker = req.body;
-        const result = await workerSignup(worker, dbWorkerRepository, authService);
+        const result: any = await workerSignup(worker, dbWorkerRepository, authService, otpService);
         if(result instanceof AppError){
             res.status(result.errorCode).json({
-                ...result,
-                status: "failed",
-            })
+                ...result
+                })
         }else{
             res.json({
-                result,
-                message: "successfully added new worker",
-
+                ...result,
+                message: "successfully added new user",
             });
         }
     }
@@ -185,7 +199,8 @@ const authController = (
         loginAdmin,
         loginWithGoogle,
         userOtpVerify,
-        resendUserOtp
+        resendUserOtp,
+        workerOtpVerify
     }
 
 }

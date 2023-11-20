@@ -4,6 +4,10 @@ import { Worker } from '../../../../../types/Worker';
 import { Router } from '@angular/router';
 import { WorkerAuthService } from '../../../services/worker-auth-service.service';
 import { WorkerService } from '../../../services/worker.service';
+import { Store, select } from '@ngrx/store';
+import { workerSignupRequest } from '../../../state/login/worker.login.action';
+import { selectWorkerErrorMessage, selectWorkerToken } from '../../../state/login/worker.login.selector';
+import { WorkerState } from '../../../state/worker.state';
 
 @Component({
   selector: 'app-signup-box',
@@ -20,7 +24,8 @@ export class SignupBoxComponent {
     private formBuilder : FormBuilder,
     private router: Router,
     private workerAuthService: WorkerAuthService,
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private store: Store<WorkerState>
   ) { }
 
   ngOnInit(): void {
@@ -63,17 +68,29 @@ export class SignupBoxComponent {
     
     if(confpassword==worker.password){
 
-      this.workerAuthService.signup(worker).subscribe({
-        next: (response) => {
-          this.router.navigateByUrl('/worker/auth/login');
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message
-          console.log(err);
-        }
-      });
+      // this.workerAuthService.signup(worker).subscribe({
+      //   next: (response) => {
+      //     this.router.navigateByUrl('/worker/auth/login');
+      //   },
+      //   error: (err) => {
+      //     this.errorMessage = err.error.message
+      //     console.log(err);
+      //   }
+      // });
 
+        
+      this.store.dispatch(workerSignupRequest({worker}))
+  
+      this.store.pipe(select(selectWorkerErrorMessage)).subscribe((error) => {
+  
+        this.errorMessage = error
+        console.log("signup",this.errorMessage);  
+      });
+    }else{
+      this.errorMessage = "password not match"
     }
+
+    
      
   }
 }

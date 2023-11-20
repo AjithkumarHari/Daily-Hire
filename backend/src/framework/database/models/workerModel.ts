@@ -52,7 +52,11 @@ const workerShcema = new Schema(
         isListed: {
             type: Boolean,
             default: true
-        }
+        },
+        isActive: {
+            type: Boolean,
+            default: false
+        },
     }
 )
 

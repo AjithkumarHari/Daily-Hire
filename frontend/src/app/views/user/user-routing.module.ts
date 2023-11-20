@@ -21,7 +21,7 @@ const routes: Routes = [
   ]},
   { path: 'workerList', component: WorkerListComponent, canActivate: [userGuard]},
   { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]},
-  { path: 'services', component: ServiceListComponent},
+  { path: 'services', component: ServiceListComponent, canActivate: [userGuard]},
   { path: 'profile', component: UserProfileComponent}
 ];
 

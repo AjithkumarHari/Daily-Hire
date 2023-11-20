@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { workerLoginSuccess, workerLoginFailure } from "./worker.login.action";
+import { workerLoginSuccess, workerLoginFailure, workerSignupSuccess, workerSignupFailure, workerVerifySuccess, workerVerifyFailure } from "./worker.login.action";
 import { WorkerState } from "../worker.state";
 
 export const initialState: WorkerState = {
@@ -23,7 +23,38 @@ const _authReducer = createReducer(
             token: " ",
             errorMessage: error.error.message
         }
+    }),
+
+    on(workerSignupSuccess,(state, {workerData})=>{
+        return {
+            ...state,
+            ...workerData,
+            errorMessage: undefined
+        }
+    }),
+    on(workerSignupFailure,(state,{error})=>{
+        return {
+            ...state,
+            UserToken: " ",
+            errorMessage: error.error.message
+        }
+    }),
+
+    on(workerVerifySuccess,(state, {workerToken})=>{
+        return {
+            ...state,
+            UserToken : workerToken,
+            errorMessage: undefined
+        }
+    }),
+    on(workerVerifyFailure,(state,{error})=>{
+        return {
+            ...state,
+            UserToken: " ",
+            errorMessage: error.error.message
+        }
     })
+    
 )
 
 

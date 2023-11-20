@@ -17,3 +17,33 @@ export const workerLoginFailure = createAction(
     `Auth Worker Login Failure`,
     props<{error: ErrorRes}>()
 )
+
+export const workerSignupRequest = createAction(
+    `Auth Worker Signup Request`,
+    props<{worker: Worker}>()
+)
+
+export const workerSignupSuccess = createAction(
+    `Auth Worker Signup Success`,
+    props<{workerData: any}>()
+)
+
+export const workerSignupFailure = createAction(
+    `Auth Worker Signup Failure`,
+    props<{error: ErrorRes}>()
+)
+
+export const workerVerifyRequest = createAction(
+    `Auth Worker Verify Request`,
+    props<{worker:{email: string, phoneNumber: number, code: string}}>()
+)
+
+export const workerVerifySuccess = createAction(
+    `Auth Worker Verify Success`,
+    props<{workerToken: string}>()
+)
+
+export const workerVerifyFailure = createAction(
+    `Auth Worker Verify Failure`,
+    props<{error: ErrorRes}>()
+)

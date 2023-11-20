@@ -5,6 +5,9 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/login/login.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/login/login.effects';
+
+import { UserComponent } from './user.component';
+
 import { AuthComponent } from './pages/auth/auth.component';
 import { SignupBoxComponent } from './pages/auth/signup-box/signup-box.component';
 import { LoginBoxComponent } from './pages/auth/login-box/login-box.component';
@@ -35,6 +38,7 @@ import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.inter
  
 @NgModule({
   declarations: [
+    UserComponent,
     AuthComponent,
     SignupBoxComponent,
     LoginBoxComponent,

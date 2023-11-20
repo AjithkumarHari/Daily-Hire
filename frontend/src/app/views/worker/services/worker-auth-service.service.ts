@@ -20,6 +20,16 @@ export class WorkerAuthService {
     return this.http.post(`${this.server}/auth/worker-login`,credentials)
   }
 
+  verifySignupOtp(data: {email: string, phoneNumber: number, code: string}){  
+    console.log(data);
+      
+    return this.http.post(`${this.server}/auth/worker-otp`,data);
+  }
+  
+  resendOtp(phoneNumber:number){
+    return this.http.post(`${this.server}/auth/user-resend-otp`,phoneNumber);
+  }
+
   setToken(token: string){
     return window.sessionStorage.setItem('worker-token',token)
   }

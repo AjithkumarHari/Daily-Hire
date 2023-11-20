@@ -1,4 +1,4 @@
-<div class="w-7/12 m-auto mt-20  overflow-hidden bg-[#ffffffc1] shadow-lg  rounded-xl">
+<div class="w-7/12 m-auto   overflow-hidden bg-[#ffffffc1] shadow-lg  rounded-xl">
     <div class="text-center mt-3">
         <h1 class="mb-1 text-3xl ">Worker Signup</h1>
         <p class="text-sm">Already Registered on Daily Hire? <a routerLink="/worker/auth/login"  class="font-semibold text-yellow-950">Click Here</a></p>
@@ -11,7 +11,7 @@
                     <h1 class="text-xl ">Personal Details</h1>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined1" 
                             formControlName="name"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -19,7 +19,7 @@
                                 'border-green-600': !form.get('name')?.invalid && !form.get('name')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined1" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('name')?.invalid && form.get('name')?.touched,
@@ -31,7 +31,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined2" 
                             formControlName="phone"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -39,7 +39,7 @@
                                 'border-green-600': !form.get('phone')?.invalid && !form.get('phone')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined2" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('phone')?.invalid && form.get('phone')?.touched,
@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined3" 
                             formControlName="age"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -59,7 +59,7 @@
                                 'border-green-600': !form.get('age')?.invalid && !form.get('age')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined3" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('age')?.invalid && form.get('age')?.touched,
@@ -71,7 +71,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <select id="underline_select" formControlName="gender"
+                            <select id="underline_select1" formControlName="gender"
                                 class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-400 appearance-none focus:outline-none focus:ring-0 peer"
                                 >
                                 <option value="select">Select Gender</option>
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined4" 
                             formControlName="email"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -92,7 +92,7 @@
                                 'border-green-600': !form.get('email')?.invalid && !form.get('email')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined4" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('email')?.invalid && form.get('email')?.touched,
@@ -104,7 +104,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="password" id="floating_outlined5" 
                             formControlName="password"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -112,7 +112,7 @@
                                 'border-green-600': !form.get('password')?.invalid && !form.get('password')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined5" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('password')?.invalid && form.get('password')?.touched,
@@ -124,7 +124,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="password" id="floating_outlined6" 
                             formControlName="confpassword"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -132,7 +132,7 @@
                                 'border-green-600': !form.get('confpassword')?.invalid && !form.get('confpassword')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined6" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('confpassword')?.invalid && form.get('confpassword')?.touched,
@@ -149,8 +149,7 @@
                 <div class='grid gap-5'>
                     <h1 class="text-xl ">Work Details</h1>
                     <div>
-                        <label for="underline_select" class="sr-only ">Works</label>
-                        <select id="underline_select" 
+                        <select id="underline_select2" 
                         formControlName="work"
                         class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                         >
@@ -161,7 +160,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined7" 
                             formControlName="experience"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -169,7 +168,7 @@
                                 'border-green-600': !form.get('experience')?.invalid && !form.get('experience')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined7" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('experience')?.invalid && form.get('experience')?.touched,
@@ -181,7 +180,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined8" 
                             formControlName="wageForHour"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -189,7 +188,7 @@
                                 'border-green-600': !form.get('wageForHour')?.invalid && !form.get('wageForHour')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined8" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('wageForHour')?.invalid && form.get('wageForHour')?.touched,
@@ -201,7 +200,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined9" 
                             formControlName="wageForDay"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -209,7 +208,7 @@
                                 'border-green-600': !form.get('wageForDay')?.invalid && !form.get('wageForDay')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined9" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('wageForDay')?.invalid && form.get('wageForDay')?.touched,
@@ -221,7 +220,7 @@
                     </div>
                     <div>
                         <div class="relative">
-                            <input type="text" id="floating_outlined" 
+                            <input type="text" id="floating_outlined10" 
                             formControlName="location"
                             class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-400 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
                             [ngClass]="{
@@ -229,7 +228,7 @@
                                 'border-green-600': !form.get('location')?.invalid && !form.get('location')?.touched
                             }"
                             />
-                            <label for="floating_outlined" 
+                            <label for="floating_outlined10" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             [ngClass]="{
                                 'text-red-600': form.get('location')?.invalid && form.get('location')?.touched,

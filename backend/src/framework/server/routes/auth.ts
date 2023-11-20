@@ -44,6 +44,8 @@ const authRouter = () => {
     route.post('/user-google-signin',controller.loginWithGoogle)
 
     route.post('/user-otp',controller.userOtpVerify)
+    
+    route.post('/worker-otp',controller.workerOtpVerify)
 
     route.post('/user-resend-otp',controller.resendUserOtp)
 

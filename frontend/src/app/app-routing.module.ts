@@ -13,12 +13,12 @@ const routes: Routes = [
   {
     path: 'worker',
     component: WorkerComponent,
-    loadChildren: () => import('./views/worker/worker-routing.module').then(m => m.WorkerRoutingModule),
+    loadChildren: () => import('./views/worker/worker.module').then(m => m.WorkerModule),
   },
   {
     path: 'admin',
     component: AdminComponent,
-    loadChildren: () => import('./views/admin/admin-routing.module').then(m => m.AdminRoutingModule),
+    loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule),
   },
 ];
 

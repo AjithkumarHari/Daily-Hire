@@ -1,13 +1,15 @@
 import { Worker } from "../../../types/Worker";
 import { WorkerRepository } from "../../repository/workerDbRepository";
 import { AuthServiceInterface } from "../../service/authServiceInterface";
+import { OtpServiceInterface } from "../../service/otpServiceInterface";
 import AppError from "../../../util/appError";
 import { HttpStatus } from "../../../types/HttpStatus";
 
 export const workerSignup = async (
     worker : Worker,
     workerRepository: ReturnType<WorkerRepository>,
-    authService: ReturnType<AuthServiceInterface>
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>
 ) => {
     try {
         worker.email = worker.email.toLowerCase();
@@ -17,7 +19,9 @@ export const workerSignup = async (
         } 
         worker.password = await authService.encryptPassword(worker.password);
         await workerRepository.addWorker(worker);
-        return {status: "success"};
+        await otpService.sendOtp(worker.phone);
+        const { name, email, phone } = worker;
+        return {"status": "success", workerData:{name, email, phone}};
     } catch (AppError) {
         return AppError;
     }
@@ -47,4 +51,33 @@ export const workerLogin = async (
     } catch (AppError) {
         return AppError;
     }
+}
+
+export const workerOtpVerification = async (
+    data:{
+        email: string,
+        phoneNumber: number,
+        code: string
+    },
+    workerRepository: ReturnType<WorkerRepository>,
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>,
+) => {
+    try{
+        const isOtpVaild = await otpService.verifyOtp(data.phoneNumber, data.code);
+        if(isOtpVaild){
+            await workerRepository.workerActivate(data.email);
+            const worker = await workerRepository.getWorkerByEmail(data.email);
+            if(worker?._id){
+                const token = authService.generateToken(worker._id)
+                return {"status":"success" ,token , workerData:worker};
+            }
+        }else{
+            throw new AppError("OTP does not match",HttpStatus.UNAUTHORIZED);
+        }
+
+    } catch(AppError) {
+        return AppError;
+    }
+    
 }

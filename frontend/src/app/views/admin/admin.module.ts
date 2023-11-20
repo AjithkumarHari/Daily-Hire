@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/login/admin.login.effects';
 import { AuthComponent } from './pages/auth/auth.component';
  
+import { AdminComponent } from './admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
@@ -25,6 +26,7 @@ import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.int
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AuthComponent,
     HomeComponent,
     NavBarComponent,
