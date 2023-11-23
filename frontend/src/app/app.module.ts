@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewsComponent } from './views/views.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserModule } from './views/user/user.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { GlobalErrorHandler } from './service/global-error-handler.service';
+import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 
 
 @NgModule({
@@ -22,7 +24,14 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

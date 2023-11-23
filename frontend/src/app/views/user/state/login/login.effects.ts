@@ -12,7 +12,8 @@ import { loginFailure,
     signupFailure,
     signupSuccess,
     loginPending,
-    verifyRequest
+    verifyRequest,
+    verifyFailure
     } from "./login.action";
 
 @Injectable()
@@ -30,14 +31,20 @@ export class AuthEffects{
                 this.userService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
+                        console.log('shhjkhsa');
+                        
                         if(responce.status=='success'){
+                            console.log('success');
+                            
                             sessionStorage.setItem('user-token',responce.token)
                             return loginSuccess({userToken : responce.token})
                         }
                         else if(responce.status=='pending'){
+                            console.log('pending');
                             return loginPending({userData : responce})
                         }
                         else{
+                            console.log('failed');
                             console.log('in side effect LE',responce);
                             return loginFailure({ error : responce.error.error  })
                         }
@@ -63,6 +70,8 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(loginPending),
             tap(( )=>{
+                console.log('pending true');
+                
                 this.router.navigate(['/auth/otp']);
             })
         ), {
@@ -125,6 +134,8 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(signupSuccess),
             tap(()=>{
+                console.log('signup sussc');
+                
                 this.router.navigate(['/auth/otp']);
             })
         ), {
@@ -134,7 +145,7 @@ export class AuthEffects{
 
     signupFailure$ = createEffect(()=>
         this.actions$.pipe(
-            ofType(loginFailure),
+            ofType(signupFailure),
             tap(()=>{
                 this.router.navigate(['/auth/signup'])
             })
@@ -156,10 +167,10 @@ export class AuthEffects{
                         }
                         else{
                             console.log('in side effect LE',responce);
-                            return loginFailure({ error : responce.error  })
+                            return verifyFailure({ error : responce.error  })
                         }
                     }),
-                    catchError(error => of (loginFailure({ error })))
+                    catchError(error => of (verifyFailure({ error })))
                 )
             )
         )
@@ -189,8 +200,9 @@ export class AuthEffects{
 
     verifyFailure$ = createEffect(()=>
         this.actions$.pipe(
-            ofType(loginFailure),
+            ofType(verifyFailure),
             tap(()=>{
+                console.log('verfy falure');
                 this.router.navigate(['/auth/otp'])
             })
         ), {

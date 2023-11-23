@@ -8,6 +8,11 @@ export const workerLoginRequest = createAction(
     props<{credentials: Credentials}>()
 )
 
+export const workerLoginPending = createAction(
+    `Auth Worker Login Pending`,
+    props<{workerData: any}>()
+)
+
 export const workerLoginSuccess = createAction(
     `Auth Worker Login Success`,
     props<{token: string, workerData: Worker}>()

@@ -5,11 +5,11 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { ServiceRepository } from "../../application/repository/serviceDbRepository";
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
-import { allWorkers } from "../../application/useCase/user/allWorkers";
+import { allListedWorkers, allWorkers } from "../../application/useCase/user/allWorkers";
 import { HttpStatus } from "../../types/HttpStatus";
 import { findById } from "../../application/useCase/worker/findById";
 import { Worker } from "../../types/Worker";
-import { allServices } from "../../application/useCase/service/allService";
+import { allListedServices, allServices } from "../../application/useCase/service/allService";
 
 
 const userController = ( 
@@ -29,7 +29,7 @@ const userController = (
     const getAllWorkers = async ( req: Request, res: Response ) => {
 
         try{
-            const result: Worker[] | null | unknown= await allWorkers(dbWorkerRepository);
+            const result: Worker[] | null | unknown= await allListedWorkers(dbWorkerRepository);
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'
@@ -61,7 +61,7 @@ const userController = (
     
     const getAllServices = async ( req: Request, res: Response ) => {
         try {
-            const result = await allServices(dbServiceRepository)
+            const result = await allListedServices(dbServiceRepository)
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'

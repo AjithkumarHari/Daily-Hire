@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { WorkerAuthService } from "../../services/worker-auth-service.service";
-import { workerLoginFailure, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
+import { workerLoginFailure, workerLoginPending, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -25,7 +25,12 @@ export class AuthEffects{
                             sessionStorage.setItem('worker-token',responce.token)
                             console.log('in side effect LS',responce);
                             return workerLoginSuccess({token : responce.token, workerData: responce.workerData})
-                        }else{
+                        }
+                        else if(responce.status=='pending'){
+                            console.log(responce);
+                            return workerLoginPending({workerData : responce})
+                        }
+                        else{
                             console.log('in side effect LE',responce);
                             return workerLoginFailure({ error : responce.error.error  })
                         }
@@ -34,7 +39,19 @@ export class AuthEffects{
                 )
             )
         )
+    ); 
+
+    loginPending$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(workerLoginPending),
+            tap(( )=>{
+                this.router.navigate(['/worker/auth/otp']);
+            })
+        ), {
+            dispatch : false
+        }
     );
+
 
     loginSuccess$ = createEffect(()=>
         this.actions$.pipe(
@@ -91,8 +108,10 @@ export class AuthEffects{
 
     signupFailure$ = createEffect(()=>
         this.actions$.pipe(
-            ofType(workerLoginFailure),
+            ofType(workerSignupFailure),
             tap(()=>{
+                console.log('signup failure');
+                
                 this.router.navigate(['/worker/auth/signup'])
             })
         ), {

@@ -49,9 +49,10 @@ export class LoginBoxComponent implements OnInit{
       email : this.form.value.email, 
       password : this.form.value.password
     }
+    console.log(credentials);
+    
 
     this.store.dispatch(loginRequest({credentials}))
- 
     this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
       this.errorMessage = error  
     });

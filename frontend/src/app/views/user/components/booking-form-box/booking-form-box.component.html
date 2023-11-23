@@ -1,0 +1,90 @@
+<div class="flex items-center m-5">
+    <label for="add-service" class="bg-gradient-to-r from-yellow-600 to-red-600 text-white py-3  px-6 font-semibold rounded hover:bg-[#2764a57a]">Book Worker</label>
+</div>
+<input type="checkbox" id="add-service" class="peer fixed appearance-none opacity-0">
+<label for="add-service" class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-sm opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+    <label for="" class="  h-fit  scale-90 overflow-y-auto overscroll-contain rounded-md shadow-2xl transition">
+        <div class=" flex items-center justify-center">
+            <div class="lg:w-auto mx-auto p-4 rounded-lg bg-gray-100 shadow-2xl font-sans">
+                <form>
+                    <div class="grid grid-cols-2 mt-4 mb-4">
+                        <div class=" lg:w-80 relative">
+                            <p class="font-bold text-2xl text-black">Book Our Worker</p>
+                            <div class=" mt-5">
+                                <p for="worker" class="block font-semibold text-gray-600 mb-2">Name of the Worker:<span class="p-2 text-black text-lg font-bold">{{worker.name}}</span></p>
+                                <p for="work" class="block font-semibold text-gray-600 mb-2">Entitled Work:<span class="p-2 text-black text-lg font-bold">{{worker.work}}</span></p>
+                                <p for="email" class="block font-semibold text-gray-600 mb-2">Schedule Work on:<span class="p-2 text-black text-lg font-bold">{{datepickerValue}}</span></p>
+                            </div>
+                       
+                            <div class="grid grid-cols-2  absolute inset-x-0 bottom-0">
+                                <div>
+                                    <h1 class="text-center text-sm font-bold text-gray-600">₹<span class="text-black text-2xl">{{worker.wageForDay}}</span>/d</h1>
+                                </div>
+                                <div>
+                                    <input value="Book Now" type="submit" (click)="onSubmit()"
+                                        class="w-full px-4 py-2 rounded-md bg-[#ff8533] hover:bg-orange-600 text-white font-semibold cursor-pointer" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="bg-white rounded-lg shadow p-4 m-auto " style="width: 17rem">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div>
+                                        <span class="text-lg font-bold text-gray-800">{{MONTH_NAMES[month]}}</span>
+                                        <span class="ml-1 text-lg text-gray-600 font-normal">{{year}}</span>
+                                    </div>
+                                    <div>
+                                        <button type="button"
+                                            class="transition ease-in-out  inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                            [ngClass]="{ 'cursor-not-allowed opacity-25': month === 0 }"
+                                            [disabled]="month === 0 ? true : false" (click)="month = month - 1" (click)="getNoOfDays()">
+                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <button type="button"
+                                            class="transition ease-in-out  inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                            [ngClass]="{'cursor-not-allowed opacity-25': month === 11}" 
+                                            [disabled]="month === 11 ? true : false" 
+                                            (click)="month = month + 1" (click)="getNoOfDays()">
+                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                
+                                <div class="flex flex-wrap mb-3 -mx-1">
+                                    <ng-container *ngFor="let day of DAYS; let index = index">
+                                        <div style="width: 14.26%" class="px-1">
+                                            <div class="text-gray-800 font-medium text-center text-xs">
+                                                {{ day }}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                
+                                <div class="flex flex-wrap -mx-1">
+                                    <ng-container *ngFor="let blankday of blankdays">
+                                        <div style="width: 14.28%" class="text-center border-none p-1 border-transparent text-sm"></div>
+                                    </ng-container>
+                                    <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
+                                        <div style="width: 14.28%" class="px-1 mb-1">
+                                            <div (click)="getDateValue(date)"
+                                            class="cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100"
+                                            [ngClass]="{'bg-blue-500 text-white': isToday(date) === true,'text-gray-700 hover:bg-blue-200':isToday(date) === false}">
+                                                {{ date }}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </label>
+</label>

@@ -74,9 +74,8 @@
               <li>
                   <a (click)="onPageClick(page)"
                       class="flex items-center justify-center mx-2 px-4 h-11 leading-tight text-white rounded-full  border-2  hover:border-gray-300 border-transparent    "
-                      [ngClass]="{
-                        'bg-[#eb5e28]': page === currentPage,
-                    }">
+                      [ngClass]="{'bg-[#eb5e28]': page === currentPage}"
+                  >
                       {{ page }}
                   </a>
               </li>

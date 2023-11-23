@@ -25,10 +25,10 @@ const authController = (
     adminDbRepositoryImp: AdminDbRepositoryMongoDb,
     authServiceInterface: AuthServiceInterface,
     authServiceImpl: AuthService,
-    googleAuthServiceInterface:GoogleAuthServiceInterface,
-    googleAuthServiceImpl:GoogleAuthService,
-    otpServiceInterface:OtpServiceInterface,
-    otpServiceImpl:OtpService,
+    googleAuthServiceInterface: GoogleAuthServiceInterface,
+    googleAuthServiceImpl: GoogleAuthService,
+    otpServiceInterface: OtpServiceInterface,
+    otpServiceImpl: OtpService,
 ) => {
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
@@ -37,17 +37,17 @@ const authController = (
     const googleAuthService = googleAuthServiceInterface(googleAuthServiceImpl());
     const otpService = otpServiceInterface(otpServiceImpl());
 
-    const registerUser = async ( req: Request, res: Response) => {
-        
-        const user:{name: string, phone: number, email: string, password: string}= req.body;
-        
+    const registerUser = async (req: Request, res: Response) => {
+
+        const user: { name: string, phone: number, email: string, password: string } = req.body;
+
         const result: any = await userSignup(user, dbUserRepository, authService, otpService);
-        
-        if(result instanceof AppError){
+
+        if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result
-                })
-        }else{
+            })
+        } else {
             res.json({
                 ...result,
                 message: "successfully added new user",
@@ -56,32 +56,32 @@ const authController = (
     }
 
     const userOtpVerify = async (req: Request, res: Response) => {
-        
+
         const data = req.body;
         const result: any = await otpVerification(data, dbUserRepository, authService, otpService);
-        if(result.status=='success'){
+        if (result.status == 'success') {
             res.json({
                 ...result,
                 message: "user verified"
             });
-        }else{
+        } else {
             res.status(result.errorCode).json({
                 ...result,
             });
         }
 
-    } 
+    }
 
     const workerOtpVerify = async (req: Request, res: Response) => {
-        
+
         const data = req.body;
         const result: any = await workerOtpVerification(data, dbWorkerRepository, authService, otpService);
-        if(result.status=='success'){
+        if (result.status == 'success') {
             res.json({
                 ...result,
                 message: "worker verified"
             });
-        }else{
+        } else {
             res.status(result.errorCode).json({
                 ...result,
             });
@@ -90,14 +90,14 @@ const authController = (
     }
 
     const resendUserOtp = async (req: Request, res: Response) => {
-        const {phoneNumber} = req.body;
-        const result:any = await resendOtp(phoneNumber, otpService);
-        if(result.status=='success'){
+        const { phoneNumber } = req.body;
+        const result: any = await resendOtp(phoneNumber, otpService);
+        if (result.status == 'success') {
             res.json({
                 ...result,
                 message: "user otp resend success"
             });
-        }else{
+        } else {
             res.json({
                 ...result,
                 message: "user otp resend failed"
@@ -106,20 +106,29 @@ const authController = (
     }
 
     const loginUser = async (req: Request, res: Response) => {
+
+        console.log('loginUser');
         
-        const {email, password} = req.body;
-        const result: any= await userLogin(email, password, dbUserRepository, authService, otpService);
- 
-        if(result instanceof AppError) {
+
+        const { email, password } = req.body;
+        const result: any = await userLogin(email, password, dbUserRepository, authService, otpService);
+        console.log(result);
+        
+
+        if (result instanceof AppError) {
+            console.log('err');
+            
             res.status(result.errorCode).json({
-               ...result,
-               })
-       }else if( result.status == "pending") {
+                ...result,
+            })
+        } else if (result.status == "pending") {
+            console.log('pen');
             res.json({
                 message: "otp verification required",
                 ...result
             });
-       } else {
+        } else {
+            console.log('suc');
             res.json({
                 message: "user login success",
                 ...result
@@ -128,29 +137,29 @@ const authController = (
     }
 
     const loginAdmin = async (req: Request, res: Response) => {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
         const result = await adminLogin(email, password, dbAdminRepository, authService);
-        if(result instanceof AppError){
+        if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result,
             })
-        }else{
+        } else {
             res.json({
                 status: "success",
                 message: "admin logged in successfully",
-                token: result 
+                token: result
             })
         }
     }
 
-    const registerWorker = async ( req: Request, res: Response) => {
+    const registerWorker = async (req: Request, res: Response) => {
         const worker = req.body;
         const result: any = await workerSignup(worker, dbWorkerRepository, authService, otpService);
-        if(result instanceof AppError){
+        if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result
-                })
-        }else{
+            })
+        } else {
             res.json({
                 ...result,
                 message: "successfully added new user",
@@ -159,15 +168,21 @@ const authController = (
     }
 
     const loginWorker = async (req: Request, res: Response) => {
-        const {email, password} = req.body;
-        const result: any = await workerLogin(email, password, dbWorkerRepository, authService);
- 
-        if(result instanceof AppError){
+        const { email, password } = req.body;
+        const result: any = await workerLogin(email, password, dbWorkerRepository, authService, otpService);
+
+        if (result instanceof AppError) {
             res.status(result.errorCode).json({
-               ...result,
-               status: "failed",
-               })
-       }else{
+                ...result,
+                status: "failed",
+            })
+        } else if (result.status == "pending") {
+            res.json({
+                message: "otp verification required",
+                ...result
+            });
+        }
+        else {
             res.json({
                 status: "success",
                 message: "worker logged in successfully",
@@ -175,21 +190,21 @@ const authController = (
                 workerData: result.workerDate
             });
         }
-    } 
-
-    const loginWithGoogle =async (req: Request, res: Response) => {
-        
-        const credentials: string = req.body.idToken;
-         
-        const token = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
-        res.json({
-            status:"success",
-            message:"user Google auth success",
-            token
-          })
     }
 
-    
+    const loginWithGoogle = async (req: Request, res: Response) => {
+
+        const credentials: string = req.body.idToken;
+
+        const token = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
+        res.json({
+            status: "success",
+            message: "user Google auth success",
+            token
+        })
+    }
+
+
 
     return {
         registerUser,

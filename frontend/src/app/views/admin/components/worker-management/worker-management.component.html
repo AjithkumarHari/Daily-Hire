@@ -78,8 +78,10 @@
 
                     <ng-container *ngFor="let page of pages">
                         <li>
-                            <a (click)="onPageClick(page)" [class.active]="page === currentPage"
-                                class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-blue-50 hover:text-blue-500">
+                            <a (click)="onPageClick(page)" 
+                                class="flex items-center justify-center px-4 h-10   text-gray-500 bg-white border border-gray-300 hover:bg-blue-50 hover:text-blue-500"
+                                [ngClass]="{'bg-gradient-to-r from-cyan-500 rounded-md to-blue-500 text-white hover:text-white': page === currentPage}"
+                                >
                                 {{ page }}
                             </a>
                         </li>

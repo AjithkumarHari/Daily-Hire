@@ -5,12 +5,12 @@ import { SocialUser } from "@abacritt/angularx-social-login";
 import { User } from "../../../../types/User";
 
 export const loginRequest = createAction(
-    `Auth login Request`,
+    `Auth Login Request`,
     props<{credentials: Credentials}>()
 )
 
 export const googleLoginRequest = createAction(
-    `Auth Google login Request`,
+    `Auth Google Login Request`,
     props<{user: SocialUser}>()
 )
 

@@ -67,20 +67,19 @@
                             }"
                             >Age</label>
                         </div>
-                        <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Age must be a valid (above 17 & below 65)</p>
+                        <p *ngIf="!form.get('age')?.valid && !form.get('age')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Age must be a valid (above 17 & below 60)</p>
                     </div>
                     <div>
                         <div class="relative">
                             <select id="underline_select1" formControlName="gender"
                                 class="block pl-3 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-400 appearance-none focus:outline-none focus:ring-0 peer"
                                 >
-                                <option value="select">Select Gender</option>
+                                <option value="select">Gender (select)</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <p *ngIf="!form.get('gender')?.valid && !form.get('gender')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -156,7 +155,6 @@
                             <option  value="work">PROFESSION (Select)</option>
                             <option *ngFor="let work of works" value="{{work.name}}">{{work.name}}</option>
                         </select>
-                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Work name must be valid (a-z,A-Z)</p>
                     </div>
                     <div>
                         <div class="relative">
@@ -176,7 +174,7 @@
                             }"
                             >Years of Experince</label>
                         </div>
-                        <p *ngIf="!form.get('experience')?.valid && !form.get('experience')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Years must be valid(0-9)</p>
+                        <p *ngIf="!form.get('experience')?.valid && !form.get('experience')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Years must be valid(0-9 and less than 45)</p>
                     </div>
                     <div>
                         <div class="relative">

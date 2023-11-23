@@ -1,57 +1,207 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="h-auto">
-
-    <div class="absolute w-full flex z-10 items-center justify-center ">
-        <img class="w-48 h-48 rounded-full" src="./assets/worker-sample/ocala-plumber.webp" alt="">
-    </div>
-    <div class="absolute flex w-full mt-28 z-0 h-fit">
-        
-        <div class="h-fit mx-20 w-full rounded-md bg-gradient-to-r from-[#fff9d6] via-[#e5ece9] to-[#adb6c4]">
-           
-            <div class=" flex justify-center mt-20 w-full">
-                <h1 class="text-4xl left-1/2 font-semibold">{{details$.name}}</h1>
+<main class="mt-10 grid grid-cols-1 ">
+    <div class=" rounded-2xl overflow-hidden m-auto w-10/12 bg-[#fff9f9c8]">
+        <div class="grid grid-cols-3 ">
+            <div>
+                <img class=" h-80  rounded-br-2xl shadow-2xl" src="./assets/worker-sample/ocala-plumber.webp" alt="">
             </div>
-            <div class=" flex justify-center w-full">
-                <h2 class="text-3xl">{{details$.work}}</h2>
-            </div>
-            <div class="flex justify-center items-center space-x-2 m-3">
-                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-                <svg class="w-6 h-6 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-            </div>
-            <div class="flex">
-
-                <div class="grid grid-cols-2 py-1 h-fit w-3/4 ">
+            <div class="mx-10  col-span-2">
+                <div class="flex justify-between">
+                    <div>
+                        <h1 class="text-4xl my-5 left-1/2 text-black font-semibold">{{details$.name}}</h1>
+                        <h2 class="text-3xl text-gray-500 font-bold">{{details$.work}}</h2>
+                        <div class="flex justify-start items-center space-x-2 m-3">
+                            <h3 class="text-black text-2xl font-semibold">4.5</h3>
+                            <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 22 20">
+                                <path
+                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 22 20">
+                                <path
+                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 22 20">
+                                <path
+                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 22 20">
+                                <path
+                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg class="w-6 h-6 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path
+                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                        </div>
+    
+                    </div>
+                    <div class="text-black m-10">
+                        <app-booking-form-box [worker]="details$" (scheduledDateTime)="onBooking($event)" ></app-booking-form-box>
+                    </div>
+    
+                </div>
+    
+                <div class="grid grid-cols-2 py-1 h-fit text-black">
                     <div class="mx-10 ">
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Phone:</span> {{details$.phone}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">E-mail:</span> {{details$.email}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Age:</span> {{details$.age}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Gender:</span> {{details$.gender}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Phone:</span> {{details$.phone}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">E-mail:</span> {{details$.email}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Age:</span> {{details$.age}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Gender:</span> {{details$.gender}}</p>
                     </div>
                     <div class="mx-10 ">
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Location:</span> {{details$.location}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Experience:</span> {{details$.experience}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for a Day:</span> {{details$.wageForDay}}</p>
-                        <p class="px-10 py-3 text-xl"><span class="font-semibold">Wage for an Hour:</span> {{details$.wageForHour}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Location:</span> {{details$.location}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Experience:</span> {{details$.experience}}</p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Wage for a Day:</span> {{details$.wageForDay}}
+                        </p>
+                        <p class="py-2 text-lg"><span class="font-semibold">Wage for an Hour:</span>
+                            {{details$.wageForHour}}</p>
                     </div>
                 </div>
-                <div class="flex justify-center items-center">
-                    <button class="px-6 py-3 text-lg text-white rounded bg-[#9e2a2b] hover:bg-[#540b0e]">Book Now</button>
+    
+            </div>
+    
+    
+        </div>
+        <div class="mx-20">
+            <h2 class="text-2xl font-semibold mt-5">Reviews & Rate (27)</h2>
+            <div class=" grid grid-cols-4 py-3 border-b border-gray-400">
+                <div class="">
+                    <h1 class="font-semibold">User Name</h1>
+                    <h2 class="text-gray-500">user email</h2>
+                </div>
+                <div class="col-span-3">
+                    <div class="flex justify-start items-center space-x-2  ">
+                        <h3 class="text-black text-lg font-semibold">4.5</h3>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-semibold">Review Title</h1>
+                        <p>hhd ujdj lkjdlnf kjdf mfnojsdffk opi oi po orpoewioprii pr pe rpr p oie oiie foijoijf oi
+                            oi ` </p>
+                    </div>
+                </div>
+    
+            </div>
+            <div class=" grid grid-cols-4 mt-3">
+                <div class="">
+                    <h1 class="font-semibold">User Name</h1>
+                    <h2 class="text-gray-500">user email</h2>
+                </div>
+                <div class="col-span-3">
+                    <div class="flex justify-start items-center space-x-2  ">
+                        <h3 class="text-black text-lg font-semibold">4.5</h3>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                        <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <path
+                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-semibold">Review Title</h1>
+                        <p>hhd ujdj lkjdlnf kjdf mfnojsdffk opi oi po orpoewioprii pr pe rpr p oie oiie foijoijf oi
+                            oi ` </p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-5 mb-10">
+                <div>
+                    <button (click)="showDateAddReview = !showDateAddReview" (keydown.escape)="showDateAddReview = false"
+                    class="bg-gradient-to-r from-yellow-600 to-red-600 text-white py-1  px-3 font-semibold rounded hover:bg-[#2764a57a]">
+                        Add Review
+                    </button>
+                </div>
+                <div [hidden]="!showDateAddReview" (keydown.away)="showDateAddReview = false"
+                    class="col-span-4 mt-5 p-4 w-full font-sans">
+                    <p class="font-bold text-xl">Add Your Review</p>
+    
+                    <div class="flex justify-center mt-4">
+                        <ngx-stars [color]="'#ffb703'" [readonly]="false" [size]="2"  [animation]="true" [animationSpeed]="200" [maxStars]="5" (ratingOutput)="onRatingSet($event)"></ngx-stars>
+                    </div>
+                    
+                    <form [formGroup]="reviewForm">
+                        <div>
+                            <div class="flex justify-between">
+                                <label for="title" class="block font-semibold text-gray-600 mb-2">Title:</label>
+                                <p *ngIf="!reviewForm.get('title')?.valid && !reviewForm.get('title')?.untouched" class=" mt-1 text-xs text-red-600 "> <span class="font-medium">(Oh, snapp! </span> title must be valid. )</p>
+                            </div>
+                            <input formControlName="title" placeholder="Enter your review title" id="title" type="text"
+                                [ngClass]="{
+                                    'border-red-500': reviewForm.get('title')?.invalid && reviewForm.get('title')?.touched,
+                                    'border-green-600': !reviewForm.get('title')?.invalid && !reviewForm.get('title')?.touched
+                                }"
+                                class="w-full px-4 py-2 mb-2 border rounded-md border-gray-300 focus:outline-none focus:border-gray-400">
+                        </div>
+                        <div>
+                            <div class="flex justify-between">
+                                <label for="description" class="block font-semibold text-gray-600 mb-2">Review:</label>
+                                <p *ngIf="!reviewForm.get('review')?.valid && !reviewForm.get('review')?.untouched" class=" mt-1 text-xs text-red-600 "> <span class="font-medium">(Oh, snapp! </span>description must be valid. )</p>
+                            </div>
+                            <textarea formControlName="review" id="description" placeholder="Enter the review description" 
+                            [ngClass]="{
+                                'border-red-500': reviewForm.get('review')?.invalid && reviewForm.get('review')?.touched,
+                                'border-green-600': !reviewForm.get('review')?.invalid && !reviewForm.get('review')?.touched
+                            }"
+                            class="w-full px-4 py-2 mb-2 border rounded-md border-gray-300 focus:outline-none focus:border-gray-400">
+                            </textarea>
+                        </div>
+                        <input value="Submit Review" type="submit" (click)="showDateAddReview = false" (click)="onReviewSubmit()" [disabled]="!reviewForm.valid"
+                            class="w-full px-4 py-2 rounded-md bg-orange-600 hover:bg-orange-600 text-white font-semibold cursor-pointer">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
+    
+</main>
+<div class="h-10"></div>

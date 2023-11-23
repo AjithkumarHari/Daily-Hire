@@ -31,7 +31,8 @@ export const workerLogin = async (
     email: string,
     password: string,
     workerRepository: ReturnType<WorkerRepository>,
-    authService: ReturnType<AuthServiceInterface>
+    authService: ReturnType<AuthServiceInterface>,
+    otpService: ReturnType<OtpServiceInterface>
 ) => {
     try {
         const worker: Worker | null = await workerRepository.getWorkerByEmail(email);
@@ -44,6 +45,13 @@ export const workerLogin = async (
         if(!isPasswordCorrect)
             throw new AppError("Password does not match", HttpStatus.UNAUTHORIZED);
 
+        if(!worker.isActive){
+            console.log('user not active');
+            
+            await otpService.sendOtp(worker.phone);
+            const { name, email, phone } = worker;
+            return {"status": "pending", workerData:{name, email, phone}};
+        }
         if(worker._id){
             const token = authService.generateToken(worker._id.toString());
             return {token, workerDate: worker}
@@ -64,6 +72,8 @@ export const workerOtpVerification = async (
     otpService: ReturnType<OtpServiceInterface>,
 ) => {
     try{
+        console.log('workerOtpVerification');
+        
         const isOtpVaild = await otpService.verifyOtp(data.phoneNumber, data.code);
         if(isOtpVaild){
             await workerRepository.workerActivate(data.email);

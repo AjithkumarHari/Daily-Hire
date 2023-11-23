@@ -4,7 +4,7 @@ import { Worker } from "../../../types/Worker";
 export const workerRepositoryMongoDB = () => {
 
     const getAllWorkers = async():Promise<Worker[] | null> => {
-        return await WORKER.find().select('-password');
+        return await WORKER.find({isActive:true}).select('-password');
     }
 
     const getWorkerByEmail = async(email: string):Promise<Worker | null> => {

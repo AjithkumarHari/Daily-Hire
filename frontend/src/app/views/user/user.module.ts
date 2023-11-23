@@ -27,6 +27,7 @@ import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } 
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxStarsModule } from 'ngx-stars';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { ServiceListComponent } from './pages/service-list/service-list.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
@@ -35,6 +36,7 @@ import { WageSortPipe } from './pipes/wage-sort.pipe';
 import { AgeSortPipe } from './pipes/age-sort.pipe';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.interceptor';
+import { BookingFormBoxComponent } from './components/booking-form-box/booking-form-box.component';
  
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.inter
     FilterComponent,
     WageSortPipe,
     AgeSortPipe,
+    BookingFormBoxComponent,
 
   ],
   imports: [
@@ -68,6 +71,7 @@ import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.inter
     SocialLoginModule,
     GoogleSigninButtonModule,
     NgOtpInputModule,
+    NgxStarsModule,
   ],
   providers: [
     {

@@ -15,3 +15,16 @@ export const allWorkers = async (workerRepository: ReturnType<WorkerRepository>)
         return AppError;
     }
 }
+
+export const allListedWorkers = async (workerRepository: ReturnType<WorkerRepository>) => {
+    try {
+        const workers: Worker[] | null = await workerRepository.getAllWorkers();
+
+        if(!workers)
+            throw new AppError("Not Found", HttpStatus.NOT_FOUND);
+
+        return workers.filter((w)=> w.isListed == true);
+    } catch (AppError) {
+        return AppError;
+    }
+}
