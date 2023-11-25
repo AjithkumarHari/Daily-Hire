@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Worker } from '../../../types/Worker';
 import { Service } from 'src/app/types/Service';
+import { Review } from 'src/app/types/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,15 @@ export class UserService {
   constructor( private http: HttpClient) { }
 
   setToken(token: string){
-    return window.sessionStorage.setItem('user-token',token);
+    return window.localStorage.setItem('user-token',token);
   }
 
   getToken(){
-    return window.sessionStorage.getItem('user-token');
+    return window.localStorage.getItem('user-token');
   }
   
   deleteToken(){
-    return window.sessionStorage.removeItem('user-token')
+    return window.localStorage.removeItem('user-token')
   }
 
   allWorkers():Observable<Worker[]> {
@@ -36,6 +37,18 @@ export class UserService {
 
   allServices():Observable<Service[]>{
     return this.http.get<Service[]>(`${this.server}/user/service-list`)
+  }
+
+  paymentRequest(paymentDetails: {user: object, worker: Worker, bookingTime: Date}) {
+    return this.http.post(`${this.server}/user/book-worker`,paymentDetails)
+  }
+
+  addWorkerReview(review: Review){
+    return this.http.post(`${this.server}/user/add-review`,review)
+  }
+
+  getReviewByWorker(id: string): Observable<Review[]>{
+    return this.http.get<Review[]>(`${this.server}/user/review-list/${id}`)
   }
    
 }

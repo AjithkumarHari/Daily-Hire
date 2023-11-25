@@ -5,9 +5,23 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/login/login.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/login/login.effects';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.interceptor';
+
+import { UserRoutingModule } from './user-routing.module';
+
+import { environment } from 'src/environments/environment';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxStarsModule } from 'ngx-stars';
+import { NgxStripeModule } from 'ngx-stripe';
+
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { WageSortPipe } from './pipes/wage-sort.pipe';
+import { AgeSortPipe } from './pipes/age-sort.pipe';
 
 import { UserComponent } from './user.component';
-
 import { AuthComponent } from './pages/auth/auth.component';
 import { SignupBoxComponent } from './pages/auth/signup-box/signup-box.component';
 import { LoginBoxComponent } from './pages/auth/login-box/login-box.component';
@@ -17,25 +31,11 @@ import { MainSectionComponent } from './pages/home/main-section/main-section.com
 import { CategoryComponent } from './pages/home/main-section/category/category.component';
 import { SearchComponent } from './components/search/search.component';
 import { OtpBoxComponent } from './pages/auth/otp-box/otp-box.component';
-
-import { UserRoutingModule } from './user-routing.module';
 import { WorkerListComponent } from './pages/worker-list/worker-list.component';
 import { WorkerDetailsComponent } from './pages/worker-details/worker-details.component';
-
- 
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
-import { environment } from 'src/environments/environment';
-import { NgOtpInputModule } from 'ng-otp-input';
-import { NgxStarsModule } from 'ngx-stars';
-import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { ServiceListComponent } from './pages/service-list/service-list.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { FilterComponent } from './components/filter/filter.component';
-import { WageSortPipe } from './pipes/wage-sort.pipe';
-import { AgeSortPipe } from './pipes/age-sort.pipe';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.interceptor';
 import { BookingFormBoxComponent } from './components/booking-form-box/booking-form-box.component';
  
 @NgModule({
@@ -72,6 +72,7 @@ import { BookingFormBoxComponent } from './components/booking-form-box/booking-f
     GoogleSigninButtonModule,
     NgOtpInputModule,
     NgxStarsModule,
+    NgxStripeModule.forRoot('pk_test_51OFsOJSDlgqaDxgfrx83NzkCWIKqRIeVLjNNHxcU7NrXLEMrddNWCnHHhYmWGB1cGDsvFQvnRvFM80h9aAXLqZ1100AWYv1XL9'),
   ],
   providers: [
     {

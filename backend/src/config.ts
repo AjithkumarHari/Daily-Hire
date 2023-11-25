@@ -12,6 +12,7 @@ const configKeys = {
     TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID as string,
     TWILIO_SERVICE_SID: process.env.TWILIO_SERVICE_SID as string,
     TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN as string,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY as string,
 }
 
 export default configKeys; 

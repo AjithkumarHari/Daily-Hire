@@ -9,10 +9,11 @@ export const InitialState: UserState =  {
 
 const _authReducer = createReducer(
     InitialState,
-    on(loginSuccess,(state, {userToken})=>{
+    on(loginSuccess,(state, {userToken, userData})=>{
         return {
             ...state,
             UserToken : userToken,
+            userData: userData,
             errorMessage: undefined
         }
     }),

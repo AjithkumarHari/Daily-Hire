@@ -8,13 +8,12 @@ export const addNewService = async (
     dbRepositoryService: ReturnType<ServiceRepository>
 ) => {
     try {
-     
-    service.name = service.name.toUpperCase();
-    const isServiceExist = await dbRepositoryService.getServiceByName(service.name);
-    if(isServiceExist)
-        throw new AppError("Service already exits",HttpStatus.UNAUTHORIZED);
-    const result = await dbRepositoryService.addService(service);  
-    return {status: "success",message: `${result.name} service is added`}
+        service.name = service.name.toUpperCase();
+        const isServiceExist = await dbRepositoryService.getServiceByName(service.name);
+        if(isServiceExist)
+            throw new AppError("Service already exits",HttpStatus.UNAUTHORIZED);
+        const result = await dbRepositoryService.addService(service);  
+        return {status: "success",message: `${result.name} service is added`}
     } catch (AppError) {
         return AppError;
     }

@@ -47,31 +47,33 @@ export const resendOtp = async (
 }
 
 export const userLogin = async (
-    email: string,
-    password: string,
+    userEmail: string,
+    userPassword: string,
     userRepository: ReturnType<UserDbInterface>,
     authService: ReturnType<AuthServiceInterface>,
     otpService: ReturnType<OtpServiceInterface>
 ) => {
     try{
-        const user: User | null = await userRepository.getUserByEmail(email);
+        const user: User | null = await userRepository.getUserByEmail(userEmail);
         if(!user){
             throw new AppError("User not exists",HttpStatus.UNAUTHORIZED);
         }
-        if(user.password){
-            const isPasswordCorrect = await authService.comparePassword(password, user.password);
-            if(!isPasswordCorrect){
-                throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
+        else{
+            const {_id, name, email, phone ,password, isActive } = user;
+            if(password){
+                const isPasswordCorrect = await authService.comparePassword(userPassword, password);
+                if(!isPasswordCorrect){
+                    throw new AppError("Password does not match",HttpStatus.UNAUTHORIZED);
+                }
             }
-        }
-        if(!user.isActive && user.phone){
-            await otpService.sendOtp(user.phone);
-            const { name, email, phone } = user;
-            return {"status": "pending", userData:{name, email, phone}};
-        }
-        if(user._id){
-            const token = authService.generateToken(user._id.toString());
-            return {"status": "success",token};
+            if(!isActive && phone){
+                await otpService.sendOtp(phone);
+                return {"status": "pending", userData:{name, email, phone}};
+            }
+            if(_id){
+                const token = authService.generateToken(_id.toString());
+                return {"status": "success", token, userData:{_id, name, email, phone}};
+            }
         }
     }catch(AppError){
         return AppError;
@@ -86,14 +88,15 @@ export const signInWithGoogle = async(
 ) => {
     
     const user: User = await googleAuthService.verify(credentials);
+    const {_id, name, email } = user;
     const isUserExist = await userRepository.getUserByEmail(user.email);
     if(isUserExist && isUserExist._id){
         const token = authService.generateToken(isUserExist._id.toString());
-        return token
+        return {token, userData:{_id, name, email} }
     }else{
         const { _id: userId } = await userRepository.addUser(user);
         const token = authService.generateToken(userId.toString());
-        return token
+        return {token, userData:{_id, name, email} }
     }
 }
 
@@ -115,7 +118,8 @@ export const otpVerification = async (
             const user = await userRepository.getUserByEmail(data.email);
             if(user?._id){
                 const token = authService.generateToken(user._id)
-                return {"status":"success",token};
+                const {_id, name, email, phone } = user;
+                return {"status":"success", token, userData:{_id, name, email, phone}};
             }
         }else{
             throw new AppError("OTP does not match",HttpStatus.UNAUTHORIZED);

@@ -42,7 +42,7 @@
     
                     </div>
                     <div class="text-black m-10">
-                        <app-booking-form-box [worker]="details$" (scheduledDateTime)="onBooking($event)" ></app-booking-form-box>
+                        <app-booking-form-box [worker]="details$"></app-booking-form-box>
                     </div>
     
                 </div>
@@ -70,89 +70,29 @@
         </div>
         <div class="mx-20">
             <h2 class="text-2xl font-semibold mt-5">Reviews & Rate (27)</h2>
-            <div class=" grid grid-cols-4 py-3 border-b border-gray-400">
+            <div class=" grid grid-cols-4 mb-5  pb-3 border-b border-gray-400" *ngFor="let review of reviews$">
                 <div class="">
-                    <h1 class="font-semibold">User Name</h1>
-                    <h2 class="text-gray-500">user email</h2>
+                    <h1 class="font-semibold">{{review.userName}}</h1>
+                    <h2 class="text-gray-500">{{review.userEmail}}</h2>
                 </div>
                 <div class="col-span-3">
                     <div class="flex justify-start items-center space-x-2  ">
-                        <h3 class="text-black text-lg font-semibold">4.5</h3>
+                        <h3 class="text-black text-lg font-semibold">{{review.rating}}</h3>
                         <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
+                            fill="currentColor" viewBox="0 0 22 20"
+                            *ngFor="let star of  starCount(review.rating)">
                             <path
                                 d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                         </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
+                         
                     </div>
                     <div>
-                        <h1 class="font-semibold">Review Title</h1>
-                        <p>hhd ujdj lkjdlnf kjdf mfnojsdffk opi oi po orpoewioprii pr pe rpr p oie oiie foijoijf oi
-                            oi ` </p>
-                    </div>
-                </div>
-    
-            </div>
-            <div class=" grid grid-cols-4 mt-3">
-                <div class="">
-                    <h1 class="font-semibold">User Name</h1>
-                    <h2 class="text-gray-500">user email</h2>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex justify-start items-center space-x-2  ">
-                        <h3 class="text-black text-lg font-semibold">4.5</h3>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="font-semibold">Review Title</h1>
-                        <p>hhd ujdj lkjdlnf kjdf mfnojsdffk opi oi po orpoewioprii pr pe rpr p oie oiie foijoijf oi
-                            oi ` </p>
+                        <h1 class="font-semibold">{{review.reviewTitle}}</h1>
+                        <p>{{review.reviewDescription}}</p>
                     </div>
                 </div>
             </div>
+            
             <div class="grid grid-cols-5 mb-10">
                 <div>
                     <button (click)="showDateAddReview = !showDateAddReview" (keydown.escape)="showDateAddReview = false"
@@ -194,8 +134,11 @@
                             class="w-full px-4 py-2 mb-2 border rounded-md border-gray-300 focus:outline-none focus:border-gray-400">
                             </textarea>
                         </div>
-                        <input value="Submit Review" type="submit" (click)="showDateAddReview = false" (click)="onReviewSubmit()" [disabled]="!reviewForm.valid"
-                            class="w-full px-4 py-2 rounded-md bg-orange-600 hover:bg-orange-600 text-white font-semibold cursor-pointer">
+                        <div class="flex justify-center">
+
+                            <input value="Submit Review" type="submit" (click)="showDateAddReview = false" (click)="onReviewSubmit()" [disabled]="!reviewForm.valid"
+                                class="w-fit px-4 py-2 rounded-md bg-orange-600 hover:bg-orange-600 text-white font-semibold cursor-pointer">
+                        </div>
                     </form>
                 </div>
             </div>

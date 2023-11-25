@@ -106,29 +106,18 @@ const authController = (
     }
 
     const loginUser = async (req: Request, res: Response) => {
-
-        console.log('loginUser');
-        
-
         const { email, password } = req.body;
         const result: any = await userLogin(email, password, dbUserRepository, authService, otpService);
-        console.log(result);
-        
-
         if (result instanceof AppError) {
-            console.log('err');
-            
             res.status(result.errorCode).json({
                 ...result,
             })
         } else if (result.status == "pending") {
-            console.log('pen');
             res.json({
                 message: "otp verification required",
                 ...result
             });
         } else {
-            console.log('suc');
             res.json({
                 message: "user login success",
                 ...result
@@ -193,14 +182,12 @@ const authController = (
     }
 
     const loginWithGoogle = async (req: Request, res: Response) => {
-
         const credentials: string = req.body.idToken;
-
-        const token = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
+        const result : any = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
         res.json({
             status: "success",
             message: "user Google auth success",
-            token
+            ...result
         })
     }
 

@@ -11,9 +11,10 @@ export const editService = async (
         service.name = service.name.toUpperCase();
         if(service._id){
             const isServiceExist = await dbRepositoryService.getServiceById(service._id);
+            
             if(!isServiceExist)
                 throw new AppError("Service not exits",HttpStatus.UNAUTHORIZED);
-            await dbRepositoryService.editService(service);  
+            await dbRepositoryService.editService(service); 
             return {status: "success",message: `service is updated done`}
         }
     } catch (AppError) {

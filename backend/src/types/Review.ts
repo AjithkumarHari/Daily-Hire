@@ -1,8 +1,9 @@
 export interface Review{
     rating: number,
     reviewTitle: string,
-    reviewDescription: string
+    reviewDescription: string,
+    workerId: string,
     userName: string,
     userEmail: string,
-    workerId: string,
+    isHidden: boolean
 }

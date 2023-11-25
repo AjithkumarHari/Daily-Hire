@@ -4,6 +4,10 @@ import { UserService } from '../../services/user.service';
 import { Worker } from '../../../../types/Worker';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from 'src/app/types/Review';
+import { selectUserData } from '../../state/login/login.selector';
+import { UserState } from '../../state/user.state';
+import { Store, select } from '@ngrx/store';
+import { User } from 'src/app/types/User';
 
 @Component({
   selector: 'app-worker-details',
@@ -13,21 +17,31 @@ import { Review } from 'src/app/types/Review';
 export class WorkerDetailsComponent implements OnInit{
   id: string | null = '';
   details$!: Worker;
+  user!: User;
+  reviews$: Review[] = [];
   showDateAddReview: boolean = false;
   ratingDisplay: number = 0;
   reviewForm!: FormGroup;
   bookingDate!: Date;
 
-  constructor(private activatedRoute: ActivatedRoute, private userService: UserService, private formBuilder : FormBuilder){}
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private userService: UserService, 
+    private formBuilder : FormBuilder,
+    private store: Store<UserState>
+  ){}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id')
     
     if(this.id){
-      this.userService.getWorkerById(this.id).subscribe((data: Worker)=>{
-        this.details$ = data          
-      })
+      this.userService.getWorkerById(this.id).subscribe((data: Worker)=> this.details$ = data);
+      this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> this.reviews$ = data);       
     }
+ 
+    this.store.pipe(select(selectUserData)).subscribe((data) => {
+      this.user = data;
+    });
 
     this.reviewForm = this.formBuilder.group({
       title : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
@@ -40,20 +54,36 @@ export class WorkerDetailsComponent implements OnInit{
     this.ratingDisplay = rating;
   }
 
-  onReviewSubmit(){
-    const review: Review = {
-      rating: this.ratingDisplay,
-      reviewTitle: this.reviewForm.value.title,
-      reviewDescription: this.reviewForm.value.review
+  starCount(count: number): number[] {
+    const numbers = [];
+    for (let i = 0; i < count; i++) {
+      numbers.push(i + 1);
     }
-    console.log(review);
-    this.ratingDisplay = 0;
-    this.reviewForm.reset();
+    return numbers;
   }
 
-  onBooking(date: Date){
-    this.bookingDate = date;
-    console.log(this.bookingDate.toDateString());
+  onReviewSubmit(){
+ 
+    if(this.user?._id && this.details$?._id){
+      const review: Review = {
+        rating: this.ratingDisplay,
+        reviewTitle: this.reviewForm.value.title,
+        reviewDescription: this.reviewForm.value.review,
+        userName: this.user.name,
+        userEmail: this.user.email,
+        workerId: this.details$._id
+      }
+      this.userService.addWorkerReview(review).subscribe((data)=>{
+        this.ratingDisplay = 0;
+        this.reviewForm.reset();
+        if(this.id){
+          this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> this.reviews$ = data);       
+        }
+      })
+    }else{
+      console.error('userId or workerId not found');
+    }
+
   }
    
 }

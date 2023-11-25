@@ -28,12 +28,14 @@ export class LoginBoxComponent implements OnInit{
 
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
+      console.log('google');
+      
        
       this.store.dispatch(googleLoginRequest({user}))
  
       this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
         this.errorMessage = error
-        console.log("login",this.errorMessage);  
+        console.log("login error message",this.errorMessage);  
       });
     });
 

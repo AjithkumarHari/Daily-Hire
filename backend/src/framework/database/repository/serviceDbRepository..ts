@@ -19,8 +19,8 @@ export const serviceDbRepositoryMongoDB = () => {
         return await SERVICE.create(service);
     }
 
-    const editService = async (service: Service) => {
-        return await SERVICE.updateOne(service);
+    const editService = async (service: Service) => {  
+        return await SERVICE.updateOne({_id: service._id},{$set:{name: service.name, description: service.description}});
     }
 
     const listUnlistService = async (_id: string, newStatus: boolean) => {

@@ -6,7 +6,7 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { ServiceRepository } from "../../application/repository/serviceDbRepository";
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
-import { allWorkers } from "../../application/useCase/user/allWorkers";
+import { allWorkers } from "../../application/useCase/worker/allWorkers";
 import { allUsers } from "../../application/useCase/admin/allUser";
 import { HttpStatus } from "../../types/HttpStatus";
 import { listUnlistUser } from "../../application/useCase/admin/listUnlistUser";
@@ -138,6 +138,8 @@ const adminController = (
     const updateService = async ( req: Request, res: Response) => {
         try {
             const service = req.body 
+            console.log('updateService',service);
+            
             const result = await editService(service, dbServiceRepository )
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({

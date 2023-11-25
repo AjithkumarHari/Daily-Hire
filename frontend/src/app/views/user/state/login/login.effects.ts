@@ -31,21 +31,16 @@ export class AuthEffects{
                 this.userService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
-                        console.log('shhjkhsa');
+                        console.log('res from eff',responce);
                         
                         if(responce.status=='success'){
-                            console.log('success');
-                            
-                            sessionStorage.setItem('user-token',responce.token)
-                            return loginSuccess({userToken : responce.token})
+                            localStorage.setItem('user-token',responce.token)
+                            return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }
                         else if(responce.status=='pending'){
-                            console.log('pending');
                             return loginPending({userData : responce})
                         }
                         else{
-                            console.log('failed');
-                            console.log('in side effect LE',responce);
                             return loginFailure({ error : responce.error.error  })
                         }
                     }),
@@ -99,8 +94,10 @@ export class AuthEffects{
                     map(res=>{
                         let responce : any = res;``
                         if(responce.token){
-                            sessionStorage.setItem('user-token',responce.token)
-                            return loginSuccess({userToken : responce.token})
+                            console.log(responce);
+                            
+                            localStorage.setItem('user-token',responce.token)
+                            return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }else{
                             return loginFailure({ error : responce.error.error  })
                         }
@@ -162,8 +159,8 @@ export class AuthEffects{
                     map(res=>{
                         let responce : any = res;
                         if(responce.status=='success'){
-                            sessionStorage.setItem('user-token',responce.token)
-                            return loginSuccess({userToken : responce.token})
+                            localStorage.setItem('user-token',responce.token)
+                            return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }
                         else{
                             console.log('in side effect LE',responce);

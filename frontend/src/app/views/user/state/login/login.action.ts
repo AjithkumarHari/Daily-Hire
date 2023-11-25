@@ -16,7 +16,7 @@ export const googleLoginRequest = createAction(
 
 export const loginSuccess = createAction(
     `Auth Login Success`,
-    props<{userToken: string}>()
+    props<{userToken: string, userData: User}>()
 )
 
 export const loginPending = createAction(

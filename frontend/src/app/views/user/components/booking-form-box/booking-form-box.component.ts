@@ -1,5 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, Output , ViewChild } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { User } from 'src/app/types/User';
 import { Worker } from 'src/app/types/Worker';
+import { selectUserData } from '../../state/login/login.selector';
+import { UserState } from '../../state/user.state';
+import { UserService } from '../../services/user.service';
+import { loadStripe } from '@stripe/stripe-js';
+
+ 
 
 @Component({
   selector: 'app-booking-form-box',
@@ -26,23 +35,24 @@ export class BookingFormBoxComponent {
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   showDatepicker = false;
   datepickerValue!: string;
-  month!: number; // !: mean promis it will not be null, and it will definitely be assigned
+  month!: number; 
   year!: number;
   no_of_days = [] as number[];
   blankdays = [] as number[];
   selectedDate!: Date;
   
-
+  user!: User;
   @Input() worker!: Worker ;
 
-  @Output() scheduledDateTime: EventEmitter<Date> = new EventEmitter<Date>();
-
-  constructor( ) {}
+  constructor( private userService: UserService, private store: Store<UserState> ) {}
 
   ngOnInit(): void {
     this.initDate();
     this.getNoOfDays();
-    
+    this.store.pipe(select(selectUserData)).subscribe((data) => {
+      this.user = data;
+      console.log(this.user);
+    });
   }
 
   initDate() {
@@ -67,7 +77,6 @@ export class BookingFormBoxComponent {
 
   getNoOfDays() {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
-    // find where to start calendar day of week
     let dayOfWeek = new Date(this.year, this.month).getDay();
     let blankdaysArray = [];
     for (var i = 1; i <= dayOfWeek; i++) {
@@ -78,15 +87,26 @@ export class BookingFormBoxComponent {
     for (var i = 1; i <= daysInMonth; i++) {
       daysArray.push(i);
     }
-
     this.blankdays = blankdaysArray;
     this.no_of_days = daysArray;
   }
 
-  trackByIdentity = (index: number, item: any) => item;
+  trackByIdentity = (index: number, item: any) => item; 
 
-  onSubmit(){
-    console.log(this.selectedDate);
-    this.scheduledDateTime.emit(this.selectedDate);
+  onSubmit (){
+    const paymentDetails = {
+      user: this.user,
+      worker: this.worker,
+      bookingTime: this.selectedDate
+    }
+    console.log(paymentDetails);
+    
+    this.userService.paymentRequest(paymentDetails).subscribe(async (res: any)=>{
+      let stripe = await loadStripe('pk_test_51OFsOJSDlgqaDxgfrx83NzkCWIKqRIeVLjNNHxcU7NrXLEMrddNWCnHHhYmWGB1cGDsvFQvnRvFM80h9aAXLqZ1100AWYv1XL9');
+      stripe?.redirectToCheckout({
+        sessionId:res.id
+      })
+    })
   }
+  
 }
