@@ -7,13 +7,14 @@ export const reviewDbRepositoryMongoDB = () => {
         return await REVIEW.find({ workerId: workerId , isHidden: false });
     }
 
-    const addReview = async (review: Review) => {
-        return REVIEW.create(review);
-    }
+    const addReview = async (review: Review) => REVIEW.create(review);
+
+    const getAllReview = async () => REVIEW.find();
 
     return {
         addReview,
         getReviewByWorker,
+        getAllReview
     }
 }
 

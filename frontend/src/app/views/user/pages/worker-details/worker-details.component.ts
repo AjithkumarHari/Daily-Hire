@@ -23,6 +23,8 @@ export class WorkerDetailsComponent implements OnInit{
   ratingDisplay: number = 0;
   reviewForm!: FormGroup;
   bookingDate!: Date;
+  currentPage: number = 1;
+  pages: number[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -36,7 +38,10 @@ export class WorkerDetailsComponent implements OnInit{
     
     if(this.id){
       this.userService.getWorkerById(this.id).subscribe((data: Worker)=> this.details$ = data);
-      this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> this.reviews$ = data);       
+      this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {
+        this.reviews$ = data;
+        this.countPages(this.reviews$.length);
+      });       
     }
  
     this.store.pipe(select(selectUserData)).subscribe((data) => {
@@ -47,7 +52,7 @@ export class WorkerDetailsComponent implements OnInit{
       title : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
       review : new FormControl(null, [Validators.required, Validators.max(100)])
     })
-
+    
   }
 
   onRatingSet(rating: number): void {
@@ -71,6 +76,7 @@ export class WorkerDetailsComponent implements OnInit{
         reviewDescription: this.reviewForm.value.review,
         userName: this.user.name,
         userEmail: this.user.email,
+        workerName: this.details$.name,
         workerId: this.details$._id
       }
       this.userService.addWorkerReview(review).subscribe((data)=>{
@@ -84,6 +90,30 @@ export class WorkerDetailsComponent implements OnInit{
       console.error('userId or workerId not found');
     }
 
+  }
+
+  countPages(total: number){    
+    for(let i=1;i<=Math.ceil(total/2);i++){
+      this.pages.push(i)
+    }
+  }
+
+  onPrevious($event: Event) {
+    $event.preventDefault();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  onNext($event: Event) {
+    $event.preventDefault();
+    if (this.currentPage < this.pages.length) {
+      this.currentPage++;
+    }
+  }
+
+  onPageClick(pageNumber: number) {
+    this.currentPage = pageNumber;
   }
    
 }

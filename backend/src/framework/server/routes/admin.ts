@@ -6,11 +6,23 @@ import { workerDbRepository } from "../../../application/repository/workerDbRepo
 import { workerRepositoryMongoDB } from "../../database/repository/workerDbRepository"; 
 import { serviceDbRepository } from "../../../application/repository/serviceDbRepository";
 import { serviceDbRepositoryMongoDB } from "../../database/repository/serviceDbRepository.";
+import { reviewDbRepository } from "../../../application/repository/reviewDbRepository";
+import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 
 const adminRouter = () => {
     const router = express.Router()
     
-    const controller = adminController(userDbRepository, userRepositoryMongoDB,workerDbRepository,workerRepositoryMongoDB, serviceDbRepository, serviceDbRepositoryMongoDB)
+    const controller = adminController(
+        userDbRepository,
+        userRepositoryMongoDB,
+        workerDbRepository,
+        workerRepositoryMongoDB,
+        serviceDbRepository,
+        serviceDbRepositoryMongoDB,
+        reviewDbRepository,
+        reviewDbRepositoryMongoDB,
+        )
+
 
     router.get('/user-list',controller.getAllUser);
 
@@ -30,6 +42,7 @@ const adminRouter = () => {
 
     router.get('/service-details/:id',controller.getServicesById)
 
+    router.get('/review-list',controller.getAllReviews)
 
     return router
 }

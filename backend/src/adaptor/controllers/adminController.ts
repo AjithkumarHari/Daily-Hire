@@ -6,6 +6,8 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { ServiceRepository } from "../../application/repository/serviceDbRepository";
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
+import { ReviewRepository } from "../../application/repository/reviewDbRepository";
+import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
 import { allWorkers } from "../../application/useCase/worker/allWorkers";
 import { allUsers } from "../../application/useCase/admin/allUser";
 import { HttpStatus } from "../../types/HttpStatus";
@@ -16,6 +18,7 @@ import { listUnlistService } from "../../application/useCase/admin/listUnlistSer
 import { allServices } from "../../application/useCase/service/allService";
 import { findById } from "../../application/useCase/service/findServiceById";
 import { editService } from "../../application/useCase/service/editService";
+import { findAllReviews } from "../../application/useCase/review/findAllreviews";
 
 
 const adminController = (
@@ -24,12 +27,15 @@ const adminController = (
     workerDbRepository: WorkerRepository,
     workerDbRepositoryImp: WorkerRepositoryMongoDB,
     serviceDbRepository: ServiceRepository,
-    serviceDbRepositoryImp: ServiceDbRepositoryMongoDB
+    serviceDbRepositoryImp: ServiceDbRepositoryMongoDB,
+    reviewDbRepository: ReviewRepository,
+    reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
 ) => {
 
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
+    const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
 
     const getAllUser = async ( req: Request, res: Response ) => {
         try {
@@ -167,6 +173,20 @@ const adminController = (
         }
     }
 
+    const getAllReviews = async ( req: Request, res: Response ) => {
+        try{
+            const result = await findAllReviews(dbReviewRepository);
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
 
     return {
         getAllUser,
@@ -178,6 +198,7 @@ const adminController = (
         createService,
         updateService,
         getServicesById,
+        getAllReviews,
     }
 }
 export default adminController

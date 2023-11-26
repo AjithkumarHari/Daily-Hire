@@ -7,10 +7,12 @@ export const reviewDbRepository = (repository: ReturnType<ReviewDbRepositoryMong
 
     const getReviewByWorker = async (workerId: string) => await repository.getReviewByWorker(workerId);
 
+    const getAllReview = async () => await repository.getAllReview();
 
     return {
         addReview,
         getReviewByWorker,
+        getAllReview,
     }
 }
 

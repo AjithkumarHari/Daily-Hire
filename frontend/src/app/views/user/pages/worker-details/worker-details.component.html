@@ -69,30 +69,68 @@
     
         </div>
         <div class="mx-20">
-            <h2 class="text-2xl font-semibold mt-5">Reviews & Rate (27)</h2>
-            <div class=" grid grid-cols-4 mb-5  pb-3 border-b border-gray-400" *ngFor="let review of reviews$">
-                <div class="">
-                    <h1 class="font-semibold">{{review.userName}}</h1>
-                    <h2 class="text-gray-500">{{review.userEmail}}</h2>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex justify-start items-center space-x-2  ">
-                        <h3 class="text-black text-lg font-semibold">{{review.rating}}</h3>
-                        <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 22 20"
-                            *ngFor="let star of  starCount(review.rating)">
-                            <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                         
+            <h2 class="text-2xl font-semibold mt-5">Reviews & Rate ({{reviews$.length}})</h2>
+            <div class="flex h-52">
+                <div class="w-full">
+                    <div class="grid grid-cols-4 mb-5  pb-3 border-b border-gray-400" *ngFor="let review of reviews$ | slice: currentPage * 2 - 2 : currentPage * 2">
+                        <div class="ml-5">
+                            <h1 class="font-semibold">{{review.userName}}</h1>
+                            <h2 class="text-gray-500">{{review.userEmail}}</h2>
+                        </div>
+                        <div class="col-span-3">
+                            <div class="flex justify-start items-center space-x-2  ">
+                                <h3 class="text-black text-lg font-semibold">{{review.rating}}</h3>
+                                <svg class="w-4 h-4 text-orange-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 22 20"
+                                    *ngFor="let star of  starCount(review.rating)">
+                                    <path
+                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                    
+                            </div>
+                            <div>
+                                <h1 class="font-semibold">{{review.reviewTitle}}</h1>
+                                <p>{{review.reviewDescription}}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="font-semibold">{{review.reviewTitle}}</h1>
-                        <p>{{review.reviewDescription}}</p>
+                </div>
+             
+                <div class="flex my-7 px-5">
+                    <div class="justify-center">
+                        <nav class="" aria-label="Page navigation example">
+                            <ul class="  -space-x-px text-base font-semibold h-11">
+                                <li>
+                                    <a (click)="onPrevious($event)"
+                                        class="flex items-center justify-center h-8 w-8 leading-tight border-2 border-[#0000004b]  hover:bg-[#ffffff4b]  rounded-full ">
+                                        <i class="fa fa-arrow-up text-[#0000004b]" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+
+                        
+                                <ng-container *ngFor="let page of pages">
+                                    <li class=" flex justify-center">
+                                        <a (click)="onPageClick(page)"
+                                            class="flex items-center justify-center h-6 w-6 my-1 leading-tight text-black rounded-full  border  hover:bg-[#ffffff7b] border-transparent    "
+                                            [ngClass]="{'bg-[#eb5f28c3]': page === currentPage}"
+                                        >
+                                            {{ page }}
+                                        </a>
+                                    </li>
+                                </ng-container>
+                                
+                                <li>
+                                    <a (click)="onNext($event)"
+                                    class="flex items-center justify-center  h-8 w-8 leading-tight border-2 border-[#0000004b] hover:bg-[#ffffff4b]  rounded-full ">
+                                    <i class="fa fa-arrow-down  text-[#0000004b]" aria-hidden="true"></i>
+                                </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-5 mb-10">
                 <div>
                     <button (click)="showDateAddReview = !showDateAddReview" (keydown.escape)="showDateAddReview = false"

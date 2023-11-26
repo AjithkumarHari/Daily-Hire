@@ -22,6 +22,7 @@ import { AddServiceBoxComponent } from './components/add-service-box/add-service
 import { EditServiceBoxComponent } from './components/edit-service-box/edit-service-box.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.interceptor';
+import { ReviewManagementComponent } from './components/review-management/review-management.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.int
     ServiceManagementComponent,
     PhoneNumberPipe,
     AddServiceBoxComponent,
-    EditServiceBoxComponent
+    EditServiceBoxComponent,
+    ReviewManagementComponent
   ],
   imports: [
     CommonModule,

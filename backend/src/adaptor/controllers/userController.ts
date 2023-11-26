@@ -20,7 +20,7 @@ import { allListedServices } from "../../application/useCase/service/allService"
 import { bookingPayment } from "../../application/useCase/booking/bookingPayment";
 import AppError from "../../util/appError";
 import { addReview } from "../../application/useCase/review/addReview";
-import { findByWorker } from "../../application/useCase/review/findByworker";
+import { findByWorker } from "../../application/useCase/review/findByWorker";
 
 
 const userController = ( 

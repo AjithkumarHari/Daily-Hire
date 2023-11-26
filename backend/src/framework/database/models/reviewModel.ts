@@ -18,6 +18,10 @@ const reviewSchema = new Schema(
             type: String,
             require: true
         },
+        workerName:{
+            type: String,
+            require: true
+        },
         userName:{
             type: String,
             require: true
