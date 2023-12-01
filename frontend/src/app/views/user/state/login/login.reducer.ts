@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { loginSuccess, loginFailure ,signupSuccess, signupFailure, loginPending, verifySuccess, verifyFailure} from "./login.action";
+import { loginSuccess, loginFailure ,signupSuccess, signupFailure, loginPending, verifySuccess, verifyFailure, browserReload, editProfileSuccess} from "./login.action";
 import { UserState } from "../user.state";
 
 export const InitialState: UserState =  {
@@ -9,6 +9,23 @@ export const InitialState: UserState =  {
 
 const _authReducer = createReducer(
     InitialState,
+    on(browserReload,(state, {userToken, userData})=>{
+        return {
+            ...state,
+            UserToken : userToken,
+            userData: userData,
+            errorMessage: undefined
+        }
+    }),
+    on(editProfileSuccess,(state, { userData})=>{
+        console.log('edit profile reducer');
+        
+        return {
+            ...state,
+            userData: userData,
+            errorMessage: undefined
+        }
+    }),
     on(loginSuccess,(state, {userToken, userData})=>{
         return {
             ...state,
@@ -65,3 +82,4 @@ const _authReducer = createReducer(
 export function authReducer(state: UserState = InitialState, action: Action){
     return _authReducer(state,action)
 }
+

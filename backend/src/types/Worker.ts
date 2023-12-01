@@ -13,5 +13,6 @@ export interface Worker {
     profileImg?: string,
     location: string,
     isListed?: boolean,
-    isActive?: boolean
+    isActive?: boolean,
+    blockedDates?: Date[],
 }

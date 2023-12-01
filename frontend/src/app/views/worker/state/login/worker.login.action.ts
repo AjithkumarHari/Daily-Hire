@@ -3,6 +3,11 @@ import { Credentials } from "../../../../types/Credentials";
 import { ErrorRes } from "../../../../types/ErrorRes";
 import { Worker } from "src/app/types/Worker";
 
+export const workerBrowserReload = createAction(
+    `Worker Reloads the Browser`,
+    props<{token: string, workerData: any}>()
+)
+
 export const workerLoginRequest = createAction(
     `Auth Worker Login Request`,
     props<{credentials: Credentials}>()

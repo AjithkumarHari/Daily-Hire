@@ -3,5 +3,11 @@
         <img class="w-8 h-8" src="./assets/DailyHire-logo.png" alt="fsd">
         <h1 class="text-white text-4xl font-extrabold  hidden sm:block ">aily Hire</h1>
     </div>
+    <ul class="flex items-center text-2xl text-white">
+        <li class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'" [routerLinkActiveOptions]="{exact: true}" ><a class="active:text-green-600" routerLink="/worker" >Home</a> </li>
+        <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/schedule">Schedule</a></li>
+        <li  class=" mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/bookings">My Bookings</a></li>
+        <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/profile">Profile</a></li>
+    </ul>
     <button class="px-4 py-1 text-lg font-semibold text-green-500 rounded bg-[#fff] hover:bg-[#ffffffc3]  " (click)="logout()">Log out</button>
 </nav>

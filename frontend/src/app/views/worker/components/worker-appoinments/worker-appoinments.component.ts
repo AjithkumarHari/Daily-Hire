@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Booking } from 'src/app/types/Booking';
 
 @Component({
   selector: 'app-worker-appoinments',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./worker-appoinments.component.css']
 })
 export class WorkerAppoinmentsComponent {
+
+  @Input() bookings!: Booking[];
 
 }

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Worker } from '../../../types/Worker';
 import { Service } from 'src/app/types/Service';
 import { Review } from 'src/app/types/Review';
+import { Booking } from 'src/app/types/Booking';
+import { User } from 'src/app/types/User';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,8 @@ export class UserService {
   }
   
   deleteToken(){
-    return window.localStorage.removeItem('user-token')
+    window.localStorage.removeItem('user-token');
+    window.localStorage.removeItem('user-data');
   }
 
   allWorkers():Observable<Worker[]> {
@@ -49,6 +52,22 @@ export class UserService {
 
   getReviewByWorker(id: string): Observable<Review[]>{
     return this.http.get<Review[]>(`${this.server}/user/review-list/${id}`)
+  }
+  
+  getBookingByUser(email: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/user/booking-list/${email}`)
+  }
+  
+  getBookingByWorker(id: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/user/worker-booked-list/${id}`)
+  }
+
+  bookingCancelRequest(bookingId: string){
+    return this.http.put(`${this.server}/user/booking-cancel`,{bookingId})
+  }
+
+  updateProfile(userId: string, user: User){
+    return this.http.put(`${this.server}/user/edit-user`,{userId, user} )
   }
    
 }

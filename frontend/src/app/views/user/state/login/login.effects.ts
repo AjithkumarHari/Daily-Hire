@@ -13,28 +13,33 @@ import { loginFailure,
     signupSuccess,
     loginPending,
     verifyRequest,
-    verifyFailure
+    verifyFailure,
+    editProfileRequest,
+    editProfileSuccess
     } from "./login.action";
+import { UserService } from "../../services/user.service";
 
 @Injectable()
 
 export class AuthEffects{
 
     constructor( private actions$ : Actions, 
-        private userService : UserAuthService,
+        private userAuthService : UserAuthService,
+        private userService: UserService,
         private router : Router){}
 
     login$ = createEffect(()=>
         this.actions$.pipe(
             ofType(loginRequest),
             switchMap(({ credentials }) =>
-                this.userService.login(credentials).pipe(
+                this.userAuthService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
                         console.log('res from eff',responce);
                         
                         if(responce.status=='success'){
                             localStorage.setItem('user-token',responce.token)
+                            localStorage.setItem('user-data',JSON.stringify(responce.userData))
                             return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }
                         else if(responce.status=='pending'){
@@ -90,13 +95,14 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(googleLoginRequest),
             switchMap(({ user }) =>
-                this.userService.signInWithGoogle(user).pipe(
+                this.userAuthService.signInWithGoogle(user).pipe(
                     map(res=>{
                         let responce : any = res;``
                         if(responce.token){
                             console.log(responce);
                             
                             localStorage.setItem('user-token',responce.token)
+                            localStorage.setItem('user-data',JSON.stringify(responce.userData))
                             return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }else{
                             return loginFailure({ error : responce.error.error  })
@@ -112,7 +118,7 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(signupRequest),
             switchMap(({ user }) =>
-                this.userService.signup(user).pipe(
+                this.userAuthService.signup(user).pipe(
                     map(res=>{
                         let responce : any = res;
                         if(responce.status=='success'){
@@ -155,11 +161,12 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(verifyRequest),
             switchMap(({ user }) =>
-                this.userService.verifySignupOtp(user).pipe(
+                this.userAuthService.verifySignupOtp(user).pipe(
                     map(res=>{
                         let responce : any = res;
                         if(responce.status=='success'){
                             localStorage.setItem('user-token',responce.token)
+                            localStorage.setItem('user-data',JSON.stringify(responce.userData))
                             return loginSuccess({userToken : responce.token, userData: responce.userData})
                         }
                         else{
@@ -207,6 +214,44 @@ export class AuthEffects{
         }
     );
 
+    update$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(editProfileRequest),
+            switchMap(({ userId, user }) =>
+                this.userService.updateProfile(userId, user).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        console.log('effect U');
+                        
+                        console.log(responce);
+                        if(responce.status=='success'){
+                            
+                            console.log(responce.userData);
+                            
+                            localStorage.setItem('user-data',JSON.stringify(responce.userData))
+                            return editProfileSuccess({ userData: responce.userData})
+                        }
+                        else{
+                            console.log('in side effect LE',responce);
+                            return responce;
+                        }
+                    }),
+                  
+                )
+            )
+        )
+    );
 
+    updateSuccess$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(editProfileSuccess),
+            tap(()=>{
+
+                this.router.navigate(['/profile/updateProfile'])
+            })
+        ), {
+            dispatch : false
+        }
+    );
 
 }

@@ -9,6 +9,7 @@ import { WorkerManagementComponent } from './components/worker-management/worker
 import { ServiceManagementComponent } from './components/service-management/service-management.component';
 import { EditServiceBoxComponent } from './components/edit-service-box/edit-service-box.component';
 import { ReviewManagementComponent } from './components/review-management/review-management.component';
+import { BookingManagementComponent } from './components/booking-management/booking-management.component';
 
 const routes: Routes = [
   { path:'auth', component: AuthComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
      { path: 'edit', component: EditServiceBoxComponent}
     ]},
     { path: 'review', component: ReviewManagementComponent },
+    { path: 'booking', component: BookingManagementComponent }
   ],},
 ];
 

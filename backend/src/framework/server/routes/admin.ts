@@ -8,6 +8,8 @@ import { serviceDbRepository } from "../../../application/repository/serviceDbRe
 import { serviceDbRepositoryMongoDB } from "../../database/repository/serviceDbRepository.";
 import { reviewDbRepository } from "../../../application/repository/reviewDbRepository";
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
+import { bookingDbRepository } from "../../../application/repository/bookingDbRepository";
+import { bookingDbRepositoryMongoDB } from "../../database/repository/bookingDbRepository";
 
 const adminRouter = () => {
     const router = express.Router()
@@ -21,6 +23,8 @@ const adminRouter = () => {
         serviceDbRepositoryMongoDB,
         reviewDbRepository,
         reviewDbRepositoryMongoDB,
+        bookingDbRepository,
+        bookingDbRepositoryMongoDB,
         )
 
 
@@ -30,20 +34,26 @@ const adminRouter = () => {
 
     router.put('/user-status',controller.userStatusChange);
 
-    router.put('/worker-status',controller.workerStatusChange)
+    router.put('/worker-status',controller.workerStatusChange);
 
     router.post('/add-service',controller.createService);
 
-    router.put('/edit-service',controller.updateService)
+    router.put('/edit-service',controller.updateService);
 
-    router.put('/service-status',controller.serviceStatusChange)
+    router.put('/service-status',controller.serviceStatusChange);
 
-    router.get('/service-list',controller.getAllServices)
+    router.get('/service-list',controller.getAllServices);
 
-    router.get('/service-details/:id',controller.getServicesById)
+    router.get('/service-details/:id',controller.getServicesById);
 
-    router.get('/review-list',controller.getAllReviews)
+    router.get('/review-list',controller.getAllReviews);
 
+    router.put('/review-status',controller.reviewStatusChange);
+
+    router.get('/booking-list',controller.getAllBookings);
+
+    router.put('/booking-status',controller.bookingStatusChange);
+    
     return router
 }
 

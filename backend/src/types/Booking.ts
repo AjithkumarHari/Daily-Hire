@@ -7,4 +7,5 @@ export interface Booking {
     paymentStatus: string,
     isPaid?: boolean,
     isCancelled?: boolean,
+    status?:string,
 }

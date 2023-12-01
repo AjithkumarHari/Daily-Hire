@@ -12,11 +12,15 @@ import { reviewDbRepository } from "../../../application/repository/reviewDbRepo
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 import { paymentServiceInterface } from "../../../application/service/paymentServiceInterface";
 import { paymentService } from "../../service/paymentService";
+import { authService } from "../../service/authService";
+import { authServiceInterface } from "../../../application/service/authServiceInterface";
 
 const userRouter = () => {
     const router = express.Router()
     
     const controller = userController(
+        userDbRepository,
+        userRepositoryMongoDB,
         workerDbRepository,
         workerRepositoryMongoDB,
         serviceDbRepository,
@@ -26,7 +30,9 @@ const userRouter = () => {
         reviewDbRepository,
         reviewDbRepositoryMongoDB,
         paymentServiceInterface,
-        paymentService
+        paymentService,
+        authServiceInterface,
+        authService,
     )
 
     router.get('/worker-list',controller.getAllWorkers);
@@ -41,7 +47,15 @@ const userRouter = () => {
 
     router.get('/review-list/:id',controller.getReviewByWorkerId);
 
-    return router
+    router.get('/booking-list/:email',controller.getBookingByUser);
+    
+    router.get('/worker-booked-list/:id',controller.getBookingByWorker);
+    
+    router.put('/booking-cancel',controller.cancelBooking);
+
+    router.put('/edit-user',controller.updateUserProfile)
+
+    return router;
 }
 
 export default userRouter;

@@ -29,13 +29,24 @@ export const workerRepositoryMongoDB = () => {
         return await WORKER.updateOne({email}, {$set:{isActive: true}});
     }
 
+    const blockDate = async (_id: string, date: Date) => {
+        const res = await WORKER.updateOne(
+            { _id },
+            { $addToSet: { blockedDates: date } }
+        );
+        console.log(res);
+        return res;
+        
+    }
+
     return {
         getAllWorkers,
         getWorkerByEmail,
         addWorker,
         getWorkerById,
         workerListUnlist,
-        workerActivate
+        workerActivate,
+        blockDate
     }
 }
 

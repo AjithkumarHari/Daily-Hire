@@ -1,0 +1,74 @@
+<div class="flex h-full items-center ">
+  <div class="my-4 bg-gray-100 max-w-screen-md border px-4 shadow-xl sm:mx-4 sm:rounded-xl sm:px-4 sm:py-4 md:mx-auto">
+    <form  [formGroup]="form" >
+
+      <div class="flex flex-col border-b py-4 sm:flex-row sm:items-start">
+        <div class="shrink-0 mr-auto sm:py-3">
+          <p class="font-semibold">Account Details</p>
+          <p class="text-sm text-gray-600">Edit your account details</p>
+        </div>
+        <button  [disabled]="!form.valid" (click)="onSubmit()" class="hidden rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white sm:inline focus:outline-none focus:ring hover:bg-blue-700">Save</button>
+      </div>
+      <div class="flex flex-col gap-4 border-b py-4 sm:flex-row">
+        <p class="shrink-0 w-32 font-medium">Name</p>
+        <div class="w-full">
+          <input formControlName="name" 
+          class="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+          [ngClass]="{
+            'border-red-500': form.get('name')?.invalid && form.get('name')?.touched,
+            'border-green-600': !form.get('name')?.invalid && !form.get('name')?.touched
+             }" />
+          <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Name must be valid.(0-9)</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 border-b py-4 sm:flex-row">
+        <p class="shrink-0 w-32 font-medium">Email</p>
+        <div class="w-full">
+          <input formControlName="email" 
+          class="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+          [ngClass]="{
+            'border-red-500': form.get('email')?.invalid && form.get('email')?.touched,
+            'border-green-600': !form.get('email')?.invalid && !form.get('email')?.touched
+             }" />
+          <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Email must be valid.(0-9)</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 border-b py-4 sm:flex-row">
+        <p class="shrink-0 w-32 font-medium">Phone</p>
+        <div class="w-full">
+          <input formControlName="phone" 
+          class="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+          [ngClass]="{
+            'border-red-500': form.get('phone')?.invalid && form.get('phone')?.touched,
+            'border-green-600': !form.get('phone')?.invalid && !form.get('phone')?.touched
+             }" />
+          <p *ngIf="!form.get('phone')?.valid && !form.get('phone')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Email must be valid.(0-9)</p>
+        </div>
+      </div>
+      <div class="flex  items-center flex-col gap-4 border-b py-4 sm:flex-row">
+        <p class="shrink-0 w-32 font-medium">New Password</p>
+        <div class=" w-full">
+          <input type="password" formControlName="password"  class="mb-2 w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600   sm:mb-0 focus:ring-1" 
+          [ngClass]="{
+            'border-red-500': form.get('password')?.invalid && form.get('password')?.touched,
+            'border-green-600': !form.get('password')?.invalid && !form.get('password')?.touched
+             }"/>
+             <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 ">Password must be valid. </p>
+        </div>
+        <p class="shrink-0  w-32 font-medium">Confirm Password</p>
+        <div class=" w-full">
+          <input type="password"  formControlName="confpassword"  c class="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
+          [ngClass]="{
+            'border-red-500': form.get('confpassword')?.invalid && form.get('confpassword')?.touched,
+            'border-green-600': !form.get('confpassword')?.invalid && !form.get('confpassword')?.touched
+              }"/>
+              <p *ngIf="!form.get('confpassword')?.valid && !form.get('confpassword')?.untouched"  class="mt-2 text-xs text-red-600 ">Password must be valid. </p>
+        </div>
+      </div>
+      <div class="">
+        <p>{{errorMessage}}</p>      
+      </div>
+      
+    </form>
+  </div>
+</div>

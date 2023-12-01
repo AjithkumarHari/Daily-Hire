@@ -40,9 +40,9 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <a *ngIf="review.isHidden; else list" class="font-medium text-blue-600 hover:underline">Unhide</a>
+                            <a *ngIf="review.isHidden; else list" class="font-medium text-blue-600 hover:underline" (click)="onStatusChange(review._id)" >Unhide</a>
                             <ng-template #list>
-                                <a class="font-medium text-blue-600 hover:underline">Hide</a>
+                                <a class="font-medium text-blue-600 hover:underline" (click)="onStatusChange(review._id)" >Hide</a>
                             </ng-template>
                         </td>
                     </tr>

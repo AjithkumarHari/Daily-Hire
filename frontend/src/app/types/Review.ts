@@ -1,4 +1,5 @@
 export interface Review{
+    _id?: string,
     rating: number,
     reviewTitle: string,
     reviewDescription: string

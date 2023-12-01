@@ -9,7 +9,7 @@ import { AdminService } from '../../services/admin.service';
 })
 export class UserManagementComponent {
 
-  users$: User[] = [];
+  users$!: User[];
   currentPage: number = 1;
   pages: number[] = [];
 
@@ -53,5 +53,11 @@ export class UserManagementComponent {
 
   onPageClick(pageNumber: number) {
     this.currentPage = pageNumber;
+  }
+
+  getUser(){
+    console.log(this.users$);
+    
+    return this.users$
   }
 }

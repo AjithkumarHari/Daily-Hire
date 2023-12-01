@@ -6,9 +6,8 @@ import { Worker } from 'src/app/types/Worker';
 import { selectUserData } from '../../state/login/login.selector';
 import { UserState } from '../../state/user.state';
 import { UserService } from '../../services/user.service';
-import { loadStripe } from '@stripe/stripe-js';
+import { Booking } from 'src/app/types/Booking';
 
- 
 
 @Component({
   selector: 'app-booking-form-box',
@@ -43,6 +42,8 @@ export class BookingFormBoxComponent {
   
   user!: User;
   @Input() worker!: Worker ;
+  bookings!: Booking;
+  workerBookings!: Booking[]
 
   constructor( private userService: UserService, private store: Store<UserState> ) {}
 
@@ -51,8 +52,16 @@ export class BookingFormBoxComponent {
     this.getNoOfDays();
     this.store.pipe(select(selectUserData)).subscribe((data) => {
       this.user = data;
-      console.log(this.user);
+      
     });
+    if(this.worker._id){
+      this.userService.getBookingByWorker(this.worker._id).subscribe((data)=> {
+        console.log(data);
+        
+        this.workerBookings = data;
+      })
+
+    }
   }
 
   initDate() {
@@ -69,10 +78,32 @@ export class BookingFormBoxComponent {
     return today.toDateString() === d.toDateString() ? true : false;
   }
 
+  isPast(date: any) {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const d = new Date(this.year, this.month, date);
+    d.setHours(0, 0, 0, 0);
+ 
+    return currentDate.getTime() > d.getTime(); 
+  }
+
+  isBooked(date: any) {
+    const d = new Date(this.year, this.month, date);
+    d.setHours(0, 0, 0, 0);
+    const result = this.workerBookings.some((details) => {
+      const newDate = new Date(details.bookingTime);
+      newDate.setHours(0, 0, 0, 0);
+      return newDate.getTime() === d.getTime();
+    });
+    return result;
+  }
+  
+
   getDateValue(date: any) {
     this.selectedDate = new Date(this.year, this.month, date);
     this.datepickerValue = this.selectedDate.toDateString();
     this.showDatepicker = false;
+
   }
 
   getNoOfDays() {
@@ -94,18 +125,19 @@ export class BookingFormBoxComponent {
   trackByIdentity = (index: number, item: any) => item; 
 
   onSubmit (){
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    this.selectedDate.setHours(0, 0, 0, 0);
+
+    
     const paymentDetails = {
       user: this.user,
       worker: this.worker,
       bookingTime: this.selectedDate
     }
-    console.log(paymentDetails);
-    
+
     this.userService.paymentRequest(paymentDetails).subscribe(async (res: any)=>{
-      let stripe = await loadStripe('pk_test_51OFsOJSDlgqaDxgfrx83NzkCWIKqRIeVLjNNHxcU7NrXLEMrddNWCnHHhYmWGB1cGDsvFQvnRvFM80h9aAXLqZ1100AWYv1XL9');
-      stripe?.redirectToCheckout({
-        sessionId:res.id
-      })
+      window.location.href = res.sessionUrl
     })
   }
   

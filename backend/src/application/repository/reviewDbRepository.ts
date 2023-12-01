@@ -9,10 +9,16 @@ export const reviewDbRepository = (repository: ReturnType<ReviewDbRepositoryMong
 
     const getAllReview = async () => await repository.getAllReview();
 
+    const reviewListUnlist = async (reviewId: string, newStatus: boolean) => await repository.reviewListUnlist(reviewId, newStatus);
+
+    const getReviewById = async (id:string) => await repository.getReviewById(id);
+
     return {
         addReview,
         getReviewByWorker,
         getAllReview,
+        reviewListUnlist,
+        getReviewById,
     }
 }
 

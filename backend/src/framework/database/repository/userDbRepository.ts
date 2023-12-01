@@ -27,8 +27,8 @@ export const userRepositoryMongoDB = () => {
         return await USER.updateOne({_id}, {$set:{isListed: newStatus}});
     }
     
-    const bookWorker = async () => {
-        
+    const updateUser =async (_id:string, user: User) => {
+        return await USER.updateOne({_id},{...user});
     }
 
     return {
@@ -37,7 +37,8 @@ export const userRepositoryMongoDB = () => {
         addUser,
         userActivate,
         getAllUser,
-        userlistUnlist
+        userlistUnlist,
+        updateUser,
     };
     
 }

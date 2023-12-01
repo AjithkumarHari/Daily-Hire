@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="grid grid-cols-2 h-fit ">
+    <app-worker-calender 
+    [bookings]="newBookings()" 
+    [blockedDates]="workerBlockedDates()" 
+    (onBlockBooking)="blockBooking($event)"
+    (onBlockBooking)="blockBooking($event)"
+    (onShowBooking)="showBooking($event)"
+    ></app-worker-calender>
+    <div>
+        <app-current-booking-box [bookings]="newBookings()"></app-current-booking-box>
+        <div>
+            <div *ngIf="!showDay">
+              <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
+            </div>
+            <div *ngIf="!blockDay">
+              <app-block-day [blockDay]="selectedBlockDay"  (onBlock)="onBlocked($event)"></app-block-day>
+            </div>
+          </div>
+          
+    </div>
+</div>

@@ -13,16 +13,19 @@ export const bookingPayment = async (
     ) => {
     try {
         const session: any = await paymentService.createSession(paymentDetails)  
+        console.log(session);
+        
         if(!session)
             throw new AppError("Not Found", HttpStatus.NOT_FOUND);
         const bookingData: Booking = {
             ...paymentDetails,
             fee: paymentDetails.worker.wageForDay,
             paymentId: session.id,
-            paymentStatus: 'paid'
+            paymentStatus: 'paid',
+            status:'Confirmed'
         }
         await bookingRepository.addBooking(bookingData);        
-        return {"status":"succuss"};
+        return {"status":"succuss",sessionUrl: session.url};
     } catch (AppError) {
         return AppError;
     }

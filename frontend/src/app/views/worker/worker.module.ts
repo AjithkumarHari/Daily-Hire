@@ -20,6 +20,13 @@ import { WorkerAppoinmentsComponent } from './components/worker-appoinments/work
 import { OtpBoxComponent } from './pages/auth/otp-box/otp-box.component';
 
 import { NgOtpInputModule } from 'ng-otp-input';
+import { DateStringPipe } from './pipes/date-string.pipe';
+import { CurrentBookingBoxComponent } from './components/current-booking-box/current-booking-box.component';
+import { SelectedDayComponent } from './components/selected-day/selected-day.component';
+import { BlockDayComponent } from './components/block-day/block-day.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { BookingsComponent } from './pages/bookings/bookings.component';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +39,14 @@ import { NgOtpInputModule } from 'ng-otp-input';
     WorkerProfileComponent,
     WorkerCalenderComponent,
     WorkerAppoinmentsComponent,
-    OtpBoxComponent
+    OtpBoxComponent,
+    DateStringPipe,
+    CurrentBookingBoxComponent,
+    SelectedDayComponent,
+    BlockDayComponent,
+    ProfileComponent,
+    BookingsComponent,
+    ScheduleComponent,
   ],
   imports: [
     WorkerRoutingModule,

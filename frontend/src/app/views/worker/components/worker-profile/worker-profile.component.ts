@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { selectWorkerDetails } from '../../state/login/worker.login.selector';
 import { WorkerState } from '../../state/worker.state';
+import { Worker } from 'src/app/types/Worker';
 
 @Component({
   selector: 'app-worker-profile',
@@ -10,7 +11,7 @@ import { WorkerState } from '../../state/worker.state';
 })
 export class WorkerProfileComponent {
 
-  workerDetails: any;
+  workerDetails!: Worker;
 
   constructor(private store: Store<WorkerState>) {
     
@@ -19,9 +20,9 @@ export class WorkerProfileComponent {
   ngOnInit(){
  
     this.store.pipe(select(selectWorkerDetails)).subscribe((workerData)=>{
-      console.log(workerData);
       
       this.workerDetails = workerData;
+
       
     })
   }

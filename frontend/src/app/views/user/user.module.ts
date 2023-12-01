@@ -37,6 +37,12 @@ import { ServiceListComponent } from './pages/service-list/service-list.componen
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { BookingFormBoxComponent } from './components/booking-form-box/booking-form-box.component';
+import { NewBookingsComponent } from './pages/user-profile/new-bookings/new-bookings.component';
+import { BookingHistoryComponent } from './pages/user-profile/booking-history/booking-history.component';
+import { UpdateProfileComponent } from './pages/user-profile/update-profile/update-profile.component';
+import { DateStringPipe } from './pipes/date-string.pipe';
+import { BookingBoxComponent } from './components/booking-box/booking-box.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
  
 @NgModule({
   declarations: [
@@ -59,6 +65,12 @@ import { BookingFormBoxComponent } from './components/booking-form-box/booking-f
     WageSortPipe,
     AgeSortPipe,
     BookingFormBoxComponent,
+    NewBookingsComponent,
+    BookingHistoryComponent,
+    UpdateProfileComponent,
+    DateStringPipe,
+    BookingBoxComponent,
+    PaginationComponent,
 
   ],
   imports: [

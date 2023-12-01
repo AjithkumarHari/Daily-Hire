@@ -15,13 +15,16 @@ export const workerDbRepository = (repository: ReturnType<WorkerRepositoryMongoD
 
     const workerActivate = async (email: string) => await repository.workerActivate(email);
 
+    const blockDate = async (workerId: string, blockDate: Date) => await repository.blockDate(workerId, blockDate);
+
     return {
         getAllWorkers,
         getWorkerByEmail,
         addWorker,
         getWorkerById,
         workerListUnlist,
-        workerActivate
+        workerActivate,
+        blockDate,
     }
 }
 

@@ -4,6 +4,21 @@ import { ErrorRes } from "../../../../types/ErrorRes";
 import { SocialUser } from "@abacritt/angularx-social-login";
 import { User } from "../../../../types/User";
 
+export const browserReload = createAction(
+    `User Reloads the Browser`,
+    props<{userToken: string, userData: any}>()
+)
+
+export const editProfileRequest = createAction(
+    `User Updates the Profile`,
+    props<{userId: string, user: User}>()
+)
+
+export const editProfileSuccess = createAction(
+    `User Updates the Profile`,
+    props<{userData: any}>()
+)
+
 export const loginRequest = createAction(
     `Auth Login Request`,
     props<{credentials: Credentials}>()
@@ -16,7 +31,7 @@ export const googleLoginRequest = createAction(
 
 export const loginSuccess = createAction(
     `Auth Login Success`,
-    props<{userToken: string, userData: User}>()
+    props<{userToken: string, userData: any}>()
 )
 
 export const loginPending = createAction(

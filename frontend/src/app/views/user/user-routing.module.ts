@@ -10,6 +10,9 @@ import { userGuard } from './guards/user.guard';
 import { OtpBoxComponent } from './pages/auth/otp-box/otp-box.component';
 import { ServiceListComponent } from './pages/service-list/service-list.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { NewBookingsComponent } from './pages/user-profile/new-bookings/new-bookings.component';
+import { BookingHistoryComponent } from './pages/user-profile/booking-history/booking-history.component';
+import { UpdateProfileComponent } from './pages/user-profile/update-profile/update-profile.component';
  
 
 const routes: Routes = [
@@ -22,7 +25,11 @@ const routes: Routes = [
   { path: 'workerList', component: WorkerListComponent, canActivate: [userGuard]},
   { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]},
   { path: 'services', component: ServiceListComponent, canActivate: [userGuard]},
-  { path: 'profile', component: UserProfileComponent}
+  { path: 'profile', component: UserProfileComponent, children: [
+    { path: 'newBooking', component: NewBookingsComponent },
+    { path: 'bookingHistory', component: BookingHistoryComponent },
+    { path: 'updateProfile', component: UpdateProfileComponent }
+  ]}
 ];
 
 @NgModule({

@@ -22,7 +22,8 @@ export class AuthEffects{
                     map(res=>{
                         let responce : any = res;
                         if(responce.token){ 
-                            sessionStorage.setItem('worker-token',responce.token)
+                            localStorage.setItem('worker-token',responce.token)
+                            localStorage.setItem('worker-data',JSON.stringify(responce.workerData))
                             console.log('in side effect LS',responce);
                             return workerLoginSuccess({token : responce.token, workerData: responce.workerData})
                         }
@@ -129,7 +130,8 @@ export class AuthEffects{
                         if(responce.status=='success'){
                             console.log('verify req',responce);
                             
-                            sessionStorage.setItem('worker-token',responce.token)
+                            localStorage.setItem('worker-token',responce.token)
+                            localStorage.setItem('worker-data',JSON.stringify(responce.workerData))
                             return workerLoginSuccess({token : responce.token, workerData: responce.workerData})
                         }
                         else{

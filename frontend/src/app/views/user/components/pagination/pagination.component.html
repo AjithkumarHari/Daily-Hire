@@ -1,0 +1,29 @@
+<div class="flex justify-center">
+    <nav class=" my-5" aria-label="Page navigation example">
+        <ul class="inline-flex -space-x-px text-base font-semibold h-11">
+            <li>
+                <a (click)="onPrevious($event)"
+                    class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
+                    Previous
+                </a>
+            </li>
+  
+            <ng-container *ngFor="let page of pages">
+                <li>
+                    <a (click)="onPageClick(page)"
+                        class="flex items-center justify-center mx-2 px-4 h-11 leading-tight text-white rounded-full  border-2  hover:border-gray-300 border-transparent    "
+                        [ngClass]="{'bg-[#eb5e28]': page === currentPage}"
+                    >
+                        {{ page }}
+                    </a>
+                </li>
+            </ng-container>
+            
+            <li>
+                <a (click)="onNext($event)"
+                class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
+                Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

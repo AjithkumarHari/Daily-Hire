@@ -15,13 +15,16 @@ export const userDbRepository = (repository : ReturnType<UserRepositoryMongoDB>)
 
     const userListUnlist = async (userId: string, newStatus: boolean) => await repository.userlistUnlist(userId, newStatus);
 
+    const updateUser = async (userId: string, user: User) => await repository.updateUser(userId, user);
+
     return {
         getUserByEmail,
         addUser,
         getUserById,
         userActivate,
         getAllUsers,
-        userListUnlist
+        userListUnlist,
+        updateUser,
     }
 }
 

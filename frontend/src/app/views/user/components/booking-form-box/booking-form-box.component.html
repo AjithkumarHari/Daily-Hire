@@ -74,7 +74,7 @@
                                         <div style="width: 14.28%" class="px-1 mb-1">
                                             <div (click)="getDateValue(date)"
                                             class="cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100"
-                                            [ngClass]="{'bg-blue-500 text-white': isToday(date) === true,'text-gray-700 hover:bg-blue-200':isToday(date) === false}">
+                                            [ngClass]="{'bg-blue-500 text-white': isToday(date) === true,'text-gray-700 hover:bg-blue-200':isToday(date) === false,'text-[#8d8a8a] pointer-events-none':isPast(date)===true,'text-white bg-[#b43939] pointer-events-none':isBooked(date)=== true}">
                                                 {{ date }}
                                             </div>
                                         </div>

@@ -6,6 +6,7 @@ import { User } from '../../../types/User';
 import { Worker } from '../../../types/Worker';
 import { Service } from 'src/app/types/Service';
 import { Review } from 'src/app/types/Review';
+import { Booking } from 'src/app/types/Booking';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,18 @@ export class AdminService {
 
   getAllReviews(): Observable<Review[]>{
     return this.http.get<Review[]>(`${this.server}/admin/review-list`);
+  }
+
+  changeReviewStatus(reviewId: string){
+    return this.http.put(`${this.server}/admin/review-status`,{reviewId});
+  }
+
+  getAllBookings(): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/admin/booking-list`);
+  }
+
+  changeBookingStatus(bookingId: string){
+    return this.http.put(`${this.server}/admin/booking-status`,{bookingId});
   }
 
 }

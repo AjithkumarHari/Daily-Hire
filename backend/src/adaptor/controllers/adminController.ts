@@ -8,6 +8,8 @@ import { ServiceRepository } from "../../application/repository/serviceDbReposit
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
 import { ReviewRepository } from "../../application/repository/reviewDbRepository";
 import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
+import { BookingRepository } from "../../application/repository/bookingDbRepository";
+import { BookingDbRepositoryMongoDB } from "../../framework/database/repository/bookingDbRepository";
 import { allWorkers } from "../../application/useCase/worker/allWorkers";
 import { allUsers } from "../../application/useCase/admin/allUser";
 import { HttpStatus } from "../../types/HttpStatus";
@@ -18,7 +20,11 @@ import { listUnlistService } from "../../application/useCase/admin/listUnlistSer
 import { allServices } from "../../application/useCase/service/allService";
 import { findById } from "../../application/useCase/service/findServiceById";
 import { editService } from "../../application/useCase/service/editService";
-import { findAllReviews } from "../../application/useCase/review/findAllreviews";
+import { findAllReviews } from "../../application/useCase/review/findAllReviews";
+import { listUnlistReview } from "../../application/useCase/admin/listUnlistReviews";
+import { allBookings } from "../../application/useCase/booking/allBooking";
+import { cancelBooking } from "../../application/useCase/booking/cancelBooking";
+
 
 
 const adminController = (
@@ -30,12 +36,15 @@ const adminController = (
     serviceDbRepositoryImp: ServiceDbRepositoryMongoDB,
     reviewDbRepository: ReviewRepository,
     reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
+    bookingDbRepository: BookingRepository,
+    bookingDbRepositoryImp: BookingDbRepositoryMongoDB,
 ) => {
 
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
     const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
+    const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
 
     const getAllUser = async ( req: Request, res: Response ) => {
         try {
@@ -187,6 +196,50 @@ const adminController = (
         }
     }
 
+    const reviewStatusChange = async ( req: Request, res: Response ) => {
+        try {
+            const reviewId = req.body.reviewId
+            const result = await listUnlistReview(reviewId, dbReviewRepository)
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
+    const getAllBookings = async ( req: Request, res: Response ) => {
+        try{
+            const result = await allBookings(dbBookingRepository);
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
+    const bookingStatusChange = async ( req: Request, res: Response ) => {
+        try {
+            const bookingId = req.body.bookingId
+            const result = await cancelBooking(bookingId, dbBookingRepository)
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
 
     return {
         getAllUser,
@@ -199,6 +252,9 @@ const adminController = (
         updateService,
         getServicesById,
         getAllReviews,
+        reviewStatusChange,
+        getAllBookings,
+        bookingStatusChange,
     }
 }
 export default adminController

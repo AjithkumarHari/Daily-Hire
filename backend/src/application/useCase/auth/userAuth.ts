@@ -13,7 +13,7 @@ export const userSignup = async (
     otpService: ReturnType<OtpServiceInterface>
 ) => { 
     try{
-        user.email = user.email.toLowerCase(); 
+        user.email = user.email.toLowerCase();
 
         const isUserExist = await userRepository.getUserByEmail(user.email)
         if(isUserExist){
@@ -42,8 +42,6 @@ export const resendOtp = async (
         console.log(error);
         
     }
- 
-    
 }
 
 export const userLogin = async (

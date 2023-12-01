@@ -11,10 +11,18 @@ export const reviewDbRepositoryMongoDB = () => {
 
     const getAllReview = async () => REVIEW.find();
 
+    const reviewListUnlist = async (_id: string, newStatus: boolean) => {
+        return await REVIEW.updateOne({_id}, {$set:{isHidden: newStatus}});
+    }
+
+    const getReviewById = async (id : string) => await REVIEW.findById(id);
+
     return {
         addReview,
         getReviewByWorker,
-        getAllReview
+        getAllReview,
+        reviewListUnlist,
+        getReviewById,
     }
 }
 

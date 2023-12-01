@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="m-10">
+    <div class="grid grid-cols-2 ">
+        <button  (click)="setTab('new')" 
+        [ngClass]="{
+          'text-white bg-[#fff3]  font-normal': tab === 'new',
+          'p-2 py-5 mr-5 px-5  bg-[#0003] rounded-md text-gray-300 font-semibold text-[30px] leading-7  ': true
+        }"
+        >
+            New Appointments
+        </button>
+
+        <button (click)="setTab('old')" [ngClass]="{
+            'text-white bg-[#fff3] font-normal': tab === 'old',
+            'p-2 mr-5 px-5 w-full  bg-[#0003]    rounded-md text-gray-300 font-semibold text-[30px] leading-7  ': true
+        }">
+            Appointment History
+        </button>
+    </div>
+
+    <ng-container *ngIf="tab === 'new'">
+        <app-worker-appoinments [bookings]="onNewBookings()"></app-worker-appoinments>
+    </ng-container>
+
+    <ng-container *ngIf="tab === 'old'">
+        <app-worker-appoinments [bookings]="onOldBookings()"></app-worker-appoinments>
+    </ng-container>
+</div>

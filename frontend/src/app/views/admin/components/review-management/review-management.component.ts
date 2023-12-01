@@ -22,6 +22,16 @@ export class ReviewManagementComponent {
     });
   }
 
+  onStatusChange(reviewId: any) {
+    this.adminService
+      .changeReviewStatus(reviewId)
+      .subscribe(() => {
+        this.adminService.getAllReviews().subscribe((data: Review[]) => {
+          this.reviews$ = data;
+        });
+      });
+  }
+
   
 
   countPages(total: number){    

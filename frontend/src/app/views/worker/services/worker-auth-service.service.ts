@@ -31,14 +31,14 @@ export class WorkerAuthService {
   }
 
   setToken(token: string){
-    return window.sessionStorage.setItem('worker-token',token)
+    return window.localStorage.setItem('worker-token',token)
   }
 
   getToken(){
-    return window.sessionStorage.getItem('worker-token')
+    return window.localStorage.getItem('worker-token')
   }
   deleteToken(){
-    return window.sessionStorage.removeItem('worker-token')
+    return window.localStorage.removeItem('worker-token')
   }
 
 }

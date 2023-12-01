@@ -57,6 +57,9 @@ const workerShcema = new Schema(
             type: Boolean,
             default: false
         },
+        blockedDates:{
+            type: Array
+        }
     }
 )
 

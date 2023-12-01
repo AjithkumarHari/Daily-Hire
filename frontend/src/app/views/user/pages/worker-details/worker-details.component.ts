@@ -8,7 +8,7 @@ import { selectUserData } from '../../state/login/login.selector';
 import { UserState } from '../../state/user.state';
 import { Store, select } from '@ngrx/store';
 import { User } from 'src/app/types/User';
-
+ 
 @Component({
   selector: 'app-worker-details',
   templateUrl: './worker-details.component.html',
@@ -25,6 +25,8 @@ export class WorkerDetailsComponent implements OnInit{
   bookingDate!: Date;
   currentPage: number = 1;
   pages: number[] = [];
+  reviewFormHidden: boolean = true 
+  rating: any
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -41,6 +43,11 @@ export class WorkerDetailsComponent implements OnInit{
       this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {
         this.reviews$ = data;
         this.countPages(this.reviews$.length);
+        if(this.reviews$.length==0){
+          this.reviewFormHidden = false;
+        }
+        const totalRating: number = this.reviews$.reduce((acc, val) => acc + val.rating, 0);
+        this.rating = totalRating !== 0 ? totalRating / this.reviews$.length : '';
       });       
     }
  
@@ -49,8 +56,8 @@ export class WorkerDetailsComponent implements OnInit{
     });
 
     this.reviewForm = this.formBuilder.group({
-      title : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
-      review : new FormControl(null, [Validators.required, Validators.max(100)])
+      title : new FormControl(null, [Validators.required, Validators.pattern("^[A-Za-z]*[A-Za-z][A-Za-z0-9-. _]*$"),  Validators.max(30)]),
+      review : new FormControl(null, [Validators.required, Validators.max(200)])
     })
     
   }
@@ -83,7 +90,8 @@ export class WorkerDetailsComponent implements OnInit{
         this.ratingDisplay = 0;
         this.reviewForm.reset();
         if(this.id){
-          this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> this.reviews$ = data);       
+          this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {this.reviews$ = data.reverse()});   
+            this.reviewFormHidden = true
         }
       })
     }else{
@@ -96,6 +104,7 @@ export class WorkerDetailsComponent implements OnInit{
     for(let i=1;i<=Math.ceil(total/2);i++){
       this.pages.push(i)
     }
+
   }
 
   onPrevious($event: Event) {
