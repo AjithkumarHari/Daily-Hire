@@ -43,6 +43,8 @@ import { UpdateProfileComponent } from './pages/user-profile/update-profile/upda
 import { DateStringPipe } from './pipes/date-string.pipe';
 import { BookingBoxComponent } from './components/booking-box/booking-box.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { RupeesPipe } from './pipes/rupees-pipe.pipe';
+import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
  
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     DateStringPipe,
     BookingBoxComponent,
     PaginationComponent,
+    RupeesPipe,
+    WalletTransactionsComponent,
 
   ],
   imports: [

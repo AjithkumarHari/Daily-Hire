@@ -15,6 +15,8 @@ export const bookingDbRepository = (repository: ReturnType<BookingDbRepositoryMo
 
     const getBookingByWorkerId = async (_id: string) => await repository.getBookingByWorkerId(_id);
 
+    const getBookingById = async (id: string) => await repository.getBookingById(id);
+
     return {
         addBooking,
         getAllBooking,
@@ -22,6 +24,7 @@ export const bookingDbRepository = (repository: ReturnType<BookingDbRepositoryMo
         bookingCancel,
         cancelRequest,
         getBookingByWorkerId,
+        getBookingById,
     }
 }
 

@@ -15,6 +15,8 @@ export class BookingsComponent {
   tab: string = 'new';
 
   bookings$: Booking[] = [];
+  newBookings$: Booking[] = [];
+  oldBookings$: Booking[] = [];
   worker!: Worker;
   workerId : string =''
 
@@ -24,7 +26,12 @@ export class BookingsComponent {
     this.store.pipe(select(selectWorkerDetails)).subscribe((data) => {
       this.worker = data;
       this.workerId= data._id;
-      this.workerService.getAllBooking(this.workerId).subscribe((data)=> this.bookings$ = data);
+      this.workerService.getAllBooking(this.workerId).subscribe((data)=>{ 
+        this.bookings$ = data
+        this.onNewBookings()
+        this.onOldBookings()
+      });
+      
     });
   }
 
@@ -34,7 +41,7 @@ export class BookingsComponent {
   }
 
   onOldBookings(){
-    return this.bookings$.filter((details)=>{
+    this.oldBookings$ = this.bookings$.filter((details)=>{
       const newDate = new Date(details.bookingTime); 
       const currentDate = new Date(); 
       newDate.setHours(0, 0, 0, 0);
@@ -44,7 +51,7 @@ export class BookingsComponent {
   }
 
   onNewBookings(){
-    return this.bookings$.filter((details)=>{
+    this.newBookings$ = this.bookings$.filter((details)=>{
       const newDate = new Date(details.bookingTime); 
       const currentDate = new Date(); 
       newDate.setHours(0, 0, 0, 0);
@@ -52,4 +59,44 @@ export class BookingsComponent {
       return newDate >= currentDate;
     });
   }
+
+  onNewBookingSeachFilter(text: string){
+    if(text ==''){
+      this.onNewBookings()
+    }else{
+      this.newBookings$ = this.newBookings$.filter(booking => {
+        const lowercaseText = text.toLowerCase();
+        const lowercaseName = booking.user.name.toLowerCase();
+        return lowercaseName.includes(lowercaseText);
+      });
+    }
+  }
+  
+  onOldBookingSeachFilter(text: string){
+    if(text ==''){
+      this.onOldBookings()
+    }else{
+      this.oldBookings$ = this.oldBookings$.filter(booking => {
+        const lowercaseText = text.toLowerCase();
+        const lowercaseName = booking.user.name.toLowerCase();
+        return lowercaseName.includes(lowercaseText);
+      });
+    }
+  }
+
+  onCancelled(bookingId: string){
+    this.workerService.bookingCancel(bookingId).subscribe((data)=>{
+      console.log(data);
+      if(this.worker._id)
+        this.workerService.getAllBooking(this.worker._id).subscribe((data)=>{ 
+          this.bookings$ = data;
+          this.onNewBookings();
+          this.onOldBookings();
+      })
+    })
+  }
+ 
+
+ 
+  
 }

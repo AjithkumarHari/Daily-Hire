@@ -5,10 +5,12 @@ import { GoogleAuthServiceInterface } from "../../service/googleAuthServiceInter
 import { OtpServiceInterface } from "../../service/otpServiceInterface";
 import AppError from "../../../util/appError"; 
 import { HttpStatus } from "../../../types/HttpStatus";
+import { WalletRepository } from "../../repository/walletDbRepository";
 
 export const userSignup = async (
     user: {name: string, phone: number, email: string, password: string},
     userRepository: ReturnType<UserDbInterface>,
+    walletRepository: ReturnType<WalletRepository>,
     authService: ReturnType<AuthServiceInterface>,
     otpService: ReturnType<OtpServiceInterface>
 ) => { 
@@ -20,7 +22,8 @@ export const userSignup = async (
             throw new AppError("email already exits",HttpStatus.UNAUTHORIZED);
         }
         user.password = await authService.encryptPassword(user.password);
-        await userRepository.addUser(user);
+        const res = await userRepository.addUser(user);
+        await walletRepository.createWallet({userId: res.id, balance: 0})
         await otpService.sendOtp(user.phone);
         const { name, email, phone } = user;
         return {status: "success", userData:{name, email, phone}};
@@ -80,8 +83,9 @@ export const userLogin = async (
 
 export const signInWithGoogle = async(
     credentials: string,
-    googleAuthService: ReturnType<GoogleAuthServiceInterface>,
     userRepository: ReturnType<UserDbInterface>,
+    walletRepository: ReturnType<WalletRepository>,
+    googleAuthService: ReturnType<GoogleAuthServiceInterface>,
     authService: ReturnType<AuthServiceInterface>
 ) => {
     
@@ -93,6 +97,7 @@ export const signInWithGoogle = async(
         return {token, userData:{_id, name, email} }
     }else{
         const { _id: userId } = await userRepository.addUser(user);
+        await walletRepository.createWallet({userId: userId.toString(), balance: 0})
         const token = authService.generateToken(userId.toString());
         return {token, userData:{_id, name, email} }
     }

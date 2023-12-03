@@ -1,7 +1,8 @@
 <h1 class="text-3xl font-semibold text-gray-300 mt-5">Your Upcoming Bookings</h1>
-<div>
+ 
+<div *ngIf="bookings$.length>0; else noBooking" >
     <div class="grid grid-cols-2 mt-5" >
-        <article *ngFor="let booking of bookings$" 
+        <article *ngFor="let booking of bookings$  | slice: currentPage * 4 - 4 : currentPage * 4" 
         class="mx-5 mb-3 bg-white max-w-screen-lg rounded-md border border-gray-100 text-gray-700 shadow-md ">
             <div class="flex flex-col md:flex-row">
                 <div class=" md:w-4/6 px-3 py-5">
@@ -32,7 +33,7 @@
                         Previous
                     </a>
                 </li>
-      
+    
                 <ng-container *ngFor="let page of pages">
                     <li>
                         <a (click)="onPageClick(page)"
@@ -53,5 +54,10 @@
         </nav>
     </div>
 </div>
-
+ 
+<ng-template #noBooking >
+    <div class="w-full flex mt-32 items-center justify-center">
+        <h1 class="text-7xl text-[#5f564f] font-extrabold">No New Bookings</h1>
+    </div>
+</ng-template>
 <!-- <app-booking-box (bookingData)="bookings$"></app-booking-box> -->

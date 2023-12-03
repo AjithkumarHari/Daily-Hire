@@ -1,0 +1,64 @@
+<div class="flex items-center">
+    <label for="wallet" class="relative py-2 px-8 text-black text-base font-bold uppercase rounded-[50px] overflow-hidden bg-white transition-all duration-400 ease-in-out hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-[50px] hover:before:left-0">
+        {{wallet.balance | rupeesPipe}}
+    </label>
+</div>
+<input type="checkbox" id="wallet" class="peer fixed appearance-none opacity-0">
+<label for="wallet" class="pointer-events-none   invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-lg opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+    <label for="" class="h-fit  scale-90 rounded-md transition">
+        <div class=" flex items-center justify-center ">
+            <table class="min-w-full bg-white shadow-md overflow-hidden rounded-xl">
+                <thead>
+                    <tr class="bg-blue-gray-100 text-gray-700 text-center">
+                        <th class="py-3 px-4 text-center">Type</th>
+                        <th class="py-3 px-4 text-center">Date</th>
+                        <th class="py-3 px-4 text-center">Amount</th>
+                        <th class="py-3 px-4 text-center">Transaction</th>
+                    </tr>
+                </thead>
+                <tbody class="text-blue-gray-900">
+                    <tr class="border-b border-blue-gray-200" *ngFor="let transaction of wallet.transactions | slice: currentPage * 5 - 5 : currentPage * 5">
+                        <td class="py-3 px-4">{{transaction.type}}</td>
+                        <td class="py-3 px-4">{{ transaction.time | dateString}}</td>
+                        <td class="py-3 px-4">{{ transaction.amount | rupeesPipe}}</td>
+                        <td class="py-3 px-4">{{transaction.message}}</td>
+                    </tr>
+                </tbody>
+            </table>    
+            <div class="flex justify-center mb-10 px-5">
+                <div class="justify-center">
+                    <nav class="" aria-label="Page navigation example">
+                        <ul class="  -space-x-px text-base font-semibold h-11">
+                            <li>
+                                <a (click)="onPrevious($event)"
+                                    class="flex items-center justify-center h-8 w-8 leading-tight rounded-full ">
+                                    <i class="fa fa-arrow-up text-[#0000004b] hover:text-black" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                    
+                            <ng-container *ngFor="let page of pages">
+                                <li class=" flex justify-center">
+                                    <a (click)="onPageClick(page)"
+                                        class="flex items-center justify-center h-6 w-6 my-1 leading-tight text-black rounded-full hover:bg-[#ffffff] border-transparent"
+                                        [ngClass]="{'bg-[#fff]': page === currentPage,
+                                        'bg-[#ffffff7b] ': page !== currentPage,
+                                    }"
+                                    >
+                                        {{ page }}
+                                    </a>
+                                </li>
+                            </ng-container>
+                            
+                            <li>
+                                <a (click)="onNext($event)"
+                                class="flex items-center justify-center h-8 w-8 leading-tight rounded-full">
+                                    <i class="fa fa-arrow-down  text-[#0000004b] hover:text-black" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </label>
+</label>

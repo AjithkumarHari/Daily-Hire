@@ -65,14 +65,10 @@ export class ScheduleComponent {
     this.showDay = true
   }
   showBooking(date: Date){
-    console.log("show",date.toDateString());
     const data = this.bookings$.filter((details) => {
       const bookingDate = new Date(details.bookingTime);
       return bookingDate.toDateString() === date.toDateString();
     });
-
-    console.log(data);
-    
     this.selectedShowDay = data[0]  ;
     this.showDay = false
     this.blockDay = true
@@ -87,9 +83,9 @@ export class ScheduleComponent {
       })
     })
   }
+  
   onBlocked(blockDate: Date){
     this.workerService.blockBooking(this.workerId,blockDate).subscribe((data)=>{
-      console.log(data);
         this.workerService.getAllBooking(this.workerId).subscribe((data)=>{ 
           this.bookings$ = data
       })

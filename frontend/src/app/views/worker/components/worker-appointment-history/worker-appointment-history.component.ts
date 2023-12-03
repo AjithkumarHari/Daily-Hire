@@ -2,17 +2,16 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { Booking } from 'src/app/types/Booking';
 
 @Component({
-  selector: 'app-worker-appoinments',
-  templateUrl: './worker-appoinments.component.html',
-  styleUrls: ['./worker-appoinments.component.css']
+  selector: 'app-worker-appointment-history',
+  templateUrl: './worker-appointment-history.component.html',
+  styleUrls: ['./worker-appointment-history.component.css']
 })
-export class WorkerAppoinmentsComponent {
+export class WorkerAppointmentHistoryComponent {
 
   @Input() bookings!: Booking[];
   @Input() count!: number;
 
   @Output() onSearchTextChanged : EventEmitter<string> = new EventEmitter<string>();
-  @Output() onCancel : EventEmitter<string> = new EventEmitter<string>();
 
   searchText: string = '';
 
@@ -36,6 +35,8 @@ export class WorkerAppoinmentsComponent {
     for(let i=1;i<=Math.ceil(total/5);i++){
       this.pages.push(i)
     }
+    console.log(this.pages);
+    
   }
 
   onPrevious($event: Event) {
@@ -57,12 +58,7 @@ export class WorkerAppoinmentsComponent {
   }
 
   onSearchText(){
+    console.log(this.searchText);
     this.onSearchTextChanged.emit(this.searchText);
   }
-
-  onCancelSelected(bookingId: string | undefined){
-    
-    this.onCancel.emit(bookingId)
-  }
-
 }

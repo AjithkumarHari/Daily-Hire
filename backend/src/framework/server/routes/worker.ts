@@ -8,7 +8,9 @@ import { workerRepositoryMongoDB } from "../../database/repository/workerDbRepos
 import { serviceDbRepository } from "../../../application/repository/serviceDbRepository";
 import { serviceDbRepositoryMongoDB } from "../../database/repository/serviceDbRepository.";
 import { bookingDbRepository } from "../../../application/repository/bookingDbRepository";
-import { bookingDbRepositoryMongoDB } from "../../database/repository/bookingDbRepository"; 
+import { bookingDbRepositoryMongoDB } from "../../database/repository/bookingDbRepository";
+import { walletDbRepository } from "../../../application/repository/walletDbRepository";
+import { walletDbRepositoryMongoDB } from "../../database/repository/walletDbRepository";
 import { reviewDbRepository } from "../../../application/repository/reviewDbRepository";
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 import { paymentServiceInterface } from "../../../application/service/paymentServiceInterface";
@@ -28,6 +30,8 @@ const workerRouter = () => {
         serviceDbRepositoryMongoDB,
         bookingDbRepository,
         bookingDbRepositoryMongoDB,
+        // walletDbRepository,
+        // walletDbRepositoryMongoDB,
         // reviewDbRepository,
         // reviewDbRepositoryMongoDB,
         // paymentServiceInterface,

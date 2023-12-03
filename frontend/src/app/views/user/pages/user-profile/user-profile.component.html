@@ -3,27 +3,33 @@
 <div class="grid grid-cols-3">
     <div>
         <div class="mx-10 mt-7 max-w-sm">
-            <div class="rounded-lg border bg-white px-3  pt-8 pb-10 shadow-lg">
+            <div class="   px-3  bg-white rounded-lg  py-5 items-center justify-center gap-2 relative">
                 <div class="relative mx-auto w-36 rounded-full">
                     <span
-                        class="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
-                    <img class="mx-auto h-auto w-full rounded-full"
-                        src="./assets/images/user.jpg"
-                        alt="" />
+                        class="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2">
+                    </span>
+                    <img class="mx-auto h-auto w-full rounded-full" src="./assets/images/user.jpg" alt="" />
                 </div>
-                <h1 class="my-1 text-center text-xl font-bold leading-8 text-gray-900">{{user$.name}}</h1>
-                <div class="flex justify-evenly">
+                <h1 class="mt-1 text-center text-xl font-bold leading-8 text-gray-900">{{user$.name}}</h1>
+                <div class="flex justify-center" *ngIf="wallet$">
+                    <app-wallet-transactions [wallet]="wallet$" [count]="wallet$.transactions?.length"></app-wallet-transactions>
+                </div>
+
+                <div class="flex mt-1 justify-evenly">
                     <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">{{user$.email}}</h3>
                     <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">+91 {{user$.phone}}</h3>
                 </div>
                 <ul class="mt-3 divide-y py-2 px-3 text-gray-600 hover:text-gray-700 ">
-                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"  routerLink="newBooking"   >
+                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"
+                        routerLink="newBooking">
                         <span class="font-semibold">Upcoming Bookings</span>
                     </li>
-                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"  routerLink="bookingHistory">
+                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"
+                        routerLink="bookingHistory">
                         <span class="font-semibold">Bookings History</span>
                     </li>
-                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"  routerLink="updateProfile">
+                    <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"
+                        routerLink="updateProfile">
                         <span class="font-semibold">Update Profile</span>
                     </li>
                 </ul>
@@ -33,5 +39,5 @@
     <div class="col-span-2 ">
         <router-outlet></router-outlet>
     </div>
-    
+
 </div>

@@ -7,8 +7,10 @@ import { ServiceRepository } from "../../application/repository/serviceDbReposit
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
 import { BookingRepository } from "../../application/repository/bookingDbRepository";
 import { BookingDbRepositoryMongoDB } from "../../framework/database/repository/bookingDbRepository";
-import { ReviewRepository, reviewDbRepository } from "../../application/repository/reviewDbRepository";
+import { ReviewRepository } from "../../application/repository/reviewDbRepository";
 import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
+import { WalletRepository } from "../../application/repository/walletDbRepository";
+import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
 import { AuthServiceInterface } from "../../application/service/authServiceInterface";
 import { AuthService } from "../../framework/service/authService";
 import { PaymentServiceInterface } from "../../application/service/paymentServiceInterface";
@@ -27,6 +29,7 @@ import { Booking } from "../../types/Booking";
 import { cancelBookingRequest } from "../../application/useCase/booking/cancelBookingRequest";
 import { editUser } from "../../application/useCase/user/editUser";
 import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId";
+import { getWallet } from "../../application/useCase/wallet/getWallet";
 
 
 const userController = ( 
@@ -40,6 +43,8 @@ const userController = (
     bookingDbRepositoryImp: BookingDbRepositoryMongoDB,
     reviewDbRepository: ReviewRepository,
     reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
+    walletDbRepository: WalletRepository,
+    walletDbRepositoryImp: WalletDbRepositoryMongoDB,
     paymentServiceInterface: PaymentServiceInterface,
     paymentServiceImp: PaymentService,
     authServiceInterface: AuthServiceInterface,
@@ -51,6 +56,7 @@ const userController = (
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
     const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
     const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
+    const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
     const paymentService = paymentServiceInterface(paymentServiceImp());
     const authService = authServiceInterface(authServiceImpl());
 
@@ -214,15 +220,32 @@ const userController = (
         }
     }
 
+    const getWalletByUser = async ( req: Request, res: Response ) =>{
+        try {
+            const userId = req.params.id;
+            const result = await getWallet(userId, dbWalletRepository)
+            if (result instanceof AppError) {
+                res.status(result.errorCode).json({
+                    ...result
+                })
+            } else {
+                res.json(result);
+            }
+        } catch {
+            res.status(500);
+        }
+    }
+
     return {
         getAllWorkers,
-        getWorkerById,
         getAllServices,
-        bookingWorker,
-        reviewWorker,
+        getWorkerById,
         getReviewByWorkerId,
         getBookingByUser,
         getBookingByWorker,
+        getWalletByUser,
+        bookingWorker,
+        reviewWorker,
         cancelBooking,
         updateUserProfile,
     };

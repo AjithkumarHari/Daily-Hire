@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="m-10">
+<div class="mx-10">
     <div class="grid grid-cols-2 ">
         <button  (click)="setTab('new')" 
         [ngClass]="{
@@ -20,10 +20,10 @@
     </div>
 
     <ng-container *ngIf="tab === 'new'">
-        <app-worker-appoinments [bookings]="onNewBookings()"></app-worker-appoinments>
+        <app-worker-appoinments [bookings]="newBookings$" [count]="newBookings$.length" (onSearchTextChanged)="onNewBookingSeachFilter($event)" (onCancel)="onCancelled($event)"></app-worker-appoinments>
     </ng-container>
 
     <ng-container *ngIf="tab === 'old'">
-        <app-worker-appoinments [bookings]="onOldBookings()"></app-worker-appoinments>
+        <app-worker-appointment-history [bookings]="oldBookings$" [count]="oldBookings$.length" (onSearchTextChanged)="onOldBookingSeachFilter($event)"></app-worker-appointment-history>
     </ng-container>
 </div>

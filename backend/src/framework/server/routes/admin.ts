@@ -10,6 +10,8 @@ import { reviewDbRepository } from "../../../application/repository/reviewDbRepo
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 import { bookingDbRepository } from "../../../application/repository/bookingDbRepository";
 import { bookingDbRepositoryMongoDB } from "../../database/repository/bookingDbRepository";
+import { walletDbRepository } from "../../../application/repository/walletDbRepository";
+import { walletDbRepositoryMongoDB } from "../../database/repository/walletDbRepository";
 
 const adminRouter = () => {
     const router = express.Router()
@@ -25,6 +27,8 @@ const adminRouter = () => {
         reviewDbRepositoryMongoDB,
         bookingDbRepository,
         bookingDbRepositoryMongoDB,
+        walletDbRepository,
+        walletDbRepositoryMongoDB,
         )
 
 

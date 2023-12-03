@@ -13,8 +13,6 @@ export const bookingPayment = async (
     ) => {
     try {
         const session: any = await paymentService.createSession(paymentDetails)  
-        console.log(session);
-        
         if(!session)
             throw new AppError("Not Found", HttpStatus.NOT_FOUND);
         const bookingData: Booking = {

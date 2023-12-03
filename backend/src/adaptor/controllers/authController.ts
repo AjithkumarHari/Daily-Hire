@@ -5,6 +5,8 @@ import { WorkerRepository } from "../../application/repository/workerDbRepositor
 import { WorkerRepositoryMongoDB } from "../../framework/database/repository/workerDbRepository";
 import { AdminRepository } from "../../application/repository/adminDbRepository";
 import { AdminDbRepositoryMongoDb } from "../../framework/database/repository/adminDbRepository";
+import { WalletRepository } from "../../application/repository/walletDbRepository";
+import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
 import { AuthServiceInterface } from "../../application/service/authServiceInterface";
 import { AuthService } from "../../framework/service/authService";
 import { GoogleAuthServiceInterface } from "../../application/service/googleAuthServiceInterface";
@@ -23,6 +25,8 @@ const authController = (
     workerDbRepositoryImp: WorkerRepositoryMongoDB,
     adminDbRepository: AdminRepository,
     adminDbRepositoryImp: AdminDbRepositoryMongoDb,
+    walletDbRepository: WalletRepository,
+    walletDbRepositoryImp: WalletDbRepositoryMongoDB,
     authServiceInterface: AuthServiceInterface,
     authServiceImpl: AuthService,
     googleAuthServiceInterface: GoogleAuthServiceInterface,
@@ -33,6 +37,7 @@ const authController = (
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbAdminRepository = adminDbRepository(adminDbRepositoryImp());
+    const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
     const authService = authServiceInterface(authServiceImpl());
     const googleAuthService = googleAuthServiceInterface(googleAuthServiceImpl());
     const otpService = otpServiceInterface(otpServiceImpl());
@@ -40,9 +45,7 @@ const authController = (
     const registerUser = async (req: Request, res: Response) => {
 
         const user: { name: string, phone: number, email: string, password: string } = req.body;
-
-        const result: any = await userSignup(user, dbUserRepository, authService, otpService);
-
+        const result: any = await userSignup(user, dbUserRepository, dbWalletRepository, authService, otpService);
         if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result
@@ -183,7 +186,7 @@ const authController = (
 
     const loginWithGoogle = async (req: Request, res: Response) => {
         const credentials: string = req.body.idToken;
-        const result : any = await signInWithGoogle(credentials, googleAuthService, dbUserRepository, authService);
+        const result : any = await signInWithGoogle(credentials,dbUserRepository , dbWalletRepository, googleAuthService, authService);
         res.json({
             status: "success",
             message: "user Google auth success",

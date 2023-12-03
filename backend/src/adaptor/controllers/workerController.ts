@@ -5,6 +5,8 @@ import { ServiceRepository } from "../../application/repository/serviceDbReposit
 import { ServiceDbRepositoryMongoDB } from "../../framework/database/repository/serviceDbRepository.";
 import { BookingRepository } from "../../application/repository/bookingDbRepository";
 import { BookingDbRepositoryMongoDB } from "../../framework/database/repository/bookingDbRepository";
+// import { WalletRepository } from "../../application/repository/walletDbRepository";
+// import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
 import { allServices } from "../../application/useCase/service/allService";
 import { HttpStatus } from "../../types/HttpStatus";
 import { Booking } from "../../types/Booking";
@@ -19,11 +21,14 @@ const workerController = (
     serviceDbRepositoryImp: ServiceDbRepositoryMongoDB,
     bookingDbRepository: BookingRepository,
     bookingDbRepositoryImp: BookingDbRepositoryMongoDB,
+    // walletDbRepository: WalletRepository,
+    // walletDbRepositoryImp: WalletDbRepositoryMongoDB,
     
 ) => {
     const dbWorkerRepository = workerDbRepository(workerDbRepositoryImp());
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
     const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
+    // const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
 
     const getAllServices = async ( req: Request, res: Response ) => {
         try {

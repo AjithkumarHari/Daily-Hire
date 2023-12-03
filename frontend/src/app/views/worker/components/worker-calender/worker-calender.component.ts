@@ -38,7 +38,6 @@ export class WorkerCalenderComponent {
   constructor(private workerService: WorkerService){}
   
   ngOnInit(): void {
- 
     this.initDate();
     this.getNoOfDays();
   }
@@ -112,5 +111,17 @@ export class WorkerCalenderComponent {
   }
 
   trackByIdentity = (index: number, item: any) => item; 
+
+  changeMonth(monthOffset: number) {
+    this.month += monthOffset;
+    if (this.month === -1) {
+        this.month = 11; 
+        this.year--; 
+    } else if (this.month === 12) {
+        this.month = 0; 
+        this.year++;
+    }
+    this.getNoOfDays();
+  }
 
 }

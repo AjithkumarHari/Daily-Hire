@@ -10,6 +10,8 @@ import { ReviewRepository } from "../../application/repository/reviewDbRepositor
 import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
 import { BookingRepository } from "../../application/repository/bookingDbRepository";
 import { BookingDbRepositoryMongoDB } from "../../framework/database/repository/bookingDbRepository";
+import { WalletRepository } from "../../application/repository/walletDbRepository";
+import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
 import { allWorkers } from "../../application/useCase/worker/allWorkers";
 import { allUsers } from "../../application/useCase/admin/allUser";
 import { HttpStatus } from "../../types/HttpStatus";
@@ -38,6 +40,8 @@ const adminController = (
     reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
     bookingDbRepository: BookingRepository,
     bookingDbRepositoryImp: BookingDbRepositoryMongoDB,
+    walletDbRepository: WalletRepository,
+    walletDbRepositoryImp: WalletDbRepositoryMongoDB,
 ) => {
 
     const dbUserRepository = userDbRepository(userDbRepositoryImp());
@@ -45,6 +49,7 @@ const adminController = (
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
     const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
     const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
+    const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
 
     const getAllUser = async ( req: Request, res: Response ) => {
         try {
@@ -228,7 +233,7 @@ const adminController = (
     const bookingStatusChange = async ( req: Request, res: Response ) => {
         try {
             const bookingId = req.body.bookingId
-            const result = await cancelBooking(bookingId, dbBookingRepository)
+            const result = await cancelBooking(bookingId, dbBookingRepository, dbWalletRepository)
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'

@@ -12,7 +12,6 @@ export class SelectedDayComponent {
   @Output() onCancel : EventEmitter<string> = new EventEmitter<string>();
 
   onCancelSelected(){
-    console.log(this.booking.bookingTime);
     if(this.booking._id){
       this.onCancel.emit(this.booking._id)
     }

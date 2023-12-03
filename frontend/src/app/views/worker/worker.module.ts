@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { WorkerRoutingModule } from './worker-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -27,6 +27,7 @@ import { BlockDayComponent } from './components/block-day/block-day.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { WorkerAppointmentHistoryComponent } from './components/worker-appointment-history/worker-appointment-history.component';
 
 @NgModule({
   declarations: [
@@ -47,11 +48,13 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     ProfileComponent,
     BookingsComponent,
     ScheduleComponent,
+    WorkerAppointmentHistoryComponent,
   ],
   imports: [
     WorkerRoutingModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     StoreModule.forFeature('worker', authReducer),
     EffectsModule.forFeature(AuthEffects),
     NgOtpInputModule

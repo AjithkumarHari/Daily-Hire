@@ -7,6 +7,7 @@ import { Service } from 'src/app/types/Service';
 import { Review } from 'src/app/types/Review';
 import { Booking } from 'src/app/types/Booking';
 import { User } from 'src/app/types/User';
+import { Wallet } from 'src/app/types/Wallet';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,10 @@ export class UserService {
 
   updateProfile(userId: string, user: User){
     return this.http.put(`${this.server}/user/edit-user`,{userId, user} )
+  }
+
+  getWalletByUser(id: string): Observable<Wallet>{
+    return this.http.get<Wallet>(`${this.server}/user/wallet/${id}`)
   }
    
 }

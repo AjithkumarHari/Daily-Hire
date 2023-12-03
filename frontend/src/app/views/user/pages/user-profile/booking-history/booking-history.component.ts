@@ -13,6 +13,8 @@ import { selectUserData } from '../../../state/login/login.selector';
 })
 export class BookingHistoryComponent {
 
+  
+
   user!: User;
   bookings$: Booking[] = [];
   

@@ -6,6 +6,8 @@ import { workerDbRepository } from "../../../application/repository/workerDbRepo
 import { workerRepositoryMongoDB } from "../../database/repository/workerDbRepository";
 import { adminDbRepository } from "../../../application/repository/adminDbRepository";
 import { adminDbRepositoryMongoDB } from "../../database/repository/adminDbRepository";
+import { walletDbRepository } from "../../../application/repository/walletDbRepository";
+import { walletDbRepositoryMongoDB } from "../../database/repository/walletDbRepository";
 import { authService } from "../../service/authService";
 import { authServiceInterface } from "../../../application/service/authServiceInterface";
 import { googleAuthService } from "../../service/googleAuthService";
@@ -23,6 +25,8 @@ const authRouter = () => {
         workerRepositoryMongoDB,
         adminDbRepository,
         adminDbRepositoryMongoDB,
+        walletDbRepository,
+        walletDbRepositoryMongoDB,
         authServiceInterface,
         authService,
         googleAuthServiceInterface,
