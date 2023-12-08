@@ -57,3 +57,18 @@ export const workerVerifyFailure = createAction(
     `Auth Worker Verify Failure`,
     props<{error: ErrorRes}>()
 )
+
+export const workerBlockBooking = createAction(
+    `Auth Worker Block Booking`,
+    props<{workerId: string, blockDate: Date}>()
+)
+
+export const workerUnBlockBooking = createAction(
+    `Auth Worker UnBlock Booking`,
+    props<{workerId: string, blockDate: Date}>()
+)
+
+export const workerBlockSuccess = createAction(
+    `Auth Worker Block Booking Success`,
+    props<{workerData: any}>()
+)

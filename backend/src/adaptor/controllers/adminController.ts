@@ -26,6 +26,7 @@ import { findAllReviews } from "../../application/useCase/review/findAllReviews"
 import { listUnlistReview } from "../../application/useCase/admin/listUnlistReviews";
 import { allBookings } from "../../application/useCase/booking/allBooking";
 import { cancelBooking } from "../../application/useCase/booking/cancelBooking";
+import { getStaticsAdmin } from "../../application/useCase/booking/getStaticsAdmin";
 
 
 
@@ -244,6 +245,21 @@ const adminController = (
             res.status(500)
         }
     }
+    
+    const getStatistics = async ( req: Request, res: Response ) => {
+        try {
+            const result = await getStaticsAdmin(dbUserRepository,dbWorkerRepository,dbServiceRepository,dbReviewRepository, dbBookingRepository)
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
 
 
     return {
@@ -260,6 +276,7 @@ const adminController = (
         reviewStatusChange,
         getAllBookings,
         bookingStatusChange,
+        getStatistics,
     }
 }
 export default adminController

@@ -12,7 +12,8 @@ import { HttpStatus } from "../../types/HttpStatus";
 import { Booking } from "../../types/Booking";
 import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId";
 import { cancelBookingRequest } from "../../application/useCase/booking/cancelBookingRequest";
-import { blockBookingDate } from "../../application/useCase/worker/blockBookingDate";
+import { blockBookingDate, unBlockBookingDate } from "../../application/useCase/worker/blockUnblockBooking";
+import { getStaticsWorker } from "../../application/useCase/worker/getStaticsWorker";
 
 const workerController = (
     workerDbRepository: WorkerRepository,
@@ -95,11 +96,49 @@ const workerController = (
         }
     }
 
+    const unBlockBooking = async ( req: Request, res: Response) => {
+        try {
+            console.log('hsghfhjksd');
+            
+            const {workerId, blockDate} = req.body;
+            console.log('blockBooking',workerId, blockDate);
+           
+           const result = await unBlockBookingDate(workerId, blockDate, dbWorkerRepository)
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+
+        } catch {
+            
+        }
+    }
+
+
+    const getStatistics = async ( req: Request, res: Response ) => {
+        try {
+            const workerId = req.params.id;
+            const result = await getStaticsWorker(workerId ,dbBookingRepository)
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+
     return {
         getAllServices,
         getBookingByWorker,
         cancelBooking,
         blockBooking,
+        unBlockBooking,
+        getStatistics,
     };
     
 }

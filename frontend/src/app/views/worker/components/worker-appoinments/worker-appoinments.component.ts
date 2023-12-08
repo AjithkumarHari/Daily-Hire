@@ -58,6 +58,7 @@ export class WorkerAppoinmentsComponent {
 
   onSearchText(){
     this.onSearchTextChanged.emit(this.searchText);
+    this.currentPage = 1;
   }
 
   onCancelSelected(bookingId: string | undefined){

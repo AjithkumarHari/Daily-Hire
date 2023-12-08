@@ -27,6 +27,7 @@ import { BookingManagementComponent } from './components/booking-management/book
 import { DateStringPipe } from './pipes/date-string.pipe';
 import { GenericTableComponent } from './components/generic-table/generic-table.component';
 
+import { AgChartsAngularModule } from 'ag-charts-angular';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
     AdminRoutingModule,
     ReactiveFormsModule,
     StoreModule.forFeature('admin', authReducer),
-    EffectsModule.forFeature(AuthEffects)
+    EffectsModule.forFeature(AuthEffects),
+    AgChartsAngularModule
   ],
   providers: [
     {

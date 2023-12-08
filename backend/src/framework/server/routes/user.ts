@@ -51,7 +51,7 @@ const userRouter = () => {
 
     router.get('/review-list/:id',controller.getReviewByWorkerId);
 
-    router.get('/booking-list/:email',controller.getBookingByUser);
+    router.get('/booking-list/:id',controller.getBookingByUser);
     
     router.get('/worker-booked-list/:id',controller.getBookingByWorker);
     
@@ -59,7 +59,9 @@ const userRouter = () => {
 
     router.put('/edit-user',controller.updateUserProfile);
 
-    router.get('/wallet/:id',controller.getWalletByUser)
+    router.get('/wallet/:id',controller.getWalletByUser);
+    
+    router.get('/isBooked/:userId/:workerId',controller.isWorkerBooked);
 
     return router;
 }

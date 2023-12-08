@@ -38,6 +38,15 @@ export const workerRepositoryMongoDB = () => {
         return res;
         
     }
+    const unBlockDate = async (_id: string, date: Date) => {
+        const res = await WORKER.updateOne(
+            { _id },
+            { $pull: { blockedDates: date } }
+        );
+        console.log(res);
+        return res;
+        
+    }
 
     return {
         getAllWorkers,
@@ -46,7 +55,8 @@ export const workerRepositoryMongoDB = () => {
         getWorkerById,
         workerListUnlist,
         workerActivate,
-        blockDate
+        blockDate,
+        unBlockDate,
     }
 }
 

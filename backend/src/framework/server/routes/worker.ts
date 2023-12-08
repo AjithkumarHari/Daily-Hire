@@ -47,6 +47,10 @@ const workerRouter = () => {
     router.put('/cancel-booking',controller.cancelBooking);
 
     router.put('/block-booking',controller.blockBooking);
+    
+    router.put('/unblock-booking',controller.unBlockBooking);
+
+    router.get('/worker-stats/:id',controller.getStatistics);
 
     return router;
 }

@@ -33,6 +33,7 @@ export class WorkerCalenderComponent {
   @Input() bookings!: Booking[];
   @Input() blockedDates: Date[] | undefined;
   @Output() onBlockBooking : EventEmitter<Date> = new EventEmitter<Date>();
+  @Output() onUnBlockBooking : EventEmitter<Date> = new EventEmitter<Date>();
   @Output() onShowBooking : EventEmitter<Date> = new EventEmitter<Date>();
 
   constructor(private workerService: WorkerService){}
@@ -49,19 +50,19 @@ export class WorkerCalenderComponent {
     this.selectedDate = new Date(this.year, this.month, today.getDate())
   }
 
-  isToday(date: any) {
-    const today = new Date();
-    const d = new Date(this.year, this.month, date);
-    return today.toDateString() === d.toDateString() ? true : false;
-  }
+  // isToday(date: any) {
+  //   const today = new Date();
+  //   const d = new Date(this.year, this.month, date);
+  //   return today.toDateString() === d.toDateString() ? true : false;
+  // }
   
-  isPast(date: any) {
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-    const d = new Date(this.year, this.month, date);
-    d.setHours(0, 0, 0, 0);
-    return currentDate.getTime() > d.getTime(); 
-  }
+  // isPast(date: any) {
+  //   const currentDate = new Date();
+  //   currentDate.setHours(0, 0, 0, 0);
+  //   const d = new Date(this.year, this.month, date);
+  //   d.setHours(0, 0, 0, 0);
+  //   return currentDate.getTime() > d.getTime(); 
+  // }
 
   isBooked(date: any) {
     const d = new Date(this.year, this.month, date);
@@ -74,24 +75,30 @@ export class WorkerCalenderComponent {
     return result;
   }
   
-  isBlocked(date: any) {
-    if(this.blockedDates){
-      const d = new Date(this.year, this.month, date);
-      d.setHours(0, 0, 0, 0);
-      const result = this.blockedDates.some((details) => {
-        const newDate = new Date(details);
-        newDate.setHours(0, 0, 0, 0);
-        return newDate.getTime() === d.getTime();
-      });
-      return result;
-    }
-    return null;
-  }
+  // isBlocked(date: any) {
+  //   if(this.blockedDates){
+  //     const d = new Date(this.year, this.month, date);
+  //     d.setHours(0, 0, 0, 0);
+  //     const result = this.blockedDates.some((details) => {
+  //       const newDate = new Date(details);
+  //       newDate.setHours(0, 0, 0, 0);
+  //       return newDate.getTime() === d.getTime();
+  //     });
+  //     return result;
+  //   }
+  //   return null;
+  // }
 
 
   getDateValue(date: any): void {
     this.selectedDate = new Date(this.year, this.month, date);
-    this.isBooked(date) ? this.onShowBooking.emit(this.selectedDate) : this.onBlockBooking.emit(this.selectedDate);
+    if(this.isBooked(date)){
+      this.onShowBooking.emit(this.selectedDate)
+    }else{
+      
+      this.onBlockBooking.emit(this.selectedDate)
+    }
+    
   }
 
   getNoOfDays() {

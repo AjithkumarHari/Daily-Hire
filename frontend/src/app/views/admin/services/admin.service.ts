@@ -68,4 +68,9 @@ export class AdminService {
     return this.http.put(`${this.server}/admin/booking-status`,{bookingId});
   }
 
+  getStatistics(){
+    return this.http.get(`${this.server}/admin/app-statics`);
+  }
+
+
 }

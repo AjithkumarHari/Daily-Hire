@@ -11,8 +11,8 @@ export const bookingDbRepositoryMongoDB = () => {
         return BOOKING.create(bookingData)
     }
 
-    const getBookingByUserEmail = async (email: string) => {
-        return BOOKING.find({"user.email": email}).sort({ bookingTime: -1 });
+    const getBookingByUserId = async (userId: string) => {
+        return BOOKING.find({"user._id": userId}).sort({ bookingTime: -1 });
     }
 
     const bookingCancel = async (_id: string) => {
@@ -30,15 +30,20 @@ export const bookingDbRepositoryMongoDB = () => {
     const getBookingById = async (_id: string) => {
         return await BOOKING.findOne({_id});
     }
+    
+    const isBooked = async (userId: string, workerId: string) => {
+        return await BOOKING.findOne( { "user._id": userId, "worker._id": workerId});
+    }
 
     return {
         getAllBooking,
         addBooking,
-        getBookingByUserEmail,
+        getBookingByUserId,
         bookingCancel,
         cancelRequest,
         getBookingByWorkerId,
         getBookingById,
+        isBooked,
     }
 }
 

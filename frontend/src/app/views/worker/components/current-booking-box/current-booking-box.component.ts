@@ -9,5 +9,7 @@ import { Booking } from 'src/app/types/Booking';
 export class CurrentBookingBoxComponent {
 
   @Input() bookings!: Booking[];
+
+  
   
 }

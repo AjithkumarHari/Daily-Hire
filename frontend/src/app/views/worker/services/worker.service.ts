@@ -29,4 +29,12 @@ export class WorkerService {
     return this.http.put(`${this.server}/worker/block-booking`,{workerId, blockDate })
   }
 
+  unBlockBooking(workerId: string, blockDate: Date){
+    return this.http.put(`${this.server}/worker/unblock-booking`,{workerId, blockDate })
+  }
+
+  getWorkerStats(id: string) {
+    return this.http.get(`${this.server}/worker/worker-stats/${id}`)
+  }
+
 }

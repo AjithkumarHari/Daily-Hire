@@ -18,7 +18,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
     .pipe(
       catchError((error: HttpErrorResponse) => {
         console.warn(
-          'the interceptor has caught an error, process it here',
+          'the interceptor has caught an error',
           error
         );
         return throwError(() => error);

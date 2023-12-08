@@ -23,7 +23,6 @@ import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
     UserModule,
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
-    
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.interceptor';
 
 import { UserRoutingModule } from './user-routing.module';
+import { DirectiveModule } from 'src/app/directives/directive.module';
 
 import { environment } from 'src/environments/environment';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
@@ -89,6 +90,7 @@ import { WalletTransactionsComponent } from './components/wallet-transactions/wa
     NgOtpInputModule,
     NgxStarsModule,
     NgxStripeModule.forRoot('pk_test_51OFsOJSDlgqaDxgfrx83NzkCWIKqRIeVLjNNHxcU7NrXLEMrddNWCnHHhYmWGB1cGDsvFQvnRvFM80h9aAXLqZ1100AWYv1XL9'),
+    DirectiveModule,
   ],
   providers: [
     {

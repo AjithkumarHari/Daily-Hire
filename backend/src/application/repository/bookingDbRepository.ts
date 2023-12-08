@@ -7,7 +7,7 @@ export const bookingDbRepository = (repository: ReturnType<BookingDbRepositoryMo
 
     const getAllBooking = async () => await repository.getAllBooking();
 
-    const getBookingByUserEmail = async (email: string) => await repository.getBookingByUserEmail(email);
+    const getBookingByUserId = async (userId: string) => await repository.getBookingByUserId(userId);
 
     const bookingCancel = async (id: string) => await repository.bookingCancel(id);
     
@@ -16,15 +16,18 @@ export const bookingDbRepository = (repository: ReturnType<BookingDbRepositoryMo
     const getBookingByWorkerId = async (_id: string) => await repository.getBookingByWorkerId(_id);
 
     const getBookingById = async (id: string) => await repository.getBookingById(id);
+    
+    const isBooked = async (userId: string, workerId: string) => await repository.isBooked(userId, workerId);
 
     return {
         addBooking,
         getAllBooking,
-        getBookingByUserEmail,
+        getBookingByUserId,
         bookingCancel,
         cancelRequest,
         getBookingByWorkerId,
         getBookingById,
+        isBooked,
     }
 }
 

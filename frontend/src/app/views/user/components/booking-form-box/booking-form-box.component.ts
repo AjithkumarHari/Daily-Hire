@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output , ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { User } from 'src/app/types/User';
 import { Worker } from 'src/app/types/Worker';
@@ -7,6 +6,8 @@ import { selectUserData } from '../../state/login/login.selector';
 import { UserState } from '../../state/user.state';
 import { UserService } from '../../services/user.service';
 import { Booking } from 'src/app/types/Booking';
+import { Router } from '@angular/router';
+import { Wallet } from 'src/app/types/Wallet';
 
 
 @Component({
@@ -38,26 +39,32 @@ export class BookingFormBoxComponent {
   year!: number;
   no_of_days = [] as number[];
   blankdays = [] as number[];
-  selectedDate!: Date;
+  selectedDate: Date = new Date();
   
   user!: User;
   @Input() worker!: Worker ;
   bookings!: Booking;
+  wallet!: Wallet;
   workerBookings!: Booking[]
+  paymentMethod: string ='stripe';
 
-  constructor( private userService: UserService, private store: Store<UserState> ) {}
+  constructor( 
+    private userService: UserService, 
+    private store: Store<UserState>,
+    private router: Router ) {}
 
   ngOnInit(): void {
     this.initDate();
     this.getNoOfDays();
     this.store.pipe(select(selectUserData)).subscribe((data) => {
       this.user = data;
-      
+      if(this.user._id)
+        this.userService.getWalletByUser(this.user._id).subscribe((data)=>{
+          this.wallet = data
+        })
     });
     if(this.worker._id){
       this.userService.getBookingByWorker(this.worker._id).subscribe((data)=> {
-        console.log(data);
-        
         this.workerBookings = data;
       })
 
@@ -72,31 +79,39 @@ export class BookingFormBoxComponent {
     this.datepickerValue = this.selectedDate.toDateString(); 
   }
 
-  isToday(date: any) {
-    const today = new Date();
-    const d = new Date(this.year, this.month, date);
-    return today.toDateString() === d.toDateString() ? true : false;
-  }
+  // isToday(date: any) {
+  //   const today = new Date();
+  //   const d = new Date(this.year, this.month, date);
+  //   return today.toDateString() === d.toDateString();
+  // }
 
-  isPast(date: any) {
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-    const d = new Date(this.year, this.month, date);
-    d.setHours(0, 0, 0, 0);
- 
-    return currentDate.getTime() > d.getTime(); 
-  }
+  // isPast(date: any) {
+  //   const currentDate = new Date();
+  //   currentDate.setHours(0, 0, 0, 0);
+  //   const d = new Date(this.year, this.month, date);
+  //   d.setHours(0, 0, 0, 0);
+  //   return currentDate.getTime() > d.getTime(); 
+  // }
 
-  isBooked(date: any) {
-    const d = new Date(this.year, this.month, date);
-    d.setHours(0, 0, 0, 0);
-    const result = this.workerBookings.some((details) => {
-      const newDate = new Date(details.bookingTime);
-      newDate.setHours(0, 0, 0, 0);
-      return newDate.getTime() === d.getTime();
-    });
-    return result;
-  }
+  // isSelected(date: any) {
+  //   const currentDate = this.selectedDate;
+  //   currentDate.setHours(0, 0, 0, 0);
+  //   const d = new Date(this.year, this.month, date);
+  //   d.setHours(0, 0, 0, 0);
+  //   return currentDate.getTime() == d.getTime(); 
+  // }
+
+  // isBooked(date: any) {
+  //   console.log('booked');
+  //   const d = new Date(this.year, this.month, date);
+  //   d.setHours(0, 0, 0, 0);
+  //   const result = this.workerBookings.some((details) => {
+  //     const newDate = new Date(details.bookingTime);
+  //     newDate.setHours(0, 0, 0, 0);
+  //     return newDate.getTime() === d.getTime();
+  //   });
+  //   return result;
+  // }
   
 
   getDateValue(date: any) {
@@ -124,7 +139,22 @@ export class BookingFormBoxComponent {
 
   trackByIdentity = (index: number, item: any) => item; 
 
+  changeMonth(monthOffset: number) {
+    this.month += monthOffset;
+    if (this.month === -1) {
+        this.month = 11; 
+        this.year--; 
+    } else if (this.month === 12) {
+        this.month = 0; 
+        this.year++;
+    }
+    this.getNoOfDays();
+  }
+
   onSubmit (){
+
+    console.log(this.paymentMethod);
+    
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
     this.selectedDate.setHours(0, 0, 0, 0);
@@ -133,11 +163,16 @@ export class BookingFormBoxComponent {
     const paymentDetails = {
       user: this.user,
       worker: this.worker,
-      bookingTime: this.selectedDate
+      bookingTime: this.selectedDate,
+      paymentMethod: this.paymentMethod
     }
 
     this.userService.paymentRequest(paymentDetails).subscribe(async (res: any)=>{
-      window.location.href = res.sessionUrl
+      if(res.sessionUrl){
+        window.location.href = res.sessionUrl;
+      }else{
+        window.location.reload();
+      }
     })
   }
   

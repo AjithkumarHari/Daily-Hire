@@ -70,6 +70,7 @@ export class BookingsComponent {
         return lowercaseName.includes(lowercaseText);
       });
     }
+    
   }
   
   onOldBookingSeachFilter(text: string){

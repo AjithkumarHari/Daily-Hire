@@ -27,6 +27,7 @@ export class WorkerDetailsComponent implements OnInit{
   pages: number[] = [];
   reviewFormHidden: boolean = true 
   rating: any
+  isBooked!: Boolean
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -39,7 +40,18 @@ export class WorkerDetailsComponent implements OnInit{
     this.id = this.activatedRoute.snapshot.paramMap.get('id')
     
     if(this.id){
-      this.userService.getWorkerById(this.id).subscribe((data: Worker)=> this.details$ = data);
+      this.userService.getWorkerById(this.id).subscribe((data: Worker)=>{
+         this.details$ = data
+         this.store.pipe(select(selectUserData)).subscribe((data) => {
+          this.user = data;
+          if(this.user._id && this.details$._id){
+            this.userService.isWorkerBooked(this.user._id,this.details$._id).subscribe((data: any)=>{
+              this.isBooked = data.isBooked
+            })
+          }
+        });
+      });
+
       this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {
         this.reviews$ = data;
         this.countPages(this.reviews$.length);
@@ -49,11 +61,9 @@ export class WorkerDetailsComponent implements OnInit{
         const totalRating: number = this.reviews$.reduce((acc, val) => acc + val.rating, 0);
         this.rating = totalRating !== 0 ? totalRating / this.reviews$.length : '';
       });       
+      
     }
  
-    this.store.pipe(select(selectUserData)).subscribe((data) => {
-      this.user = data;
-    });
 
     this.reviewForm = this.formBuilder.group({
       title : new FormControl(null, [Validators.required, Validators.pattern("^[A-Za-z]*[A-Za-z][A-Za-z0-9-. _]*$"),  Validators.max(30)]),

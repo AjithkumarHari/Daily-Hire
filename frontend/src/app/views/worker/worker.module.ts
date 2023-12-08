@@ -28,6 +28,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { WorkerAppointmentHistoryComponent } from './components/worker-appointment-history/worker-appointment-history.component';
+import { DirectiveModule } from 'src/app/directives/directive.module';
+import { UnblockDayComponent } from './components/unblock-day/unblock-day.component';
+
+import { AgChartsAngularModule } from 'ag-charts-angular';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,7 @@ import { WorkerAppointmentHistoryComponent } from './components/worker-appointme
     BookingsComponent,
     ScheduleComponent,
     WorkerAppointmentHistoryComponent,
+    UnblockDayComponent,
   ],
   imports: [
     WorkerRoutingModule,
@@ -57,7 +62,9 @@ import { WorkerAppointmentHistoryComponent } from './components/worker-appointme
     FormsModule,
     StoreModule.forFeature('worker', authReducer),
     EffectsModule.forFeature(AuthEffects),
-    NgOtpInputModule
+    NgOtpInputModule,
+    DirectiveModule,
+    AgChartsAngularModule
   ]
 })
 export class WorkerModule { }

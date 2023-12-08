@@ -7,7 +7,7 @@ export const findById = async ( workerId:string, dbWorkerRepository:ReturnType<W
     try {
       
         const worker: Worker | null = await dbWorkerRepository.getWorkerById(workerId);
-
+        
         if(!worker)
             throw new AppError("Not Found", HttpStatus.NOT_FOUND);
 

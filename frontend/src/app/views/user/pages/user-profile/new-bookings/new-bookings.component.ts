@@ -25,20 +25,23 @@ export class NewBookingsComponent {
   ngOnInit(){
     this.store.pipe(select(selectUserData)).subscribe((data) => {
       this.user = data;
-      this.userService.getBookingByUser(this.user.email).subscribe((data)=>{
-        this.bookings$ = data.filter((details)=>{
-          const newDate = new Date(details.bookingTime); 
-          const currentDate = new Date(); 
-          newDate.setHours(0, 0, 0, 0);
-          currentDate.setHours(0, 0, 0, 0);
-          return newDate >= currentDate;
+      if(this.user._id){
+        this.userService.getBookingByUser(this.user._id).subscribe((data)=>{
+          this.bookings$ = data.filter((details)=>{
+            const newDate = new Date(details.bookingTime); 
+            const currentDate = new Date(); 
+            newDate.setHours(0, 0, 0, 0);
+            currentDate.setHours(0, 0, 0, 0);
+            return newDate >= currentDate;
+          });
+          this.countPages(this.bookings$.length); 
         });
-        this.countPages(this.bookings$.length);
-      });
+      }
     });
   }
 
-  countPages(total: number){    
+  countPages(total: number){
+    this.pages = []   
     for(let i=1;i<=Math.ceil(total/4);i++){
       this.pages.push(i)
     }

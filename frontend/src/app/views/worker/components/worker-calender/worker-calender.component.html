@@ -1,10 +1,10 @@
  <div class=" py-5 pl-10 ">
-    <div>
-        <h1 class="mb-5 text-white text-5xl font-extrabold">See Your Bookings</h1>
-     </div>
+    <!-- <div>
+        <h1 class="mb-4 text-white text-5xl font-extrabold">See Your Bookings</h1>
+     </div> -->
 
-     <div class="flex justify-end">
-         <div class="bg-white rounded-lg shadow py-4 px-7 w-11/12  "  >
+     <div class="flex justify-end pt-5">
+         <div class="bg-gray-100 rounded-lg shadow py-4 px-7 w-11/12  "  >
             <div class="flex justify-between items-center mb-2">
                 <div>
                     <span class="text-4xl font-bold text-gray-800">{{MONTH_NAMES[month]}}</span>
@@ -43,15 +43,10 @@
                     <div style="width: 14.28%" class="text-center border-none p-1 border-transparent text-sm"></div>
                 </ng-container>
                 <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
-                    <div style="width: 14.28%" class=" px-3">
+                    <div style="width: 14.28%" class=" px-3 py-1">
                         <div (click)="getDateValue(date)"
-                        class="cursor-pointer text-center text-white text-xl rounded-full leading-loose transition ease-in-out duration-100"
-                        [ngClass]="{
-                            'bg-blue-500 text-white': isToday(date) === true,
-                            'text-[#e68b8b] pointer-events-none':isPast(date)===true,
-                            'text-white bg-[#39b43d] ':isBooked(date)=== true,
-                            'text-white bg-[#585858]  pointer-events-none':isBlocked(date)=== true,
-                        }">
+                        appDate [date]="date" [year]="year" [month]="month" [booking]="bookings"  [blockedDates]="blockedDates" [selectedDate]="selectedDate"
+                        class="cursor-pointer text-center text-black text-xl rounded-xl leading-loose transition ease-in-out duration-100">
                             {{ date }}
                         </div>
                     </div>
@@ -61,5 +56,3 @@
         
      </div>
  </div>
-
- 

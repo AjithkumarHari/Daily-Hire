@@ -58,6 +58,8 @@ const adminRouter = () => {
 
     router.put('/booking-status',controller.bookingStatusChange);
     
+    router.get('/app-statics',controller.getStatistics);
+
     return router
 }
 

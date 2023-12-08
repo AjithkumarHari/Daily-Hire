@@ -1,17 +1,19 @@
 <div class="max-w-md rounded-xl border bg-white p-6   text-gray-900  mt-10 ml-32">
-    <p class="text-lg font-bold pb-3">Block Booking on -  {{blockDay | dateString }}</p>
+    <p class="text-lg font-bold pb-3">Open Booking on -  {{blockDay | dateString }}</p>
  
     <ul class="max-w-md divide-y divide-gray-200 ">
        <li class="pb-3 sm:pb-4" >
           <div class="flex items-center justify-evenly space-x-4 rtl:space-x-reverse">
              <div class="flex text-center items-center">
-               <i class="fa-solid fa-ban text-4xl text-red-500 pr-5"></i>
-               <p class="text-lg">Are You Sure to close booking ?</p>
+
+                <i class="fa-solid fa-address-card  text-4xl text-green-500 pr-5"></i>
+ 
+               <p class="text-xl">Wish to open booking ?</p>
                  
              </div>
              <div class="inline-flex items-center text-base font-semibold text-gray-900  ">
-                <button (click)="onBlockSelected()" class="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg hover:brightness-110 active:brightness-90">
-                  Block
+                <button (click)="onBlockSelected()" class="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg hover:brightness-110 active:brightness-90">
+                  Unblock
                 </button>
              </div>
           </div>

@@ -18,8 +18,6 @@ const _authReducer = createReducer(
         }
     }),
     on(editProfileSuccess,(state, { userData})=>{
-        console.log('edit profile reducer');
-        
         return {
             ...state,
             userData: userData,

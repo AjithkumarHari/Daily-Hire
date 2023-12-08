@@ -16,6 +16,8 @@ export const workerDbRepository = (repository: ReturnType<WorkerRepositoryMongoD
     const workerActivate = async (email: string) => await repository.workerActivate(email);
 
     const blockDate = async (workerId: string, blockDate: Date) => await repository.blockDate(workerId, blockDate);
+    
+    const unBlockDate = async (workerId: string, blockDate: Date) => await repository.unBlockDate(workerId, blockDate);
 
     return {
         getAllWorkers,
@@ -25,6 +27,7 @@ export const workerDbRepository = (repository: ReturnType<WorkerRepositoryMongoD
         workerListUnlist,
         workerActivate,
         blockDate,
+        unBlockDate,
     }
 }
 

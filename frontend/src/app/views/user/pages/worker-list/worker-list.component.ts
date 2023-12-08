@@ -19,6 +19,7 @@ export class WorkerListComponent implements OnInit{
 
   currentPage: number = 1;
   pages: number[] = [];
+  filteredWorkers!: Worker[]
 
   constructor(private activatedRoute: ActivatedRoute,private userService: UserService){}
 
@@ -27,8 +28,9 @@ export class WorkerListComponent implements OnInit{
       this.workers$ = data;
       this.serviceFilter = this.activatedRoute.snapshot.paramMap.get('serviceName')
       if(this.serviceFilter){
-        this.workers$ = this.workers$.filter(worker => worker.work == this.serviceFilter);
+        this.workers$ = this.workers$.filter(worker => worker.work == this.serviceFilter)
       }
+      this.onSearchTextEntered('')
       this.countPages(this.workers$.length);
     })
   }
@@ -55,9 +57,21 @@ export class WorkerListComponent implements OnInit{
   
   onSearchTextEntered(enteredText: string){
     this.searchText = enteredText;
+    if(this.searchText==''){
+      this.filteredWorkers = this.workers$
+    }else{
+      this.filteredWorkers = this.workers$.filter(worker => {
+        const lowercaseText = enteredText.toLowerCase();
+        const lowercaseName = worker.name.toLowerCase();
+        return lowercaseName.includes(lowercaseText);
+      });
+    }
+    this.currentPage = 1;
+    this.countPages(this.filteredWorkers.length)
   }
 
   countPages(total: number){    
+    this.pages = [];
     for(let i=1;i<=Math.ceil(total/9);i++){
       this.pages.push(i)
     }
@@ -80,6 +94,5 @@ export class WorkerListComponent implements OnInit{
   onPageClick(pageNumber: number) {
     this.currentPage = pageNumber;
   }
-
  
 }

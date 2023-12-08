@@ -24,9 +24,9 @@ export class WorkerAppointmentHistoryComponent {
   ngOnChanges(changes: SimpleChanges){
     if (changes['count']) {
       // React to changes in 'count' input
-      const newCount = changes['count'].currentValue;
+      // const newCount = changes['count'].currentValue;
       // Do something with the new count...
-      this.countPages(newCount);
+      this.countPages(this.count);
     }
   }
 
@@ -35,8 +35,6 @@ export class WorkerAppointmentHistoryComponent {
     for(let i=1;i<=Math.ceil(total/5);i++){
       this.pages.push(i)
     }
-    console.log(this.pages);
-    
   }
 
   onPrevious($event: Event) {
@@ -58,7 +56,7 @@ export class WorkerAppointmentHistoryComponent {
   }
 
   onSearchText(){
-    console.log(this.searchText);
     this.onSearchTextChanged.emit(this.searchText);
+    this.currentPage = 1;
   }
 }

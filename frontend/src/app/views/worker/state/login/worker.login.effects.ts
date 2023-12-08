@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { WorkerAuthService } from "../../services/worker-auth-service.service";
-import { workerLoginFailure, workerLoginPending, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
+import { WorkerService } from "../../services/worker.service";
+import { workerBlockBooking, workerBlockSuccess, workerLoginFailure, workerLoginPending, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerUnBlockBooking, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -11,14 +12,15 @@ import { Router } from "@angular/router";
 export class AuthEffects{
 
     constructor( private actions$ : Actions, 
-        private workerService : WorkerAuthService,
+        private workerAuthService : WorkerAuthService,
+        private workerService : WorkerService,
         private router : Router){}
 
     login$ = createEffect(()=>
         this.actions$.pipe(
             ofType(workerLoginRequest),
             switchMap(({ credentials }) =>
-                this.workerService.login(credentials).pipe(
+                this.workerAuthService.login(credentials).pipe(
                     map(res=>{
                         let responce : any = res;
                         if(responce.token){ 
@@ -81,7 +83,7 @@ export class AuthEffects{
             ofType(workerSignupRequest),
             switchMap(({ worker }) =>
             
-            this.workerService.signup(worker).pipe(
+            this.workerAuthService.signup(worker).pipe(
                 map(res=>{
                     let responce : any = res;
                     if(responce.status=='success'){
@@ -124,7 +126,7 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(workerVerifyRequest),
             switchMap(({ worker }) =>
-                this.workerService.verifySignupOtp(worker).pipe(
+                this.workerAuthService.verifySignupOtp(worker).pipe(
                     map(res=>{
                         let responce : any = res;
                         if(responce.status=='success'){
@@ -172,6 +174,90 @@ export class AuthEffects{
             dispatch: false
         }
     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    block$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(workerBlockBooking),
+            switchMap(({ workerId,blockDate }) =>
+                this.workerService.blockBooking(workerId,blockDate).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        if(responce.status=='success'){
+                            console.log('verify req',responce.workerData);
+                            localStorage.setItem('worker-data',JSON.stringify(responce.workerData))
+                            return workerBlockSuccess({ workerData: responce.workerData})
+                        }
+                        else{
+                            console.log('in side effect LE',responce);
+                            return responce
+                        }
+                    }),
+                     
+                )
+            )
+        )
+    );
+    unblock$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(workerUnBlockBooking),
+            switchMap(({ workerId,blockDate }) =>
+                this.workerService.unBlockBooking(workerId,blockDate).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        if(responce.status=='success'){
+                            console.log('verify req',responce.workerData);
+                            localStorage.setItem('worker-data',JSON.stringify(responce.workerData))
+                            return workerBlockSuccess({ workerData: responce.workerData})
+                        }
+                        else{
+                            console.log('in side effect LE',responce);
+                            return responce
+                        }
+                    }),
+                     
+                )
+            )
+        )
+    );
+
+    blockSuccess$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(workerVerifySuccess),
+            tap(()=>{
+                console.log('block success');
+                
+                this.router.navigate(['/worker/schedule'])
+            })
+        ), {
+            dispatch: false
+        }
+    );
+
+ 
+
+ 
 
     
 }

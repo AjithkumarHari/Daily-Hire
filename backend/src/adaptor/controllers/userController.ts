@@ -30,6 +30,7 @@ import { cancelBookingRequest } from "../../application/useCase/booking/cancelBo
 import { editUser } from "../../application/useCase/user/editUser";
 import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId";
 import { getWallet } from "../../application/useCase/wallet/getWallet";
+import { isBooked } from "../../application/useCase/booking/isWorkerBookedByUser";
 
 
 const userController = ( 
@@ -108,7 +109,7 @@ const userController = (
     const bookingWorker = async ( req: Request, res: Response ) => {
         try{
             const paymentDetails = req.body;
-            const result: any = await bookingPayment(paymentDetails,paymentService,dbBookingRepository);
+            const result: any = await bookingPayment(paymentDetails,paymentService,dbBookingRepository, dbWalletRepository);
             if (result instanceof AppError) {
                 res.status(result.errorCode).json({
                     ...result
@@ -126,8 +127,8 @@ const userController = (
 
     const getBookingByUser = async ( req: Request, res: Response ) => {
         try {
-            const userEmail = req.params.email;
-            const result: Booking | null | unknown= await findByUser(userEmail, dbBookingRepository)
+            const userId = req.params.id;
+            const result: Booking | null | unknown= await findByUser(userId, dbBookingRepository)
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Not Found'
@@ -236,6 +237,22 @@ const userController = (
         }
     }
 
+    const isWorkerBooked = async ( req: Request, res: Response ) =>{
+        try {
+            const { userId, workerId } = req.params;
+            const result = await isBooked(userId, workerId, dbBookingRepository);
+            if (result instanceof AppError) {
+                res.status(result.errorCode).json({
+                    ...result
+                });
+            } else {
+                res.json(result);
+            }
+        } catch {
+            res.status(500);
+        }
+    }
+
     return {
         getAllWorkers,
         getAllServices,
@@ -248,6 +265,7 @@ const userController = (
         reviewWorker,
         cancelBooking,
         updateUserProfile,
+        isWorkerBooked,
     };
 };
 

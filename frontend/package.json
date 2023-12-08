@@ -23,6 +23,7 @@
     "@ngrx/effects": "^16.3.0",
     "@ngrx/store": "^16.3.0",
     "@stripe/stripe-js": "^2.2.0",
+    "ag-charts-angular": "^9.0.1",
     "flowbite-svelte": "^0.44.19",
     "ng-otp-input": "^1.9.3",
     "ngx-stars": "^1.6.5",

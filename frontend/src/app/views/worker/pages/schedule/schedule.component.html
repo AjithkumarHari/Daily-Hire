@@ -3,20 +3,23 @@
     <app-worker-calender 
     [bookings]="newBookings()" 
     [blockedDates]="workerBlockedDates()" 
-    (onBlockBooking)="blockBooking($event)"
+    (onUnBlockBooking)="blockBooking($event)"
     (onBlockBooking)="blockBooking($event)"
     (onShowBooking)="showBooking($event)"
     ></app-worker-calender>
     <div>
-        <app-current-booking-box [bookings]="newBookings()"></app-current-booking-box>
+        <app-current-booking-box [bookings]="nearestBooking()"></app-current-booking-box>
         <div>
-            <div *ngIf="!showDay">
-              <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
-            </div>
-            <div *ngIf="!blockDay">
-              <app-block-day [blockDay]="selectedBlockDay"  (onBlock)="onBlocked($event)"></app-block-day>
-            </div>
+          <div *ngIf="!showDay">
+            <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
           </div>
+          <div *ngIf="!blockDay">
+            <app-block-day [blockDay]="selectedBlockDay"  (onBlock)="onBlocked($event)"></app-block-day>
+          </div>
+          <div *ngIf="!unBlockDay">
+            <app-unblock-day [blockDay]="selectedBlockDay"  (onUnBlock)="onUnBlocked($event)"></app-unblock-day>
+          </div>
+        </div>
           
     </div>
 </div>

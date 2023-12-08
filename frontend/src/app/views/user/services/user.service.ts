@@ -43,7 +43,7 @@ export class UserService {
     return this.http.get<Service[]>(`${this.server}/user/service-list`)
   }
 
-  paymentRequest(paymentDetails: {user: object, worker: Worker, bookingTime: Date}) {
+  paymentRequest(paymentDetails: {user: object, worker: Worker, bookingTime: Date, paymentMethod: string}) {
     return this.http.post(`${this.server}/user/book-worker`,paymentDetails)
   }
 
@@ -55,8 +55,8 @@ export class UserService {
     return this.http.get<Review[]>(`${this.server}/user/review-list/${id}`)
   }
   
-  getBookingByUser(email: string): Observable<Booking[]>{
-    return this.http.get<Booking[]>(`${this.server}/user/booking-list/${email}`)
+  getBookingByUser(id: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/user/booking-list/${id}`)
   }
   
   getBookingByWorker(id: string): Observable<Booking[]>{
@@ -74,5 +74,9 @@ export class UserService {
   getWalletByUser(id: string): Observable<Wallet>{
     return this.http.get<Wallet>(`${this.server}/user/wallet/${id}`)
   }
-   
+  
+  isWorkerBooked(userId: string, workerId: string){
+    return this.http.get(`${this.server}/user/isBooked/${userId}/${workerId}`)
+  }
+
 }

@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'workerList', component: WorkerListComponent, canActivate: [userGuard]},
   { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]},
   { path: 'services', component: ServiceListComponent, canActivate: [userGuard]},
-  { path: 'profile', component: UserProfileComponent, children: [
+  { path: 'profile', component: UserProfileComponent, canActivate: [userGuard], children: [
     { path: 'newBooking', component: NewBookingsComponent },
     { path: 'bookingHistory', component: BookingHistoryComponent },
     { path: 'updateProfile', component: UpdateProfileComponent }

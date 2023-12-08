@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { workerLoginSuccess, workerLoginFailure, workerSignupSuccess, workerSignupFailure, workerVerifySuccess, workerVerifyFailure, workerLoginPending, workerBrowserReload } from "./worker.login.action";
+import { workerLoginSuccess, workerLoginFailure, workerSignupSuccess, workerSignupFailure, workerVerifySuccess, workerVerifyFailure, workerLoginPending, workerBrowserReload, workerBlockSuccess } from "./worker.login.action";
 import { WorkerState } from "../worker.state";
 
 export const initialState: WorkerState = {
@@ -68,7 +68,16 @@ const _authReducer = createReducer(
             UserToken: " ",
             errorMessage: error.error.message
         }
-    })
+    }),
+    on(workerBlockSuccess,(state, { workerData})=>{
+        console.log('success');
+        
+        return {
+            ...state,
+            workerData: workerData,
+            errorMessage: undefined
+        }
+    }),
     
 )
 

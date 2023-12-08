@@ -114,8 +114,8 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-5 mb-10">
-                <div>
+            <div class="grid grid-cols-5 mb-10" >
+                <div *ngIf="isBooked">
                     <button (click)="showDateAddReview = !showDateAddReview" (keydown.escape)="showDateAddReview = false"
                     class="bg-gradient-to-r from-yellow-600 to-red-600 text-white py-1  px-3 font-semibold rounded hover:bg-[#2764a57a]">
                         Add Review

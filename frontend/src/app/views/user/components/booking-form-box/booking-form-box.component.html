@@ -15,8 +15,24 @@
                                 <p for="work" class="block font-semibold text-gray-600 mb-2">Entitled Work:<span class="p-2 text-black text-lg font-bold">{{worker.work}}</span></p>
                                 <p for="email" class="block font-semibold text-gray-600 mb-2">Schedule Work on:<span class="p-2 text-black text-lg font-bold">{{datepickerValue}}</span></p>
                             </div>
+                            <p class="font-medium mb-1 text-gray-500">Payment Method?</p>
+                            <div class="flex gap-x-4">
+                                <div *ngIf="wallet" class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50   py-3 font-medium text-gray-700">
+                                    <input class="peer hidden" type="radio" name="radio" [(ngModel)]="paymentMethod" value="wallet" id="radio1" checked [disabled]="wallet.balance<worker.wageForDay" />
+                                    <label class="peer-checked:border-blue-400 peer-checked:bg-blue-200 absolute top-0 h-full w-full cursor-pointer rounded-xl border" for="radio1"> </label>
+                                    <div class="peer-checked:border-transparent peer-checked:bg-blue-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-blue-400 ring-offset-2"></div>
+                                    <span class="pointer-events-none pl-10 z-10">Wallet</span>
+                                    <span class="pointer-events-none pl-1 z-10 text-sm text-gray-500">₹{{wallet.balance}}</span>
+                                </div>
+                                <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-700">
+                                    <input class="peer hidden" type="radio" name="radio" [(ngModel)]="paymentMethod" value="stripe" id="radio3" checked />
+                                    <label class="peer-checked:border-blue-400 peer-checked:bg-blue-200 absolute top-0 h-full w-full cursor-pointer rounded-xl border" for="radio3"> </label>
+                                    <div class="peer-checked:border-transparent peer-checked:bg-blue-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-blue-400 ring-offset-2"></div>
+                                    <span class="pointer-events-none z-10">Stripe</span>
+                                </div>
+                            </div>
                        
-                            <div class="grid grid-cols-2  absolute inset-x-0 bottom-0">
+                            <div class="grid grid-cols-2 pt-3">
                                 <div>
                                     <h1 class="text-center text-sm font-bold text-gray-600">₹<span class="text-black text-2xl">{{worker.wageForDay}}</span>/d</h1>
                                 </div>
@@ -35,20 +51,15 @@
                                     </div>
                                     <div>
                                         <button type="button"
-                                            class="transition ease-in-out  inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
-                                            [ngClass]="{ 'cursor-not-allowed opacity-25': month === 0 }"
-                                            [disabled]="month === 0 ? true : false" (click)="month = month - 1" (click)="getNoOfDays()">
-                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15 19l-7-7 7-7" />
+                                            class="transition ease-in-out inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                            (click)="changeMonth(-1)">
+                                            <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                             </svg>
                                         </button>
                                         <button type="button"
-                                            class="transition ease-in-out  inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
-                                            [ngClass]="{'cursor-not-allowed opacity-25': month === 11}" 
-                                            [disabled]="month === 11 ? true : false" 
-                                            (click)="month = month + 1" (click)="getNoOfDays()">
+                                                class="transition ease-in-out inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                (click)="changeMonth(1)">
                                             <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                             </svg>
@@ -73,8 +84,8 @@
                                     <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
                                         <div style="width: 14.28%" class="px-1 mb-1">
                                             <div (click)="getDateValue(date)"
-                                            class="cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100"
-                                            [ngClass]="{'bg-blue-500 text-white': isToday(date) === true,'text-gray-700 hover:bg-blue-200':isToday(date) === false,'text-[#8d8a8a] pointer-events-none':isPast(date)===true,'text-white bg-[#b43939] pointer-events-none':isBooked(date)=== true}">
+                                            appDate [date]="date" [year]="year" [month]="month" [booking]="workerBookings"  [blockedDates]="worker.blockedDates" [selectedDate]="selectedDate" [isUser]="true"
+                                            class="cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100">
                                                 {{ date }}
                                             </div>
                                         </div>
@@ -88,3 +99,5 @@
         </div>
     </label>
 </label>
+
+<!-- 'text-white bg-[#b43939] pointer-events-none':isBooked(date)=== true -->
