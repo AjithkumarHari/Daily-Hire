@@ -32,6 +32,9 @@ import { DirectiveModule } from 'src/app/directives/directive.module';
 import { UnblockDayComponent } from './components/unblock-day/unblock-day.component';
 
 import { AgChartsAngularModule } from 'ag-charts-angular';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     ScheduleComponent,
     WorkerAppointmentHistoryComponent,
     UnblockDayComponent,
+    MessagesComponent,
+    ChatBoxComponent,
+    DateAgoPipe,
   ],
   imports: [
     WorkerRoutingModule,

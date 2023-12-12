@@ -8,6 +8,7 @@ import { Review } from 'src/app/types/Review';
 import { Booking } from 'src/app/types/Booking';
 import { User } from 'src/app/types/User';
 import { Wallet } from 'src/app/types/Wallet';
+import { io } from "socket.io-client";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,12 @@ import { Wallet } from 'src/app/types/Wallet';
 export class UserService {
 
   server = environment.serverUrl;
+  private socket: any
   
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient) {
+    this.socket = io('http://localhost:3000')
+   }
+   
 
   setToken(token: string){
     return window.localStorage.setItem('user-token',token);
@@ -78,5 +83,24 @@ export class UserService {
   isWorkerBooked(userId: string, workerId: string){
     return this.http.get(`${this.server}/user/isBooked/${userId}/${workerId}`)
   }
+  
+  loadChats(senderId: string, receiverId: string){
+    return this.http.get(`${this.server}/chat/load-chats/${senderId}/${receiverId}`);
+  }
+  
+  sendChat(data:{senderId: string, receiverId: string, content: string }){
+    this.socket.emit('chat message', data)
+    return this.http.put(`${this.server}/chat/send-chat/`,{data});
+  }
+
+  onNewMessage() {
+    return new Observable<string>((observer) => {
+      this.socket.on('chat message', (message: any) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  
 
 }

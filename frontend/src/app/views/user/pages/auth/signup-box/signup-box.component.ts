@@ -71,7 +71,6 @@ export class SignupBoxComponent {
       //   },
       //   error: (err) => {
       //     console.log(err); 
-          
       //   }
       // });
 

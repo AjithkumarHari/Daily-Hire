@@ -1,26 +1,31 @@
 <div class="max-w-md rounded-xl border bg-white p-6   text-gray-900  mt-10 ml-32">
-   <p class="text-lg font-bold pb-3">Nearest Bookings</p>
-
-   <ul class="max-w-md divide-y divide-gray-200 ">
-      <li class="pb-3 sm:pb-4" *ngFor="let booking of bookings | slice:0:3">
-         <div class="flex items-center space-x-4 rtl:space-x-reverse">
-            <div class="flex-shrink-0">
-               <img class="w-8 h-8 rounded-full" src="./assets/images/woker.jpg" alt="Neil image">
+   <div  *ngIf="bookings==[]; else noBooking">
+      <p class="text-lg font-bold pb-3">Nearest Bookings</p>
+    
+      <ul class="max-w-md divide-y divide-gray-200 ">
+         <li class="pb-3 sm:pb-4" *ngFor="let booking of bookings | slice:0:3">
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+               <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="./assets/images/woker.jpg" alt="Neil image">
+               </div>
+               <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-900 truncate  ">
+                     {{booking.user.name}}
+                  </p>
+                  <p class="text-sm text-gray-500 truncate  ">
+                     {{booking.user.email}}
+                  </p>
+               </div>
+               <div class="inline-flex items-center text-base font-semibold text-gray-900  ">
+                  {{booking.bookingTime | dateString}}
+               </div>
             </div>
-            <div class="flex-1 min-w-0">
-               <p class="text-sm font-medium text-gray-900 truncate  ">
-                  {{booking.user.name}}
-               </p>
-               <p class="text-sm text-gray-500 truncate  ">
-                  {{booking.user.email}}
-               </p>
-            </div>
-            <div class="inline-flex items-center text-base font-semibold text-gray-900  ">
-               {{booking.bookingTime | dateString}}
-            </div>
-         </div>
-      </li>
+         </li>
+      </ul>
+   </div>
 
-   </ul>
-
+   <ng-template #noBooking>
+      <p class="text-lg font-semibold">No New Bookings...</p>
+   </ng-template>
+   
 </div>

@@ -46,6 +46,8 @@ import { BookingBoxComponent } from './components/booking-box/booking-box.compon
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { RupeesPipe } from './pipes/rupees-pipe.pipe';
 import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
  
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { WalletTransactionsComponent } from './components/wallet-transactions/wa
     PaginationComponent,
     RupeesPipe,
     WalletTransactionsComponent,
+    ChatBoxComponent,
+    DateAgoPipe,
 
   ],
   imports: [

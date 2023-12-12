@@ -9,6 +9,7 @@ import { OtpBoxComponent } from './pages/auth/otp-box/otp-box.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { MessagesComponent } from './pages/messages/messages.component';
 
 const routes: Routes = [
   { path:"", component: HomeComponent, canActivate: [workerGuard]},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path:"profile", component: ProfileComponent, canActivate: [workerGuard]},
   { path:"bookings", component: BookingsComponent, canActivate: [workerGuard]},
   { path:"schedule", component: ScheduleComponent, canActivate: [workerGuard]},
+  { path:"messages", component: MessagesComponent, canActivate: [workerGuard]},
 ];
 
 @NgModule({

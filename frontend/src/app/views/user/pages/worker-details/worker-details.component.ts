@@ -134,5 +134,14 @@ export class WorkerDetailsComponent implements OnInit{
   onPageClick(pageNumber: number) {
     this.currentPage = pageNumber;
   }
+
+  chatData(){
+    const data = {
+      senderId: this.user._id,
+      receiverId: this.details$._id,
+      name: this.details$.name
+    }
+    return data;
+  }
    
 }

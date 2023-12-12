@@ -56,8 +56,6 @@ export class UserManagementComponent {
   }
 
   getUser(){
-    console.log(this.users$);
-    
     return this.users$
   }
 }
