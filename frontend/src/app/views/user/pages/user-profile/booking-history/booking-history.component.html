@@ -25,7 +25,7 @@
                 </article>
             </div>
         </div>
-        <div class="flex justify-center">
+        <div *ngIf="bookings$.length>4" class="flex justify-center">
             <nav class=" my-5" aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base font-semibold h-11">
                     <li>

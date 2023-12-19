@@ -48,6 +48,7 @@ import { RupeesPipe } from './pipes/rupees-pipe.pipe';
 import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.component';
  
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     WalletTransactionsComponent,
     ChatBoxComponent,
     DateAgoPipe,
+    ComplaintBoxComponent,
 
   ],
   imports: [

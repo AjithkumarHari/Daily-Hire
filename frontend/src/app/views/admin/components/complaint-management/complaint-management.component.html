@@ -1,0 +1,70 @@
+<h1 class="p-3 font-semibold text-4xl">Complaint Management</h1>
+
+<div class=" flex justify-center">
+    <div class="relative w-11/12">
+        <div class="overflow-x-auto shadow-lg sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
+                <thead class="text-md text-gray-700   bg-gray-200  ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                            USER (Complaint from)
+                        </th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                            WORKER (Complaint on)
+                        </th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                            TYPE 
+                        </th>
+                        <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                            COMPLAINT
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let complaint of compalaints$ | slice: currentPage * 6 - 6 : currentPage * 6"  class="bg-white border-b ">
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+                            {{complaint.userName}}
+                        </th>
+                        <td class="px-4 py-4">
+                            {{complaint.workerName}}
+                        </td>
+                        <td class="px-4 py-4 whitespace-nowrap ">
+                            {{complaint.type}}
+                        </td>
+                        <td class="pl-4 py-4 ">
+                            <div class="w-[28rem] truncate  ">
+                                <p><span class="font-semibold p-1 uppercase"> {{complaint.complaint}}</span>{{complaint.description}}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="compalaints$.length>6">
+            <nav class="flex justify-center my-3" aria-label="Page navigation example">
+                <ul class="inline-flex -space-x-px text-base h-10">
+                    <li>
+                        <a (click)="onPrevious($event)"
+                            class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-50 hover:text-blue-500">
+                            Previous
+                        </a>
+                    </li>
+                    <ng-container *ngFor="let page of pages">
+                        <li>
+                            <a (click)="onPageClick(page)" 
+                                class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-blue-50 hover:text-blue-500"
+                                [ngClass]="{'bg-gradient-to-r from-cyan-500 rounded-md to-blue-500 text-white hover:text-white': page === currentPage}"
+                                >
+                                {{ page }}
+                            </a>
+                        </li>
+                    </ng-container>
+                    <li>
+                        <a (click)="onNext($event)" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-blue-50 hover:text-blue-500">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

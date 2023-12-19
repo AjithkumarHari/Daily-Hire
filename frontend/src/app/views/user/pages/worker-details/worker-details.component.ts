@@ -111,7 +111,7 @@ export class WorkerDetailsComponent implements OnInit{
   }
 
   countPages(total: number){    
-    for(let i=1;i<=Math.ceil(total/2);i++){
+    for(let i=1;i<=Math.ceil(total/4);i++){
       this.pages.push(i)
     }
 

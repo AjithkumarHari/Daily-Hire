@@ -1,25 +1,38 @@
 <app-navbar></app-navbar>
 <div class="grid grid-cols-2 h-fit ">
-    <app-worker-calender 
-    [bookings]="newBookings()" 
-    [blockedDates]="workerBlockedDates()" 
-    (onUnBlockBooking)="blockBooking($event)"
-    (onBlockBooking)="blockBooking($event)"
-    (onShowBooking)="showBooking($event)"
-    ></app-worker-calender>
-    <div>
-        <app-current-booking-box [bookings]="nearestBooking()"></app-current-booking-box>
-        <div>
-          <div *ngIf="!showDay">
-            <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
-          </div>
-          <div *ngIf="!blockDay">
-            <app-block-day [blockDay]="selectedBlockDay"  (onBlock)="onBlocked($event)"></app-block-day>
-          </div>
-          <div *ngIf="!unBlockDay">
-            <app-unblock-day [blockDay]="selectedBlockDay"  (onUnBlock)="onUnBlocked($event)"></app-unblock-day>
-          </div>
-        </div>
-          
+  <app-worker-calender [bookings]="newBookings()" [blockedDates]="workerBlockedDates()"
+    (onUnBlockBooking)="blockBooking($event)" (onBlockBooking)="blockBooking($event)"
+    (onShowBooking)="showBooking($event)"></app-worker-calender>
+  <div>
+    <div class=" flex mx-10 justify-center items-center">
+      <img class="h-40 " src="../../../../../assets/images/3870277-removebg-preview.png" alt="nochat">
+      <h1 class="text-5xl font-schedule">Schedule Your Bookings</h1>
     </div>
+    <app-current-booking-box [bookings]="nearestBooking()"></app-current-booking-box>
+    <div>
+      <div *ngIf="!showDay">
+        <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
+      </div>
+      <div *ngIf="!blockDay">
+        <app-block-day [blockDay]="selectedBlockDay" (onBlock)="onBlocked($event)"></app-block-day>
+      </div>
+      <div *ngIf="!unBlockDay">
+        <app-unblock-day [blockDay]="selectedBlockDay" (onUnBlock)="onUnBlocked($event)"></app-unblock-day>
+      </div>
+      <div *ngIf="showDay && blockDay && unBlockDay" >
+        <div class=" first-letter: rounded-xl border bg-white  px-6 py-2  text-gray-900  mt-3 mx-10">
+          <ul class="max-w-md divide-y divide-gray-200 ">
+            <li class=" ">
+              <div class="flex items-center justify-evenly space-x-4 rtl:space-x-reverse py-1">
+                <div class="flex text-center items-center">
+                  <img class="h-24" src="../../../../../assets/images/5556.jpg" alt="nochat">
+                  <h1 class="text-2xl font-schedule">Select any date that you wish to check.</h1>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

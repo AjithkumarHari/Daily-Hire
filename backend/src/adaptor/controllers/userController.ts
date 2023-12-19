@@ -11,6 +11,8 @@ import { ReviewRepository } from "../../application/repository/reviewDbRepositor
 import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
 import { WalletRepository } from "../../application/repository/walletDbRepository";
 import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
+import { ComplaintRepository } from "../../application/repository/complaintDbRepository";
+import { ComplaintDbRepositoryMongoDB } from "../../framework/database/repository/complaintDbRepository";
 import { AuthServiceInterface } from "../../application/service/authServiceInterface";
 import { AuthService } from "../../framework/service/authService";
 import { PaymentServiceInterface } from "../../application/service/paymentServiceInterface";
@@ -31,6 +33,7 @@ import { editUser } from "../../application/useCase/user/editUser";
 import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId";
 import { getWallet } from "../../application/useCase/wallet/getWallet";
 import { isBooked } from "../../application/useCase/booking/isWorkerBookedByUser";
+import { addComplaint } from "../../application/useCase/complaint/addComplaint";
 
 
 const userController = ( 
@@ -46,6 +49,8 @@ const userController = (
     reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
     walletDbRepository: WalletRepository,
     walletDbRepositoryImp: WalletDbRepositoryMongoDB,
+    complaintDbRepository: ComplaintRepository,
+    complaintDbRepositoryImp: ComplaintDbRepositoryMongoDB,
     paymentServiceInterface: PaymentServiceInterface,
     paymentServiceImp: PaymentService,
     authServiceInterface: AuthServiceInterface,
@@ -58,6 +63,7 @@ const userController = (
     const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
     const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
     const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
+    const dbComplaintRepository = complaintDbRepository(complaintDbRepositoryImp())
     const paymentService = paymentServiceInterface(paymentServiceImp());
     const authService = authServiceInterface(authServiceImpl());
 
@@ -253,6 +259,22 @@ const userController = (
         }
     }
 
+    const complaintWorker = async ( req: Request, res: Response ) =>{
+        try {
+            const complaintDetails = req.body;
+            const result = await addComplaint(complaintDetails,dbComplaintRepository)
+            if (result instanceof AppError) {
+                res.status(result.errorCode).json({
+                    ...result
+                });
+            } else {
+                res.json(result);
+            }
+        } catch {
+            res.status(500);
+        }
+    }
+
     return {
         getAllWorkers,
         getAllServices,
@@ -263,9 +285,11 @@ const userController = (
         getWalletByUser,
         bookingWorker,
         reviewWorker,
+        complaintWorker,
         cancelBooking,
         updateUserProfile,
         isWorkerBooked,
+
     };
 };
 

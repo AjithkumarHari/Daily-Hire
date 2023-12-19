@@ -1,0 +1,79 @@
+<div class="fixed inset-0 flex  items-center justify-center overflow-hidden overscroll-contain bg-black/50   transition-all duration-200 ease-in-out ">
+ 
+    <label for="" class="w-6/12 h-fit   scale-90 overflow-y-auto overscroll-contain rounded-md bg-white p-6 text-black shadow-2xl transition">
+        <div class="w-full  mx-auto ">
+            <div class="p-6 bg-white rounded-md shadow">
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="mb-6 text-3xl font-medium leading-6 text-gray-900 ">
+                            <i class="fa-solid fa-triangle-exclamation px-2 text-red-600"></i>
+                            Report Complaint on the Worker
+                        </h2>
+                    </div>
+                    <div>
+
+                        <button type="button" class="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-lg w-10 h-10 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal"  routerLink="../">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"  >
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <form [formGroup]="form" >
+                    <div class="container px-4 mx-auto"></div>
+                    <div class="mb-6">
+                        <label class="block mb-2 text-sm font-medium " for="">
+                            Complaint Subject
+                        </label>
+                        <input
+                            formControlName="complaint"
+                            class="block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded  "
+                            type="text" name="" placeholder="Write a full name">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block mb-2 text-sm font-medium " for="">Type of Complaint</label>
+                        <div class="relative">
+                            <select
+                                formControlName="type"
+                                class="block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded appearance-none  "
+                                name="field-name">
+                                <option value="Worker Behavioural Issues">Worker Behavioural Issues </option>
+                                <option value="Poor Quality of Work">Poor Quality of Work</option>
+                                <option value="Constantly Ignoring Bookings">Constantly Ignoring Bookings</option>
+                                <option value="Overcharging or Billing Disputes">Overcharging or Billing Disputes</option>
+                                <option value="Lack of Expertise">Lack of Expertise</option>
+                            </select>
+                            <div
+                                class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-500 pointer-events-none">
+                                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block mb-2 text-sm font-medium " for="">Message</label>
+                        <textarea
+                            formControlName="description"
+                            class="block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded  "
+                            name="field-name" rows="5" placeholder="Write something..."></textarea>
+                    </div>
+                    <div class="mt-7">
+                        <div class="flex justify-start space-x-2">
+                            <button type="button"
+                                (click)="onFormSubmit()"
+                                routerLink="../"
+                                class="inline-block px-6 py-2.5 bg-blue-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-600">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </label>
+</div>
+ 

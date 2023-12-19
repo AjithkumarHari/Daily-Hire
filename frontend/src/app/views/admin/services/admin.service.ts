@@ -7,6 +7,7 @@ import { Worker } from '../../../types/Worker';
 import { Service } from 'src/app/types/Service';
 import { Review } from 'src/app/types/Review';
 import { Booking } from 'src/app/types/Booking';
+import { Complaint } from 'src/app/types/Complaint';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,10 @@ export class AdminService {
 
   getStatistics(){
     return this.http.get(`${this.server}/admin/app-statics`);
+  }
+
+  getAllComplaints(): Observable<Complaint[]>{
+    return this.http.get<Complaint[]>(`${this.server}/admin/complaint-list`);
   }
 
 

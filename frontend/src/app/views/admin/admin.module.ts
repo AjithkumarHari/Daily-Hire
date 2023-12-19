@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -52,6 +52,7 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     StoreModule.forFeature('admin', authReducer),
     EffectsModule.forFeature(AuthEffects),
     AgChartsAngularModule

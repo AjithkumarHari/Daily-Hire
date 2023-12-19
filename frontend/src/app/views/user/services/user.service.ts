@@ -8,6 +8,7 @@ import { Review } from 'src/app/types/Review';
 import { Booking } from 'src/app/types/Booking';
 import { User } from 'src/app/types/User';
 import { Wallet } from 'src/app/types/Wallet';
+import { Complaint } from 'src/app/types/Complaint';
 import { io } from "socket.io-client";
 
 @Injectable({
@@ -99,6 +100,10 @@ export class UserService {
         observer.next(message);
       });
     });
+  }
+
+  addWorkerComplaint(complaint: Complaint){
+    return this.http.post(`${this.server}/user/add-complaint`,complaint)
   }
 
   

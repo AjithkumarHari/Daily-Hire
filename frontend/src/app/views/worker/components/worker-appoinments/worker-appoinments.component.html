@@ -6,7 +6,15 @@
 					<circle cx="11" cy="11" r="8" class=""></circle>
 					<line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
 				</svg>
-				<input type="name" [(ngModel)]="searchText" (input)="onSearchText()" (keyup.backspace)="onSearchText()"  name="search" class="h-12 w-full text-white font-bold text-md border-b-gray-100 bg-transparent py-3 pl-12  outline-none focus:border-b-2" placeholder="Search by Name" />
+				<div class="relative">
+					<input type="text" id="floating_outlined1" 
+					name="search" type="name" [(ngModel)]="searchText" (input)="onSearchText()" (keyup.backspace)="onSearchText()"  name="search" class="" 
+					class="block h-12 w-96 text-black font-semibold text-md border-b-gray-100 bg-transparent py-3 pl-12 outline-none focus:border-b-2 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
+					/>
+					<label for="floating_outlined1" 
+					class="absolute text-lg pl-10 text-white rounded-2xl font-semibold duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+					>Search by Name</label>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -52,7 +60,11 @@
 								<td class="hidden md:table-cell">
 									<button
 									(click)="onCancelSelected(booking._id)"
-									 class="relative px-5 py-1 rounded-md bg-transparent text-gray-300 isolation-auto z-10 border-2 border-lime-600 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-lime-600 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">
+									 class="relative px-5 py-1 rounded-md bg-transparent text-gray-300 isolation-auto z-10 border-2 border-lime-600 "
+									 [disabled]="booking.status!='Confirmed'"
+									 [ngClass]="{
+										'before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-lime-600 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700': booking.status=='Confirmed',
+									}">
 										Cancel
 									</button>
 								</td>
@@ -62,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex justify-center">
+		<div *ngIf="bookings.length>7" class="flex justify-center">
 			<nav class=" my-" aria-label="Page navigation example">
 				<ul class="inline-flex -space-x-px text-base font-semibold h-11">
 					<li>

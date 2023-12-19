@@ -1,16 +1,16 @@
 <div *ngIf="chats.length>0; else noChat">
     <div class="flex flex-col flex-auto  px-6">
-        <div class="h-14 rounded-t-2xl bg-[#04471c]">
+        <div class="h-14 rounded-t-2xl bg-[#0a2e36]">
             <h1 class=" ml-10 py-3 text-white text-lg">{{name}}</h1>
         </div>
-        <div class="flex flex-col flex-auto flex-shrink-0  bg-[#daf4db] w-[900px] h-[350px] p-4">
+        <div class="flex flex-col flex-auto flex-shrink-0  bg-[#ffffff] w-[700px] h-[450px] p-4">
             <div #scrollMe class="flex flex-col h-full overflow-x-auto mb-4">
                 <div  class="flex flex-col h-full">
                     <div class="grid grid-cols-12 gap-y-2"  *ngFor="let chat of chats">
                         <div class="col-start-1 col-end-8 p-3 rounded-lg" *ngIf="chat.senderId==senderId" >
                             <div class="flex flex-row items-center">
                                 <div
-                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-[#319177] flex-shrink-0">
                                     
                                 </div>
                                 <div class="relative ml-3 text-sm bg-indigo-100 py-2 shadow rounded-xl">
@@ -27,8 +27,7 @@
                         <div class="col-start-6 col-end-13 p-3 rounded-lg" *ngIf="chat.senderId!=senderId">
                             <div class="flex items-center justify-start flex-row-reverse">
                                 <div
-                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                                    A
+                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-[#319177] flex-shrink-0">
                                 </div>
                                 <div class="relative mr-3 text-sm bg-indigo-100 py-2 shadow rounded-xl">
                                     <div class="px-4 ">
@@ -46,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center h-16 rounded-b-xl bg-[#226f54] w-full px-4">
+        <div class="flex flex-row items-center h-16 rounded-b-xl bg-[#0a2e36] w-full px-4">
             <div class="flex-grow ml-4">
                 <div class="relative w-full">
                     <input type="text"
@@ -56,7 +55,7 @@
             </div>
             <div class="ml-4">
                 <button (click)="sendMessage(text)"
-                    class="flex items-center justify-center bg-[#04471c] hover:bg-[#058c42] rounded-xl text-white px-4 py-1 flex-shrink-0">
+                    class="flex items-center justify-center bg-[#058c42] hover:bg-[#319177] rounded-xl text-white px-4 py-1 flex-shrink-0">
                     <span>Send</span>
                     <span class="ml-2">
                         <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor"
@@ -71,11 +70,9 @@
     </div>
 </div>
 <ng-template #noChat>
-    <div class=" ml-48 items-center">
+    <div class=" ml-56 items-center">
         <img class="h-96 " src="../../../../../assets/images/4318690-removebg-preview.png" alt="nochat">
-    
         <p class="text-xl text-center text-white">You can send and Receive messages</p>
         <p class="text-lg text-center text-white">Please select a Chat</p>
-
     </div>
 </ng-template>

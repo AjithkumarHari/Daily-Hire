@@ -23,6 +23,8 @@ export class HomeComponent {
   bookingsByMonth: any
   bookingsByPayment: any
 
+  columnDefs:any
+
   worker!: Worker;
   public options: AgChartOptions = {};
   public optionsTotal: AgChartOptions = {};
@@ -48,7 +50,7 @@ export class HomeComponent {
             bookingsByMonth: this.bookingsByMonth,
             bookingsByPayment: this.bookingsByPayment,
           } = data);
-          this.options = {
+          this.options = { 
             theme: 'ag-sheets-dark',
             background:{
               visible: false
@@ -63,23 +65,26 @@ export class HomeComponent {
                   xKey: 'month',
                   yKey: 'bookings',
                   yName: 'Bookings',
+                  
               },
+              
           ],
-          };
+          
+        };
+ 
           this.optionsTotal = {
             theme: 'ag-sheets-dark',
             background:{
               visible: false
             },
+            
             data: this.bookingsByPayment,
-            title: {
-              text: 'Total Bookings Composition',
-            },
-            series: [
+            series: [ 
               {
                 type: 'pie',
                 angleKey: 'amount',
                 legendItemKey: 'paymentType',
+                
             },
           ],
           };

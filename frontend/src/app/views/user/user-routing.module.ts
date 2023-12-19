@@ -13,6 +13,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { NewBookingsComponent } from './pages/user-profile/new-bookings/new-bookings.component';
 import { BookingHistoryComponent } from './pages/user-profile/booking-history/booking-history.component';
 import { UpdateProfileComponent } from './pages/user-profile/update-profile/update-profile.component';
+import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.component';
  
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
   { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]},
   { path: 'services', component: ServiceListComponent, canActivate: [userGuard]},
   { path: 'profile', component: UserProfileComponent, canActivate: [userGuard], children: [
-    { path: 'newBooking', component: NewBookingsComponent },
+    { path: 'newBooking', component: NewBookingsComponent, children: [
+      {path: 'complaint', component: ComplaintBoxComponent}
+    ]},
     { path: 'bookingHistory', component: BookingHistoryComponent },
     { path: 'updateProfile', component: UpdateProfileComponent }
   ]}

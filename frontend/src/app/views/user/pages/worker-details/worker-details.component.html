@@ -49,12 +49,12 @@
     
     
         </div>
-        <div class="mx-20">
-            <div *ngIf="reviewFormHidden">
+        <div class="mx-20 ">
+            <div *ngIf="reviewFormHidden" >
                 <h2 class="text-2xl font-semibold mt-5">Reviews & Rate ({{reviews$.length}})</h2>
-                <div class="flex h-52">
+                <div class="flex h-fit">
                     <div class="w-full">
-                        <div class="grid grid-cols-4 mb-5  pb-3 border-b border-gray-400" *ngFor="let review of reviews$ | slice: currentPage * 2 - 2 : currentPage * 2">
+                        <div class="grid grid-cols-4 mb-5  pb-3 border-b border-gray-400" *ngFor="let review of reviews$ | slice: currentPage * 4 - 4 : currentPage * 4">
                             <div class="ml-5">
                                 <h1 class="font-semibold">{{review.userName}}</h1>
                                 <h2 class="text-gray-500">{{review.userEmail}}</h2>
@@ -78,10 +78,10 @@
                         </div>
                     </div>
                  
-                    <div class="flex my-7 px-5">
+                    <div class="flex m-auto px-3" *ngIf="reviews$.length>4">
                         <div class="justify-center">
                             <nav class="" aria-label="Page navigation example">
-                                <ul class="  -space-x-px text-base font-semibold h-11">
+                                <ul class="  -space-x-px text-base font-semibold h-fit">
                                     <li>
                                         <a (click)="onPrevious($event)"
                                             class="flex items-center justify-center h-8 w-8 leading-tight border-2 border-[#0000004b]  hover:bg-[#ffffff4b]  rounded-full ">

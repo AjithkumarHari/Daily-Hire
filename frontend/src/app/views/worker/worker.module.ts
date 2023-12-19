@@ -35,6 +35,7 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+ 
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     MessagesComponent,
     ChatBoxComponent,
     DateAgoPipe,
+ 
   ],
   imports: [
     WorkerRoutingModule,

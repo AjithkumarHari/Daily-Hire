@@ -10,6 +10,8 @@ import { ReviewRepository } from "../../application/repository/reviewDbRepositor
 import { ReviewDbRepositoryMongoDB } from "../../framework/database/repository/reviewDbrepository";
 import { BookingRepository } from "../../application/repository/bookingDbRepository";
 import { BookingDbRepositoryMongoDB } from "../../framework/database/repository/bookingDbRepository";
+import { ComplaintRepository } from "../../application/repository/complaintDbRepository";
+import { ComplaintDbRepositoryMongoDB } from "../../framework/database/repository/complaintDbRepository";
 import { WalletRepository } from "../../application/repository/walletDbRepository";
 import { WalletDbRepositoryMongoDB } from "../../framework/database/repository/walletDbRepository";
 import { allWorkers } from "../../application/useCase/worker/allWorkers";
@@ -27,6 +29,7 @@ import { listUnlistReview } from "../../application/useCase/admin/listUnlistRevi
 import { allBookings } from "../../application/useCase/booking/allBooking";
 import { cancelBooking } from "../../application/useCase/booking/cancelBooking";
 import { getStaticsAdmin } from "../../application/useCase/booking/getStaticsAdmin";
+import { findAllComplaints } from "../../application/useCase/complaint/findAllComplaints";
 
 
 
@@ -41,6 +44,8 @@ const adminController = (
     reviewDbRepositoryImp: ReviewDbRepositoryMongoDB,
     bookingDbRepository: BookingRepository,
     bookingDbRepositoryImp: BookingDbRepositoryMongoDB,
+    complaintDbRepository: ComplaintRepository,
+    complaintDbRepositoryImp: ComplaintDbRepositoryMongoDB,
     walletDbRepository: WalletRepository,
     walletDbRepositoryImp: WalletDbRepositoryMongoDB,
 ) => {
@@ -50,6 +55,7 @@ const adminController = (
     const dbServiceRepository = serviceDbRepository(serviceDbRepositoryImp());
     const dbReviewRepository = reviewDbRepository(reviewDbRepositoryImp());
     const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImp());
+    const dbComplaintRepository = complaintDbRepository(complaintDbRepositoryImp())
     const dbWalletRepository = walletDbRepository(walletDbRepositoryImp());
 
     const getAllUser = async ( req: Request, res: Response ) => {
@@ -260,23 +266,37 @@ const adminController = (
         }
     }
 
+    const getAllComplaints = async ( req: Request, res: Response ) => {
+        try{
+            const result = await findAllComplaints(dbComplaintRepository);
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
 
 
     return {
         getAllUser,
         getAllWorkers,
         getAllServices,
+        getAllReviews,
+        getAllBookings,
+        getAllComplaints,
+        getStatistics,
+        getServicesById,
         userStatusChange,
         workerStatusChange,
         serviceStatusChange,
+        reviewStatusChange,
+        bookingStatusChange,
         createService,
         updateService,
-        getServicesById,
-        getAllReviews,
-        reviewStatusChange,
-        getAllBookings,
-        bookingStatusChange,
-        getStatistics,
     }
 }
 export default adminController

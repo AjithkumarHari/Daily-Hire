@@ -1,20 +1,31 @@
-<div class="grid grid-cols-3 mb-10">
-    <div></div>
-    <div class="relative justify-end ml-5">
-        <div class="flex w-full ">
-            <div class="absolute w-full flex z-10 items-center justify-center ">
-                <img class="w-28 h-28 rounded-full" src="./assets/worker-sample/ocala-plumber.webp" alt="">
+<div class="">
+ 
+    <div class="relative bg-[#0a2e36] h-11/12 rounded-xl  justify-end ml-5 ">
+        <div class="flex  rounded-t-xl overflow-hidden">
+            <div class="w-full">
+                <img class="h-56 w-full rounded-xl" src="./assets/worker-sample/ocala-plumber.webp" alt="">
             </div>
-        </div>
-        <div class="bg-[#181d16] border-[2px]   text-white border-[#f1f3f27c] shadow-lg mt-10  h-fit w-full p-2 rounded-3xl">
-            <div class=" flex w-full z-0 h-fit">
-                <div class="relative h-fit  mt-16 w-full rounded-md ">
+            <div class="absolute pt-16 w-full  flex z-10 items-center   justify-center ">
+                <div class="bg-[#e9fdfd] text-black shadow-lg rounded-xl w-10/12 py-3 px-10 mt-20">
+
                     <div class=" flex justify-center w-full">
                         <h1 class="text-2xl left-1/2 font-semibold">{{workerDetails.name}}</h1>
                     </div>
                     <div class=" flex justify-center w-full">
-                        <h2 class="text-xl">{{workerDetails.work}}</h2>
+                        <h2 class="text-xl font-bold text-gray-500">{{workerDetails.work}}</h2>
                     </div>
+                    <div class="flex justify-evenly">
+                        <button class="border-2 border-gray-600 text-gray-700 py-2 px-3 rounded-full" ><i class="fas fa-edit"></i></button>
+                        <button class="border-2 border-gray-600 text-gray-700  py-2 px-3 rounded-full"><i class="fa-solid fa-message"></i></button>
+                    </div>
+                </div>
+                <!-- <img class="w-28 h-28 rounded-full" src="./assets/worker-sample/ocala-plumber.webp" alt=""> -->
+            </div>
+        </div>
+        <div class="  mt-20 text-white  shadow-lg   h-fit w-full p-2  ">
+            <div class=" flex w-full z-0 h-fit">
+                <div class="relative h-fit   w-full rounded-md ">
+ 
                     <div class="flex">
                         <div class="grid grid-cols-2 text-md text-center h-fit w-full ">
                             <div class=" ">
@@ -31,15 +42,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-center items-center">
-                        <button class="px-3 py-1 text-lg font-semibold text-[#89fc00] rounded-lg bg-[#ffffff] hover:bg-[#82d61b] hover:text-white">Edit</button>
-                    </div>
                 </div>
             </div>
         </div>
     
     </div>
-    <div>
-        
-    </div>
+ 
 </div>

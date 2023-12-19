@@ -7,9 +7,9 @@ export const reviewDbRepositoryMongoDB = () => {
         return await REVIEW.find({ workerId: workerId , isHidden: false });
     }
     
-    const addReview = async (review: Review) => REVIEW.create(review);
+    const addReview = async (review: Review) => await REVIEW.create(review);
 
-    const getAllReview = async () => REVIEW.find();
+    const getAllReview = async () => await REVIEW.find();
 
     const reviewListUnlist = async (_id: string, newStatus: boolean) => {
         return await REVIEW.updateOne({_id}, {$set:{isHidden: newStatus}});

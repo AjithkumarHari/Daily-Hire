@@ -1,29 +1,23 @@
 <app-navbar></app-navbar>
 <!-- component -->
 
-<div class="flex h-fit   text-gray-800">
-    <div class="flex flex-row h-fit w-full  ">
-        <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-transparent text-white flex-shrink-0">
-
-            <div class="flex flex-col">
+<div class="flex h-full text-gray-800">
+    <div class="flex flex-row h-screen mx-20 w-full">
+        <div class=" flex flex-col mx-10 rounded-xl h-[570px] py-8 px-6 w-96 bg-[#0a2e36] text-white flex-shrink-0">    
+            <div class="flex flex-col ">
                 <div class="flex flex-row items-center justify-between text-xs">
                     <span class="font-bold">Active Conversations</span>
                     <span class="flex items-center justify-center bg-green-800 h-4 w-4 rounded-full">{{chatRooms.length}}</span>
                 </div>
                 <div class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto">
                     <div *ngFor="let chatMate of chatRooms">
-                        <button class="flex flex-row w-full items-center hover:bg-[#18482b90]  rounded-xl p-2" (click)="onChatSelect(chatMate.senderId,chatMate.receiverId,chatMate.userName)">
+                        <button class="flex flex-row w-full items-center hover:bg-[#058c42]  rounded-xl p-5" (click)="onChatSelect(chatMate.senderId,chatMate.receiverId,chatMate.userName)">
                             <div class="flex items-center justify-center h-8 w-8 bg-gray-900 rounded-full">
                                 {{chatMate.userName | slice:0:1 | uppercase }}
                             </div>
-                            <div class="ml-2 text-sm font-semibold">{{chatMate.userName}}</div>
-                            <!-- <div
-                                class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none">
-                                2
-                            </div> -->
+                            <div class="mx-5 text-sm font-semibold">{{chatMate.userName}}</div>
                         </button>
                     </div>
-                    
                 </div>
             </div>
         </div>

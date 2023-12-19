@@ -10,6 +10,8 @@ import { reviewDbRepository } from "../../../application/repository/reviewDbRepo
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 import { bookingDbRepository } from "../../../application/repository/bookingDbRepository";
 import { bookingDbRepositoryMongoDB } from "../../database/repository/bookingDbRepository";
+import { complaintDbRepository } from "../../../application/repository/complaintDbRepository";
+import { complaintDbRepositoryMongoDB } from "../../database/repository/complaintDbRepository";
 import { walletDbRepository } from "../../../application/repository/walletDbRepository";
 import { walletDbRepositoryMongoDB } from "../../database/repository/walletDbRepository";
 
@@ -27,6 +29,8 @@ const adminRouter = () => {
         reviewDbRepositoryMongoDB,
         bookingDbRepository,
         bookingDbRepositoryMongoDB,
+        complaintDbRepository,
+        complaintDbRepositoryMongoDB,
         walletDbRepository,
         walletDbRepositoryMongoDB,
         )
@@ -59,6 +63,8 @@ const adminRouter = () => {
     router.put('/booking-status',controller.bookingStatusChange);
     
     router.get('/app-statics',controller.getStatistics);
+
+    router.get('/complaint-list',controller.getAllComplaints);
 
     return router
 }

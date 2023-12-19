@@ -1,30 +1,52 @@
 <h1 class="text-3xl font-semibold text-gray-300 mt-5">Your Upcoming Bookings</h1>
- 
-<div *ngIf="bookings$.length>0; else noBooking" >
-    <div class="grid grid-cols-2 mt-5" >
-        <article *ngFor="let booking of bookings$  | slice: currentPage * 4 - 4 : currentPage * 4" 
-        class="mx-5 mb-3 bg-white max-w-screen-lg rounded-md border border-gray-100 text-gray-700 shadow-md ">
+
+<div *ngIf="bookings$.length>0; else noBooking">
+    <div class="grid grid-cols-2 mt-5">
+        <article *ngFor="let booking of bookings$  | slice: currentPage * 4 - 4 : currentPage * 4"
+            class="mx-5 mb-3 bg-white max-w-screen-lg rounded-md border border-gray-100 text-gray-700 shadow-md ">
             <div class="flex flex-col md:flex-row">
                 <div class=" md:w-4/6 px-3 py-5">
-                    <span class="rounded-md h-full bg-orange-400 p-2 text-xs uppercase text-white">{{booking.worker.work}}</span>
-                    <p class="mt-2 text-xl font-black  ">{{booking.worker.name}}</p>
+                    <div class="flex justify-between">
+                        
+                        <p class=" text-xl font-black  ">{{booking.worker.name}}</p>
+                        <span class="rounded-md h-full bg-orange-400 p-2 text-xs uppercase text-white">{{booking.worker.work}}</span>
+                    </div>
                     <p class="mt-1 text-lg text-gray-600">{{ booking.bookingTime | dateString }} </p>
                     <div class="flex h-8 justify-between">
-                        <span class="rounded-md h-full border-2 text-orange-400 border-orange-400 p-2 text-xs uppercase ">{{booking.status}}</span>
+                        <span
+                            class="rounded-md h-full border-2 text-orange-400 border-orange-400 p-2 text-xs uppercase ">{{booking.status}}</span>
                     </div>
                     <div class="flex justify-between mt-2 items-center ">
-                        <button *ngIf="booking.status =='Confirmed'" (click)="onCancelRequest(booking._id)" class="rounded-md bg-sky-400 px-3 py-2 text-center text-white duration-150  hover:translate-y-1 hover:bg-sky-500">Cancel</button>
                         <p class="text-2xl text-gray-600">₹{{booking.fee}}</p>
                     </div>
                 </div>
-                <div class="items-center md:flex pr-3">
-                    <img class="rounded-md shadow-lg h-40" src="./assets/worker-sample/ocala-plumber.webp"
+                <div class="items-center md:flex">
+                    <img class="rounded-md shadow-lg h-40 my-5" src="./assets/worker-sample/ocala-plumber.webp"
                         alt="Shop image" />
+                </div>
+                <div class="p-1">
+                    <div class="dropdown inline-block relative">
+                        <button
+                            class="  text-gray-700 font-semibold py-[7px] px-[17px] rounded-full inline-flex items-center">
+                            <span class=""><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                        </button>
+                        
+                        <div class="dropdown-menu hidden absolute right-0 z-10 mt-0 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-slate-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                            <div  *ngIf="booking.status =='Confirmed'" class="py-1" role="none">
+                              <a (click)="onCancelRequest(booking._id)" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2"><i class="fa fa-trash" aria-hidden="true"></i>
+                                Cancel Booking</a>
+                            </div>
+                            <div class="py-1" role="none">
+                                <a [routerLink]="['complaint', {workerId: booking.worker._id, workerName: booking.worker.name, userId: booking.user._id, userName: booking.user.name,} ]" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    Complaint Worker</a>
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </article>
     </div>
-    <div class="flex justify-center">
+    <div *ngIf="bookings$.length>4" class="flex justify-center">
         <nav class=" my-5" aria-label="Page navigation example">
             <ul class="inline-flex -space-x-px text-base font-semibold h-11">
                 <li>
@@ -33,31 +55,33 @@
                         Previous
                     </a>
                 </li>
-    
+
                 <ng-container *ngFor="let page of pages">
                     <li>
                         <a (click)="onPageClick(page)"
                             class="flex items-center justify-center mx-2 px-4 h-11 leading-tight text-white rounded-full  border-2  hover:border-gray-300 border-transparent    "
-                            [ngClass]="{'bg-[#eb5e28]': page === currentPage}"
-                        >
+                            [ngClass]="{'bg-[#eb5e28]': page === currentPage}">
                             {{ page }}
                         </a>
                     </li>
                 </ng-container>
-                
+
                 <li>
                     <a (click)="onNext($event)"
-                    class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
-                    Next</a>
+                        class="flex items-center justify-center px-5 h-11  ms-0 leading-tight text-white  hover:bg-[#0000004b]  rounded-lg ">
+                        Next</a>
                 </li>
             </ul>
         </nav>
     </div>
 </div>
- 
-<ng-template #noBooking >
+
+<ng-template #noBooking>
     <div class="w-full flex mt-32 items-center justify-center">
         <h1 class="text-7xl text-[#5f564f] font-extrabold">No New Bookings</h1>
     </div>
 </ng-template>
 <!-- <app-booking-box (bookingData)="bookings$"></app-booking-box> -->
+
+
+<router-outlet></router-outlet>

@@ -12,6 +12,8 @@ import { reviewDbRepository } from "../../../application/repository/reviewDbRepo
 import { reviewDbRepositoryMongoDB } from "../../database/repository/reviewDbrepository";
 import { walletDbRepository } from "../../../application/repository/walletDbRepository";
 import { walletDbRepositoryMongoDB } from "../../database/repository/walletDbRepository";
+import { complaintDbRepository } from "../../../application/repository/complaintDbRepository";
+import { complaintDbRepositoryMongoDB } from "../../database/repository/complaintDbRepository";
 import { paymentServiceInterface } from "../../../application/service/paymentServiceInterface";
 import { paymentService } from "../../service/paymentService";
 import { authService } from "../../service/authService";
@@ -33,6 +35,8 @@ const userRouter = () => {
         reviewDbRepositoryMongoDB,
         walletDbRepository,
         walletDbRepositoryMongoDB,
+        complaintDbRepository,
+        complaintDbRepositoryMongoDB,
         paymentServiceInterface,
         paymentService,
         authServiceInterface,
@@ -62,6 +66,8 @@ const userRouter = () => {
     router.get('/wallet/:id',controller.getWalletByUser);
     
     router.get('/isBooked/:userId/:workerId',controller.isWorkerBooked);
+
+    router.post('/add-complaint',controller.complaintWorker);
 
     return router;
 }

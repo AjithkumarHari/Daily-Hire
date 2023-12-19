@@ -9,12 +9,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { GlobalErrorHandler } from './service/global-error-handler.service';
 import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
+import { ComplaintManagementComponent } from './views/admin/components/complaint-management/complaint-management.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewsComponent,
+    ComplaintManagementComponent,
   ],
   imports: [
     BrowserModule,
