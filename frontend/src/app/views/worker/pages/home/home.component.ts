@@ -6,6 +6,7 @@ import { selectWorkerDetails } from '../../state/login/worker.login.selector';
 import { Worker } from 'src/app/types/Worker';
 import { AgBarSeriesOptions, AgChartOptions, AgCharts } from 'ag-charts-community';
 import { AgChartsAngular } from 'ag-charts-angular';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -22,24 +23,18 @@ export class HomeComponent {
   bookedUsers: number = 0;
   bookingsByMonth: any
   bookingsByPayment: any
-
-  columnDefs:any
-
   worker!: Worker;
   public options: AgChartOptions = {};
   public optionsTotal: AgChartOptions = {};
-
   public agCharts!: AgChartsAngular;
 
-  constructor(private workerService: WorkerService, private store: Store<WorkerState>) {
-  }
-
+  constructor(private workerService: WorkerService, private store: Store<WorkerState>){}
 
   ngOnInit(){
-    this.store.select(selectWorkerDetails).subscribe((data)=>{
+    this.store.select(selectWorkerDetails).pipe(take(1)).subscribe((data)=>{
       this.worker = data;
       if(this.worker._id ){
-        this.workerService.getWorkerStats(this.worker._id).subscribe((data: any)=> {
+        this.workerService.getWorkerStats(this.worker._id).pipe(take(1)).subscribe((data: any)=> {
           ({
             totalRevenue: this.totalRevenue,
             totalBookingCount: this.totalBookingCount,
@@ -61,40 +56,29 @@ export class HomeComponent {
             },
             series: [
               {
-                  type: 'area',
-                  xKey: 'month',
-                  yKey: 'bookings',
-                  yName: 'Bookings',
-                  
+                type: 'area',
+                xKey: 'month',
+                yKey: 'bookings',
+                yName: 'Bookings',
               },
-              
-          ],
-          
-        };
- 
+            ],
+          };
           this.optionsTotal = {
             theme: 'ag-sheets-dark',
             background:{
               visible: false
             },
-            
             data: this.bookingsByPayment,
             series: [ 
               {
                 type: 'pie',
                 angleKey: 'amount',
                 legendItemKey: 'paymentType',
-                
-            },
-          ],
+              },
+            ],
           };
         })
       }
-      
-
     })
   }
-
- 
-
 }

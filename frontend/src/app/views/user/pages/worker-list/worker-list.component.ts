@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Worker } from '../../../../types/Worker';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
  
 @Component({
   selector: 'app-worker-list',
@@ -24,7 +25,7 @@ export class WorkerListComponent implements OnInit{
   constructor(private activatedRoute: ActivatedRoute,private userService: UserService){}
 
   ngOnInit(): void {
-    this.userService.allWorkers().subscribe((data: Worker[])=>{
+    this.userService.allWorkers().pipe(take(1)).subscribe((data: Worker[])=>{
       this.workers$ = data;
       this.serviceFilter = this.activatedRoute.snapshot.paramMap.get('serviceName')
       if(this.serviceFilter){

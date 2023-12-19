@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Review } from 'src/app/types/Review';
 import { AdminService } from '../../services/admin.service';
 import { Complaint } from 'src/app/types/Complaint';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-complaint-management',
@@ -17,16 +18,9 @@ export class ComplaintManagementComponent {
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
-    this.adminService.getAllComplaints().subscribe((data)=> {
-      this.compalaints$ = data;
-      console.log(data)
-    }
-    )
-    
+    this.adminService.getAllComplaints()
+      .pipe(take(1)).subscribe((data)=> this.compalaints$ = data);
   }
- 
-
-  
 
   countPages(total: number){    
     for(let i=1;i<=Math.ceil(total/6);i++){

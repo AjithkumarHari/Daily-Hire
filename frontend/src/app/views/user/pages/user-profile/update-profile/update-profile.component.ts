@@ -6,6 +6,7 @@ import { User } from 'src/app/types/User';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { editProfileRequest } from '../../../state/login/login.action';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-profile',
@@ -21,7 +22,7 @@ export class UpdateProfileComponent {
   constructor( private store: Store<UserState>, private formBuilder: FormBuilder, private userService: UserService){}
 
   ngOnInit(){
-    this.store.pipe(select(selectUserData)).subscribe((data: any) => {
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data: any) => {
       this.user = data;
       this.form = this.formBuilder.group({
         name: new FormControl(this.user.name, [Validators.required, Validators.pattern("^[A-Za-z]*[A-Za-z][A-Za-z0-9-. _]*$"), Validators.maxLength(20)]),
@@ -41,10 +42,8 @@ export class UpdateProfileComponent {
         phone: this.form.value.phone,
         password: this.form.value.password,
       }
-      console.log(user);
       const userId = this.user._id;
       this.store.dispatch(editProfileRequest({ userId , user}))
-      // this.userService.updateProfile(this.user._id, userDetails).subscribe((data)=>console.log(data))
     }else{
       this.errorMessage = "Password does not match !"
     }

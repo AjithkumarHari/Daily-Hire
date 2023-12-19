@@ -6,6 +6,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as fonts from "pdfmake/build/vfs_fonts";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/app/types/Service';
+import { take } from 'rxjs';
 (pdfMake as any).vfs = fonts.pdfMake.vfs;  
  
 @Component({
@@ -28,13 +29,13 @@ export class BookingManagementComponent {
   ){}
 
   ngOnInit() {
-    this.adminService.getAllBookings().subscribe((data: Booking[]) => {
+    this.adminService.getAllBookings().pipe(take(1)).subscribe((data: Booking[]) => {
       this.allBookings$ = data;
       this.bookings$ = this.allBookings$;
       this.countPages(this.bookings$.length);
     });
 
-    this.adminService.getAllServices().subscribe((data)=> this.services = data)
+    this.adminService.getAllServices().pipe(take(1)).subscribe((data)=> this.services = data)
 
     this.form = this.formBuilder.group({
       searchKey : new FormControl(null, [Validators.required]),
@@ -93,14 +94,13 @@ export class BookingManagementComponent {
   onStatusChange(bookingId: any) {  
     this.adminService
       .changeBookingStatus(bookingId)
-      .subscribe(() => {
-        this.adminService.getAllBookings().subscribe((data: Booking[]) => {
-          this.bookings$ = data
-        });
+      .pipe(take(1)).subscribe(() => {
+         this.ngOnInit()
       });
   }
 
-  countPages(total: number){    
+  countPages(total: number){
+    this.pages = [];
     for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }

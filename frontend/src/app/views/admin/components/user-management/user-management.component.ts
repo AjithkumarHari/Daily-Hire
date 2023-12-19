@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../../../../types/User';
 import { AdminService } from '../../services/admin.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-management',
@@ -12,26 +13,26 @@ export class UserManagementComponent {
   users$!: User[];
   currentPage: number = 1;
   pages: number[] = [];
+  userSub: any;
+  userStatusSub: any;
 
   constructor( private adminService: AdminService){}
 
   ngOnInit(){
-    this.adminService.getAllUsers().subscribe((data)=>{ 
+    this.userSub = this.adminService.getAllUsers().pipe(take(1)).subscribe((data)=>{ 
       this.users$ = data
       this.countPages(this.users$.length)
     });
   }
 
-  
-
   onStatusChange(userId: any){
-    this.adminService.changeUserStatus(userId).subscribe((data: any)=> {console.log(data)
-      this.adminService.getAllUsers().subscribe((data)=> this.users$ = data);
-    }
-    )
+    this.userStatusSub = this.adminService.changeUserStatus(userId).pipe(take(1)).subscribe(()=> { 
+      this.ngOnInit();
+    });
   }
 
-  countPages(total: number){    
+  countPages(total: number){   
+    this.pages = []; 
     for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }

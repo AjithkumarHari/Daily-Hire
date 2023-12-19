@@ -6,6 +6,7 @@ import { googleLoginRequest, loginRequest } from '../../../state/login/login.act
 import { selectErrorMessage } from '../../../state/login/login.selector';
 import { UserState } from '../../../state/user.state';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -26,14 +27,11 @@ export class LoginBoxComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.socialAuthService.authState.subscribe((user) => {
+    this.socialAuthService.authState.pipe(take(1)).subscribe((user) => {
       this.user = user;
-      console.log('google');
-      
-       
       this.store.dispatch(googleLoginRequest({user}))
  
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
         this.errorMessage = error
         console.log("login error message",this.errorMessage);  
       });

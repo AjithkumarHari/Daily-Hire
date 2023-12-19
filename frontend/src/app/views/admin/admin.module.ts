@@ -25,7 +25,6 @@ import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.int
 import { ReviewManagementComponent } from './components/review-management/review-management.component';
 import { BookingManagementComponent } from './components/booking-management/booking-management.component';
 import { DateStringPipe } from './pipes/date-string.pipe';
-import { GenericTableComponent } from './components/generic-table/generic-table.component';
 
 import { AgChartsAngularModule } from 'ag-charts-angular';
 
@@ -46,7 +45,6 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     ReviewManagementComponent,
     BookingManagementComponent,
     DateStringPipe,
-    GenericTableComponent
   ],
   imports: [
     CommonModule,

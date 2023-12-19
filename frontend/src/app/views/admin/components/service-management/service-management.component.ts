@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Service } from 'src/app/types/Service';
 import { AdminService } from '../../services/admin.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-management',
@@ -20,7 +21,7 @@ ServiceManagementComponent {
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
-    this.adminService.getAllServices().subscribe((data: Service[]) => {
+    this.adminService.getAllServices().pipe(take(1)).subscribe((data: Service[]) => {
       this.services$ = data;
       this.countPages(this.services$.length);
     });
@@ -29,15 +30,13 @@ ServiceManagementComponent {
   onStatusChange(serviceId: any) {
     this.adminService
       .changeServiceStatus(serviceId)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.adminService.getAllServices().subscribe((data: Service[]) => {
-          this.services$ = data;
-        });
+      .pipe(take(1)).subscribe(() => {
+         this.ngOnInit();
       });
   }
 
-  countPages(total: number){    
+  countPages(total: number){
+    this.pages = [];
     for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }

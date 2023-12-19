@@ -5,6 +5,7 @@ import { User } from 'src/app/types/User';
 import { UserState } from '../../../state/user.state';
 import { Store, select } from '@ngrx/store';
 import { selectUserData } from '../../../state/login/login.selector';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-bookings',
@@ -16,14 +17,13 @@ export class NewBookingsComponent {
   user!: User;
   bookings$: Booking[] = [];
   date: Date = new Date();
-
   currentPage: number = 1;
   pages: number[] = [];
 
   constructor(private userService: UserService, private store: Store<UserState>){}
 
   ngOnInit(){
-    this.store.pipe(select(selectUserData)).subscribe((data) => {
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
       this.user = data;
       if(this.user._id){
         this.userService.getBookingByUser(this.user._id).subscribe((data)=>{
@@ -41,7 +41,7 @@ export class NewBookingsComponent {
   }
 
   countPages(total: number){
-    this.pages = []   
+    this.pages = [];
     for(let i=1;i<=Math.ceil(total/4);i++){
       this.pages.push(i)
     }
@@ -66,7 +66,7 @@ export class NewBookingsComponent {
   }
 
   onCancelRequest(bookingId: any){
-    this.userService.bookingCancelRequest(bookingId).subscribe((data)=> console.log(data))
-    this.ngOnInit()
+    this.userService.bookingCancelRequest(bookingId).pipe(take(1)).subscribe();
+    this.ngOnInit();
   }
 }

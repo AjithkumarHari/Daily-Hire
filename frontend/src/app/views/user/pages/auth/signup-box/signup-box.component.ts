@@ -8,6 +8,7 @@ import { googleLoginRequest, signupRequest } from '../../../state/login/login.ac
 import { selectErrorMessage, selectToken } from '../../../state/login/login.selector';
 import { Store, select } from '@ngrx/store';
 import { UserState } from '../../../state/user.state';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup-box',
@@ -31,13 +32,13 @@ export class SignupBoxComponent {
 
   ngOnInit(): void {
 
-    this.socialAuthService.authState.subscribe((user) => {
+    this.socialAuthService.authState.pipe(take(1)).subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
        
       this.store.dispatch(googleLoginRequest({user}))
  
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
         this.errorMessage = error
         console.log("login",this.errorMessage);  
       });
@@ -75,15 +76,13 @@ export class SignupBoxComponent {
       // });
 
       
-      this.store.dispatch(signupRequest({user}))
-  
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-        this.errorMessage = error
-        console.log("signup",this.errorMessage);  
+      this.store.dispatch(signupRequest({user}));
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
+        this.errorMessage = error;
       });
       }
       else{
-        this.errorMessage = "password not match"
+        this.errorMessage = "password not match";
       }
     
   }

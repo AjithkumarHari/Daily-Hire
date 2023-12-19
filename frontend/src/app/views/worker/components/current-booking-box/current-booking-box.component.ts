@@ -10,6 +10,4 @@ export class CurrentBookingBoxComponent {
 
   @Input() bookings!: Booking[];
 
-  
-  
 }

@@ -5,6 +5,7 @@ import { Worker } from 'src/app/types/Worker';
 import { WorkerState } from '../../state/worker.state';
 import { WorkerService } from '../../services/worker.service';
 import { selectWorkerDetails } from '../../state/login/worker.login.selector';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bookings',
@@ -12,8 +13,8 @@ import { selectWorkerDetails } from '../../state/login/worker.login.selector';
   styleUrls: ['./bookings.component.css']
 })
 export class BookingsComponent {
+  
   tab: string = 'new';
-
   bookings$: Booking[] = [];
   newBookings$: Booking[] = [];
   oldBookings$: Booking[] = [];
@@ -23,18 +24,16 @@ export class BookingsComponent {
   constructor(private store: Store<WorkerState>, private workerService: WorkerService){}
 
   ngOnInit(){
-    this.store.pipe(select(selectWorkerDetails)).subscribe((data) => {
+    this.store.pipe(select(selectWorkerDetails)).pipe(take(1)).subscribe((data) => {
       this.worker = data;
       this.workerId= data._id;
-      this.workerService.getAllBooking(this.workerId).subscribe((data)=>{ 
+      this.workerService.getAllBooking(this.workerId).pipe(take(1)).subscribe((data)=>{ 
         this.bookings$ = data
         this.onNewBookings()
         this.onOldBookings()
       });
-      
     });
   }
-
 
   setTab(tab: string){
     this.tab = tab;
@@ -86,10 +85,9 @@ export class BookingsComponent {
   }
 
   onCancelled(bookingId: string){
-    this.workerService.bookingCancel(bookingId).subscribe((data)=>{
-      console.log(data);
+    this.workerService.bookingCancel(bookingId).pipe(take(1)).subscribe((data)=>{
       if(this.worker._id)
-        this.workerService.getAllBooking(this.worker._id).subscribe((data)=>{ 
+        this.workerService.getAllBooking(this.worker._id).pipe(take(1)).subscribe((data)=>{ 
           this.bookings$ = data;
           this.onNewBookings();
           this.onOldBookings();
@@ -97,7 +95,4 @@ export class BookingsComponent {
     })
   }
  
-
- 
-  
 }

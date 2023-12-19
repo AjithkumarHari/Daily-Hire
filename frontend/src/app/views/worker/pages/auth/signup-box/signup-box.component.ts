@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Worker } from '../../../../../types/Worker';
-import { Router } from '@angular/router';
-import { WorkerAuthService } from '../../../services/worker-auth-service.service';
+import { Worker } from '../../../../../types/Worker';;
 import { WorkerService } from '../../../services/worker.service';
 import { Store, select } from '@ngrx/store';
 import { workerSignupRequest } from '../../../state/login/worker.login.action';
-import { selectWorkerErrorMessage, selectWorkerToken } from '../../../state/login/worker.login.selector';
+import { selectWorkerErrorMessage } from '../../../state/login/worker.login.selector';
 import { WorkerState } from '../../../state/worker.state';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup-box',
@@ -22,8 +21,6 @@ export class SignupBoxComponent {
 
   constructor( 
     private formBuilder : FormBuilder,
-    private router: Router,
-    private workerAuthService: WorkerAuthService,
     private workerService: WorkerService,
     private store: Store<WorkerState>
   ) { }
@@ -44,7 +41,7 @@ export class SignupBoxComponent {
       location: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_-]{3,20}$")]),
     })
     
-    this.workerService.getAllServices().subscribe((data)=> this.works = data)
+    this.workerService.getAllServices().pipe(take(1)).subscribe((data)=> this.works = data);
 
   }
 
@@ -65,32 +62,13 @@ export class SignupBoxComponent {
     }
 
     const confpassword = this.form.value.confpassword;
-    
     if(confpassword==worker.password){
-
-      // this.workerAuthService.signup(worker).subscribe({
-      //   next: (response) => {
-      //     this.router.navigateByUrl('/worker/auth/login');
-      //   },
-      //   error: (err) => {
-      //     this.errorMessage = err.error.message
-      //     console.log(err);
-      //   }
-      // });
-
-        
       this.store.dispatch(workerSignupRequest({worker}))
-  
-      this.store.pipe(select(selectWorkerErrorMessage)).subscribe((error) => {
-  
-        this.errorMessage = error
-        console.log("signup",this.errorMessage);  
+      this.store.pipe(select(selectWorkerErrorMessage)).pipe(take(1)).subscribe((error) => {
+        this.errorMessage = error;  
       });
     }else{
       this.errorMessage = "password not match"
-    }
-
-    
-     
+    } 
   }
 }

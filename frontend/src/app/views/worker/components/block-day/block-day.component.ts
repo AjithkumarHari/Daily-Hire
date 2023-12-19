@@ -10,7 +10,6 @@ export class BlockDayComponent {
   @Output() onBlock : EventEmitter<Date> = new EventEmitter<Date>();
 
   onBlockSelected(){
-    console.log(this.blockDay);
     this.onBlock.emit(this.blockDay) 
   }
 }

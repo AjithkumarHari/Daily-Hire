@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Review } from 'src/app/types/Review';
 import { AdminService } from '../../services/admin.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-review-management',
@@ -16,7 +17,7 @@ export class ReviewManagementComponent {
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
-    this.adminService.getAllReviews().subscribe((data: Review[]) => {
+    this.adminService.getAllReviews().pipe(take(1)).subscribe((data: Review[]) => {
       this.reviews$ = data;
       this.countPages(this.reviews$.length);
     });
@@ -25,16 +26,13 @@ export class ReviewManagementComponent {
   onStatusChange(reviewId: any) {
     this.adminService
       .changeReviewStatus(reviewId)
-      .subscribe(() => {
-        this.adminService.getAllReviews().subscribe((data: Review[]) => {
-          this.reviews$ = data;
-        });
+      .pipe(take(1)).subscribe(() => {
+        this.ngOnInit()
       });
   }
 
-  
-
   countPages(total: number){    
+    this.pages = [];
     for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }

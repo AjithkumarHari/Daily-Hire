@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { Worker } from '../../../../types/Worker';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-worker-management',
@@ -12,25 +13,26 @@ export class WorkerManagementComponent {
   workers$ : Worker[] = [];
   currentPage: number = 1;
   pages: number[] = [];
+  workerSub: any;
+  workerStatusSub: any;
 
   constructor( private adminService: AdminService){}
 
   ngOnInit(){
-    this.adminService.getAllWorkers().subscribe((data)=>{ 
+    this.workerSub = this.adminService.getAllWorkers().pipe(take(1)).subscribe((data)=>{ 
       this.workers$ = data;
       this.countPages(this.workers$.length);
     });
-    
   }
 
   onStatusChange(workerId: any){
-    this.adminService.changeWorkerStatus(workerId).subscribe((data: any)=> {console.log(data);
-      this.adminService.getAllWorkers().subscribe((data)=> this.workers$ = data);
-    }
-    )
+    this.workerStatusSub = this.adminService.changeWorkerStatus(workerId).pipe(take(1)).subscribe((data: any)=> {
+      this.ngOnInit();
+    })
   }
 
   countPages(total: number){    
+    this.pages = []; 
     for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i);
     }
@@ -53,4 +55,9 @@ export class WorkerManagementComponent {
   onPageClick(pageNumber: number) {
     this.currentPage = pageNumber;
   }
+
+  // ngOnDestroy(){
+  //   this.workerSub.unsubscribe()
+  //   this.workerStatusSub.unsubscribe()
+  // }
 }

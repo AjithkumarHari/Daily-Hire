@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { Booking } from 'src/app/types/Booking';
 import { Router } from '@angular/router';
 import { Wallet } from 'src/app/types/Wallet';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -56,15 +57,15 @@ export class BookingFormBoxComponent {
   ngOnInit(): void {
     this.initDate();
     this.getNoOfDays();
-    this.store.pipe(select(selectUserData)).subscribe((data) => {
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
       this.user = data;
       if(this.user._id)
-        this.userService.getWalletByUser(this.user._id).subscribe((data)=>{
+        this.userService.getWalletByUser(this.user._id).pipe(take(1)).subscribe((data)=>{
           this.wallet = data
         })
     });
     if(this.worker._id){
-      this.userService.getBookingByWorker(this.worker._id).subscribe((data)=> {
+      this.userService.getBookingByWorker(this.worker._id).pipe(take(1)).subscribe((data)=> {
         this.workerBookings = data;
       })
 
@@ -167,7 +168,7 @@ export class BookingFormBoxComponent {
       paymentMethod: this.paymentMethod
     }
 
-    this.userService.paymentRequest(paymentDetails).subscribe(async (res: any)=>{
+    this.userService.paymentRequest(paymentDetails).pipe(take(1)).subscribe(async (res: any)=>{
       if(res.sessionUrl){
         window.location.href = res.sessionUrl;
       }else{

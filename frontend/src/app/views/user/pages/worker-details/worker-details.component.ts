@@ -8,6 +8,7 @@ import { selectUserData } from '../../state/login/login.selector';
 import { UserState } from '../../state/user.state';
 import { Store, select } from '@ngrx/store';
 import { User } from 'src/app/types/User';
+import { take } from 'rxjs/operators';
  
 @Component({
   selector: 'app-worker-details',
@@ -40,19 +41,19 @@ export class WorkerDetailsComponent implements OnInit{
     this.id = this.activatedRoute.snapshot.paramMap.get('id')
     
     if(this.id){
-      this.userService.getWorkerById(this.id).subscribe((data: Worker)=>{
-         this.details$ = data
-         this.store.pipe(select(selectUserData)).subscribe((data) => {
+      this.userService.getWorkerById(this.id).pipe(take(1)).subscribe((data: Worker)=>{
+         this.details$ = data;
+         this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
           this.user = data;
           if(this.user._id && this.details$._id){
-            this.userService.isWorkerBooked(this.user._id,this.details$._id).subscribe((data: any)=>{
+            this.userService.isWorkerBooked(this.user._id,this.details$._id).pipe(take(1)).subscribe((data: any)=>{
               this.isBooked = data.isBooked
             })
           }
         });
       });
 
-      this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {
+      this.userService.getReviewByWorker(this.id).pipe(take(1)).subscribe((data: Review[])=> {
         this.reviews$ = data;
         this.countPages(this.reviews$.length);
         if(this.reviews$.length==0){
@@ -96,11 +97,11 @@ export class WorkerDetailsComponent implements OnInit{
         workerName: this.details$.name,
         workerId: this.details$._id
       }
-      this.userService.addWorkerReview(review).subscribe((data)=>{
+      this.userService.addWorkerReview(review).pipe(take(1)).subscribe((data)=>{
         this.ratingDisplay = 0;
         this.reviewForm.reset();
         if(this.id){
-          this.userService.getReviewByWorker(this.id).subscribe((data: Review[])=> {this.reviews$ = data.reverse()});   
+          this.userService.getReviewByWorker(this.id).pipe(take(1)).subscribe((data: Review[])=> {this.reviews$ = data.reverse()});   
             this.reviewFormHidden = true
         }
       })

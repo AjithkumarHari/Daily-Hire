@@ -4,6 +4,7 @@ import { adminLoginRequest } from '../../state/login/admin.login.action';
 import { selectErrorMessage } from '../../state/login/admin.login.selector';
 import { Store, select } from '@ngrx/store';
 import { AdminState } from '../../state/admin.state';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -27,20 +28,13 @@ export class AuthComponent {
 
 
   onFormSubmit(){
-    console.log(this.form);
-    
     const credentials: {email: string, password: string} ={
       email : this.form.value.email,
       password : this.form.value.password
     }
-
-    console.log(credentials);
-    
     this.store.dispatch(adminLoginRequest({credentials}))
- 
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
       this.errorMessage = error
-      console.log("login",this.errorMessage);  
     }
     );
     

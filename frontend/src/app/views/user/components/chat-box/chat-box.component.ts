@@ -37,14 +37,11 @@ export class ChatBoxComponent {
     this.userService.loadChats(this.senderId, this.receiverId).subscribe((res: any) => {
       this.chats = res.chats
     })
-    console.log('scroll on init');
     this.scrollToBottom(); 
     
   }
 
   ngAfterViewInit() {
-    console.log('scroll after init');
-    
     this.scrollToBottom();
   }
 
@@ -68,7 +65,7 @@ export class ChatBoxComponent {
   }
 
   scrollToBottom(): void {
-    console.log('scroll method');
+    // console.log('scroll method');
     
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   }

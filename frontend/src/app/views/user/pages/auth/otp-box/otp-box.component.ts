@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { selectErrorMessage, selectUserData } from '../../../state/login/login.selector';
 import { Router } from '@angular/router';
 import { verifyRequest } from '../../../state/login/login.action';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class OtpBoxComponent {
   ngOnInit(): void {
     this.startTimer();
 
-    const user = this.store.pipe(select(selectUserData)).subscribe((userData) => {
+    const user = this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((userData) => {
       this.email = userData.email;
       this.phoneNumber = userData.phone; 
     });

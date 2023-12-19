@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { Store, select } from '@ngrx/store';
 import { UserState } from '../../../state/user.state';
 import { selectUserData } from '../../../state/login/login.selector';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking-history',
@@ -13,26 +14,18 @@ import { selectUserData } from '../../../state/login/login.selector';
 })
 export class BookingHistoryComponent {
 
-  
-
   user!: User;
   bookings$: Booking[] = [];
-  
   currentPage: number = 1;
   pages: number[] = [];
-
 
   constructor(private userService: UserService, private store: Store<UserState>){}
 
   ngOnInit(){
-    this.store.pipe(select(selectUserData)).subscribe((data) => {
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
       this.user = data;
       if(this.user._id){
-        console.log(this.user._id);
-        
-        this.userService.getBookingByUser(this.user._id).subscribe((data)=>{
-          console.log(data);
-          
+        this.userService.getBookingByUser(this.user._id).pipe(take(1)).subscribe((data)=>{
           this.bookings$ = data.filter((details)=>{
             const newDate = new Date(details.bookingTime); 
             const currentDate = new Date(); 

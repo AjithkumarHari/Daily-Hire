@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { selectWorkerDetails, selectWorkerErrorMessage } from '../../../state/login/worker.login.selector';
 import { workerVerifyRequest } from '../../../state/login/worker.login.action';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-otp-box',
@@ -23,14 +24,10 @@ export class OtpBoxComponent {
 
   ngOnInit(): void {
     this.startTimer();
-
-    this.store.pipe(select(selectWorkerDetails)).subscribe((workerData) => {
+    this.store.pipe(select(selectWorkerDetails)).pipe(take(1)).subscribe((workerData) => {
       this.email = workerData.email;
       this.phoneNumber = workerData.phone; 
-
-    });
- 
-    
+    });    
   }
 
 
@@ -55,15 +52,14 @@ export class OtpBoxComponent {
         code: event
       }
       this.store.dispatch(workerVerifyRequest({worker}))
- 
-      this.store.pipe(select(selectWorkerErrorMessage)).subscribe((error) => {
+      this.store.pipe(select(selectWorkerErrorMessage)).pipe(take(1)).subscribe((error) => {
         this.errorMessage = error  
       });
     }
   }
 
   resendOtp(){
-    // this.userService.resendOtp(this.phoneNumber)
+    this.workerAuthService.resendOtp(this.phoneNumber)
     console.log('resend');
     
   }

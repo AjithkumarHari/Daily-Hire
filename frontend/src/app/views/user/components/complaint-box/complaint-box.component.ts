@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Complaint } from 'src/app/types/Complaint';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-complaint-box',
@@ -16,7 +17,6 @@ export class ComplaintBoxComponent {
   workerName: any;
   userId: any;
   userName: any;
-  complaint: any;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -47,12 +47,7 @@ export class ComplaintBoxComponent {
       userId: this.userId,
       userName: this.userName,
     }
-    this.complaint = this.userService.addWorkerComplaint(complaint).subscribe();
+    this.userService.addWorkerComplaint(complaint).pipe(take(1)).subscribe();
   }
-
-  ngOnDestroy(){
-    this.complaint.unsubscribe();
-  }
-
-  
+ 
 }

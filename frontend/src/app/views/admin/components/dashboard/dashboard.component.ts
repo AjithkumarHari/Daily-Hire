@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { AgChartOptions, AgCharts } from 'ag-charts-community'; 
 import { AdminService } from '../../services/admin.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,7 @@ export class DashboardComponent {
     }
 
     ngOnInit(){
-      this.adminService.getStatistics().subscribe((data: any)=>{
+      this.adminService.getStatistics().pipe(take(1)).subscribe((data: any)=>{
         console.log(data);
 
         ({
