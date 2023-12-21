@@ -27,7 +27,7 @@ export const bookingDbRepositoryMongoDB = () => {
         return await BOOKING.find({"worker._id": id}).sort({ bookingTime: -1 });
     }
 
-    const getBookingById = async (_id: string) => {
+    const getBookingById = async (_id: string): Promise<Booking | null> => {
         return await BOOKING.findOne({_id});
     }
     

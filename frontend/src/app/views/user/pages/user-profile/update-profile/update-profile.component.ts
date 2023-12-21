@@ -4,7 +4,6 @@ import { selectUserData } from '../../../state/login/login.selector';
 import { UserState } from '../../../state/user.state';
 import { User } from 'src/app/types/User';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
 import { editProfileRequest } from '../../../state/login/login.action';
 import { take } from 'rxjs/operators';
 
@@ -19,7 +18,7 @@ export class UpdateProfileComponent {
   form !: FormGroup;
   errorMessage: string = ''
 
-  constructor( private store: Store<UserState>, private formBuilder: FormBuilder, private userService: UserService){}
+  constructor( private store: Store<UserState>, private formBuilder: FormBuilder){}
 
   ngOnInit(){
     this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data: any) => {

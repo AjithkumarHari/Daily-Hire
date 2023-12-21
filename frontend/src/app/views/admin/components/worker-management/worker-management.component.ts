@@ -56,8 +56,4 @@ export class WorkerManagementComponent {
     this.currentPage = pageNumber;
   }
 
-  // ngOnDestroy(){
-  //   this.workerSub.unsubscribe()
-  //   this.workerStatusSub.unsubscribe()
-  // }
 }

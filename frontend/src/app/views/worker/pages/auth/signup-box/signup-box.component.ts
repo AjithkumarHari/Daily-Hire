@@ -26,6 +26,8 @@ export class SignupBoxComponent {
   ) { }
 
   ngOnInit(): void {
+    this.workerService.getAllServices().pipe(take(1)).subscribe((data)=> this.works = data);
+    
     this.form = this.formBuilder.group({
       name: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_A-Z-]{3,15}$")]),
       phone: new FormControl(null, [Validators.required, Validators.pattern("[6-9]\\d{9}")]),
@@ -41,7 +43,7 @@ export class SignupBoxComponent {
       location: new FormControl(null, [Validators.required, Validators.pattern("^[a-z_-]{3,20}$")]),
     })
     
-    this.workerService.getAllServices().pipe(take(1)).subscribe((data)=> this.works = data);
+   
 
   }
 

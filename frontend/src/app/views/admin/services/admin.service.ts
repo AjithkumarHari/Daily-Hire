@@ -77,5 +77,12 @@ export class AdminService {
     return this.http.get<Complaint[]>(`${this.server}/admin/complaint-list`);
   }
 
+  getBookingById(bookingId: string):Observable<Booking>{
+    return this.http.get<Booking>(`${this.server}/admin/booking-details/${bookingId}`);
+  }
+  
+  getWorkerById(workerId: string):Observable<Worker>{
+    return this.http.get<Worker>(`${this.server}/admin/worker-details/${workerId}`);
+  }
 
 }

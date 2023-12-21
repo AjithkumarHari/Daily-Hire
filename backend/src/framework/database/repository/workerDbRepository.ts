@@ -30,22 +30,15 @@ export const workerRepositoryMongoDB = () => {
     }
 
     const blockDate = async (_id: string, date: Date) => {
-        const res = await WORKER.updateOne(
-            { _id },
-            { $addToSet: { blockedDates: date } }
-        );
-        console.log(res);
-        return res;
-        
+        return await WORKER.updateOne({ _id },{ $addToSet: { blockedDates: date } });
     }
+
     const unBlockDate = async (_id: string, date: Date) => {
-        const res = await WORKER.updateOne(
-            { _id },
-            { $pull: { blockedDates: date } }
-        );
-        console.log(res);
-        return res;
-        
+        return await WORKER.updateOne({ _id },{ $pull: { blockedDates: date } });
+    }
+
+    const updateWorker =async (_id:string, worker: Worker) => {
+        return await WORKER.updateOne({_id},{...worker});
     }
 
     return {
@@ -57,6 +50,7 @@ export const workerRepositoryMongoDB = () => {
         workerActivate,
         blockDate,
         unBlockDate,
+        updateWorker,
     }
 }
 

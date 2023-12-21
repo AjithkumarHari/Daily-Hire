@@ -106,6 +106,4 @@ export class UserService {
     return this.http.post(`${this.server}/user/add-complaint`,complaint)
   }
 
-  
-
 }

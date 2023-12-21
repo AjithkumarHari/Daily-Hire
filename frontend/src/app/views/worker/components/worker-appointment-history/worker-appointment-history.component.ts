@@ -32,7 +32,7 @@ export class WorkerAppointmentHistoryComponent {
 
   countPages(total: number){    
     this.pages = []
-    for(let i=1;i<=Math.ceil(total/7);i++){
+    for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }
   }

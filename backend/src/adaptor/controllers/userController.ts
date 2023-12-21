@@ -19,14 +19,14 @@ import { PaymentServiceInterface } from "../../application/service/paymentServic
 import { PaymentService } from "../../framework/service/paymentService";
 import { allListedWorkers } from "../../application/useCase/worker/allWorkers";
 import { HttpStatus } from "../../types/HttpStatus";
-import { findById } from "../../application/useCase/worker/findById";
+import {  findWorkerById } from "../../application/useCase/worker/findWorkerById";
 import { Worker } from "../../types/Worker";
 import { allListedServices } from "../../application/useCase/service/allService";
 import { bookingPayment } from "../../application/useCase/booking/bookingPayment";
 import AppError from "../../util/appError";
 import { addReview } from "../../application/useCase/review/addReview";
 import { findByWorker } from "../../application/useCase/review/findByWorker";
-import { findByUser } from "../../application/useCase/booking/findByUser";
+import { findByUser } from "../../application/useCase/booking/findByUserId";
 import { Booking } from "../../types/Booking";
 import { cancelBookingRequest } from "../../application/useCase/booking/cancelBookingRequest";
 import { editUser } from "../../application/useCase/user/editUser";
@@ -85,7 +85,7 @@ const userController = (
         try{
             const workerId: string = req.params.id;
             
-            const result: Worker | null | unknown= await findById(workerId, dbWorkerRepository);
+            const result: Worker | null | unknown= await findWorkerById(workerId, dbWorkerRepository);
 
             if(JSON.stringify(result)=='{}'){
                 res.status(HttpStatus.NOT_FOUND).json({

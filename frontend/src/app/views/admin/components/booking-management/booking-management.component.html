@@ -105,6 +105,9 @@
                         <th scope="col" class="px-6 py-3">
                             Action
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,6 +138,16 @@
                                 class="font-medium text-blue-600 hover:underline" [disabled]="booking.isCancelled"
                                 [ngClass]="{'text-gray-500 ': booking.isCancelled  === true}">
                                 Cancel</button>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button
+                            [routerLink]="['/admin/bookingDetails',{ bookingId: booking._id}]"
+                            class="inline-flex items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-blue-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+                          >
+                          <i class="fa-regular fa-eye pr-1"></i>
+                          
+                            View
+                          </button>
                         </td>
                     </tr>
 

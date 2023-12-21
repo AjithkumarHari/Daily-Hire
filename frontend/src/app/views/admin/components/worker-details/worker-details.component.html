@@ -1,0 +1,69 @@
+<div class=" flex justify-center items-center  w-full">
+    <div class="relative w-10/12 mt-10 h-fit bg-gray-50 rounded-2xl p-4  shadow shadow-sky-800 flex flex-col justify-around items-stretch">
+        <div class="flex items-center">
+            <div class="stroke-blue-400 w-12 h-12 p-1 bg-sky-100 rounded-2xl flex justify-center items-center">
+                <i class="fa-regular fa-address-card text-blue-400 text-[27px]"></i>
+            </div>
+           
+            <span class="text-blue-400 font-semibold text-xl px-5">Worker Details</span>
+        </div>
+
+        <div class="flex justify-between items-center mx-24 my-5">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-700 ">{{worker.name}}</h1>
+                <h1 class="text-xl text-gray-500 ">{{worker.email}}</h1>
+            </div>
+            <div>
+
+                <h1 class="text-xl font-semibold text-gray-500 ">{{worker.work}}</h1>
+            </div>
+        </div>
+ 
+        <div class="grid grid-cols-3 text-sm gap-4 mx-5 p-5">
+            <div>
+                <h1><span class="font-semibold  text-blue-900 uppercase mr-3">phone number:</span>{{worker.phone | phoneNumber}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3">age of worker : </span> {{worker.age}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3">years of experience: </span>  {{worker.experience}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3">gender : </span> {{worker.gender}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3">wage for an hour :</span> ₹ {{worker.wageForHour}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3"> wage for a day: </span> ₹ {{worker.wageForDay}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3"> location: </span>{{worker.location}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3"> is worker listed: </span> <span *ngIf="worker.isListed; else notListed">yes</span> <ng-template #notListed> No</ng-template></h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase  mr-3"> is worker active: </span> <span *ngIf="worker.isActive; else notListed">yes</span> <ng-template #notListed> No</ng-template></h1>
+            </div>
+        </div>
+
+        <p class="text-sm pb-3 text-gray-600">Administrator can change status of worker by list or unlist.</p>
+        <div class=" flex justify-center">
+            <button
+                (click)="onStatusChange(worker._id)"
+                class="border-2 px-10 border-blue-400 bg-blue-400 py-1 rounded text-gray-50 hover:bg-blue-300">
+                Change Status 
+            </button>
+        </div>
+        <div class="absolute top-3 right-2  text-red-300 hover:text-red-500" routerLink="/admin/worker">
+            <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                preserveAspectRatio="xMidYMid meet" height="100" class="w-12 h-12 fill-current">
+                <path fill-rule="evenodd"
+                    d="M50,87.4A37.4,37.4,0,1,0,12.6,50,37.3,37.3,0,0,0,50,87.4ZM44,37.3A4.7,4.7,0,0,0,37.3,44l6.1,6-6.1,6A4.7,4.7,0,0,0,44,62.7l6-6.1,6,6.1A4.7,4.7,0,0,0,62.7,56l-6.1-6,6.1-6A4.7,4.7,0,0,0,56,37.3l-6,6.1Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+</div>

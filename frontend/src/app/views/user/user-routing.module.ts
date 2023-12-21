@@ -14,6 +14,7 @@ import { NewBookingsComponent } from './pages/user-profile/new-bookings/new-book
 import { BookingHistoryComponent } from './pages/user-profile/booking-history/booking-history.component';
 import { UpdateProfileComponent } from './pages/user-profile/update-profile/update-profile.component';
 import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.component';
+import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
  
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
       {path: 'complaint', component: ComplaintBoxComponent}
     ]},
     { path: 'bookingHistory', component: BookingHistoryComponent },
-    { path: 'updateProfile', component: UpdateProfileComponent }
+    { path: 'updateProfile', component: UpdateProfileComponent },
+    { path: 'wallet', component: WalletTransactionsComponent }
   ]}
 ];
 

@@ -52,6 +52,8 @@ const workerRouter = () => {
 
     router.get('/worker-stats/:id',controller.getStatistics);
 
+    router.put('/edit-worker',controller.updateWorkerProfile);
+
     return router;
 }
 

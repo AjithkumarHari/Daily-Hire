@@ -30,6 +30,9 @@ import { allBookings } from "../../application/useCase/booking/allBooking";
 import { cancelBooking } from "../../application/useCase/booking/cancelBooking";
 import { getStaticsAdmin } from "../../application/useCase/booking/getStaticsAdmin";
 import { findAllComplaints } from "../../application/useCase/complaint/findAllComplaints";
+import { findBookingById } from "../../application/useCase/booking/findByBookingId";
+import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId";
+import { findWorkerById } from "../../application/useCase/worker/findWorkerById";
 
 
 
@@ -280,6 +283,35 @@ const adminController = (
         }
     }
 
+    const getBookingById = async ( req: Request, res: Response ) => {
+        try {
+            const bookingId: string = req.params.bookingId
+            const result  = await  findBookingById( bookingId , dbBookingRepository )
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
+    
+    const getWorkerById = async ( req: Request, res: Response ) => {
+        try {
+            const workerId: string = req.params.workerId;
+            const result  = await  findWorkerById( workerId , dbWorkerRepository )
+            if(JSON.stringify(result)=='{}'){
+                res.status(HttpStatus.NOT_FOUND).json({
+                    message: 'Not Found'
+                })
+            }
+            res.json(result)
+        } catch{
+            res.status(500)
+        }
+    }
 
     return {
         getAllUser,
@@ -290,6 +322,8 @@ const adminController = (
         getAllComplaints,
         getStatistics,
         getServicesById,
+        getBookingById,
+        getWorkerById,
         userStatusChange,
         workerStatusChange,
         serviceStatusChange,

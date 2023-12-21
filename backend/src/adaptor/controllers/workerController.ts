@@ -14,6 +14,8 @@ import { findByWorkerId } from "../../application/useCase/booking/findByWorkerId
 import { cancelBookingRequest } from "../../application/useCase/booking/cancelBookingRequest";
 import { blockBookingDate, unBlockBookingDate } from "../../application/useCase/worker/blockUnblockBooking";
 import { getStaticsWorker } from "../../application/useCase/worker/getStaticsWorker";
+import AppError from "../../util/appError";
+import { editWorker } from "../../application/useCase/worker/editWorker";
 
 const workerController = (
     workerDbRepository: WorkerRepository,
@@ -116,7 +118,6 @@ const workerController = (
         }
     }
 
-
     const getStatistics = async ( req: Request, res: Response ) => {
         try {
             const workerId = req.params.id;
@@ -132,13 +133,30 @@ const workerController = (
         }
     }
 
+    const updateWorkerProfile = async ( req: Request, res: Response ) => {
+        try {
+            const { workerId, worker } = req.body;
+            const result = await editWorker(workerId, worker, dbWorkerRepository);
+            if (result instanceof AppError) {
+                res.status(result.errorCode).json({
+                    ...result
+                })
+            } else {
+                res.json(result);
+            }
+        } catch {
+            res.status(500);
+        }
+    }
+
     return {
         getAllServices,
         getBookingByWorker,
+        getStatistics,
         cancelBooking,
         blockBooking,
         unBlockBooking,
-        getStatistics,
+        updateWorkerProfile,
     };
     
 }

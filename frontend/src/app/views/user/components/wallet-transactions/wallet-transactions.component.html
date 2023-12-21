@@ -4,7 +4,7 @@
     </label>
 </div>
 <input type="checkbox" id="wallet" class="peer fixed appearance-none opacity-0">
-<label for="wallet" class="pointer-events-none   invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-lg opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+<label for="wallet" class="pointer-events-none z-10 invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-lg opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
     <label for="" class="h-fit  scale-90 rounded-md transition">
         <div class=" flex items-center justify-center ">
             <table class="min-w-full bg-white shadow-md overflow-hidden rounded-xl">
@@ -28,7 +28,7 @@
             <div class="flex justify-center mb-10 px-5">
                 <div class="justify-center">
                     <nav class="" aria-label="Page navigation example">
-                        <ul class="  -space-x-px text-base font-semibold h-11">
+                        <ul class="-space-x-px text-base font-semibold h-11">
                             <li>
                                 <a (click)="onPrevious($event)"
                                     class="flex items-center justify-center h-8 w-8 leading-tight rounded-full ">
@@ -41,9 +41,7 @@
                                     <a (click)="onPageClick(page)"
                                         class="flex items-center justify-center h-6 w-6 my-1 leading-tight text-black rounded-full hover:bg-[#ffffff] border-transparent"
                                         [ngClass]="{'bg-[#fff]': page === currentPage,
-                                        'bg-[#ffffff7b] ': page !== currentPage,
-                                    }"
-                                    >
+                                        'bg-[#ffffff7b] ': page !== currentPage,}">
                                         {{ page }}
                                     </a>
                                 </li>

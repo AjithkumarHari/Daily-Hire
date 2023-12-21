@@ -1,0 +1,74 @@
+<div class=" flex justify-center items-center  w-full">
+    <div class="relative w-10/12 mt-10 h-fit bg-gray-50 rounded-2xl p-4  shadow shadow-sky-800 flex flex-col justify-around items-stretch">
+        <div class="flex items-center">
+            <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                preserveAspectRatio="xMidYMid meet" height="100"
+                class="stroke-blue-400 w-12 h-12 p-1 bg-sky-100 rounded-2xl">
+                <path stroke-width="8" stroke-linejoin="round" stroke-linecap="round" fill="none"
+                    d="M60.7,25v7.2m0,14.2v7.2m0,14.2V75M25,25a7.1,7.1,0,0,0-7.1,7.2V42.9a7.1,7.1,0,1,1,0,14.2V67.8A7.1,7.1,0,0,0,25,75H75a7.1,7.1,0,0,0,7.1-7.2V57.1a7.1,7.1,0,1,1,0-14.2V32.2A7.1,7.1,0,0,0,75,25Z">
+                </path>
+            </svg>
+            <span class="text-blue-400 font-semibold text-xl px-5">Booking Details</span>
+        </div>
+        <div class="grid grid-cols-2 mx-10 mt-5 pb-3 gap-10 border-b border-blue-200">
+            <div>
+                <h1 class="text-xl font-semibold text-gray-600 underline">User</h1>
+                <ul>
+                    <li><span class="font-semibold pr-5">Name: </span>{{booking.user.name}}</li>
+                    <li><span class="font-semibold pr-5">E-mail: </span>{{booking.user.email}}</li>
+                    <li><span class="font-semibold pr-5">Phone Number: </span>{{booking.user.phone | phoneNumber}}</li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="text-xl font-semibold text-gray-600 underline">Worker</h1>
+                <ul>
+                    <li><span class="font-semibold pr-5">Name: </span>{{booking.worker.name}}</li>
+                    <li><span class="font-semibold pr-5">E-mail: </span>{{booking.worker.email}}</li>
+                    <li><span class="font-semibold pr-5">Phone Number: </span>{{booking.worker.phone| phoneNumber}}</li>
+                    <li><span class="font-semibold pr-5">Gender: </span>{{booking.worker.gender}}</li>
+                    <li><span class="font-semibold pr-5">Age: </span>{{booking.worker.age}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 text-sm gap-3 p-5">
+            <div>
+                <h1><span class="font-semibold  text-blue-900 uppercase">Appointment Date: </span> {{booking.bookingTime
+                    | dateString}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase">Date of Booking : </span> {{booking.createdAt |
+                    dateString}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase">Booking Fees: </span> ₹{{booking.fee}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase">Payment Status : </span>
+                    {{booking.paymentStatus}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase">Payment Method :
+                    </span>{{booking.paymentMethod}}</h1>
+            </div>
+            <div>
+                <h1><span class="font-semibold text-blue-900 uppercase">Booking Status : </span>{{booking.status}}</h1>
+            </div>
+        </div>
+
+        <p class="text-sm pb-3 text-gray-600">Administrator can cancel booking even if it is not requested</p>
+        <div *ngIf="booking.status!='Cancelled'" class=" flex justify-center">
+            <button
+                (click)="onStatusChange(booking._id)"
+                class="border-2 px-10 border-blue-400 bg-blue-400 py-1 rounded text-gray-50 hover:bg-blue-300">Cancel
+                Booking</button>
+        </div>
+        <div class="absolute top-3 right-2  text-red-300 hover:text-red-500" routerLink="/admin/booking">
+            <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                preserveAspectRatio="xMidYMid meet" height="100" class="w-12 h-12 fill-current">
+                <path fill-rule="evenodd"
+                    d="M50,87.4A37.4,37.4,0,1,0,12.6,50,37.3,37.3,0,0,0,50,87.4ZM44,37.3A4.7,4.7,0,0,0,37.3,44l6.1,6-6.1,6A4.7,4.7,0,0,0,44,62.7l6-6.1,6,6.1A4.7,4.7,0,0,0,62.7,56l-6.1-6,6.1-6A4.7,4.7,0,0,0,56,37.3l-6,6.1Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+</div>

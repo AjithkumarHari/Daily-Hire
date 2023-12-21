@@ -22,7 +22,7 @@ export const editUser = async (
             if(newUserData){
                 const { _id, name, phone, email} = newUserData;
                 return {status: "success",message: `user data is updated`, userData:  { _id, name, phone, email} };
-        }
+            }
         }
     } catch (AppError) {
         return AppError;

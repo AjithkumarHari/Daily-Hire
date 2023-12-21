@@ -12,7 +12,7 @@
 					class="block h-12 w-96 text-black font-semibold text-md border-b-gray-100 bg-transparent py-3 pl-12 outline-none focus:border-b-2 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
 					/>
 					<label for="floating_outlined1" 
-					class="absolute text-lg pl-10 text-white rounded-2xl font-semibold duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+					class="absolute text-lg pl-10 text-white rounded-2xl font-semibold duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
 					>Search by Name</label>
 				</div>
             </form>
@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-[#0d2818a4]">
-                            <tr class="accordion border-0 border-black border-grey-light hover:bg-[#ffffff3a]" *ngFor="let booking of bookings | slice: currentPage * 7 - 7 : currentPage * 7">
+                            <tr class="accordion border-0 border-black border-grey-light hover:bg-[#ffffff3a]" *ngFor="let booking of bookings | slice: currentPage * 6 - 6 : currentPage * 6">
                                 <td class="inline-flex items-center">
                                     <span class="py-3 px-6 w-40">
                                         <p class="text-gray-400 text-sm">{{booking.user.name}} </p>

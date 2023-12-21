@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { workerLoginSuccess, workerLoginFailure, workerSignupSuccess, workerSignupFailure, workerVerifySuccess, workerVerifyFailure, workerLoginPending, workerBrowserReload, workerBlockSuccess } from "./worker.login.action";
+import { workerLoginSuccess, workerLoginFailure, workerSignupSuccess, workerSignupFailure, workerVerifySuccess, workerVerifyFailure, workerLoginPending, workerBrowserReload, workerBlockSuccess, editWorkerProfileSuccess } from "./worker.login.action";
 import { WorkerState } from "../worker.state";
 
 export const initialState: WorkerState = {
@@ -13,6 +13,15 @@ const _authReducer = createReducer(
         return {
             ...state,
             token: token,
+            workerData: workerData,
+            errorMessage: undefined
+        }
+    }),
+    on(editWorkerProfileSuccess,(state, { workerData})=>{
+        console.log('edir pro',workerData);
+        
+        return {
+            ...state,
             workerData: workerData,
             errorMessage: undefined
         }

@@ -27,6 +27,8 @@ import { BookingManagementComponent } from './components/booking-management/book
 import { DateStringPipe } from './pipes/date-string.pipe';
 
 import { AgChartsAngularModule } from 'ag-charts-angular';
+import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { WorkerDetailsComponent } from './components/worker-details/worker-details.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
     ReviewManagementComponent,
     BookingManagementComponent,
     DateStringPipe,
+    BookingDetailsComponent,
+    WorkerDetailsComponent,
   ],
   imports: [
     CommonModule,

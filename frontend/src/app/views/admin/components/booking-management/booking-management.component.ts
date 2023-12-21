@@ -50,6 +50,8 @@ export class BookingManagementComponent {
   onApplySearchFilter(){
     const startDate = new Date(this.form.value.startDate); 
     const endDate = new Date(this.form.value.endDate); 
+    console.log(startDate, endDate);
+    
 
     this.bookings$ = this.bookings$.filter((booking) => {
       const bookingDate = new Date(booking.bookingTime);
@@ -65,19 +67,26 @@ export class BookingManagementComponent {
       });
     }
 
-    if(this.form.value.serviceKey != 'All' || (this.form.value.startDate == 'dd-mm-yyyy' && this.form.value.endDate == 'dd-mm-yyyy')){
-      if(this.form.value.searchKey !== null)
-        this.bookings$ = this.bookings$.filter(booking => booking.worker.work == this.form.value.serviceKey);
+    if(this.form.value.serviceKey != 'All' ){
+      if(this.form.value.searchKey !== null || (this.form.value.startDate != 'dd-mm-yyyy' && this.form.value.endDate != 'dd-mm-yyyy')) {
+          console.log('filtered bookingss');
+          this.bookings$ = this.bookings$.filter(booking => booking.worker.work == this.form.value.serviceKey);
+        }
       else{
+        console.log('all bookings');
         this.bookings$ = this.allBookings$.filter(booking => booking.worker.work == this.form.value.serviceKey);
       }
     }
 
     if(this.form.value.statusKey != 'All'){
-      if(this.form.value.serviceKey != 'All' || (this.form.value.startDate == 'dd-mm-yyyy' && this.form.value.endDate == 'dd-mm-yyyy'))
-        this.bookings$ = this.bookings$.filter(booking => booking.status == this.form.value.statusKey);
-      else
-        this.bookings$ = this.allBookings$.filter(booking => booking.status == this.form.value.statusKey);
+      if(this.form.value.serviceKey != 'All' || (this.form.value.startDate != 'dd-mm-yyyy' && this.form.value.endDate != 'dd-mm-yyyy')){
+        console.log('filtered bookingss');
+        
+        this.bookings$ = this.bookings$.filter(booking => booking.status == this.form.value.statusKey);}
+      else {
+       console.log('all bookings');
+      
+        this.bookings$ = this.allBookings$.filter(booking => booking.status == this.form.value.statusKey);}
     }
     
   }
@@ -171,7 +180,7 @@ export class BookingManagementComponent {
           ]
         },
         {
-          text: 'Order Details',
+          text: 'Booking Details',
           style: 'sectionHeader'
         },
         {

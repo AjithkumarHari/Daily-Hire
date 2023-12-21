@@ -3,7 +3,7 @@ import { Worker } from "../../../types/Worker";
 import AppError from "../../../util/appError";
 import { WorkerRepository } from "../../repository/workerDbRepository";
 
-export const findById = async ( workerId:string, dbWorkerRepository:ReturnType<WorkerRepository>) => {
+export const findWorkerById = async ( workerId:string, dbWorkerRepository:ReturnType<WorkerRepository>) => {
     try {
       
         const worker: Worker | null = await dbWorkerRepository.getWorkerById(workerId);

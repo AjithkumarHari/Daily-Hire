@@ -7,6 +7,15 @@ export const workerBrowserReload = createAction(
     `Worker Reloads the Browser`,
     props<{token: string, workerData: any}>()
 )
+export const editWorkerProfileRequest = createAction(
+    `Worker Updates the Profile`,
+    props<{workerId: string, worker: Worker}>()
+)
+
+export const editWorkerProfileSuccess = createAction(
+    `Worker Updates the Profile`,
+    props<{workerData: any}>()
+)
 
 export const workerLoginRequest = createAction(
     `Auth Worker Login Request`,

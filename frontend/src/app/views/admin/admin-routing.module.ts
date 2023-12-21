@@ -11,6 +11,8 @@ import { EditServiceBoxComponent } from './components/edit-service-box/edit-serv
 import { ReviewManagementComponent } from './components/review-management/review-management.component';
 import { BookingManagementComponent } from './components/booking-management/booking-management.component';
 import { ComplaintManagementComponent } from './components/complaint-management/complaint-management.component';
+import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { WorkerDetailsComponent } from './components/worker-details/worker-details.component';
 
 const routes: Routes = [
   { path:'auth', component: AuthComponent },
@@ -18,11 +20,13 @@ const routes: Routes = [
     { path:'dashboard', component: DashboardComponent, },
     { path: 'user', component: UserManagementComponent },
     { path: 'worker', component: WorkerManagementComponent },
+    { path: 'workerDetails', component: WorkerDetailsComponent },
     { path: 'service', component: ServiceManagementComponent , children: [
      { path: 'edit', component: EditServiceBoxComponent}
     ]},
     { path: 'review', component: ReviewManagementComponent },
     { path: 'booking', component: BookingManagementComponent },
+    { path: 'bookingDetails', component: BookingDetailsComponent },
     { path: 'complaint', component: ComplaintManagementComponent },
   ],},
 ];

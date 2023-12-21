@@ -65,6 +65,10 @@ const adminRouter = () => {
     router.get('/app-statics',controller.getStatistics);
 
     router.get('/complaint-list',controller.getAllComplaints);
+    
+    router.get('/booking-details/:bookingId',controller.getBookingById);
+    
+    router.get('/worker-details/:workerId',controller.getWorkerById);
 
     return router
 }

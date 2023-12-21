@@ -33,7 +33,7 @@ export class WorkerAppoinmentsComponent {
 
   countPages(total: number){    
     this.pages = []
-    for(let i=1;i<=Math.ceil(total/5);i++){
+    for(let i=1;i<=Math.ceil(total/6);i++){
       this.pages.push(i)
     }
   }

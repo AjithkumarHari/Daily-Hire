@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { WorkerAuthService } from "../../services/worker-auth-service.service";
 import { WorkerService } from "../../services/worker.service";
-import { workerBlockBooking, workerBlockSuccess, workerLoginFailure, workerLoginPending, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerUnBlockBooking, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
+import { editWorkerProfileRequest, editWorkerProfileSuccess, workerBlockBooking, workerBlockSuccess, workerLoginFailure, workerLoginPending, workerLoginRequest, workerLoginSuccess, workerSignupFailure, workerSignupRequest, workerSignupSuccess, workerUnBlockBooking, workerVerifyRequest, workerVerifySuccess } from "./worker.login.action";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -176,27 +176,6 @@ export class AuthEffects{
     );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     block$ = createEffect(()=>
         this.actions$.pipe(
             ofType(workerBlockBooking),
@@ -257,6 +236,89 @@ export class AuthEffects{
 
  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    update$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(editWorkerProfileRequest),
+            switchMap(({ workerId, worker }) =>
+                this.workerService.updateProfile(workerId, worker).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        console.log('effect U');
+                        
+                        console.log(responce);
+                        if(responce.status=='success'){
+                            
+                            console.log(responce.workerData);
+                            localStorage.setItem('worker-data',JSON.stringify(responce.workerData))
+                            return editWorkerProfileSuccess({ workerData: responce.workerData})
+                        }
+                        else{
+                            console.log('in side effect LE',responce);
+                            return responce;
+                        }
+                    }),
+                  
+                )
+            )
+        )
+    );
+
+    updateSuccess$ = createEffect(()=>
+    this.actions$.pipe(
+        
+        ofType(editWorkerProfileSuccess),
+        tap(()=>{
+                console.log('sucess');
+                this.router.navigate(['/worker'])
+            })
+        ), {
+            dispatch : false
+        }
+    );
  
 
     

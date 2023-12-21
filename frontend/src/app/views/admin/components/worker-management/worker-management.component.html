@@ -19,9 +19,6 @@
                             Proffesion
                         </th>
                         <th scope="col" class="px-3 py-3">
-                            Age
-                        </th>
-                        <th scope="col" class="px-3 py-3">
                             Gender
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -29,6 +26,9 @@
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Status
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                             
                         </th>
                     </tr>
                 </thead>
@@ -47,9 +47,6 @@
                             {{worker.work}}
                         </td>
                         <td class="px-3 py-4">
-                            {{worker.age}}
-                        </td>
-                        <td class="px-3 py-4">
                             {{worker.gender}}
                         </td>
                         <td class="px-3 py-4">
@@ -60,6 +57,15 @@
                             <ng-template #list>
                                 <a (click)="onStatusChange(worker._id)"  class="font-medium text-blue-600 hover:underline">List</a>
                             </ng-template>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button
+                            [routerLink]="['/admin/workerDetails',{ workerId: worker._id}]"
+                            class="inline-flex items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-blue-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
+                          <i class="fa-regular fa-eye pr-1"></i>
+                          
+                            View
+                          </button>
                         </td>
                     </tr> 
                 </tbody>

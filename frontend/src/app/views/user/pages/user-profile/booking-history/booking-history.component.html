@@ -21,6 +21,23 @@
                             <img class="rounded-md shadow-lg h-40" src="./assets/worker-sample/ocala-plumber.webp"
                                 alt="Shop image" />
                         </div>
+                        <div class="p-1">
+                            <div class="dropdown inline-block relative">
+                                <button
+                                    class=" text-gray-700 font-semibold py-[7px] px-[17px] rounded-full inline-flex items-center">
+                                    <span class=""><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                                </button>
+                                
+                                <div class="dropdown-menu hidden absolute right-0 z-10 mt-0 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-slate-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                    <div class="py-1" role="none">
+                                        <a [routerLink]="['/profile/newBooking/complaint', {workerId: booking.worker._id, workerName: booking.worker.name, userId: booking.user._id, userName: booking.user.name,} ]" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            Complaint Worker
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>

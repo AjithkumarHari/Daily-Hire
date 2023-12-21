@@ -19,6 +19,7 @@ export const theme = {
     fontFamily:{
       schedule:[ 'Bree Serif', 'serif'],
       admin:[ 'Satisfy', 'cursive'],
+      worker:[ 'Bree Serif', 'serif'],
 
     }
 

@@ -35,6 +35,7 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
  
 
 @NgModule({
@@ -61,6 +62,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     MessagesComponent,
     ChatBoxComponent,
     DateAgoPipe,
+    EditProfileComponent,
  
   ],
   imports: [

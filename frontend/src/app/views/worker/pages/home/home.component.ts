@@ -27,10 +27,12 @@ export class HomeComponent {
   public options: AgChartOptions = {};
   public optionsTotal: AgChartOptions = {};
   public agCharts!: AgChartsAngular;
+  tab: string = 'dashboard';
 
   constructor(private workerService: WorkerService, private store: Store<WorkerState>){}
 
   ngOnInit(){
+ 
     this.store.select(selectWorkerDetails).pipe(take(1)).subscribe((data)=>{
       this.worker = data;
       if(this.worker._id ){
@@ -80,5 +82,17 @@ export class HomeComponent {
         })
       }
     })
+  }
+
+  onEditProfile(){
+    this.tab = 'edit';
+  }
+  onCancelProfile(){
+    this.tab = 'dashboard';
+  }
+  afterEditProfile(){
+    console.log('hfjk');
+    
+    this.ngOnInit()
   }
 }

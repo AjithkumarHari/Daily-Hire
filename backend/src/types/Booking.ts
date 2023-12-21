@@ -1,6 +1,9 @@
+import { User } from "./User";
+import { Worker } from "./Worker";
+
 export interface Booking {
-    worker: object,
-    user: object,
+    worker: Worker,
+    user: User,
     bookingTime: Date,
     fee: number,
     paymentId: string,

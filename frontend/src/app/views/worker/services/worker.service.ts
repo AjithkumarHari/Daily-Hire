@@ -64,4 +64,8 @@ export class WorkerService {
     });
   }
 
+  updateProfile(workerId: string, worker: Worker){
+    return this.http.put(`${this.server}/worker/edit-worker`,{workerId, worker} )
+  }
+
 }
