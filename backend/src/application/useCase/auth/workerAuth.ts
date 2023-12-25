@@ -36,11 +36,13 @@ export const workerLogin = async (
 ) => {
     try {
         const worker: Worker | null = await workerRepository.getWorkerByEmail(email);
-
+ 
         if(!worker) 
             throw new AppError("Worker not exists",HttpStatus.UNAUTHORIZED);
 
+ 
         const isPasswordCorrect = await authService.comparePassword(password, worker.password);
+   
 
         if(!isPasswordCorrect)
             throw new AppError("Password does not match", HttpStatus.UNAUTHORIZED);
@@ -52,6 +54,7 @@ export const workerLogin = async (
         }
         if(worker._id){
             const token = authService.generateToken(worker._id.toString());
+ 
             return {token, workerDate: worker}
         }
     } catch (AppError) {

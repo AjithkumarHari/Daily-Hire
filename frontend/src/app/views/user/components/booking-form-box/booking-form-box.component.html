@@ -1,11 +1,14 @@
 <div class="flex items-center m-5">
-    <label for="add-service" class="bg-gradient-to-r from-yellow-600 to-red-600 text-white py-3  px-6 font-semibold rounded hover:bg-[#2764a57a]">Book Worker</label>
+    <label for="add-service"
+        class="bg-gradient-to-r from-yellow-600 to-red-600 text-white py-3  px-6 font-semibold rounded hover:bg-[#2764a57a]">Book
+        Worker</label>
 </div>
 <input type="checkbox" id="add-service" class="peer fixed appearance-none opacity-0">
-<label for="add-service" class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-sm opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
-    <label for="" class="  h-fit  scale-90 overflow-y-auto overscroll-contain rounded-md shadow-2xl transition">
+<label for="add-service"
+    class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain backdrop-blur-sm opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>*]:scale-100">
+    <label for="" class="  h-fit  scale-90 overflow-y-auto overscroll-contain rounded-3xl shadow-2xl transition">
         <div class=" flex items-center justify-center">
-            <div class="lg:w-auto z-[100] mx-auto p-4 rounded-lg bg-gray-100 shadow-2xl font-sans">
+            <div *ngIf="!success ; else successTemplate" class="lg:w-auto z-[100] mx-auto p-4 rounded-lg bg-gray-100 shadow-2xl font-sans">
                 <form>
                     <div class="grid grid-cols-2 mt-4 mb-4">
                         <div class=" lg:w-80 relative">
@@ -96,8 +99,35 @@
                     </div>
                 </form>
             </div>
+            <ng-template #successTemplate>
+                <div class="bg-white w-fit  h-fit">
+                    <div class=" rounded-3xl text-gray-700 shadow-md">
+                        <div class="h-32">
+                            <img class="h-full w-full object-contain" src="./assets/images/success4.jpg" alt="Booking Success" />
+                        </div>
+                        <div class="flex flex-col items-center bg-white px-4 py-2">
+                            <h2 class="mb-2 text-3xl font-bold text-[#fcca46] font-success sm:text-4xl">Thank you for
+                                Booking!</h2>
+                            <p class="mb-5 font-medium text-gray-500">You can cancel anytime before the scheduled time</p>
+                            <div class="mb-2 flex w-fit items-center rounded-xl bg-[#fcefb4] px-4 py-2">
+                                <div class="ml-2 w-fit flex justify-between font-success">
+                                    <div class="flex items-center text-left">
+                                        <p class="font-medium text-lg text-orange-400 ">{{worker.name}}</p>
+                                        <p class="text-xs text-end text-yellow-500 px-2">{{worker.work}}</p>
+                                    </div>
+                                    <div class=" flex items-center">
+                                        <p class="font-semibold text-orange-400 whitespace-nowrap">{{datepickerValue}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
         </div>
     </label>
 </label>
+
+
 
 <!-- 'text-white bg-[#b43939] pointer-events-none':isBooked(date)=== true -->

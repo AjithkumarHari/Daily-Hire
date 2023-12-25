@@ -15,6 +15,8 @@ export class UserAuthHeaderInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const userAuthService = this.injector.get(UserService)
 
+    console.log('user');
+    
     const authReq = request.clone({
       setHeaders : {
         'Content-Type' : 'application/json',

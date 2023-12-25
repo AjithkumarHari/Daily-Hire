@@ -21,6 +21,7 @@ export const getStaticsAdmin = async (
         const totalRevenue = allBookings.map(booking => booking.fee).reduce((acc: any, fee) => acc + fee, 0);
         const currentDate = new Date();  
         const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
 
         const monthlyRevenue: any =  allBookings
             .filter(booking => {
@@ -29,13 +30,33 @@ export const getStaticsAdmin = async (
             .map(booking => booking.fee || 0)  
             .reduce((acc: number, fee: number) => acc + fee, 0);
 
-        const bookingsThisMonth = allBookings.filter((booking) => {
-            return  booking.bookingTime && booking.bookingTime.getMonth() === currentMonth;
+        
+        const yearlyRevenue: any = allBookings
+          .filter(booking => {
+            return booking.bookingTime && new Date(booking.bookingTime).getFullYear() === currentYear;
+          })
+          .map(booking => booking.fee || 0)  
+          .reduce((acc: number, fee: number) => acc + fee, 0);
+          
+ 
+        const completedBookings = allBookings.filter((booking)=>{
+          return booking.bookingTime && booking.bookingTime < currentDate
+        })
+
+        const startOfYear = new Date(currentYear, 0, 1);  
+        const bookingsThisYear = allBookings.filter((booking) => {
+          return booking.bookingTime && new Date(booking.bookingTime) < currentDate && new Date(booking.bookingTime) >= startOfYear;
         });
 
-        const completedBookings = allBookings.filter((booking)=>{
-            return booking.bookingTime && booking.bookingTime < currentDate
-        })
+        const bookingsThisMonth = allBookings.filter((booking) => {
+          return  booking.bookingTime && booking.bookingTime.getMonth() === currentMonth && booking.bookingTime < currentDate;
+        });
+     
+        const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+        const lastDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 6));
+        const bookingsThisWeek = allBookings.filter((booking) => {
+          return booking.bookingTime && new Date(booking.bookingTime) <= currentDate && new Date(booking.bookingTime) >= firstDayOfWeek;
+        });
 
         const allusers = await userRepository.getAllUsers();
         const allWorkers = await workerRepository.getAllWorkers();
@@ -48,13 +69,19 @@ export const getStaticsAdmin = async (
         return {
             "totalBookingCount": allBookings.length,
             "totalRevenue": totalRevenue,
-            "monthlyBookingCount": bookingsThisMonth.length,
             "monthlyRevenue": monthlyRevenue,
+            "yearlyRevenue": yearlyRevenue,
+
             "completedBookings": completedBookings.length,
+            "completedYearlyBookings": bookingsThisYear.length,
+            "completedMonthlyBookings": bookingsThisMonth.length,
+            "completedWeeklyBookings": bookingsThisWeek.length,
+
             "userCount": allusers.length,
             "workerCount": allWorkers?.length,
             "serviceCount": allServices.length,
             "reviewCount": allReviews.length,
+
             "bookingsByMonth": bookingsByMonth,
             "bookingsByPayment": bookingsByPayment,
             "bookingsByService": bookingsByService

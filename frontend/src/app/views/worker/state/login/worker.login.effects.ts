@@ -22,6 +22,8 @@ export class AuthEffects{
             switchMap(({ credentials }) =>
                 this.workerAuthService.login(credentials).pipe(
                     map(res=>{
+                        console.log(res);
+                        
                         let responce : any = res;
                         if(responce.token){ 
                             localStorage.setItem('worker-token',responce.token)

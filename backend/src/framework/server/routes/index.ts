@@ -6,6 +6,7 @@ import workerRouter from "./worker";
 import chatRouter from "./chat";
 import userAuthMiddle from "../middlewares/userAuthMiddleware";
 
+
 const routes = (app: Application) => {
     app.use('/api/user',userAuthMiddle,userRouter())
     app.use('/api/auth',authRouter())
@@ -14,4 +15,4 @@ const routes = (app: Application) => {
     app.use('/api/chat',chatRouter())
 }
 
-export default routes
+export default routes 

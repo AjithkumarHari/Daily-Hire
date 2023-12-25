@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './views/user/user.component';
 import { WorkerComponent } from './views/worker/worker.component';
 import { AdminComponent } from './views/admin/admin.component';
+import { NotFoundErrorComponent } from './errorPages/not-found-error/not-found-error.component';
  
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
     component: AdminComponent,
     loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule),
   },
+  {
+    path: '**',
+    component: NotFoundErrorComponent
+  }
 ];
 
 @NgModule({

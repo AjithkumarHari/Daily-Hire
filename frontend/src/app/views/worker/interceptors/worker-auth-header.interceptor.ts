@@ -15,11 +15,14 @@ export class WorekrAuthHeaderInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const workerAuthService = this.injector.get(WorkerAuthService)
-
+    console.log('worker');
+    
     const authReq = request.clone({
+      
+      
       setHeaders : {
-        'Content-Type' : 'application/json',
-        Authorization : `Admin-Bearer ${workerAuthService.getToken()}`
+        'Content-Type' : 'application/json', 
+        Authorization : `Worker-Bearer ${workerAuthService.getToken()}`
       },
     })
     return next.handle(authReq);

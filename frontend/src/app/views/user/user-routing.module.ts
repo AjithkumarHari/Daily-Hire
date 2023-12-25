@@ -15,6 +15,7 @@ import { BookingHistoryComponent } from './pages/user-profile/booking-history/bo
 import { UpdateProfileComponent } from './pages/user-profile/update-profile/update-profile.component';
 import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.component';
 import { WalletTransactionsComponent } from './components/wallet-transactions/wallet-transactions.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
  
 
 const routes: Routes = [
@@ -24,8 +25,12 @@ const routes: Routes = [
     {path:'signup',component:SignupBoxComponent},
     { path:'otp', component:OtpBoxComponent}
   ]},
-  { path: 'workerList', component: WorkerListComponent, canActivate: [userGuard]},
-  { path: 'workerDetails/:id', component: WorkerDetailsComponent, canActivate: [userGuard]},
+  { path: 'workerList', component: WorkerListComponent, canActivate: [userGuard], children: [
+    {path:'chat/:name/:receiverId/:senderId', component: ChatBoxComponent}
+  ]},
+  { path: 'workerDetails/:id', component: WorkerDetailsComponent, children: [
+    {path:'chat/:name/:receiverId/:senderId', component: ChatBoxComponent}
+  ]},
   { path: 'services', component: ServiceListComponent, canActivate: [userGuard]},
   { path: 'profile', component: UserProfileComponent, canActivate: [userGuard], children: [
     { path: 'newBooking', component: NewBookingsComponent, children: [

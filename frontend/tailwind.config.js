@@ -20,6 +20,9 @@ export const theme = {
       schedule:[ 'Bree Serif', 'serif'],
       admin:[ 'Satisfy', 'cursive'],
       worker:[ 'Bree Serif', 'serif'],
+      success:[ 'Sriracha', 'cursive'],
+      caption:[ 'Noto Serif Devanagari', 'serif'],
+      caption2:[ 'Yellowtail', 'cursiv'],
 
     }
 

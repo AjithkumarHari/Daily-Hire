@@ -162,7 +162,7 @@ const authController = (
     const loginWorker = async (req: Request, res: Response) => {
         const { email, password } = req.body;
         const result: any = await workerLogin(email, password, dbWorkerRepository, authService, otpService);
-
+ 
         if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result,

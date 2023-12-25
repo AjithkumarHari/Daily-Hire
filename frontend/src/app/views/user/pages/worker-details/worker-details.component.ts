@@ -64,7 +64,6 @@ export class WorkerDetailsComponent implements OnInit{
       });       
       
     }
- 
 
     this.reviewForm = this.formBuilder.group({
       title : new FormControl(null, [Validators.required, Validators.pattern("^[A-Za-z]*[A-Za-z][A-Za-z0-9-. _]*$"),  Validators.max(30)]),
@@ -136,13 +135,4 @@ export class WorkerDetailsComponent implements OnInit{
     this.currentPage = pageNumber;
   }
 
-  chatData(){
-    const data = {
-      senderId: this.user._id,
-      receiverId: this.details$._id,
-      name: this.details$.name
-    }
-    return data;
-  }
-   
 }

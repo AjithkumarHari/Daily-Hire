@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { io } from 'socket.io-client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-box',
@@ -8,17 +9,17 @@ import { io } from 'socket.io-client';
   styleUrls: ['./chat-box.component.css']
 })
 export class ChatBoxComponent {
-  senderId!: string
-  receiverId!: string
-  name!: string
+  senderId!: any
+  receiverId!: any
+  name!: any
   text: string = ''
   chats!: any[]
   socket: any
+  chatData: any
 
-  @Input() data!: any;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   
-  constructor(private userService: UserService){
+  constructor(private userService: UserService,  private activatedRoute: ActivatedRoute,){
 
     this.socket = io('http://localhost:3000');
     this.socket.on("connect", () => {
@@ -29,11 +30,10 @@ export class ChatBoxComponent {
   }
 
   ngOnInit() {
-    ({
-      senderId: this.senderId,
-      receiverId: this.receiverId,
-      name: this.name
-    } = this.data)
+ 
+    this.name = this.activatedRoute.snapshot.paramMap.get('name')
+    this.receiverId = this.activatedRoute.snapshot.paramMap.get('receiverId')
+    this.senderId = this.activatedRoute.snapshot.paramMap.get('senderId')    
     this.userService.loadChats(this.senderId, this.receiverId).subscribe((res: any) => {
       this.chats = res.chats
     })

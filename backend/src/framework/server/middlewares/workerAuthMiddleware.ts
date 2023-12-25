@@ -6,7 +6,9 @@ import { authService } from "../../service/authService";
 const workerAuthMiddle = (req: Request, res: Response ,next: NextFunction) => {
 
     let token: string | null = "";
-    if(req.headers.authorization&& req.headers.authorization.startsWith('Worker-Bearer')){
+    console.log(req.headers.authorization);
+    
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         token = req.headers.authorization.split(' ')[1];
     }
     if(!token){

@@ -49,6 +49,9 @@ import { WalletTransactionsComponent } from './components/wallet-transactions/wa
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AdvantagesComponent } from './components/advantages/advantages.component';
+import { DetailsComponent } from './components/details/details.component';
  
 @NgModule({
   declarations: [
@@ -82,6 +85,9 @@ import { ComplaintBoxComponent } from './components/complaint-box/complaint-box.
     ChatBoxComponent,
     DateAgoPipe,
     ComplaintBoxComponent,
+    FooterComponent,
+    AdvantagesComponent,
+    DetailsComponent,
 
   ],
   imports: [

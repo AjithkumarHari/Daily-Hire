@@ -2,7 +2,35 @@
 
 <div class=" flex justify-center">
     <div class="relative w-11/12">
-        <div class="overflow-x-auto shadow-lg sm:rounded-lg">
+        <div class=" w-full rounded-t-lg" id="navigation">
+            <div class="  w-full  ">
+                <div class="flex flex-col">
+                    <div class="rounded-t-xl border border-gray-200 bg-white px-6 py-3 shadow-md">
+                        <form class="" [formGroup]="form"  >
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                <div class="flex flex-col col-span-2">
+                                    <div class="relative col-span-2  pt-2 w-full flex  items-center justify-between rounded-md">
+                                        <svg class="absolute left-2 block h-5 w-5 text-gray-400"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8" class=""></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+                                        </svg>
+                                        <input type="name" name="search"
+                                            formControlName="searchKey"
+                                            (input)="onApplySearchFilter()"
+                                            class="h-10 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-1 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                            placeholder="Search by Name of User and Worker" />
+                                    </div>
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overflow-x-auto shadow-lg sm:rounded-b-xl">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500  ">
                 <thead class="text-md text-gray-700   bg-gray-200  ">
                     <tr>
@@ -21,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let complaint of compalaints$ | slice: currentPage * 6 - 6 : currentPage * 6"  class="bg-white border-b ">
+                    <tr *ngFor="let complaint of complaints$ | slice: currentPage * 6 - 6 : currentPage * 6"  class="bg-white border-b ">
                         <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap  ">
                             {{complaint.userName}}
                         </th>
@@ -41,7 +69,7 @@
             </table>
         </div>
 
-        <div *ngIf="compalaints$.length>6">
+        <div *ngIf="complaints$.length>6">
             <nav class="flex justify-center my-3" aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base h-10">
                     <li>

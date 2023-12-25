@@ -1,6 +1,6 @@
 <div class=" px-10  h-fit w-full">
-    <form  [formGroup]="form"  class="px-10 py-7 bg-white rounded-xl">
-        <div class="space-y-12">
+    <form  [formGroup]="form"  class="px-10 py-3 bg-white rounded-xl">
+        <div class="space-y-7">
             <div class="border-b border-gray-900/10  ">
                 <div class="flex justify-between">
                     <div>
@@ -14,7 +14,7 @@
                     </div>
 
                 </div>
-                <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6">
+                <div class="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-6">
                     <div class="sm:col-span-3">
                         <label for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900">Name</label>
@@ -22,7 +22,11 @@
                             <input type="text" name="first-name" id="first-name"
                                 autocomplete="given-name"
                                 formControlName="name" 
-                                class="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-2 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('name')?.invalid && form.get('name' )?.touched,
+                                    'border-green-600': !form.get('name')?.invalid && form.get('name')?.touched
+                                }">
                         </div>
                     </div>
 
@@ -31,9 +35,8 @@
                             class="block text-sm font-medium leading-6 text-gray-900">Work</label>
                         <div class="mt-2">
                             <select id="country" name="country" autocomplete="country-name" formControlName="work"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                 <option *ngFor="let work of works" value="{{work.name}}">{{work.name}}</option>
-                                <!-- <option  value="wrk">PROFESSION (Select)</option> -->
                             </select>
                         </div>
                     </div>
@@ -44,7 +47,11 @@
                             address</label>
                         <div class="mt-2">
                             <input id="email" name="email" type="email" autocomplete="email" formControlName="email" 
-                                class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full px-2 rounded-md border-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('email')?.invalid && form.get('email' )?.touched,
+                                    'border-green-600': !form.get('email')?.invalid && form.get('email')?.touched
+                                }">
                         </div>
                     </div>
                     <div class="sm:col-span-3">
@@ -52,11 +59,26 @@
                             class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                         <div class="mt-2">
                             <input id="email" name="email" type="email" autocomplete="email" formControlName="phone" 
-                                class="block w-full  rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full  rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('phone')?.invalid && form.get('phone' )?.touched,
+                                    'border-green-600': !form.get('phone')?.invalid && form.get('phone')?.touched
+                                }">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="email"
+                            class="block text-sm font-medium leading-6 text-gray-900">Location</label>
+                        <div class="mt-2">
+                            <input id="email" name="email" type="email" autocomplete="email" formControlName="location" 
+                                class="block w-full  rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('location')?.invalid && form.get('location' )?.touched,
+                                    'border-green-600': !form.get('location')?.invalid && form.get('location')?.touched
+                                }">
                         </div>
                     </div>
                     <fieldset>
-
                         <p class="mt-1 text-sm leading-6 text-gray-600">Gender</p>
                         <div class=" flex items-center w-full ">
                             <div class="flex items-center gap-x-2 px-5">
@@ -80,7 +102,11 @@
                         class="block text-sm font-medium leading-6 text-gray-900">Age</label>
                         <div class="mt-2">
                             <input type="text" name="city" id="city" autocomplete="address-level2" formControlName="age" 
-                            class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            class="block w-full rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            [ngClass]="{
+                                ' border-red-500 ': form.get('age')?.invalid && form.get('age' )?.touched,
+                                'border-green-600': !form.get('age')?.invalid && form.get('age')?.touched
+                            }">
                         </div>
                     </div>
                     
@@ -90,7 +116,11 @@
                             class="block text-sm font-medium leading-6 text-gray-900">Wage for Day</label>
                         <div class="mt-2">
                             <input type="text" name="region" id="region" autocomplete="address-level1" formControlName="wageForDay" 
-                                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('wageForDay')?.invalid && form.get('wageForDay' )?.touched,
+                                    'border-green-600': !form.get('wageForDay')?.invalid && form.get('wageForDay')?.touched
+                                }">
                         </div>
                     </div>
 
@@ -100,19 +130,43 @@
                         <div class="mt-2">
                             <input type="text" name="postal-code" id="postal-code"
                                 autocomplete="postal-code" formControlName="wageForHour" 
-                                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('wageForHour')?.invalid && form.get('wageForHour' )?.touched,
+                                    'border-green-600': !form.get('wageForHour')?.invalid && form.get('wageForHour')?.touched
+                                }">
                         </div>
                     </div>
-                    <div class="col-span-full">
+                    <div class="col-span-3 pb-1">
                         <label for="street-address"
-                            class="block text-sm font-medium leading-6 text-gray-900">Location</label>
+                            class="block text-sm font-medium leading-6 text-gray-900">New Password</label>
                         <div class="mt-2">
                             <input type="text" name="street-address" id="street-address"
-                                autocomplete="street-address" formControlName="location" 
-                                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                autocomplete="street-address" formControlName="password" 
+                                class="block w-full rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('password')?.invalid && form.get('password' )?.touched,
+                                    'border-green-600': !form.get('password')?.invalid && form.get('password')?.touched
+                                }">
+                        </div>
+                    </div>
+                    <div class="col-span-3">
+                        <label for="street-address"
+                            class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                        <div class="mt-2">
+                            <input type="text" name="street-address" id="street-address"
+                                autocomplete="street-address" formControlName="confpassword" 
+                                class="block w-full rounded-md border-2 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                [ngClass]="{
+                                    ' border-red-500 ': form.get('confpassword')?.invalid && form.get('confpassword' )?.touched,
+                                    'border-green-600': !form.get('confpassword')?.invalid && form.get('confpassword')?.touched
+                                }">
                         </div>
                     </div>
                 </div>
+                    <div class="flex justify-center w-full">
+                        <p class="text-sm text-center text-red-600 font-semibold">{{errorMessage}}</p>
+                    </div>
             </div>
         </div>
     </form>

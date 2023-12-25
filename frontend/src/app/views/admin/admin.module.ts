@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminAuthHeaderInterceptor } from './interceptors/admin-auth-header.interceptor';
 import { ReviewManagementComponent } from './components/review-management/review-management.component';
 import { BookingManagementComponent } from './components/booking-management/booking-management.component';
+import { ComplaintManagementComponent } from './components/complaint-management/complaint-management.component';
 import { DateStringPipe } from './pipes/date-string.pipe';
 
 import { AgChartsAngularModule } from 'ag-charts-angular';
@@ -49,6 +50,7 @@ import { WorkerDetailsComponent } from './components/worker-details/worker-detai
     DateStringPipe,
     BookingDetailsComponent,
     WorkerDetailsComponent,
+    ComplaintManagementComponent,
   ],
   imports: [
     CommonModule,

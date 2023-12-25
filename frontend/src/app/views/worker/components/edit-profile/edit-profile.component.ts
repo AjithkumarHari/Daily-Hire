@@ -67,13 +67,18 @@ export class EditProfileComponent {
       wageForDay : this.form.value.wageForDay,
       location : this.form.value.location,
     }
-    console.log(worker);
-    const workerId = this.worker._id;
-    if(workerId)
-      this.store.dispatch(editWorkerProfileRequest({ workerId , worker}))
-      this.store.pipe(select(selectWorkerToken))
-      .pipe(take(1)).subscribe((workerData)=> console.log(workerData)
-      );
+    if(worker.password != null && this.form.value.password!=this.form.value.confpassword){
+      this.errorMessage = 'Password not match'
+    }else{
+      worker.password = this.worker.password;
+      console.log(worker);
+      const workerId = this.worker._id;
+      if(workerId)
+        this.store.dispatch(editWorkerProfileRequest({ workerId , worker}))
+        this.store.pipe(select(selectWorkerToken))
+        .pipe(take(1)).subscribe((workerData)=> console.log(workerData)
+        );
+    }
  
        
   }

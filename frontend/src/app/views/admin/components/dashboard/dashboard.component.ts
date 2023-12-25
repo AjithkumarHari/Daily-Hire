@@ -15,7 +15,12 @@ export class DashboardComponent {
   totalRevenue: number = 0;
   monthlyBookingCount: number = 0;
   monthlyRevenue: number = 0;
+  yearlyRevenue: number = 0;
   completedBookings: number = 0;
+  completedYearlyBookings: number = 0;
+  completedMonthlyBookings: number = 0;
+  completedWeeklyBookings: number = 0;
+
   userCount: number = 0;
   workerCount: number = 0;
   serviceCount: number = 0;
@@ -34,14 +39,18 @@ export class DashboardComponent {
 
     ngOnInit(){
       this.adminService.getStatistics().pipe(take(1)).subscribe((data: any)=>{
-        console.log(data);
+        // console.log(data);
 
         ({
           totalBookingCount: this.totalBookingCount,
           totalRevenue: this.totalRevenue,
           monthlyBookingCount: this.monthlyBookingCount,
           monthlyRevenue: this.monthlyRevenue,
+          yearlyRevenue: this.yearlyRevenue,
           completedBookings: this.completedBookings,
+          completedYearlyBookings: this.completedYearlyBookings,
+          completedMonthlyBookings: this.completedMonthlyBookings,
+          completedWeeklyBookings: this.completedWeeklyBookings,
           userCount: this.userCount,
           workerCount: this.workerCount,
           serviceCount: this.serviceCount,
@@ -81,7 +90,7 @@ export class DashboardComponent {
           },
           data: this.bookingsByPayment,
           title: {
-              text: 'Bookings by Payment Type',
+              text: 'Bookings by Payment',
           },
           series: [
               {

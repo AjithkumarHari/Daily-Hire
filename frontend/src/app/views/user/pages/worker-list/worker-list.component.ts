@@ -3,6 +3,10 @@ import { UserService } from '../../services/user.service';
 import { Worker } from '../../../../types/Worker';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { UserState } from '../../state/user.state';
+import { Store, select } from '@ngrx/store';
+import { selectUserData } from '../../state/login/login.selector';
+import { User } from 'src/app/types/User';
  
 @Component({
   selector: 'app-worker-list',
@@ -12,6 +16,7 @@ import { take } from 'rxjs/operators';
 export class WorkerListComponent implements OnInit{
 
   workers$: Worker[] = [];
+  user!: User;
   selectedGender: string = 'all';
   searchText: string = '';
   orderAge: string = '';
@@ -22,9 +27,12 @@ export class WorkerListComponent implements OnInit{
   pages: number[] = [];
   filteredWorkers!: Worker[]
 
-  constructor(private activatedRoute: ActivatedRoute,private userService: UserService){}
+  constructor(private activatedRoute: ActivatedRoute,private userService: UserService, private store: Store<UserState>){}
 
   ngOnInit(): void {
+
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) =>this.user = data);
+
     this.userService.allWorkers().pipe(take(1)).subscribe((data: Worker[])=>{
       this.workers$ = data;
       this.serviceFilter = this.activatedRoute.snapshot.paramMap.get('serviceName')
@@ -34,6 +42,7 @@ export class WorkerListComponent implements OnInit{
       this.onSearchTextEntered('')
       this.countPages(this.workers$.length);
     })
+    
   }
 
   getAllWorkersCount(){ 
@@ -70,6 +79,18 @@ export class WorkerListComponent implements OnInit{
     this.currentPage = 1;
     this.countPages(this.filteredWorkers.length)
   }
+
+  chatData( workerId: any,name: string,){
+      const data = {
+        senderId: this.user._id,
+        receiverId: workerId,
+        name: name
+      }
+      console.log(data);
+      return data
+      
+  }
+ 
 
   countPages(total: number){    
     this.pages = [];
