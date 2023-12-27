@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  
+  showDateAddReview: boolean = false;
+
   constructor(private workerAuthService: WorkerAuthService, private router: Router
   ){}
   logout(){

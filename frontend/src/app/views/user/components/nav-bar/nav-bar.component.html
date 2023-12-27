@@ -1,19 +1,61 @@
-<nav class="flex justify-around w-auto pt-3 pb-3">
-    <div class="flex items-center">
+<nav class="flex sm:justify-around justify-between w-auto pt-3 pb-3">
+    <div class="flex items-center ml-10">
         <img class="w-8 h-8" src="./assets/DailyHire-logo.png" alt="fsd">
         <h1 class="text-white text-3xl font-semibold  hidden sm:block ">aily Hire</h1>
     </div>
-    <ul class="flex items-center text-2xl text-white">
+    <ul class="hidden sm:flex items-center text-2xl text-white">
         <li><a class="pr-2.5 pl-2.5" routerLink="/">Home</a> </li>
         <li><a class="pr-2.5 pl-2.5" routerLink="/services">Services</a></li>
         <li><a class="pr-2.5 pl-2.5" routerLink="/workerList">Workers</a></li>
         <li><a class="pr-2.5 pl-2.5" routerLink="/profile/newBooking">Profile</a></li>
     </ul>
-    <div>
-        <button *ngIf="isLoggedIn(); else loginSignup" class="px-4 py-1 text-lg text-white rounded   bg-[#a53521] hover:bg-[#6f1d1b]" (click)="logout()">Logout</button>
+    <div class="hidden sm:block">
+        <button *ngIf="isLoggedIn(); else loginSignup"
+            class="px-4 py-1 text-lg text-white rounded   bg-[#a53521] hover:bg-[#6f1d1b]"
+            (click)="logout()">Logout</button>
         <ng-template #loginSignup>
-            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]" routerLink="/auth/login">Login</button>
-            <button class="px-4 py-1 text-lg text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]" routerLink="/auth/signup">Signup</button>
+            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/login">Login</button>
+            <button class="px-4 py-1 text-lg text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/signup">Signup</button>
         </ng-template>
     </div>
+
+    <div class="sm:hidden mr-10">
+        <button type="button" (click)="showDateAddReview = !showDateAddReview"
+            (keydown.escape)="showDateAddReview = false"
+            class=" w-10 h-10 flex justify-center items-center text-sm font-semibold rounded-lg border-2   disabled:opacity-50 disabled:pointer-events-none "
+            [ngClass]="{
+                'border-gray-200 text-white': showDateAddReview == false,
+                'bg-white text-black': showDateAddReview == true
+            }">
+            <svg class=" w-5 h-5 " width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+    </div>
+    
 </nav>
+<div [hidden]="!showDateAddReview" (keydown.away)="showDateAddReview = false"
+    class="p-5 w-full font-sans text-white ml-10 sm:hidden">
+    <ul class="text-2xl ">
+        <li><a class=" p-2.5" routerLink="/">Home</a> </li>
+        <li><a class="  p-2.5" routerLink="/services">Services</a></li>
+        <li><a class="p-2.5" routerLink="/workerList">Workers</a></li>
+        <li><a class="p-2.5" routerLink="/profile/newBooking">Profile</a></li>
+    </ul>
+    <div class="p-3">
+        <button *ngIf="isLoggedIn(); else loginSignup"
+            class="px-4 py-1 text-lg text-white rounded border-2 border-white hover:bg-[#6f1d1b]"
+            (click)="logout()">
+            Logout
+        </button>
+        <ng-template #loginSignup>
+            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/login">Login</button>
+            <button class="px-4 py-1 text-lg text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/signup">Signup</button>
+        </ng-template>
+    </div>
+</div>

@@ -1,14 +1,45 @@
- <nav class="flex justify-between w-auto px-20 py-4 sticky top-0  bg-[#96bbbb]">
+ <nav class="flex sm:justify-between justify-between w-auto px-20 py-4 sticky top-0  bg-[#96bbbb]">
     <div class="flex items-center">
-        <!-- <img class="w-8 h-8" src="./assets/DailyHire-logo.png" alt="fsd"> -->
-        <h1 class="text-white text-3xl font-extrabold  hidden sm:block font-worker">DailyHire <span class="text-[#10434e]">Worker</span></h1>
+        <h1 class="text-white text-3xl font-extrabold  hidden lg:block font-worker">DailyHire <span class="text-[#10434e]">Worker</span></h1>
+        <h1 class="text-white  text-2xl font-extrabold  md:block lg:hidden font-worker">DH <span class="text-[#10434e]">Worker</span></h1>
+        
     </div>
-    <ul class="flex items-center text-2xl text-white">
+    <ul class="hidden sm:flex items-center text-lg lg:text-2xl md:text-xl text-white">
         <li class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'" [routerLinkActiveOptions]="{exact: true}" ><a class="active:text-green-600" routerLink="/worker" >Home</a> </li>
         <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/schedule">Schedule</a></li>
         <li  class=" mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/bookings">My Bookings</a></li>
         <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/messages">Messages</a></li>
         <!-- <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/profile">Profile</a></li> -->
     </ul>
-    <button class="px-4 py-1 text-lg font-semibold text-[#96bbbb] rounded bg-[#10434e] hover:bg-[#0a2e36]  " (click)="logout()">Log out</button>
+    <button class="hidden sm:flex items-center px-2 md:px-4 py-1 text-lg font-semibold text-[#96bbbb] rounded bg-[#10434e] hover:bg-[#0a2e36] whitespace-nowrap" (click)="logout()">
+        <i class="fa fa-sign-out p-2" aria-hidden="true"></i><span class="hidden md:block ">Log out</span>
+    </button>
+
+    <div class="sm:hidden mr-10">
+        <button type="button" (click)="showDateAddReview = !showDateAddReview"
+            (keydown.escape)="showDateAddReview = false"
+            class=" w-10 h-10 flex justify-center items-center text-sm font-semibold rounded-lg border-2   disabled:opacity-50 disabled:pointer-events-none "
+            [ngClass]="{
+                'border-gray-200 text-white': showDateAddReview == false,
+                'bg-white text-black': showDateAddReview == true
+            }">
+            <svg class=" w-5 h-5 " width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+    </div>
 </nav>
+
+<div [hidden]="!showDateAddReview" (keydown.away)="showDateAddReview = false"
+    class="p-5 w-full font-sans text-white sm:hidden">
+    <ul class="text-2xl ">
+        <li class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'" [routerLinkActiveOptions]="{exact: true}" ><a class="active:text-green-600" routerLink="/worker" >Home</a> </li>
+        <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/schedule">Schedule</a></li>
+        <li  class=" mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/bookings">My Bookings</a></li>
+        <li  class="mx-3 border-b-2 border-transparent" [routerLinkActive]="'border-white'"><a class=" active:text-green-600" routerLink="/worker/messages">Messages</a></li>
+    </ul>
+    <button class=" flex items-center px-2 md:px-4 py-1 text-lg font-semibold text-[#96bbbb] rounded bg-[#10434e] hover:bg-[#0a2e36] whitespace-nowrap" (click)="logout()">
+        <i class="fa fa-sign-out p-2" aria-hidden="true"></i> Log out 
+    </button>
+</div>

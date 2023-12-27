@@ -1,5 +1,5 @@
 <div class="h-28"></div>
-<div class="flex w-7/12 m-auto  overflow-hidden bg-white shadow-lg h-fit rounded-xl"> 
+<div class="flex w-10/12 sm:w-7/12 m-auto  overflow-hidden bg-white shadow-lg h-fit rounded-xl"> 
     <div class="hidden  w-1/2  sm:hidden md:block">
         <div class="flex flex-col items-center justify-center p-12 h-full bg-no-repeat bg-cover" style="background-image: url('../../../assets/images/gentleman-tuxedo.jpg');">
             <div class="flex items-center p-10">
@@ -12,7 +12,7 @@
             </div>
         </div> 
     </div>
-    <div class="relative sm:w-full lg:w-1/2 px-5 lg:px-10 py-10 h-fit ">
+    <div class="relative w-full lg:w-1/2 px-5 lg:px-10 py-10 h-fit ">
         <h1 class="mb-1 text-3xl ">Login</h1>
         <p class="  text-sm  ">Are you new to Daily Hire? <a routerLink="/auth/signup"  class="font-semibold text-yellow-950">Click Here</a></p>
         <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="">

@@ -1,14 +1,12 @@
 <app-navbar></app-navbar>
-<div class="grid grid-cols-2 h-fit ">
-  <app-worker-calender [bookings]="newBookings()" [blockedDates]="workerBlockedDates()"
-    (onUnBlockBooking)="blockBooking($event)" (onBlockBooking)="blockBooking($event)"
-    (onShowBooking)="showBooking($event)"></app-worker-calender>
+<div class=" grid grid-cols-1 md:grid-cols-2 h-fit ">
+  <div class="sm:mx-10">
+    <app-worker-calender [bookings]="newBookings()" [blockedDates]="workerBlockedDates()"
+      (onUnBlockBooking)="blockBooking($event)" (onBlockBooking)="blockBooking($event)"
+      (onShowBooking)="showBooking($event)"></app-worker-calender>
+  </div>
   <div>
-    <div class=" flex mx-10 justify-center items-center">
-      <img class="h-40 " src="../../../../../assets/images/3870277-removebg-preview.png" alt="nochat">
-      <h1 class="text-5xl font-schedule">Schedule Your Bookings</h1>
-    </div>
-    <app-current-booking-box [bookings]="nearestBooking()"></app-current-booking-box>
+    
     <div>
       <div *ngIf="!showDay">
         <app-selected-day [booking]="selectedShowDay" (onCancel)="onCancelled($event)"></app-selected-day>
@@ -34,5 +32,10 @@
         </div>
       </div>
     </div>
+    <div class=" flex mx-10 justify-center items-center">
+      <img class="h-40 " src="../../../../../assets/images/3870277-removebg-preview.png" alt="nochat">
+      <h1 class="text-5xl font-schedule">Schedule Your Bookings</h1>
+    </div>
+    <app-current-booking-box [bookings]="nearestBooking()"></app-current-booking-box>
   </div>
 </div>

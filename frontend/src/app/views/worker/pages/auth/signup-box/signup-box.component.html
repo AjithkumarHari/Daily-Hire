@@ -1,11 +1,11 @@
-<div class="w-7/12 m-auto   overflow-hidden bg-[#ffffffc1] shadow-lg  rounded-xl">
+<div class="w-10/12 sm:w-7/12 m-auto   overflow-hidden bg-[#ffffffc1] shadow-lg  rounded-xl">
     <div class="text-center mt-3">
         <h1 class="mb-1 text-3xl ">Worker Signup</h1>
         <p class="text-sm">Already Registered on Daily Hire? <a routerLink="/worker/auth/login"  class="font-semibold text-yellow-950">Click Here</a></p>
     </div>
 
     <form  [formGroup]="form"  (ngSubmit)="onFormSubmit()" >
-        <div class="grid grid-cols-2 mt-3 divide-x divide-slate-400/50">
+        <div class="grid grid-cols-1 sm:grid-cols-2 mt-3 divide-x divide-slate-400/50">
             <div class="relative w-full px-10 py-10 h-fit">
                 <div class='grid gap-5'>
                     <h1 class="text-xl ">Personal Details</h1>

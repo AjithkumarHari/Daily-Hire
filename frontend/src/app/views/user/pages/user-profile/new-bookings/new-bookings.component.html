@@ -3,13 +3,13 @@
 </h1>
 
 <div *ngIf="bookings$.length > 0; else noBooking">
-    <div class="grid grid-cols-2 mt-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 mt-5">
         <article *ngFor="
         let booking of bookings$ | slice : currentPage * 4 - 4 : currentPage * 4
-      " class="mx-5 mb-3 bg-white max-w-screen-lg rounded-md border border-gray-100 text-gray-700 shadow-md">
-            <div class="flex flex-col md:flex-row">
-                <div class="md:w-4/6 px-3 py-5">
-                    <div class="flex justify-between">
+      " class="mx-5 mb-3 bg-white max-w-screen-lg  rounded-md border border-gray-100 text-gray-700 shadow-md">
+            <div class="flex flex-row">
+                <div class="md:w-4/6 w-5/6 px-3 py-5">
+                    <div class="flex justify-between ">
                         <p class="text-xl font-black">{{ booking.worker.name }}</p>
                         <span class="rounded-md h-full bg-orange-400 p-2 text-xs uppercase text-white">{{
                             booking.worker.work }}</span>
@@ -26,7 +26,7 @@
                         <p class="text-2xl text-gray-600">₹{{ booking.fee }}</p>
                     </div>
                 </div>
-                <div class="items-center md:flex">
+                <div class="items-center hidden md:flex">
                     <img class="rounded-md shadow-lg h-40 my-5" src="./assets/worker-sample/ocala-plumber.webp"
                         alt="Shop image" />
                 </div>

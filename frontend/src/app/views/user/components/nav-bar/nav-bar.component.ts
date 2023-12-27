@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
 
+  showDateAddReview: boolean = false;
+
   constructor( private userService : UserService, private router : Router){}
   
   isLoggedIn(): boolean {
