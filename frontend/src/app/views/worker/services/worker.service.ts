@@ -16,7 +16,7 @@ export class WorkerService {
   private socket: any;
 
   constructor( private http: HttpClient) {
-    this.socket = io('http://localhost:3000')
+    this.socket = io('http://dailyhire.ajithkumarhari.co')
    }
 
   getAllServices():Observable<Service[]>{
