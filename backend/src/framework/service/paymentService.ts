@@ -22,8 +22,6 @@ export const paymentService = () => {
                     },
                 ],
                 mode: 'payment',
-                success_url: `https://dailyhire.ajithkumarhari.co/workerDetails/${paymentDetails.worker._id}`,
-                cancel_url: 'https://dailyhire.ajithkumarhari.co/',
             })
             return session;
         } catch (error) {
