@@ -21,7 +21,7 @@ export class ChatBoxComponent {
   
   constructor(private userService: UserService,  private activatedRoute: ActivatedRoute,){
 
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://dailyhire.ajithkumarhari.co');
     this.socket.on("connect", () => {
     });
     this.userService.onNewMessage().subscribe((message) => {

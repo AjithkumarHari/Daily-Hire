@@ -22,7 +22,7 @@ export class ChatBoxComponent {
   
   constructor(private workerService: WorkerService){
 
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://dailyhire.ajithkumarhari.co');
     this.socket.on("connect", () => {
     });
     this.workerService.onNewMessage().subscribe((message) => {
