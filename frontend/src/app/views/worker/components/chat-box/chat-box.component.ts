@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { io } from 'socket.io-client';
-import { UserService } from 'src/app/views/user/services/user.service';
 import { WorkerService } from '../../services/worker.service';
 import { environment } from 'src/environments/environment';
 
@@ -69,9 +68,7 @@ export class ChatBoxComponent {
       
       this.workerService.sendChat(data).subscribe((res) => {
 
-        this.text = ''
-        console.log('dadad');
-        
+        this.text = ''        
         this.scrollToBottom();
 
       })
@@ -81,7 +78,7 @@ export class ChatBoxComponent {
   }
 
   scrollToBottom(): void {
-    console.log('scroll');
+    // console.log('scroll');
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   }
 }

@@ -37,6 +37,7 @@ export class ChatBoxComponent {
     this.receiverId = this.activatedRoute.snapshot.paramMap.get('receiverId')
     this.senderId = this.activatedRoute.snapshot.paramMap.get('senderId')    
     this.userService.loadChats(this.senderId, this.receiverId).subscribe((res: any) => {
+      if( res.chats)
       this.chats = res.chats
     })
     this.scrollToBottom(); 
@@ -46,6 +47,7 @@ export class ChatBoxComponent {
   ngAfterViewInit() {
     this.scrollToBottom();
   }
+  
 
   sendMessage(text: string) {
     const trimmedText = text.trim();
