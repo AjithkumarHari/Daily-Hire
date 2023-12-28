@@ -20,7 +20,7 @@ export class UserService {
   private socket: any
   
   constructor( private http: HttpClient) {
-    this.socket = io('http://dailyhire.ajithkumarhari.co')
+    this.socket = io('https://dailyhire.ajithkumarhari.co')
    }
    
 
