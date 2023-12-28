@@ -1,28 +1,16 @@
 import express, { Application } from "express";
 import http from "http";
+import socketIoConfig from "./framework/server/socket.io";
 import serverConfig from "./framework/server/server";
 import expressConfig from "./framework/server/express";
 import connectDB from "./framework/database/connection";
 import routes from "./framework/server/routes"
-import { Server } from "socket.io";
-import configKeys from "./config";
 
 const app:Application = express();
 const server =  http.createServer(app);
-const io = new Server(server, {
-    cors: {
-      origin: ['http://localhost:4200'],
-    }
-  });
 
-
-io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => { io.emit('chat message', msg); });
-    socket.on('typing', (data) => { io.emit('typing', data) });
-    socket.on('stop typing', (data) => { io.emit('stop typing', data); });
-    socket.on('read', (data) => { io.emit('read', data); });
-    socket.on('unread', (data) => { io.emit('read', data); });
-});
+// socket.io configuration
+socketIoConfig(server);
 
 // express.js configuration (middlewares etc.)
 expressConfig(app);
@@ -33,6 +21,7 @@ serverConfig(server).startServer();
 // connect to datbase
 connectDB() 
 
+// router configuration
 routes(app)
 
 // Expose app

@@ -1,5 +1,5 @@
 import express ,{ Application } from "express";
-import cors from 'cors'
+import cors from 'cors';
 import configKeys from "../../config";
 
 const expressConfig = (app : Application) => {
@@ -8,4 +8,4 @@ const expressConfig = (app : Application) => {
     app.use(cors({origin: configKeys.ORIGIN_PORT}));
 }
 
-export default expressConfig
+export default expressConfig;
