@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { io } from 'socket.io-client';
 import { WorkerService } from '../../services/worker.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-chat-box',

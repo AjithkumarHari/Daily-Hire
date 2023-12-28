@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { io } from 'socket.io-client';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-chat-box',

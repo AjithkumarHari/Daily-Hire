@@ -11,7 +11,7 @@ import { UserAuthHeaderInterceptor } from './interceptors/user-auth-header.inter
 import { UserRoutingModule } from './user-routing.module';
 import { DirectiveModule } from 'src/app/directives/directive.module';
 
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { NgOtpInputModule } from 'ng-otp-input';
