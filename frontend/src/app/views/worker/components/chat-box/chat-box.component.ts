@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular
 import { io } from 'socket.io-client';
 import { UserService } from 'src/app/views/user/services/user.service';
 import { WorkerService } from '../../services/worker.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat-box',
@@ -16,13 +17,14 @@ export class ChatBoxComponent {
   text: string = ''
   chats: any[] = []
   socket: any
+  site = environment.siteUrl;
 
   @Input() data!: any;
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
   
   constructor(private workerService: WorkerService){
 
-    this.socket = io('https://dailyhire.ajithkumarhari.co');
+    this.socket = io(this.site);
     this.socket.on("connect", () => {
     });
     this.workerService.onNewMessage().subscribe((message) => {

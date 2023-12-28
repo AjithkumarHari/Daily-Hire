@@ -16,11 +16,12 @@ import { io } from "socket.io-client";
 })
 export class UserService {
 
+  site = environment.siteUrl;
   server = environment.serverUrl;
   private socket: any
   
   constructor( private http: HttpClient) {
-    this.socket = io('https://dailyhire.ajithkumarhari.co')
+    this.socket = io(this.site)
    }
    
 
