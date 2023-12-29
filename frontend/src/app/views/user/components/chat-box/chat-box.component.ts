@@ -35,7 +35,7 @@ export class ChatBoxComponent {
  
     this.name = this.activatedRoute.snapshot.paramMap.get('name')
     this.receiverId = this.activatedRoute.snapshot.paramMap.get('receiverId')
-    this.senderId = this.activatedRoute.snapshot.paramMap.get('senderId')    
+    this.senderId = this.activatedRoute.snapshot.paramMap.get('senderId') 
     this.userService.loadChats(this.senderId, this.receiverId).subscribe((res: any) => {
       if( res.chats)
       this.chats = res.chats

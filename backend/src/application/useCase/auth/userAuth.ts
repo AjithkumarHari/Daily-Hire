@@ -90,16 +90,16 @@ export const signInWithGoogle = async(
 ) => {
     
     const user: User = await googleAuthService.verify(credentials);
-    const {_id, name, email } = user;
     const isUserExist = await userRepository.getUserByEmail(user.email);
     if(isUserExist && isUserExist._id){
+        const {_id, name, email } = isUserExist;
         const token = authService.generateToken(isUserExist._id.toString());
-        return {token, userData:{_id, name, email} }
+        return {token,  userData:{_id, name, email} }
     }else{
-        const { _id: userId } = await userRepository.addUser(user);
-        await walletRepository.createWallet({userId: userId.toString(), balance: 0})
-        const token = authService.generateToken(userId.toString());
-        return {token, userData:{_id, name, email} }
+        const {_id, name, email } = await userRepository.addUser(user);
+        await walletRepository.createWallet({userId:  _id.toString(), balance: 0})
+        const token = authService.generateToken(_id.toString());
+        return {token, userData:{_id, name, email}  }
     }
 }
 
