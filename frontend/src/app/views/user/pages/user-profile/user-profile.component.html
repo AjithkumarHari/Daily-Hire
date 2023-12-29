@@ -17,7 +17,7 @@
 
                 <div class="flex mt-1 justify-evenly">
                     <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">{{user$.email}}</h3>
-                    <h3 class="font-lg text-semibold text-center leading-6 text-gray-600">+91 {{user$.phone}}</h3>
+                    <h3 *ngIf="user$.phone" class="font-lg text-semibold text-center leading-6 text-gray-600">+91 {{user$.phone}}</h3>
                 </div>
                 <ul class="md:mt-3 divide-y sm:py-2 px-3 text-gray-600 hover:text-gray-700 grid grid-cols-3 sm:grid-cols-1 ">
                     <li class="flex items-center p-3 m-1 text-sm bg-gray-200 rounded-lg hover:shadow"
