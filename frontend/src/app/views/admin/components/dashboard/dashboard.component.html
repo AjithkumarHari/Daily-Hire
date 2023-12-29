@@ -1,7 +1,7 @@
 <h1 class="px-3 py-5 font-semibold text-4xl">Dashboard</h1>
 <div class="pb-10">
 
-  <div class="grid grid-cols-3 gap-y-4 px-4 text-slate-600">
+  <div class="grid grid-cols-2 md:grid-cols-3  gap-y-4 px-4 text-slate-600">
     <div class="col-span-2">
       <div class="mx-4 bg-gradient-to-t from-indigo-500 to-blue-500 px-4 py-8 sm:col-span-1 sm:mx-0 sm:rounded-xl sm:py-4">
         <p class="mb-4 font-medium text-indigo-100">Cases in pipeline</p>
@@ -11,7 +11,7 @@
       </div>
     </div>
   
-    <div class="gap-4 px-4 ">
+    <div class="gap-4 px-4 col-span-2 md:col-span-1">
       <div class="rounded-lg border border-gray-300 bg-[#d5eaf9] shadow-md mx-5 py-2 px-5 my-3">
         <p class="text-lg font-bold">Total Revenue</p>
         <p class="text-blue-900 px-6 text-4xl mb-4 font-medium">₹{{totalRevenue}}</p>
@@ -27,7 +27,7 @@
       
     </div>
   </div>
-  <div class="grid grid-cols-4 gap-6  px-3 pt-4 ">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6  px-3 pt-4 ">
     <div class="border border-blue-50 bg-gradient-to-bl from-indigo-900 via-blue-400 to-indigo-900 rounded-lg h-20 shadow-lg px-3 py-1  ">
       <p class="text-slate-100 text-sm font-semibold">Total Completed Bookings</p>
       <p class="text-3xl px-8  text-white font-medium"> <i class="fa-regular fa-calendar-check text-4xl pr-5"></i>{{completedBookings}}</p>
@@ -49,18 +49,16 @@
   </div>
   
   <div class="grid grid-cols-3 pt-4">
-    <div class=" ">
-      <div class="  ">
+    <div class=" col-span-3 md:col-span-1  ">
         <div class="rounded-lg border border-gray-200 bg-[#d5eaf9] shadow-md mx-5 py-2 px-5 my-3">
           <p class="font-medium text-indigo-600">Payment wise Bookings</p>
           <div class="py-3 h-96">  
             <ag-charts-angular  [options]="optionsPie"></ag-charts-angular> 
           </div>
         </div>
-      </div>
     </div>
-    <div class=" col-span-2">
-      <div class="grid grid-cols-4 gap-6  px-3 pt-4 ">
+    <div class="col-span-3  md:col-span-2">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6  px-3 pt-4 ">
         <div class="border border-slate-300 bg-slate-200 rounded-lg h-16 shadow-md px-3 py-1  ">
           <p class="text-slate-500 text-sm">Total No of Users</p>
           <p class="text-xl font-medium flex justify-center items-center"> <i class="fa-solid fa-users pr-1"></i>{{userCount}}</p>

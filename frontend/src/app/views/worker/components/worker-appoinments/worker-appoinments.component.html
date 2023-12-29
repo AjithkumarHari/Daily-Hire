@@ -46,7 +46,10 @@
 									</span>
 								</td>
 								<td class="hidden md:table-cell">
-									<p class="text-sm text-gray-300 font-medium">{{booking.user.phone}}</p>
+									<p *ngIf="booking.user.phone; else googleUser" class="text-sm text-gray-300 font-medium">{{booking.user.phone}}</p>
+									<ng-template #googleUser>
+										<p class="text-sm text-gray-300 font-medium">Google User</p>
+									</ng-template>
 								</td>
 								<td class="hidden md:table-cell">
 									<p class="text-sm text-gray-300 font-medium">{{booking.user.email}}</p>
