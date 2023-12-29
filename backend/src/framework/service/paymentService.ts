@@ -24,9 +24,11 @@ export const paymentService = () => {
                     },
                 ],
                 mode: 'payment',
-                success_url: `${configKeys.ORIGIN_PORT}/${paymentDetails.worker._id}`,
+                success_url: `${configKeys.ORIGIN_PORT}/workerDetails/${paymentDetails.worker._id}`,
                 cancel_url: `${configKeys.ORIGIN_PORT}`,
             })
+            console.log(`${configKeys.ORIGIN_PORT}/${paymentDetails.worker._id}`);
+            
             return session;
         } catch (error) {
             return error;
