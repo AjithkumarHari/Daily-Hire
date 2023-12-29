@@ -15,8 +15,12 @@ export const bookingPayment = async (
     walletRepository: ReturnType<WalletRepository>,
     ) => {
     try {
+        console.log('paymentDetails', paymentDetails.paymentMethod);
+        
         if(paymentDetails.paymentMethod === 'stripe'){
-            const session: any = await paymentService.createSession(paymentDetails)  
+            const session: any = await paymentService.createSession(paymentDetails) 
+            console.log(session);
+             
             if(!session)
                 throw new AppError("Not Found", HttpStatus.NOT_FOUND);
             const bookingData: Booking = {

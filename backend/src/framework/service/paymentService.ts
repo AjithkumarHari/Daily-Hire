@@ -8,6 +8,8 @@ export const paymentService = () => {
  
     const createSession = async (paymentDetails: {user: object, worker: Worker, bookingTime: Date}) => {
         try {
+            console.log("paymentrService",paymentDetails);
+            
             const session = await stripeClient.checkout.sessions.create({
                 line_items: [
                     {
@@ -22,6 +24,8 @@ export const paymentService = () => {
                     },
                 ],
                 mode: 'payment',
+                success_url: `${configKeys.ORIGIN_PORT}/${paymentDetails.worker._id}`,
+                cancel_url: `${configKeys.ORIGIN_PORT}`,
             })
             return session;
         } catch (error) {

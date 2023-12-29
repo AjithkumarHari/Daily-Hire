@@ -32,6 +32,7 @@ export class AuthComponent {
       email : this.form.value.email,
       password : this.form.value.password
     }
+
     this.store.dispatch(adminLoginRequest({credentials}))
       this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
       this.errorMessage = error
