@@ -14,7 +14,7 @@ export class ChatBoxComponent {
   receiverId!: any
   name!: any
   text: string = ''
-  chats!: any[]
+  chats: any[] = []
   socket: any
   chatData: any
   site = environment.siteUrl;
@@ -61,6 +61,12 @@ export class ChatBoxComponent {
 
       this.userService.sendChat(data).subscribe((res) => {
         this.text = ''
+        if(this.chats.length == 0){
+          this.userService.loadChats(this.senderId, this.receiverId).subscribe((res: any) => {
+            if( res.chats)
+            this.chats = res.chats
+          })
+        }
         this.scrollToBottom()
       })
     } else {
