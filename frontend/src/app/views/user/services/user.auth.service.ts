@@ -40,8 +40,8 @@ export class UserAuthService {
     return this.http.post(`${this.server}/auth/user-google-signin`,user);
   }
 
-  verifySignupOtp(data: {email: string, phoneNumber: number, code: string}){    
-    return this.http.post(`${this.server}/auth/user-otp`,data);
+  verifySignupOtp(userData: {email: string, phoneNumber: number, code: string}){    
+    return this.http.post(`${this.server}/auth/user-otp`,userData);
   }
   
   resendOtp(phoneNumber:number){

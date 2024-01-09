@@ -225,60 +225,15 @@ export class AuthEffects{
 
     blockSuccess$ = createEffect(()=>
         this.actions$.pipe(
-            ofType(workerVerifySuccess),
+            ofType(workerBlockSuccess),
             tap(()=>{
-                console.log('block success');
-                
-                this.router.navigate(['/worker/schedule'])
+                window.location.reload()
             })
         ), {
             dispatch: false
         }
     );
-
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -315,6 +270,7 @@ export class AuthEffects{
         ofType(editWorkerProfileSuccess),
         tap(()=>{
                 console.log('sucess');
+
                 this.router.navigate(['/worker'])
             })
         ), {

@@ -22,8 +22,7 @@ export class UserService {
   
   constructor( private http: HttpClient) {
     this.socket = io(this.site)
-   }
-   
+  }
 
   setToken(token: string){
     return window.localStorage.setItem('user-token',token);
@@ -42,8 +41,8 @@ export class UserService {
     return this.http.get<Worker[]>(`${this.server}/user/worker-list`);
   }
 
-  getWorkerById (id: string):Observable<Worker> {
-    return this.http.get<Worker>(`${this.server}/user/worker-details/${id}`);
+  getWorkerById (workerId: string):Observable<Worker> {
+    return this.http.get<Worker>(`${this.server}/user/worker-details/${workerId}`);
   }
 
   allServices():Observable<Service[]>{
@@ -58,16 +57,16 @@ export class UserService {
     return this.http.post(`${this.server}/user/add-review`,review)
   }
 
-  getReviewByWorker(id: string): Observable<Review[]>{
-    return this.http.get<Review[]>(`${this.server}/user/review-list/${id}`)
+  getReviewByWorker(workerId: string): Observable<Review[]>{
+    return this.http.get<Review[]>(`${this.server}/user/review-list/${workerId}`)
   }
   
-  getBookingByUser(id: string): Observable<Booking[]>{
-    return this.http.get<Booking[]>(`${this.server}/user/booking-list/${id}`)
+  getBookingByUser(userId: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/user/booking-list/${userId}`)
   }
   
-  getBookingByWorker(id: string): Observable<Booking[]>{
-    return this.http.get<Booking[]>(`${this.server}/user/worker-booked-list/${id}`)
+  getBookingByWorker(workerId: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/user/worker-booked-list/${workerId}`)
   }
 
   bookingCancelRequest(bookingId: string){
@@ -78,8 +77,8 @@ export class UserService {
     return this.http.put(`${this.server}/user/edit-user`,{userId, user} )
   }
 
-  getWalletByUser(id: string): Observable<Wallet>{
-    return this.http.get<Wallet>(`${this.server}/user/wallet/${id}`)
+  getWalletByUser(userId: string): Observable<Wallet>{
+    return this.http.get<Wallet>(`${this.server}/user/wallet/${userId}`)
   }
   
   isWorkerBooked(userId: string, workerId: string){

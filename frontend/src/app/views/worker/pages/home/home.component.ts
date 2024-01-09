@@ -89,6 +89,7 @@ export class HomeComponent {
   }
   onCancelProfile(){
     this.tab = 'dashboard';
+    
   }
   afterEditProfile(){
     console.log('hfjk');

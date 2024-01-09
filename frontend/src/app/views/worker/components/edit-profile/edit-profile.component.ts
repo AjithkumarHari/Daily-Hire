@@ -71,13 +71,11 @@ export class EditProfileComponent {
       this.errorMessage = 'Password not match'
     }else{
       worker.password = this.worker.password;
-      console.log(worker);
       const workerId = this.worker._id;
       if(workerId)
         this.store.dispatch(editWorkerProfileRequest({ workerId , worker}))
-        this.store.pipe(select(selectWorkerToken))
-        .pipe(take(1)).subscribe((workerData)=> console.log(workerData)
-        );
+        this.store.pipe(select(selectWorkerToken)).pipe(take(1)).subscribe();
+
     }
  
        

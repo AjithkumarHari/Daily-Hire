@@ -41,12 +41,12 @@ export class AdminService {
     return this.http.put(`${this.server}/admin/service-status`,{serviceId});
   }
 
-  addService(data: {name: string, description: string}){
-    return this.http.post(`${this.server}/admin/add-service`,data);
+  addService(serviceData: {name: string, description: string}){
+    return this.http.post(`${this.server}/admin/add-service`,serviceData);
   }
 
-  editService(data: {_id: string, name: string, description: string}){
-    return this.http.put(`${this.server}/admin/edit-service`,data);
+  editService(serviceData: {_id: string, name: string, description: string}){
+    return this.http.put(`${this.server}/admin/edit-service`,serviceData);
   }
 
   getServiceById(serviceId: string):Observable<Service>{

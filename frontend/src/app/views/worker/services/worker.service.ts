@@ -24,8 +24,8 @@ export class WorkerService {
     return this.http.get<Service[]>(`${this.server}/admin/service-list`)
   }
 
-  getAllBooking(id: string):Observable<Booking[]>{
-    return this.http.get<Booking[]>(`${this.server}/worker/bookings/${id}`)
+  getAllBooking(workerId: string):Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.server}/worker/bookings/${workerId}`)
   }
  
   bookingCancel(bookingId: string){
@@ -40,12 +40,12 @@ export class WorkerService {
     return this.http.put(`${this.server}/worker/unblock-booking`,{workerId, blockDate })
   }
 
-  getWorkerStats(id: string) {
-    return this.http.get(`${this.server}/worker/worker-stats/${id}`)
+  getWorkerStats(workerId: string) {
+    return this.http.get(`${this.server}/worker/worker-stats/${workerId}`)
   }
 
-  loadChatMates(id: string){
-    return this.http.get(`${this.server}/chat/load-chatmates/${id}`)
+  loadChatMates(workerId: string){
+    return this.http.get(`${this.server}/chat/load-chatmates/${workerId}`)
   }
 
   sendChat(data:{senderId: string, receiverId: string, content: string }){
