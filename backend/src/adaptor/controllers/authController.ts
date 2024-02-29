@@ -115,7 +115,7 @@ const authController = (
             res.status(result.errorCode).json({
                 ...result,
             })
-        } else if (result.status == "pending") {
+        } else if (result.status == "pending") { 
             res.json({
                 message: "otp verification required",
                 ...result
